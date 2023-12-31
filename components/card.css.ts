@@ -82,11 +82,11 @@ export const list = style({
   marginLeft: scale.fluid.md,
 });
 
-export const cureItem = style({
+export const statusEffectItem = style({
   padding: scale.minorSixths[0],
 });
 
-export const cureLink = style({
+export const statusEffectLink = style({
   color: theme.color.link,
   fontSize: scale.fluid.sm,
 
@@ -99,7 +99,7 @@ export const cureLink = style({
   },
 });
 
-export const activeCureLink = style({
+export const activeLink = style({
   color: theme.color.secondary,
   fontWeight: 500,
   textDecoration: "none",

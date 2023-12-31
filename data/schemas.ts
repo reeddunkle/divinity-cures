@@ -57,6 +57,7 @@ export const skillStatSchema = z.object({
 
 export const skillStatusEffectSchema = z.object({
   duration: z.number().optional(),
+  id: z.string(),
   name: statusEffectNameSchema,
 });
 

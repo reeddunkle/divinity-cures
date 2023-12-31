@@ -15,20 +15,29 @@ import {
 } from "./util";
 
 const mapEffectToSkills = (statusEffect: StatusEffect, skills: Skill[]) => {
-  const statusRemoves = statusEffect.removes;
-
   return skills
     .filter((skill) => {
-      const skillStatusEffects = skill.statusEffects;
-
-      return skillStatusEffects
-        .map(({ name = "" }) => name.toLowerCase())
-        .includes(statusEffect.name.toLowerCase());
+      return skill.statusEffects.map(({ id }) => id).includes(statusEffect.id);
     })
-    .map(({ removes = [], ...rest }) => ({
-      ...rest,
-      removes: uniqueBy([...statusRemoves, ...removes], identity),
-    }));
+    .map(({ immunities, removes, ...rest }) => {
+      const mappedImmunities = uniqueBy(
+        [...statusEffect.immunities, ...immunities],
+        identity,
+      );
+
+      const mappedRemoves = uniqueBy(
+        [...statusEffect.removes, ...removes].filter(
+          (rm) => !mappedImmunities.includes(rm),
+        ),
+        identity,
+      );
+
+      return {
+        ...rest,
+        immunities: mappedImmunities,
+        removes: mappedRemoves,
+      };
+    });
 };
 
 //
@@ -54,6 +63,9 @@ export function searchCures(ailment: string, data: SearchData) {
       immunities.some((value) => startsWith(value, ailment)) ||
       removes.some((value) => startsWith(value, ailment)),
   );
+
+  // console.log({ skillCures });
+  // console.log({ effectCures });
 
   const skillCuresFromEffects = effectCures
     .map((effect) => mapEffectToSkills(effect, skills))

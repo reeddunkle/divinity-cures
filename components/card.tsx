@@ -9,15 +9,21 @@ import { compareStrings, range, startsWith } from "@/util/util.ts";
 import * as styles from "./card.css.ts";
 import { CollapsibleSection } from "./collapsible-section.tsx";
 
+const addAsterisk = (str: string) => {
+  return `${str}*`;
+};
+
 type CardProps = React.HTMLProps<HTMLDivElement> &
   Skill & {
     searchText: string;
   };
 
 export function Card(props: CardProps) {
-  const cures = Array.from(
-    new Set([...props.removes, ...props.immunities]),
-  ).sort(compareStrings);
+  const { immunities, removes } = props;
+
+  const cures = Array.from(new Set([...removes, ...immunities])).sort(
+    compareStrings,
+  );
 
   return (
     <div className={clsx(styles.card, props.className)}>
@@ -41,93 +47,87 @@ export function Card(props: CardProps) {
       <div className={styles.col2}>
         <div className={styles.title}>{props.name}</div>
         <div className={styles.listGrid}>
-          <div className={styles.listGridColumn}>
-            {cures.length > 0 ? (
-              <>
-                <div className={styles.listTitle}>Cures:</div>
-                <ul className={styles.list}>
-                  {cures.map((cure) => {
-                    const cureLink = `?search=${cure.toLowerCase()}`;
-                    const MIN_SEARCH_CHARACTERS = 3;
+          {removes.length > 0 ? (
+            <div className={styles.listGridColumn}>
+              <div className={styles.listTitle}>Removes:</div>
+              <ul className={styles.list}>
+                {removes.map((statusEffect) => {
+                  const statusEffectLink = `?search=${statusEffect.toLowerCase()}`;
+                  const MIN_SEARCH_CHARACTERS = 3;
 
-                    return (
-                      <li className={styles.cureItem} key={cure}>
-                        <Link
-                          className={clsx(styles.cureLink, {
-                            [styles.activeCureLink]:
-                              props.searchText.length > MIN_SEARCH_CHARACTERS &&
-                              startsWith(cure, props.searchText),
-                          })}
-                          href={cureLink}
-                          prefetch={false}
-                        >
-                          {cure}
-                        </Link>
-                      </li>
-                    );
-                  })}
-                </ul>
-              </>
-            ) : null}
-          </div>
-          <div className={styles.listGridColumn}>
-            {cures.length > 0 ? (
-              <>
-                <div className={styles.listTitle}>Cures:</div>
-                <ul className={styles.list}>
-                  {cures.map((cure) => {
-                    const cureLink = `?search=${cure.toLowerCase()}`;
-                    const MIN_SEARCH_CHARACTERS = 3;
+                  return (
+                    <li className={styles.statusEffectItem} key={statusEffect}>
+                      <Link
+                        className={clsx(styles.statusEffectLink, {
+                          [styles.activeLink]:
+                            props.searchText.length > MIN_SEARCH_CHARACTERS &&
+                            startsWith(statusEffect, props.searchText),
+                        })}
+                        href={statusEffectLink}
+                        prefetch={false}
+                      >
+                        {statusEffect}
+                      </Link>
+                    </li>
+                  );
+                })}
+              </ul>
+            </div>
+          ) : null}
+          {immunities.length > 0 ? (
+            <div className={styles.listGridColumn}>
+              <div className={styles.listTitle}>Immunities:</div>
+              <ul className={styles.list}>
+                {immunities.map((statusEffect) => {
+                  const statusEffectLink = `?search=${statusEffect.toLowerCase()}`;
+                  const MIN_SEARCH_CHARACTERS = 3;
 
-                    return (
-                      <li className={styles.cureItem} key={cure}>
-                        <Link
-                          className={clsx(styles.cureLink, {
-                            [styles.activeCureLink]:
-                              props.searchText.length > MIN_SEARCH_CHARACTERS &&
-                              startsWith(cure, props.searchText),
-                          })}
-                          href={cureLink}
-                          prefetch={false}
-                        >
-                          {cure}
-                        </Link>
-                      </li>
-                    );
-                  })}
-                </ul>
-              </>
-            ) : null}
-          </div>
-          <div className={styles.listGridColumn}>
-            {cures.length > 0 ? (
-              <>
-                <div className={styles.listTitle}>Cures:</div>
-                <ul className={styles.list}>
-                  {cures.map((cure) => {
-                    const cureLink = `?search=${cure.toLowerCase()}`;
-                    const MIN_SEARCH_CHARACTERS = 3;
+                  return (
+                    <li className={styles.statusEffectItem} key={statusEffect}>
+                      <Link
+                        className={clsx(styles.statusEffectLink, {
+                          [styles.activeLink]:
+                            props.searchText.length > MIN_SEARCH_CHARACTERS &&
+                            startsWith(statusEffect, props.searchText),
+                        })}
+                        href={statusEffectLink}
+                        prefetch={false}
+                      >
+                        {addAsterisk(statusEffect)}
+                      </Link>
+                    </li>
+                  );
+                })}
+              </ul>
+            </div>
+          ) : null}
+          {cures.length > 0 ? (
+            <div className={styles.listGridColumn}>
+              <div className={styles.listTitle}>Cures:</div>
+              <ul className={styles.list}>
+                {cures.map((statusEffect) => {
+                  const statusEffectLink = `?search=${statusEffect.toLowerCase()}`;
+                  const MIN_SEARCH_CHARACTERS = 3;
 
-                    return (
-                      <li className={styles.cureItem} key={cure}>
-                        <Link
-                          className={clsx(styles.cureLink, {
-                            [styles.activeCureLink]:
-                              props.searchText.length > MIN_SEARCH_CHARACTERS &&
-                              startsWith(cure, props.searchText),
-                          })}
-                          href={cureLink}
-                          prefetch={false}
-                        >
-                          {cure}
-                        </Link>
-                      </li>
-                    );
-                  })}
-                </ul>
-              </>
-            ) : null}
-          </div>
+                  return (
+                    <li className={styles.statusEffectItem} key={statusEffect}>
+                      <Link
+                        className={clsx(styles.statusEffectLink, {
+                          [styles.activeLink]:
+                            props.searchText.length > MIN_SEARCH_CHARACTERS &&
+                            startsWith(statusEffect, props.searchText),
+                        })}
+                        href={statusEffectLink}
+                        prefetch={false}
+                      >
+                        {statusEffect}
+                      </Link>
+                    </li>
+                  );
+                })}
+              </ul>
+            </div>
+          ) : null}
         </div>
       </div>
       <div className={styles.col3}>
