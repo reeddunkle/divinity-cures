@@ -31,7 +31,7 @@ export function SearchCures(props: SearchCuresProps) {
 
   const urlSearchState = urlState.search ?? "";
 
-  const [searchText, setSearchText] = useState("");
+  const [searchText, setSearchText] = useState(urlSearchState);
 
   const searchResults = searchCures(searchText, {
     skills: props.skills,
