@@ -64,9 +64,6 @@ export function searchCures(ailment: string, data: SearchData) {
       removes.some((value) => startsWith(value, ailment)),
   );
 
-  // console.log({ skillCures });
-  // console.log({ effectCures });
-
   const skillCuresFromEffects = effectCures
     .map((effect) => mapEffectToSkills(effect, skills))
     .flat();
