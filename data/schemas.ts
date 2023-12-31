@@ -105,3 +105,32 @@ export const statusEffectSchemaArray = z.array(statusEffectSchema);
 export type StatusEffect = z.infer<typeof statusEffectSchema>;
 
 export type StatusEffectArray = StatusEffect[];
+
+// Spell Schools
+
+export const spellSchoolModifierSchema = z.object({
+  amount: z.number().optional(),
+  percent: z.number().optional(),
+  type: z.string(),
+});
+
+export const spellSchoolEffectSchema = z.object({
+  amount: z.number().optional(),
+  percent: z.number().optional(),
+  type: z.string(),
+});
+
+export const spellSchoolSchema = z.object({
+  description: z.string(),
+  effects: z.array(spellSchoolEffectSchema).optional().default([]),
+  id: z.string(),
+  imageSrc: z.string(),
+  modifies: z.array(spellSchoolModifierSchema).optional().default([]),
+  name: z.string(),
+});
+
+export const spellSchoolSchemaArray = z.array(spellSchoolSchema);
+
+export type SpellSchool = z.infer<typeof spellSchoolSchema>;
+
+export type SpellSchoolArray = SpellSchool[];

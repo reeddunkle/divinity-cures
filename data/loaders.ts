@@ -1,51 +1,58 @@
 import { promises as fs } from "node:fs";
 
-import { skillSchemaArray, statusEffectSchemaArray } from "@/data/schemas.ts";
+import type { z } from "zod";
 
-async function loadSkills() {
+import {
+  skillSchemaArray,
+  spellSchoolSchemaArray,
+  statusEffectSchemaArray,
+} from "@/data/schemas.ts";
+
+async function loadJsonToZod<SchemaType extends z.ZodTypeAny>(
+  filePath: string,
+  schema: SchemaType,
+) {
+  const jsonFile = await fs.readFile(filePath, "utf8");
+
+  // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+  const parsedData = await JSON.parse(jsonFile);
+
+  const parseResult = schema.safeParse(parsedData);
+
+  if (!parseResult.success) {
+    console.log("");
+    console.log(`!ZOD -- Failed loading ${filePath}.`);
+    console.log(parseResult.error.issues);
+    console.log("");
+  }
+
+  if (parseResult.success) {
+    return parseResult.data as Promise<z.infer<typeof schema>>;
+  }
+}
+
+//
+
+export async function loadSkills() {
   const filePath = `${process.cwd()}/data/skills.json`;
 
-  const skillsFile = await fs.readFile(filePath, "utf8");
+  const skillData = await loadJsonToZod(filePath, skillSchemaArray);
 
-  // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
-  const parsedSkillsFile = await JSON.parse(skillsFile);
-
-  const parseResult = skillSchemaArray.safeParse(parsedSkillsFile);
-
-  if (!parseResult.success) {
-    console.log("");
-    console.log(`!ZOD -- Failed loading ${filePath}.`);
-    console.log(parseResult.error.issues);
-    console.log("");
-  }
-
-  if (parseResult.success) {
-    return parseResult.data;
-  }
+  return skillData;
 }
 
-async function loadStatusEffects() {
+export async function loadStatusEffects() {
   const filePath = `${process.cwd()}/data/statusEffects.json`;
 
-  const statusEffectsFile = await fs.readFile(filePath, "utf8");
+  const skillData = await loadJsonToZod(filePath, statusEffectSchemaArray);
 
-  // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
-  const parsedStatusEffectsFile = await JSON.parse(statusEffectsFile);
-
-  const parseResult = statusEffectSchemaArray.safeParse(
-    parsedStatusEffectsFile,
-  );
-
-  if (!parseResult.success) {
-    console.log("");
-    console.log(`!ZOD -- Failed loading ${filePath}.`);
-    console.log(parseResult.error.issues);
-    console.log("");
-  }
-
-  if (parseResult.success) {
-    return parseResult.data;
-  }
+  return skillData;
 }
 
-export { loadSkills, loadStatusEffects };
+export async function loadSpellSchools() {
+  const filePath = `${process.cwd()}/data/spellSchools.json`;
+
+  const skillData = await loadJsonToZod(filePath, spellSchoolSchemaArray);
+
+  return skillData;
+}
