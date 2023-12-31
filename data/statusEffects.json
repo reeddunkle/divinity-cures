@@ -2,24 +2,16 @@
   {
     "name": "Regenerating",
     "description": "Restores Vitality per turn, healing the living and dealing physical damage to the undead.",
-    "clearedBy": [
-      "Bleeding"
-    ],
-    "removes": [
-      "Infested"
-    ],
+    "clearedBy": ["Bleeding"],
+    "removes": ["Infested"],
     "imageSrc": "https://divinityoriginalsin2.wiki.fextralife.com/file/Divinity-Original-Sin-2/status_effect_regenerate-icon.png",
     "id": "0"
   },
   {
     "name": "Fortified",
     "description": "Maximum Physical Armor increased.\nPhysical Armor: +??\nImmunity to being teleported.",
-    "immunities": [
-      "Teleport"
-    ],
-    "givenBy": [
-      "Blessed Oil Surface"
-    ],
+    "immunities": ["Teleport"],
+    "givenBy": ["Blessed Oil Surface"],
     "imageSrc": "https://divinityoriginalsin2.wiki.fextralife.com/file/Divinity-Original-Sin-2/status_effect_fortified-icon.png",
     "id": "1"
   },
@@ -46,22 +38,14 @@
         "amount": 2
       }
     ],
-    "immunities": [
-      "Muted",
-      "Blinded",
-      "Crippled",
-      "Knocked Down"
-    ],
+    "immunities": ["Muted", "Blinded", "Crippled", "Knocked Down"],
     "imageSrc": "https://divinityoriginalsin2.wiki.fextralife.com/file/Divinity-Original-Sin-2/rested.png",
     "id": "3"
   },
   {
     "name": "Hasted",
     "description": "Character is hasted.\nMovement: +2\nStart AP: +1\nAP Recovery: +1",
-    "removes": [
-      "Slowed",
-      "Crippled"
-    ],
+    "removes": ["Slowed", "Crippled"],
     "stats": [
       {
         "name": "Movement",
@@ -76,10 +60,7 @@
         "amount": 1
       }
     ],
-    "clearedBy": [
-      "Slowed",
-      "Crippled"
-    ],
+    "clearedBy": ["Slowed", "Crippled"],
     "imageSrc": "https://divinityoriginalsin2.wiki.fextralife.com/file/Divinity-Original-Sin-2/status_effect_hasted-icon.png",
     "id": "4"
   },
@@ -113,9 +94,7 @@
       }
     ],
     "scales": true,
-    "clearedBy": [
-      "Enraged"
-    ],
+    "clearedBy": ["Enraged"],
     "immunities": [
       "Blinded",
       "Terrified",
@@ -184,16 +163,8 @@
   {
     "name": "Blessed",
     "description": "Protects against Diseased, Decaying Touch, Petrified, Stunned.\nAccuracy +20%\nDodging +10%\nResistances: +15%",
-    "immunities": [
-      "Cursed",
-      "Diseased",
-      "Decaying",
-      "Petrified",
-      "Stunned"
-    ],
-    "removes": [
-      "Infested"
-    ],
+    "immunities": ["Cursed", "Diseased", "Decaying", "Petrified", "Stunned"],
+    "removes": ["Infested"],
     "stats": [
       {
         "name": "Accuracy",
@@ -238,5 +209,17 @@
     ],
     "imageSrc": "https://divinityoriginalsin2.wiki.fextralife.com/file/Divinity-Original-Sin-2/aerotheurge-17-1.png",
     "id": "13"
+  },
+  {
+    "name": "Steam Lance",
+    "description": "MISSING INFO",
+    "imageSrc": "https://divinityoriginalsin2.wiki.fextralife.com/file/Divinity-Original-Sin-2/hydrosophist_steam_lance-icon.png",
+    "id": "14"
+  },
+  {
+    "name": "Skin Graft",
+    "description": "MISSING INFO",
+    "imageSrc": "https://divinityoriginalsin2.wiki.fextralife.com/file/Divinity-Original-Sin-2/polymorph-12-13.png",
+    "id": "15"
   }
 ]

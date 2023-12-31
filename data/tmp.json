@@ -22,12 +22,20 @@
     "statusEffects": [
       {
         "name": "Fortified",
-        "duration": 3
+        "duration": 3,
+        "id": "1"
       }
     ],
-    "stats": [{ "name": "Physical Armor", "percent": 170, "scales": true }],
+    "stats": [
+      {
+        "name": "Physical Armor",
+        "percent": 170,
+        "scales": true
+      }
+    ],
     "imageSrc": "https://divinityoriginalsin2.wiki.fextralife.com/file/Divinity-Original-Sin-2/geomancer_fortify-icon.png",
-    "range": 15
+    "range": 15,
+    "id": "0"
   },
   {
     "name": "Mend Metal",
@@ -44,12 +52,19 @@
     "statusEffects": [
       {
         "name": "Mending Metal",
-        "duration": 3
+        "duration": 3,
+        "id": "2"
       }
     ],
-    "stats": [{ "name": "Physical Armor", "scales": true }],
+    "stats": [
+      {
+        "name": "Physical Armor",
+        "scales": true
+      }
+    ],
     "imageSrc": "https://divinityoriginalsin2.wiki.fextralife.com/file/Divinity-Original-Sin-2/geomancer_mend_metal-icon.png",
-    "range": 5
+    "range": 5,
+    "id": "1"
   },
   {
     "name": "First Aid",
@@ -74,10 +89,23 @@
       "Poisoned",
       "Silenced"
     ],
-    "statusEffects": [{ "name": "Rested", "duration": 1 }],
-    "stats": [{ "name": "Vitality", "percent": 80, "scales": true }],
+    "statusEffects": [
+      {
+        "name": "Rested",
+        "duration": 1,
+        "id": "3"
+      }
+    ],
+    "stats": [
+      {
+        "name": "Vitality",
+        "percent": 80,
+        "scales": true
+      }
+    ],
     "imageSrc": "https://divinityoriginalsin2.wiki.fextralife.com/file/Divinity-Original-Sin-2/huntsman_first_aid-icon.png",
-    "range": 8
+    "range": 8,
+    "id": "2"
   },
   {
     "name": "Haste",
@@ -93,12 +121,14 @@
     "statusEffects": [
       {
         "name": "Hasted",
-        "duration": 2
+        "duration": 2,
+        "id": "4"
       }
     ],
     "stats": [],
     "imageSrc": "https://divinityoriginalsin2.wiki.fextralife.com/file/Divinity-Original-Sin-2/pyrokinetic_haste-icon.png",
-    "range": 13
+    "range": 13,
+    "id": "3"
   },
   {
     "name": "Peace of Mind",
@@ -116,12 +146,32 @@
         "name": "Clear-Minded",
         "duration": 3,
         "stats": [
-          { "name": "Strength", "amount": 1, "scales": true },
-          { "name": "Finesse", "amount": 1, "scales": true },
-          { "name": "Intelligence", "amount": 1, "scales": true },
-          { "name": "Wits", "amount": 2, "scales": true },
-          { "name": "Accuracy", "percent": 20 }
-        ]
+          {
+            "name": "Strength",
+            "amount": 1,
+            "scales": true
+          },
+          {
+            "name": "Finesse",
+            "amount": 1,
+            "scales": true
+          },
+          {
+            "name": "Intelligence",
+            "amount": 1,
+            "scales": true
+          },
+          {
+            "name": "Wits",
+            "amount": 2,
+            "scales": true
+          },
+          {
+            "name": "Accuracy",
+            "percent": 20
+          }
+        ],
+        "id": "5"
       }
     ],
     "stats": [],
@@ -135,6 +185,7 @@
       "Terrified"
     ],
     "imageSrc": "https://divinityoriginalsin2.wiki.fextralife.com/file/Divinity-Original-Sin-2/pyrokinetic_burn_my_eyes-icon.png",
-    "range": 13
+    "range": 13,
+    "id": "4"
   }
 ]
