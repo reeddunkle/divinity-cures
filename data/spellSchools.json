@@ -1,0 +1,158 @@
+[
+  {
+    "id": "0",
+    "name": "Aerothurge",
+    "description": "Aerotheurge increase all Air damage you deal.",
+    "modifies": [
+      {
+        "type": "Air",
+        "percent": 5
+      }
+    ],
+    "imageSrc": "https://divinityoriginalsin2.wiki.fextralife.com/file/Divinity-Original-Sin-2/abi_aerotheurge.png"
+  },
+  {
+    "id": "1",
+    "name": "Geomancer",
+    "description": "Geomancer increases all Poison and Earth damage you deal, and any Physical Armor restoration you cause.",
+    "modifies": [
+      {
+        "type": "Poison",
+        "percent": 5
+      },
+      {
+        "type": "Earth",
+        "percent": 5
+      },
+      {
+        "type": "Physical Armor",
+        "percent": 5
+      }
+    ],
+    "imageSrc": "https://divinityoriginalsin2.wiki.fextralife.com/file/Divinity-Original-Sin-2/abi_geomancer.png"
+  },
+  {
+    "id": "2",
+    "name": "Huntsman",
+    "description": "Huntsman increases high ground advantage bonuses and decreases low ground penalties.",
+    "modifies": [
+      {
+        "type": "High Ground",
+        "percent": 5
+      },
+      {
+        "type": "Low Ground",
+        "percent": -5
+      }
+    ],
+    "imageSrc": "https://divinityoriginalsin2.wiki.fextralife.com/file/Divinity-Original-Sin-2/abi_huntsman.png"
+  },
+  {
+    "id": "3",
+    "name": "Hydrosophist",
+    "description": "Hydrosophist increases all Water damage you deal, and any Vitality healing or Magic Armor restoration that you cause.",
+    "modifies": [
+      {
+        "type": "Water",
+        "percent": 5
+      },
+      {
+        "type": "Vitality",
+        "percent": 5
+      },
+      {
+        "type": "Magic Armor",
+        "percent": 5
+      }
+    ],
+    "imageSrc": "https://divinityoriginalsin2.wiki.fextralife.com/file/Divinity-Original-Sin-2/abi_hydrosophist.png"
+  },
+  {
+    "id": "4",
+    "name": "Necromancer",
+    "description": "Necromancer heals you every time you deal damage to Vitality.",
+    "effects": [
+      {
+        "type": "Heal",
+        "percent": 10
+      }
+    ],
+    "imageSrc": "https://divinityoriginalsin2.wiki.fextralife.com/file/Divinity-Original-Sin-2/abi_necromancer.png"
+  },
+  {
+    "id": "5",
+    "name": "Polymorph",
+    "description": "Polymorph provides one free attribute point per point invested.",
+    "effects": [
+      {
+        "type": "Attribute Point",
+        "amount": 1
+      }
+    ],
+    "imageSrc": "https://divinityoriginalsin2.wiki.fextralife.com/file/Divinity-Original-Sin-2/abi_polymorph.png"
+  },
+  {
+    "id": "6",
+    "name": "Pyrokinetic",
+    "description": "Pyrokinetic increase all Fire damage you deal.",
+    "modifies": [
+      {
+        "type": "Fire",
+        "percent": 5
+      }
+    ],
+    "imageSrc": "https://divinityoriginalsin2.wiki.fextralife.com/file/Divinity-Original-Sin-2/abi_pyrokinetic.png"
+  },
+  {
+    "id": "7",
+    "name": "Scoundrel",
+    "description": "Scoundrel increase movement speed and boosts your Critical Modifier.",
+    "modifies": [
+      {
+        "type": "Movement Speed",
+        "amount": 0.3
+      },
+      {
+        "type": "Critical Modifier",
+        "percent": 5
+      }
+    ],
+    "imageSrc": "https://divinityoriginalsin2.wiki.fextralife.com/file/Divinity-Original-Sin-2/abi_scoundrel.png"
+  },
+  {
+    "id": "8",
+    "name": "Summoning",
+    "description": "Summoning increases Vitality, Damage, Physical Armor and Magical Armor of your summons and totems.",
+    "modifies": [
+      {
+        "type": "Vitality",
+        "percent": 5
+      },
+      {
+        "type": "Damage",
+        "percent": 5
+      },
+      {
+        "type": "Physical Armor",
+        "percent": 5
+      },
+      {
+        "type": "Magical Armor",
+        "percent": 5
+      }
+    ],
+    "imageSrc": "https://divinityoriginalsin2.wiki.fextralife.com/file/Divinity-Original-Sin-2/abi_summoning.png"
+  },
+  {
+    "id": "9",
+    "name": "Warfare",
+    "description": "Warfare increases all Physical damage dealt.",
+    "modifies": [
+      {
+        "type": "Physical",
+        "percent": 5
+      }
+    ],
+    "imageSrc": "https://divinityoriginalsin2.wiki.fextralife.com/file/Divinity-Original-Sin-2/abi_warfare.png"
+  }
+]

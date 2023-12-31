@@ -3,8 +3,10 @@ export const SKILL_SCHOOLS = [
   "Geomancer",
   "Huntsman",
   "Hydrosophist",
+  "Necromancer",
   "Polymorph",
   "Pyrokinetic",
+  "Scoundrel",
   "Summoning",
   "Warfare",
 ];
