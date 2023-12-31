@@ -1,0 +1,140 @@
+[
+  {
+    "name": "Fortify",
+    "school": "Geomancer",
+    "requirements": {
+      "geomancer": 1
+    },
+    "actionPoints": 1,
+    "sourcePoints": 0,
+    "cooldown": 4,
+    "description": "Provides 170% Physical Armor. While Fortified, the target cannot be teleported. Removes Poisoned, Bleeding, Burning, Acid, Decaying.",
+    "memory": 1,
+    "removes": [
+      "Acid",
+      "Bleeding",
+      "Burning",
+      "Decaying",
+      "Diseased",
+      "Infectious Disease",
+      "Poisoned"
+    ],
+    "statusEffects": [
+      {
+        "name": "Fortified",
+        "duration": 3
+      }
+    ],
+    "stats": [{ "name": "Physical Armor", "percent": 170, "scales": true }],
+    "imageSrc": "https://divinityoriginalsin2.wiki.fextralife.com/file/Divinity-Original-Sin-2/geomancer_fortify-icon.png",
+    "range": 15
+  },
+  {
+    "name": "Mend Metal",
+    "school": "Geomancer",
+    "requirements": {
+      "geomancer": 2
+    },
+    "actionPoints": 1,
+    "sourcePoints": 0,
+    "cooldown": 3,
+    "description": "Allies near you start slowly regenerating Physical Armor.\nRestore [X] Physical Armor for 3 turn(s).",
+    "memory": 1,
+    "removes": [],
+    "statusEffects": [
+      {
+        "name": "Mending Metal",
+        "duration": 3
+      }
+    ],
+    "stats": [{ "name": "Physical Armor", "scales": true }],
+    "imageSrc": "https://divinityoriginalsin2.wiki.fextralife.com/file/Divinity-Original-Sin-2/geomancer_mend_metal-icon.png",
+    "range": 5
+  },
+  {
+    "name": "First Aid",
+    "school": "Huntsman",
+    "requirements": {
+      "huntsman": 1
+    },
+    "actionPoints": 1,
+    "sourcePoints": 0,
+    "cooldown": 3,
+    "description": "Heals target for 80% Vitality. removes Crippled, Atrophy, Knocked Down, Blind, Silenced, Bleeding, Burning, Poisoned, Diseased.\nRestore [X] Vitality.\nSet Rested for 1 turn(s).",
+    "memory": 1,
+    "removes": [
+      "Atrophy",
+      "Bleeding",
+      "Blinded",
+      "Burning",
+      "Crippled",
+      "Disarmed",
+      "Diseased",
+      "Knocked Down",
+      "Poisoned",
+      "Silenced"
+    ],
+    "statusEffects": [{ "name": "Rested", "duration": 1 }],
+    "stats": [{ "name": "Vitality", "percent": 80, "scales": true }],
+    "imageSrc": "https://divinityoriginalsin2.wiki.fextralife.com/file/Divinity-Original-Sin-2/huntsman_first_aid-icon.png",
+    "range": 8
+  },
+  {
+    "name": "Haste",
+    "school": "Pyrokinetic",
+    "requirements": {
+      "pyrokinetic": 1
+    },
+    "actionPoints": 1,
+    "sourcePoints": 0,
+    "cooldown": 3,
+    "description": "Sets Hasted on target character. Hasted increases movement speed by 2m per AP and gives an additional 1 AP per turn. Clears Slowed and Crippled.\nSet Hasted for 2 turn(s).",
+    "memory": 1,
+    "statusEffects": [
+      {
+        "name": "Hasted",
+        "duration": 2
+      }
+    ],
+    "stats": [],
+    "imageSrc": "https://divinityoriginalsin2.wiki.fextralife.com/file/Divinity-Original-Sin-2/pyrokinetic_haste-icon.png",
+    "range": 13
+  },
+  {
+    "name": "Peace of Mind",
+    "school": "Pyrokinetic",
+    "requirements": {
+      "pyrokinetic": 1
+    },
+    "actionPoints": 1,
+    "sourcePoints": 0,
+    "cooldown": 3,
+    "description": "Target gains Clear-Minded, which increases Strength, Finesse, Intelligence by (1 + amount scaled by level), Wits by (2 + amount scaled by level), and grants 20% Accuracy. Protects against and removes Blinded, Terrified, Charmed, Taunted, Sleeping, Enraged and Mad.\nSet Clear-Minded for 3 turn(s).",
+    "memory": 1,
+    "statusEffects": [
+      {
+        "name": "Clear-Minded",
+        "duration": 3,
+        "stats": [
+          { "name": "Strength", "amount": 1, "scales": true },
+          { "name": "Finesse", "amount": 1, "scales": true },
+          { "name": "Intelligence", "amount": 1, "scales": true },
+          { "name": "Wits", "amount": 2, "scales": true },
+          { "name": "Accuracy", "percent": 20 }
+        ]
+      }
+    ],
+    "stats": [],
+    "immunities": [
+      "Blinded",
+      "Charmed",
+      "Enraged",
+      "Mad",
+      "Sleeping",
+      "Taunted",
+      "Terrified"
+    ],
+    "imageSrc": "https://divinityoriginalsin2.wiki.fextralife.com/file/Divinity-Original-Sin-2/pyrokinetic_burn_my_eyes-icon.png",
+    "range": 13
+  }
+]
