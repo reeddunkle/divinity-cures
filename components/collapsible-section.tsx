@@ -6,7 +6,7 @@ import * as styles from "./collapsible-section.ts";
 
 type CollapsibleSection = {
   className?: string;
-  title: number;
+  title: string;
   text: string;
 };
 
