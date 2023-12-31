@@ -20,15 +20,6 @@ export const details = style({
 
 export const title = style({
   display: "inline-block",
-  overflow: "hidden",
-  textOverflow: "ellipsis",
-  whiteSpace: "nowrap",
-
-  "@media": {
-    "screen and (max-width: 500px)": {
-      maxWidth: "50%",
-    },
-  },
 });
 
 export const summary = style({

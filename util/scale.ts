@@ -143,6 +143,11 @@ const staticScale = {
 export default {
   fluid: fluidScale,
   static: staticScale,
+
   minorSixths,
   minorThirds,
+
+  media: {
+    sm: "screen and (max-width: 500px)",
+  },
 };

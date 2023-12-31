@@ -13,7 +13,10 @@ type CollapsibleSection = {
 
 export function CollapsibleSection(props: CollapsibleSection) {
   return (
-    <details className={clsx(styles.details, props.className)} open>
+    <details
+      className={clsx(styles.details, props.className)}
+      open={props.open}
+    >
       <summary className={styles.summary}>
         <div className={styles.title}>{props.title}</div>
       </summary>
