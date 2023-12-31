@@ -8,9 +8,11 @@ const tickThickness = 1;
 
 const borderThickness = 2;
 
+const wrapperPadding = tickLength / 2 - borderThickness / 2;
+
 export const wrapper = style({
   aspectRatio: "1 / 1",
-  padding: tickLength / 2 - borderThickness / 2,
+  padding: wrapperPadding,
   position: "relative",
 });
 
@@ -20,6 +22,7 @@ export const border = style({
   borderRadius: "50%",
   borderStyle: "dotted solid dotted dotted",
   borderWidth: borderThickness,
+  height: "100%",
 
   rotate: "-45deg",
 });
