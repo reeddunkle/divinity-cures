@@ -8,7 +8,7 @@ export const IMAGE_SIZE_PX = 64;
 export const card = style({
   display: "grid",
   gap: scale.fluid.xxs,
-  gridTemplateColumns: `${scale.fluid.xxxl} 5fr 2fr`,
+  gridTemplateColumns: `${scale.fluid.xxxl} 4fr 2fr`,
   width: "100%",
 });
 
@@ -47,6 +47,7 @@ export const list = style({
 
 export const cureLink = style({
   color: theme.color.link,
+  fontSize: scale.fluid.sm,
 
   textDecoration: "underline",
   textTransform: "capitalize",
@@ -55,6 +56,10 @@ export const cureLink = style({
     color: theme.color.tertiary,
     textDecoration: "underline",
   },
+});
+
+export const cureItem = style({
+  padding: scale.minorSixths[0],
 });
 
 export const activeCureLink = style({
@@ -80,3 +85,5 @@ export const title = style({
   fontWeight: 450,
   textTransform: "uppercase",
 });
+
+export const curesWrapper = style({});

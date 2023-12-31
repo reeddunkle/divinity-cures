@@ -143,4 +143,6 @@ const staticScale = {
 export default {
   fluid: fluidScale,
   static: staticScale,
+  minorSixths,
+  minorThirds,
 };
