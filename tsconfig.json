@@ -1,0 +1,46 @@
+{
+  "compilerOptions": {
+    /* Base Options: */
+    "esModuleInterop": true,
+    "skipLibCheck": true,
+    "target": "es5",
+    "verbatimModuleSyntax": true,
+    "allowJs": true,
+    "resolveJsonModule": true,
+    "moduleDetection": "force",
+
+    /* Strictness: */
+    "strict": true,
+    "noUncheckedIndexedAccess": true,
+
+    /* No transpiling with TypeScript: */
+    "moduleResolution": "Bundler",
+    "module": "ESNext",
+    "noEmit": true,
+
+    /* Code runs in the DOM: */
+    "lib": ["dom", "dom.iterable", "esnext"],
+
+    "allowImportingTsExtensions": true, // Vanilla Extract
+    "incremental": true,
+    "isolatedModules": true,
+    "jsx": "preserve",
+
+    "plugins": [
+      {
+        "name": "next"
+      }
+    ],
+    "paths": {
+      "@/*": ["./*"]
+    }
+  },
+  "include": [
+    "next-env.d.ts",
+    "**/*.ts",
+    "**/*.tsx",
+    ".next/types/**/*.ts",
+    "**/*.css.ts"
+  ],
+  "exclude": ["node_modules"]
+}

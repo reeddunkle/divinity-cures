@@ -1,0 +1,592 @@
+[
+  {
+    "name": "Fortify",
+    "school": "Geomancer",
+    "requirements": {
+      "geomancer": 1
+    },
+    "actionPoints": 1,
+    "sourcePoints": 0,
+    "cooldown": 4,
+    "description": "Provides 170% Physical Armor. While Fortified, the target cannot be teleported. Removes Poisoned, Bleeding, Burning, Acid, Decaying.",
+    "memory": 1,
+    "removes": [
+      "Acid",
+      "Bleeding",
+      "Burning",
+      "Decaying",
+      "Diseased",
+      "Infectious Disease",
+      "Poisoned"
+    ],
+    "statusEffects": [
+      {
+        "name": "Fortified",
+        "duration": 3
+      }
+    ],
+    "stats": [{ "name": "Physical Armor", "percent": 170, "scales": true }],
+    "imageSrc": "https://divinityoriginalsin2.wiki.fextralife.com/file/Divinity-Original-Sin-2/geomancer_fortify-icon.png",
+    "range": 15
+  },
+  {
+    "name": "Mend Metal",
+    "school": "Geomancer",
+    "requirements": {
+      "geomancer": 2
+    },
+    "actionPoints": 1,
+    "sourcePoints": 0,
+    "cooldown": 3,
+    "description": "Allies near you start slowly regenerating Physical Armor.\nRestore [X] Physical Armor for 3 turn(s).",
+    "memory": 1,
+    "removes": [],
+    "statusEffects": [
+      {
+        "name": "Mending Metal",
+        "duration": 3
+      }
+    ],
+    "stats": [{ "name": "Physical Armor", "scales": true }],
+    "imageSrc": "https://divinityoriginalsin2.wiki.fextralife.com/file/Divinity-Original-Sin-2/geomancer_mend_metal-icon.png",
+    "range": 5
+  },
+  {
+    "name": "First Aid",
+    "school": "Huntsman",
+    "requirements": {
+      "huntsman": 1
+    },
+    "actionPoints": 1,
+    "sourcePoints": 0,
+    "cooldown": 3,
+    "description": "Heals target for 80% Vitality. removes Crippled, Atrophy, Knocked Down, Blind, Silenced, Bleeding, Burning, Poisoned, Diseased.\nRestore [X] Vitality.\nSet Rested for 1 turn(s).",
+    "memory": 1,
+    "removes": [
+      "Atrophy",
+      "Bleeding",
+      "Blinded",
+      "Burning",
+      "Crippled",
+      "Disarmed",
+      "Diseased",
+      "Knocked Down",
+      "Poisoned",
+      "Silenced"
+    ],
+    "statusEffects": [{ "name": "Rested", "duration": 1 }],
+    "stats": [{ "name": "Vitality", "percent": 80, "scales": true }],
+    "imageSrc": "https://divinityoriginalsin2.wiki.fextralife.com/file/Divinity-Original-Sin-2/huntsman_first_aid-icon.png",
+    "range": 8
+  },
+  {
+    "name": "Haste",
+    "school": "Pyrokinetic",
+    "requirements": {
+      "pyrokinetic": 1
+    },
+    "actionPoints": 1,
+    "sourcePoints": 0,
+    "cooldown": 3,
+    "description": "Sets Hasted on target character. Hasted increases movement speed by 2m per AP and gives an additional 1 AP per turn. Clears Slowed and Crippled.\nSet Hasted for 2 turn(s).",
+    "memory": 1,
+    "statusEffects": [
+      {
+        "name": "Hasted",
+        "duration": 2
+      }
+    ],
+    "stats": [],
+    "imageSrc": "https://divinityoriginalsin2.wiki.fextralife.com/file/Divinity-Original-Sin-2/pyrokinetic_haste-icon.png",
+    "range": 13
+  },
+  {
+    "name": "Peace of Mind",
+    "school": "Pyrokinetic",
+    "requirements": {
+      "pyrokinetic": 1
+    },
+    "actionPoints": 1,
+    "sourcePoints": 0,
+    "cooldown": 3,
+    "description": "Target gains Clear-Minded, which increases Strength, Finesse, Intelligence by (1 + amount scaled by level), Wits by (2 + amount scaled by level), and grants 20% Accuracy. Protects against and removes Blinded, Terrified, Charmed, Taunted, Sleeping, Enraged and Mad.\nSet Clear-Minded for 3 turn(s).",
+    "memory": 1,
+    "statusEffects": [
+      {
+        "name": "Clear-Minded",
+        "duration": 3,
+        "stats": [
+          { "name": "Strength", "amount": 1, "scales": true },
+          { "name": "Finesse", "amount": 1, "scales": true },
+          { "name": "Intelligence", "amount": 1, "scales": true },
+          { "name": "Wits", "amount": 2, "scales": true },
+          { "name": "Accuracy", "percent": 20 }
+        ]
+      }
+    ],
+    "stats": [],
+    "immunities": [
+      "Blinded",
+      "Charmed",
+      "Enraged",
+      "Mad",
+      "Sleeping",
+      "Taunted",
+      "Terrified"
+    ],
+    "imageSrc": "https://divinityoriginalsin2.wiki.fextralife.com/file/Divinity-Original-Sin-2/pyrokinetic_burn_my_eyes-icon.png",
+    "range": 13
+  },
+  {
+    "name": "Restoration",
+    "school": "Hydrosophist",
+    "requirements": {
+      "hydrosophist": 1
+    },
+    "actionPoints": 1,
+    "sourcePoints": 0,
+    "cooldown": 4,
+    "description": "Restore Vitality of a target character. Restoration also removes Poisoned and Bleeding.\nRestore [X] Vitality for 2 turn(s).",
+    "memory": 1,
+    "removes": ["Bleeding", "Poisoned"],
+    "statusEffects": [
+      {
+        "name": "Regenerating",
+        "duration": 2
+      }
+    ],
+    "stats": [],
+    "immunities": [],
+    "imageSrc": "https://divinityoriginalsin2.wiki.fextralife.com/file/Divinity-Original-Sin-2/hydrosophist_restoration-icon.png",
+    "range": 13
+  },
+  {
+    "name": "Cleanse Wounds",
+    "school": "Hydrosophist",
+    "requirements": {
+      "hydrosophist": 1,
+      "warfare": 1
+    },
+    "actionPoints": 2,
+    "sourcePoints": 0,
+    "cooldown": 5,
+    "description": "Heal target and create a water puddle beneath them. Remove Burning, Diseased, Decaying Touch, Poisoned and Bleeding.\nRestore X Vitality",
+    "memory": 1,
+    "removes": [
+      "Bleeding",
+      "Burning",
+      "Decaying",
+      "Diseased",
+      "Infested",
+      "Poisoned"
+    ],
+    "statusEffects": [],
+    "stats": [{ "name": "Vitality", "scales": true }],
+    "immunities": [],
+    "surfaces": ["water"],
+    "imageSrc": "https://divinityoriginalsin2.wiki.fextralife.com/file/Divinity-Original-Sin-2/hydrosophist-16-24.png",
+    "range": 2
+  },
+  {
+    "name": "Mass Cleanse Wounds",
+    "school": "Hydrosophist",
+    "requirements": {
+      "hydrosophist": 2,
+      "warfare": 2
+    },
+    "actionPoints": 2,
+    "sourcePoints": 1,
+    "cooldown": 5,
+    "description": "Heal yourself and allies around you. Create a water puddle beneath every target. Remove Necrofire, Burning, Diseased, Decaying, Poisoned, Bleeding, Suffocation and Acid.\nRestore 15 Vitality",
+    "memory": 2,
+    "removes": [
+      "Acid",
+      "Bleeding",
+      "Burning",
+      "Decaying",
+      "Diseased",
+      "Necrofire",
+      "Poisoned",
+      "Suffocation"
+    ],
+    "statusEffects": [],
+    "stats": [{ "name": "Vitality", "amount": 15, "scales": true }],
+    "immunities": [],
+    "surfaces": ["water"],
+    "imageSrc": "https://divinityoriginalsin2.wiki.fextralife.com/file/Divinity-Original-Sin-2/hydrosophist-16-23.png",
+    "range": 8
+  },
+  {
+    "name": "Healing Ritual",
+    "school": "Hydrosophist",
+    "requirements": {
+      "hydrosophist": 2
+    },
+    "actionPoints": 2,
+    "sourcePoints": 0,
+    "cooldown": 5,
+    "description": "Shoot a bolt of healing energy that will jump to nearby allies.\nRestore 7 Vitality",
+    "memory": 1,
+    "removes": ["Infested"],
+    "statusEffects": [],
+    "stats": [{ "name": "Vitality", "amount": 7, "scales": true }],
+    "immunities": [],
+    "surfaces": [],
+    "imageSrc": "https://divinityoriginalsin2.wiki.fextralife.com/file/Divinity-Original-Sin-2/hydrosophist_healing_ritual-icon.png",
+    "range": 13,
+    "notes": [
+      "Won't move unto undead allies, not allies under effects such as decay that would cause the healing to harm them."
+    ]
+  },
+  {
+    "name": "Cryogenic Stasis",
+    "school": "Hydrosophist",
+    "requirements": {
+      "hydrosophist": 2
+    },
+    "actionPoints": 2,
+    "sourcePoints": 0,
+    "cooldown": 4,
+    "description": "Target ally enters Cryogenic Stasis. Though incapacitated, they become immune to all damage, and heal over time. Removes Shackles of Pain.\nSet Permafrost for 1 Turn(s)",
+    "memory": 1,
+    "removes": [],
+    "statusEffects": [
+      { "name": "Permafrost", "duration": 1 },
+      { "name": "Regenerating", "duration": 1 }
+    ],
+    "stats": [],
+    "immunities": [
+      "Bleeding",
+      "Burning",
+      "Charmed",
+      "Petrified",
+      "Poisoned",
+      "Shackles of Pain",
+      "Shocked",
+      "Sleeping",
+      "Stunned",
+      "Taunted",
+      "Terrified"
+    ],
+    "surfaces": [],
+    "imageSrc": "https://divinityoriginalsin2.wiki.fextralife.com/file/Divinity-Original-Sin-2/hydrosophist_cryogenic_statis-icon.png",
+    "range": 13
+  },
+  {
+    "name": "Soothing Cold",
+    "school": "Hydrosophist",
+    "requirements": {
+      "hydrosophist": 2
+    },
+    "actionPoints": 1,
+    "sourcePoints": 0,
+    "cooldown": 3,
+    "description": "Regenerate Magical Armor for all alies around caster.\nRestore [x] Magic Armor for 3 turn(s).",
+    "memory": 1,
+    "removes": [],
+    "statusEffects": [
+      {
+        "name": "Soothing Cold",
+        "duration": 3,
+        "stats": [{ "name": "Magical Armor" }]
+      }
+    ],
+    "stats": [],
+    "immunities": [],
+    "surfaces": [],
+    "imageSrc": "https://divinityoriginalsin2.wiki.fextralife.com/file/Divinity-Original-Sin-2/hydrosophist_cryogenic_statis-icon.png",
+    "range": 13
+  },
+  {
+    "name": "Armor of Frost",
+    "school": "Hydrosophist",
+    "requirements": {
+      "hydrosophist": 1
+    },
+    "actionPoints": 1,
+    "sourcePoints": 0,
+    "cooldown": 4,
+    "description": "Ice forms a defensive barrier around the target, providing [X] Magical Armor. removes Burning, Poisoned, Stunned, Frozen, Suffocating and Petrified.\nSet Magic Shell for 3 turn(s).",
+    "memory": 1,
+    "removes": [
+      "Burning",
+      "Frozen",
+      "Petrified",
+      "Poisoned",
+      "Stunned",
+      "Suffocating"
+    ],
+    "statusEffects": [
+      {
+        "name": "Magic Shell",
+        "duration": 3
+      }
+    ],
+    "stats": [],
+    "immunities": [],
+    "surfaces": [],
+    "imageSrc": "https://divinityoriginalsin2.wiki.fextralife.com/file/Divinity-Original-Sin-2/hydrosophist_armour_of_frost.png",
+    "range": 13
+  },
+  {
+    "name": "Dominate Mind",
+    "school": "Summoning",
+    "requirements": {
+      "summoning": 2
+    },
+    "actionPoints": 3,
+    "sourcePoints": 0,
+    "cooldown": 5,
+    "memory": 1,
+    "description": "Charm target non-allied character, causing them to join your side in combat for the duration of the status.\nSet Charmed for 2 turn(s).",
+    "removes": [],
+    "statusEffects": [
+      {
+        "name": "Charmed",
+        "duration": 2
+      }
+    ],
+    "stats": [],
+    "immunities": [],
+    "surfaces": [],
+    "imageSrc": "https://divinityoriginalsin2.wiki.fextralife.com/file/Divinity-Original-Sin-2/summoning-18-6.png",
+    "range": 13
+  },
+  {
+    "name": "Rallying Cry",
+    "school": "Summoning",
+    "requirements": {
+      "summoning": 2
+    },
+    "actionPoints": 2,
+    "sourcePoints": 0,
+    "cooldown": 3,
+    "memory": 1,
+    "description": "Target character regenerates Vitality and Magic Armor according to the number of allied characters and totems in their vicinity.\nRestore 4 Vitality\nRestore 2 Magic Armor",
+    "removes": [],
+    "statusEffects": [],
+    "stats": [
+      {
+        "name": "Vitality",
+        "amount": 4
+      },
+      {
+        "name": "Magic Armor",
+        "amount": 2
+      }
+    ],
+    "immunities": [],
+    "surfaces": [],
+    "imageSrc": "https://divinityoriginalsin2.wiki.fextralife.com/file/Divinity-Original-Sin-2/summoning_harmony-icon.png",
+    "range": 13
+  },
+  {
+    "name": "Soul Mate",
+    "school": "Summoning",
+    "requirements": {
+      "summoning": 2
+    },
+    "actionPoints": 1,
+    "sourcePoints": 0,
+    "cooldown": 3,
+    "memory": 1,
+    "description": "Bind yourself to target character, copying any healing and Armor restoration that you receive to them. Clears Frozen, Stunned, Knocked Down and Petrified.\nSet Soul Mate for 3 turn(s).",
+    "removes": ["Frozen", "KnockedDown", "Petrified", "Stunned"],
+    "statusEffects": [
+      {
+        "name": "Soul Mate",
+        "duration": 3
+      }
+    ],
+    "stats": [],
+    "immunities": [],
+    "surfaces": [],
+    "imageSrc": "https://divinityoriginalsin2.wiki.fextralife.com/file/Divinity-Original-Sin-2/summoning-14-21.png",
+    "range": 13
+  },
+  {
+    "name": "Bless",
+    "school": "Sourcery",
+    "actionPoints": 1,
+    "sourcePoints": 1,
+    "cooldown": 3,
+    "memory": 1,
+    "description": "Bless target character or surface.\nSet Blessed for 2 turn(s).\nProtects against: Diseased, Decaying Touch, Petrified, Stunned, Cursed.\nAccuracy 20%, Dodge 10%, Resist All 15%",
+    "removes": ["Infested"],
+    "statusEffects": [
+      {
+        "name": "Blessed",
+        "duration": 3
+      }
+    ],
+    "stats": [],
+    "immunities": ["Cursed", "Diseased", "Decaying", "Petrified", "Stunned"],
+    "surfaces": [],
+    "imageSrc": "https://divinityoriginalsin2.wiki.fextralife.com/file/Divinity-Original-Sin-2/bless-icon.png",
+    "range": 13
+  },
+  {
+    "name": "Farsight",
+    "school": "Huntsman",
+    "requirements": {
+      "huntsman": 3
+    },
+    "actionPoints": 1,
+    "sourcePoints": 1,
+    "cooldown": 3,
+    "memory": 2,
+    "description": "Increase the range of a targeted character's ranged attacks and skills by 4m.\nSet Farsight for 3 Turn(s).",
+    "statusEffects": [
+      {
+        "name": "Farsight",
+        "duration": 3
+      }
+    ],
+    "imageSrc": "https://divinityoriginalsin2.wiki.fextralife.com/file/Divinity-Original-Sin-2/huntsman-15-24.png",
+    "range": 13
+  },
+  {
+    "name": "Steam Lance",
+    "school": "Hydrosophist",
+    "requirements": {
+      "hydrosophist": 3
+    },
+    "actionPoints": 2,
+    "sourcePoints": 2,
+    "cooldown": 3,
+    "memory": 2,
+    "description": "Releases a stream of Blessed Steam that heals characters in its path.\nRestore 6 Vitality for 3 Turn(s)",
+    "removes": [
+      "Burning",
+      "Chilled",
+      "Decaying",
+      "Diseased",
+      "Frozen",
+      "Necrofire"
+    ],
+    "statusEffects": [
+      {
+        "name": "Steam Lance",
+        "duration": 3,
+        "stats": [
+          {
+            "name": "Vitality",
+            "amount": 6
+          }
+        ]
+      }
+    ],
+    "stats": [],
+    "immunities": [],
+    "surfaces": [],
+    "imageSrc": "https://divinityoriginalsin2.wiki.fextralife.com/file/Divinity-Original-Sin-2/hydrosophist_steam_lance-icon.png",
+    "range": 13
+  },
+  {
+    "name": "Arcane Stitch",
+    "school": "Hydrosophist",
+    "requirements": {
+      "hydrosophist": 3
+    },
+    "actionPoints": 3,
+    "sourcePoints": 1,
+    "cooldown": 4,
+    "memory": 2,
+    "description": "Fully restore target character's Magic Armor. Removes Frozen, Stunned, Petrified, Plague, Suffocating, Poisoned, Burning, Necrofire, Terrified, Silenced, Taunted, Mad.\nRestore [X] Magic Armor",
+    "removes": [
+      "Burning",
+      "Frozen",
+      "Mad",
+      "Necrofire",
+      "Petrified",
+      "Plague",
+      "Poisoned",
+      "Silenced",
+      "Stunned",
+      "Suffocating",
+      "Taunted",
+      "Terrified"
+    ],
+    "statusEffects": [],
+    "stats": [{ "name": "Magic Armor" }],
+    "immunities": [],
+    "surfaces": [],
+    "imageSrc": "https://divinityoriginalsin2.wiki.fextralife.com/file/Divinity-Original-Sin-2/hydrosophist-14-16.png",
+    "range": 13
+  },
+  {
+    "name": "Skin Graft",
+    "school": "Polymorph",
+    "requirements": {
+      "polymorph": 3
+    },
+    "actionPoints": 1,
+    "sourcePoints": 1,
+    "cooldown": 0,
+    "memory": 2,
+    "description": "Reset all cooldowns. Removes Burning, Necrofire, Poisoned and Bleeding.\nSet Skin Graft",
+    "removes": ["Bleeding", "Burning", "Necrofire", "Poisoned"],
+    "statusEffects": [
+      {
+        "name": "Skin Graft"
+      }
+    ],
+    "stats": [],
+    "immunities": [],
+    "surfaces": [],
+    "imageSrc": "https://divinityoriginalsin2.wiki.fextralife.com/file/Divinity-Original-Sin-2/polymorph-12-13.png",
+    "range": 0
+  },
+  {
+    "name": "Uncanny Evasion",
+    "school": "Aerotheurge",
+    "requirements": {
+      "aerotheurge": 2
+    },
+    "actionPoints": 1,
+    "sourcePoints": 0,
+    "cooldown": 4,
+    "memory": 1,
+    "description": "Target character's dodging is increased by 90% and your Movement Speed is increased by 20%.\nSets Evading for 1 turn(s).",
+    "removes": [],
+    "statusEffects": [
+      {
+        "name": "Evading",
+        "duration": 1
+      }
+    ],
+    "stats": [],
+    "immunities": [],
+    "surfaces": [],
+    "imageSrc": "https://divinityoriginalsin2.wiki.fextralife.com/file/Divinity-Original-Sin-2/aerotheurge-17-1.png",
+    "range": 15
+  },
+  {
+    "name": "Break the Shackles",
+    "school": "Special",
+    "actionPoints": 0,
+    "sourcePoints": 1,
+    "cooldown": 2,
+    "memory": 0,
+    "description": "Remove the following negative status effects from yourself: Slowed, Crippled, Chilled, Shocked, Suffocating, Atrophy, Diseased, Infectious Disease, Silenced, Plagued and Shackles of Pain.",
+    "removes": [
+      "Atrophy",
+      "Chilled",
+      "Crippled",
+      "Diseased",
+      "Infectious Disease",
+      "Plagued",
+      "Shackles of Pain",
+      "Shocked",
+      "Silenced",
+      "Slowed",
+      "Suffocating"
+    ],
+    "statusEffects": [],
+    "stats": [],
+    "immunities": [],
+    "surfaces": [],
+    "imageSrc": "https://divinityoriginalsin2.wiki.fextralife.com/file/Divinity-Original-Sin-2/break_the_shackles-icon.png",
+    "range": 13
+  }
+]

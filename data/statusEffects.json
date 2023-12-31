@@ -1,0 +1,172 @@
+[
+  {
+    "name": "Regenerating",
+    "description": "Restores Vitality per turn, healing the living and dealing physical damage to the undead.",
+    "clearedBy": ["Bleeding"],
+    "removes": ["Infested"],
+    "imageSrc": "https://divinityoriginalsin2.wiki.fextralife.com/file/Divinity-Original-Sin-2/status_effect_regenerate-icon.png"
+  },
+  {
+    "name": "Fortified",
+    "description": "Maximum Physical Armor increased.\nPhysical Armor: +??\nImmunity to being teleported.",
+    "immunities": ["Teleport"],
+    "givenBy": ["Blessed Oil Surface"],
+    "imageSrc": "https://divinityoriginalsin2.wiki.fextralife.com/file/Divinity-Original-Sin-2/status_effect_fortified-icon.png"
+  },
+  {
+    "name": "Mending Metal",
+    "description": "Restores Physical Armor per turn.",
+    "imageSrc": "https://divinityoriginalsin2.wiki.fextralife.com/file/Divinity-Original-Sin-2/geomancer_mend_metal-icon.png"
+  },
+  {
+    "name": "Rested",
+    "description": "Character's primary attributes increased. Protects from Muted, Blind, Crippled, Knocked Down.\nStrength +2\nFinesse: +2\nIntelligence: +2",
+    "stats": [
+      {
+        "name": "Strength",
+        "amount": 2
+      },
+      {
+        "name": "Finesse",
+        "amount": 2
+      },
+      {
+        "name": "Intelligence",
+        "amount": 2
+      }
+    ],
+    "immunities": ["Muted", "Blinded", "Crippled", "Knocked Down"],
+    "imageSrc": "https://divinityoriginalsin2.wiki.fextralife.com/file/Divinity-Original-Sin-2/rested.png"
+  },
+  {
+    "name": "Hasted",
+    "description": "Character is hasted.\nMovement: +2\nStart AP: +1\nAP Recovery: +1",
+    "removes": ["Slowed", "Crippled"],
+    "stats": [
+      {
+        "name": "Movement",
+        "amount": 2
+      },
+      {
+        "name": "Start AP",
+        "amount": 1
+      },
+      {
+        "name": "AP Recovery",
+        "amount": 1
+      }
+    ],
+    "clearedBy": ["Slowed", "Crippled"],
+    "imageSrc": "https://divinityoriginalsin2.wiki.fextralife.com/file/Divinity-Original-Sin-2/status_effect_hasted-icon.png"
+  },
+  {
+    "name": "Clear-Minded",
+    "description": "Strength: +?? (Scales, starting with +1)\nFinesse: +?? (Scales, starting with +1)\nIntelligence: +?? (Scales, starting with +1)\nWits: +?? (Scales, starting with +2)\nAccuracy: +20%\nProtected from mind-controlling effects.",
+    "stats": [
+      { "name": "Strength", "amount": 1, "scales": true },
+      { "name": "Finesse", "amount": 1, "scales": true },
+      { "name": "Intelligence", "amount": 1, "scales": true },
+      { "name": "Wits", "amount": 2, "scales": true },
+      { "name": "Accuracy", "percent": 20 }
+    ],
+    "scales": true,
+    "clearedBy": ["Enraged"],
+    "immunities": [
+      "Blinded",
+      "Terrified",
+      "Charmed",
+      "Taunted",
+      "Sleeping",
+      "Enraged",
+      "Mad"
+    ],
+    "imageSrc": "https://divinityoriginalsin2.wiki.fextralife.com/file/Divinity-Original-Sin-2/pyrokinetic_burn_my_eyes-icon.png"
+  },
+  {
+    "name": "Permafrost",
+    "description": "A sheet of impenetrable ice protects character from incoming damage, but they are unable to act while it is active.\nAll Resistances: +100% (Including Piercing and Physical)\nImmunity to Burning\nImmunity to Stunned\nImmunity to Poisoned\nImmunity to Charmed\nImmunity to Terrified\nImmunity to Bleeding\nImmunity to Petrified\nImmunity to Taunted\nImmunity to Sleeping\nImmunity to Shocked\nImmunity to Shackles of Pain",
+    "immunities": [
+      "Burning",
+      "Stunned",
+      "Poisoned",
+      "Charmed",
+      "Terrified",
+      "Bleeding",
+      "Petrified",
+      "Taunted",
+      "Sleeping",
+      "Shocked",
+      "Shackles of Pain"
+    ],
+    "imageSrc": "https://divinityoriginalsin2.wiki.fextralife.com/file/Divinity-Original-Sin-2/status_effect_frozen-icon.png"
+  },
+  {
+    "name": "Soothing Cold",
+    "description": "Restores Magic Armor per turn.",
+    "stats": [{ "name": "Magical Armor" }],
+    "imageSrc": "https://divinityoriginalsin2.wiki.fextralife.com/file/Divinity-Original-Sin-2/hydrosophist_soothing_cold-icon.png"
+  },
+  {
+    "name": "Magic Shell",
+    "description": "Maximum Magic Armor increased.",
+    "stats": [{ "name": "Magical Armor Max" }],
+    "imageSrc": "https://divinityoriginalsin2.wiki.fextralife.com/file/Divinity-Original-Sin-2/status_effect_frozen_shell-icon.png"
+  },
+  {
+    "name": "Charmed",
+    "description": "Temporarily turns the target's allegiance around. (Your character can be charmed to attack your party). Resisted by Magic Armor.",
+    "imageSrc": "https://divinityoriginalsin2.wiki.fextralife.com/file/Divinity-Original-Sin-2/status_effect_charmed-icon.png"
+  },
+  {
+    "name": "Soul Mate",
+    "description": "Caster: Character is copying 50% of healing and Armor restoration to linked character.\nTarget: Character is receiving healing and Armor restoration from linked character.",
+    "imageSrc": "https://divinityoriginalsin2.wiki.fextralife.com/file/Divinity-Original-Sin-2/summoning-14-21.png"
+  },
+  {
+    "name": "Blessed",
+    "description": "Protects against Diseased, Decaying Touch, Petrified, Stunned.\nAccuracy +20%\nDodging +10%\nResistances: +15%",
+    "immunities": ["Cursed", "Diseased", "Decaying", "Petrified", "Stunned"],
+    "removes": ["Infested"],
+    "stats": [
+      {
+        "name": "Accuracy",
+        "percent": 20
+      },
+      {
+        "name": "Dodging",
+        "percent": 10
+      },
+      {
+        "name": "Resistances",
+        "percent": 15
+      }
+    ],
+    "imageSrc": "https://divinityoriginalsin2.wiki.fextralife.com/file/Divinity-Original-Sin-2/bless-icon.png"
+  },
+  {
+    "name": "Farsight",
+    "description": "Character's accuracy and range of ranged weapons and skills are increased. The range increase is 3m.\nAccuracy: +50%",
+    "stats": [
+      {
+        "name": "Accuracy",
+        "percent": 50
+      }
+    ],
+    "imageSrc": "https://divinityoriginalsin2.wiki.fextralife.com/file/Divinity-Original-Sin-2/huntsman-15-24.png"
+  },
+  {
+    "name": "Evading",
+    "description": "Dodging and movement speed increased.\nMovement: +20%\nDodging: +90%",
+    "stats": [
+      {
+        "name": "Movement",
+        "percent": 20
+      },
+      {
+        "name": "Dodging",
+        "percent": 90
+      }
+    ],
+    "imageSrc": "https://divinityoriginalsin2.wiki.fextralife.com/file/Divinity-Original-Sin-2/aerotheurge-17-1.png"
+  }
+]
