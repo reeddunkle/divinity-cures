@@ -15,9 +15,6 @@ type CollapsibleSection = {
 export function CollapsibleSection(props: CollapsibleSection) {
   const detailsRef = useRef<HTMLDetailsElement>(null);
 
-  console.log({ props });
-  console.log("details set: ", Boolean(detailsRef.current));
-
   useEffect(() => {
     if (props.open && detailsRef.current) {
       detailsRef.current.open = true;
