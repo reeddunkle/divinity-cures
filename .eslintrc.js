@@ -132,6 +132,7 @@ module.exports = {
         "newlines-between": "always",
       },
     ],
+    "no-implicit-coercion": "off",
     "no-nested-ternary": "off",
     "react/no-array-index-key": "off",
     "sort-imports": [

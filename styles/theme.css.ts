@@ -5,7 +5,7 @@ import { calc } from "@vanilla-extract/css-utils";
 
 const twViolet = {
   50: "#f5f3ff",
-  100: "#ede9fe",
+  100: "#ede9fe", // rgb(237, 233, 254)
   200: "#ddd6fe",
   300: "#c4b5fd",
   400: "#a78bfa",

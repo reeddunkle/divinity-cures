@@ -8,6 +8,7 @@ import { compareStrings, range, startsWith } from "@/util/util.ts";
 
 import * as styles from "./card.css.ts";
 import { CollapsibleSection } from "./collapsible-section.tsx";
+import { Cooldown } from "./cooldown.tsx";
 
 const addAsterisk = (str: string) => {
   return `${str}*`;
@@ -43,6 +44,7 @@ export function Card(props: CardProps) {
             <SourcePoint className={styles.point} key={index} />
           ))}
         </div>
+        <Cooldown cooldown={props.cooldown} />
       </div>
       <div className={styles.col2}>
         <div className={styles.title}>{props.name}</div>
@@ -76,7 +78,7 @@ export function Card(props: CardProps) {
           ) : null}
           {immunities.length > 0 ? (
             <div className={styles.listGridColumn}>
-              <div className={styles.listTitle}>Immunities:</div>
+              <div className={styles.listTitle}>Immunities (*):</div>
               <ul className={styles.list}>
                 {immunities.map((statusEffect) => {
                   const statusEffectLink = `?search=${statusEffect.toLowerCase()}`;
