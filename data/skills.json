@@ -484,7 +484,7 @@
     "cooldown": 3,
     "memory": 1,
     "description": "Bind yourself to target character, copying any healing and Armor restoration that you receive to them. Clears Frozen, Stunned, Knocked Down and Petrified.\nSet Soul Mate for 3 turn(s).",
-    "removes": ["Frozen", "KnockedDown", "Petrified", "Stunned"],
+    "removes": ["Frozen", "Knocked Down", "Petrified", "Stunned"],
     "statusEffects": [
       {
         "name": "Soul Mate",

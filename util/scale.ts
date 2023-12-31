@@ -106,6 +106,8 @@ const fluidScale = {
   xl: fluidThirds[11],
   xxl: fluidThirds[13],
   xxxl: fluidThirds[15],
+  xxxxl: fluidThirds[17],
+  xxxxxl: fluidThirds[19],
 
   half: {
     min: {
@@ -137,6 +139,10 @@ const staticScale = {
   md: minorThirds[8],
   lg: minorThirds[10],
   xl: minorThirds[11],
+  xxl: minorThirds[13],
+  xxxl: minorThirds[15],
+  xxxxl: minorThirds[17],
+  xxxxxl: minorThirds[19],
 };
 /* eslint-enable sort-keys */
 

@@ -8,12 +8,12 @@ export const IMAGE_SIZE_PX = 64;
 export const card = style({
   display: "grid",
   gap: scale.fluid.xxs,
-  gridTemplateColumns: `${scale.fluid.xxxl} 4fr 2fr`,
+  gridTemplateColumns: `[col1-start] ${scale.fluid.xxxl} [col2-start] 4fr [col3-start] ${scale.fluid.xxxxl} [end]`,
   width: "100%",
 
   "@media": {
     [scale.media.sm]: {
-      gridTemplateColumns: `${scale.fluid.xxxl} 4fr`,
+      gridTemplateColumns: "[col1-start] 1fr [col2-start] 4fr [end]",
     },
   },
 });
@@ -34,7 +34,11 @@ export const col2 = style({
 });
 
 export const col3 = style({
-  // paddingInline: scale.fluid.xxxs,
+  "@media": {
+    [scale.media.sm]: {
+      gridColumn: "col1-start / end",
+    },
+  },
 });
 
 // Col 1
@@ -65,8 +69,10 @@ export const title = style({
 
 export const listGrid = style({
   display: "grid",
-  gridTemplateColumns: "repeat(auto-fill)",
+  gridTemplateColumns: "repeat(auto-fit, minmax(100px, 1fr));",
 });
+
+export const listGridColumn = style({});
 
 export const listTitle = style({
   fontWeight: 500,
@@ -101,4 +107,4 @@ export const activeCureLink = style({
 
 // Col 3
 
-export const curesWrapper = style({});
+// export const curesWrapper = style({});

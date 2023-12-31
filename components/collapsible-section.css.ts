@@ -7,7 +7,6 @@ export const details = style({
   border: "1px solid #aaa",
   borderRadius: "4px",
   fontSize: scale.fluid.half.min.sm,
-  overflowY: "hidden",
   paddingBlock: scale.fluid.xxs,
 
   selectors: {

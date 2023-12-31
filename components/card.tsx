@@ -41,7 +41,65 @@ export function Card(props: CardProps) {
       <div className={styles.col2}>
         <div className={styles.title}>{props.name}</div>
         <div className={styles.listGrid}>
-          <div className={styles.curesWrapper}>
+          <div className={styles.listGridColumn}>
+            {cures.length > 0 ? (
+              <>
+                <div className={styles.listTitle}>Cures:</div>
+                <ul className={styles.list}>
+                  {cures.map((cure) => {
+                    const cureLink = `?search=${cure.toLowerCase()}`;
+                    const MIN_SEARCH_CHARACTERS = 3;
+
+                    return (
+                      <li className={styles.cureItem} key={cure}>
+                        <Link
+                          className={clsx(styles.cureLink, {
+                            [styles.activeCureLink]:
+                              props.searchText.length > MIN_SEARCH_CHARACTERS &&
+                              startsWith(cure, props.searchText),
+                          })}
+                          href={cureLink}
+                          prefetch={false}
+                        >
+                          {cure}
+                        </Link>
+                      </li>
+                    );
+                  })}
+                </ul>
+              </>
+            ) : null}
+          </div>
+          <div className={styles.listGridColumn}>
+            {cures.length > 0 ? (
+              <>
+                <div className={styles.listTitle}>Cures:</div>
+                <ul className={styles.list}>
+                  {cures.map((cure) => {
+                    const cureLink = `?search=${cure.toLowerCase()}`;
+                    const MIN_SEARCH_CHARACTERS = 3;
+
+                    return (
+                      <li className={styles.cureItem} key={cure}>
+                        <Link
+                          className={clsx(styles.cureLink, {
+                            [styles.activeCureLink]:
+                              props.searchText.length > MIN_SEARCH_CHARACTERS &&
+                              startsWith(cure, props.searchText),
+                          })}
+                          href={cureLink}
+                          prefetch={false}
+                        >
+                          {cure}
+                        </Link>
+                      </li>
+                    );
+                  })}
+                </ul>
+              </>
+            ) : null}
+          </div>
+          <div className={styles.listGridColumn}>
             {cures.length > 0 ? (
               <>
                 <div className={styles.listTitle}>Cures:</div>
