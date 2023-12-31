@@ -199,10 +199,7 @@
     "cooldown": 4,
     "description": "Restore Vitality of a target character. Restoration also removes Poisoned and Bleeding.\nRestore [X] Vitality for 2 turn(s).",
     "memory": 1,
-    "removes": [
-      "Bleeding",
-      "Poisoned"
-    ],
+    "removes": ["Bleeding", "Poisoned"],
     "statusEffects": [
       {
         "name": "Regenerating",
@@ -244,9 +241,7 @@
       }
     ],
     "immunities": [],
-    "surfaces": [
-      "water"
-    ],
+    "surfaces": ["water"],
     "imageSrc": "https://divinityoriginalsin2.wiki.fextralife.com/file/Divinity-Original-Sin-2/hydrosophist-16-24.png",
     "range": 2,
     "id": "6"
@@ -282,9 +277,7 @@
       }
     ],
     "immunities": [],
-    "surfaces": [
-      "water"
-    ],
+    "surfaces": ["water"],
     "imageSrc": "https://divinityoriginalsin2.wiki.fextralife.com/file/Divinity-Original-Sin-2/hydrosophist-16-23.png",
     "range": 8,
     "id": "7"
@@ -300,9 +293,7 @@
     "cooldown": 5,
     "description": "Shoot a bolt of healing energy that will jump to nearby allies.\nRestore 7 Vitality",
     "memory": 1,
-    "removes": [
-      "Infested"
-    ],
+    "removes": ["Infested"],
     "statusEffects": [],
     "stats": [
       {
@@ -403,7 +394,7 @@
     "actionPoints": 1,
     "sourcePoints": 0,
     "cooldown": 4,
-    "description": "Ice forms a defensive barrier around the target, providing [X] Magical Armor. removes Burning, Poisoned, Stunned, Frozen, Suffocating and Petrified.\nSet Magic Shell for 3 turn(s).",
+    "description": "Ice forms a defensive barrier around the target, providing [X] Magical Armor. Removes Burning, Poisoned, Stunned, Frozen, Suffocating and Petrified.\nSet Magic Shell for 3 turn(s).",
     "memory": 1,
     "removes": [
       "Burning",
@@ -493,12 +484,7 @@
     "cooldown": 3,
     "memory": 1,
     "description": "Bind yourself to target character, copying any healing and Armor restoration that you receive to them. Clears Frozen, Stunned, Knocked Down and Petrified.\nSet Soul Mate for 3 turn(s).",
-    "removes": [
-      "Frozen",
-      "KnockedDown",
-      "Petrified",
-      "Stunned"
-    ],
+    "removes": ["Frozen", "KnockedDown", "Petrified", "Stunned"],
     "statusEffects": [
       {
         "name": "Soul Mate",
@@ -521,9 +507,7 @@
     "cooldown": 3,
     "memory": 1,
     "description": "Bless target character or surface.\nSet Blessed for 2 turn(s).\nProtects against: Diseased, Decaying Touch, Petrified, Stunned, Cursed.\nAccuracy 20%, Dodge 10%, Resist All 15%",
-    "removes": [
-      "Infested"
-    ],
+    "removes": ["Infested"],
     "statusEffects": [
       {
         "name": "Blessed",
@@ -532,13 +516,7 @@
       }
     ],
     "stats": [],
-    "immunities": [
-      "Cursed",
-      "Diseased",
-      "Decaying",
-      "Petrified",
-      "Stunned"
-    ],
+    "immunities": ["Cursed", "Diseased", "Decaying", "Petrified", "Stunned"],
     "surfaces": [],
     "imageSrc": "https://divinityoriginalsin2.wiki.fextralife.com/file/Divinity-Original-Sin-2/bless-icon.png",
     "range": 13,
@@ -653,12 +631,7 @@
     "cooldown": 0,
     "memory": 2,
     "description": "Reset all cooldowns. Removes Burning, Necrofire, Poisoned and Bleeding.\nSet Skin Graft",
-    "removes": [
-      "Bleeding",
-      "Burning",
-      "Necrofire",
-      "Poisoned"
-    ],
+    "removes": ["Bleeding", "Burning", "Necrofire", "Poisoned"],
     "statusEffects": [
       {
         "name": "Skin Graft",

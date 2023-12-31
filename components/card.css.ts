@@ -9,6 +9,7 @@ export const card = style({
   display: "grid",
   gap: scale.fluid.xxs,
   gridTemplateColumns: `${scale.fluid.xxxl} 5fr 2fr`,
+  width: "100%",
 });
 
 export const col1 = style({
@@ -72,8 +73,6 @@ export const pointCostCol = style({
   flexWrap: "wrap",
   justifyContent: "center",
 });
-
-export const description = style({});
 
 export const title = style({
   color: theme.color.primary,

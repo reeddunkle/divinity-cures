@@ -7,6 +7,7 @@ import type { Skill } from "@/data/schemas.ts";
 import { compareStrings, range, startsWith } from "@/util/util.ts";
 
 import * as styles from "./card.css.ts";
+import { CollapsibleSection } from "./collapsible-section.tsx";
 
 type CardProps = React.HTMLProps<HTMLDivElement> &
   Skill & {
@@ -39,7 +40,7 @@ export function Card(props: CardProps) {
       </div>
       <div className={styles.col2}>
         <div className={styles.title}>{props.name}</div>
-        <div className={styles.description}>{props.description}</div>
+        <CollapsibleSection title="Description" text={props.description} />
       </div>
       <div className={styles.col3}>
         {cures.length > 0 ? (
