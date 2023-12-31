@@ -40,7 +40,7 @@ export function Card(props: CardProps) {
       </div>
       <div className={styles.col2}>
         <div className={styles.title}>{props.name}</div>
-        <CollapsibleSection title="Description" text={props.description} />
+        <CollapsibleSection open title="Description" text={props.description} />
       </div>
       <div className={styles.col3}>
         {cures.length > 0 ? (
