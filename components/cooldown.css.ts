@@ -3,16 +3,12 @@ import { style } from "@vanilla-extract/css";
 import { theme } from "@/styles/theme.css";
 import scale from "@/util/scale";
 
-const tickLength = 10;
-const tickThickness = 1;
-
 const borderThickness = 2;
-
-const wrapperPadding = tickLength / 2 - borderThickness / 2;
+const tickLength = 10;
 
 export const wrapper = style({
   aspectRatio: "1 / 1",
-  padding: wrapperPadding,
+  padding: tickLength / 2 - borderThickness / 2,
   position: "relative",
 });
 
@@ -48,7 +44,7 @@ export const tick = style({
 export const tickTop = style({
   backgroundColor: theme.color.foreground,
   height: tickLength,
-  width: tickThickness,
+  width: borderThickness,
 
   position: "absolute",
   top: 0,
@@ -59,7 +55,7 @@ export const tickTop = style({
 
 export const tickRight = style({
   backgroundColor: theme.color.foreground,
-  height: tickThickness,
+  height: borderThickness,
   width: tickLength,
 
   position: "absolute",
