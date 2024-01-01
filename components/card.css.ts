@@ -10,7 +10,8 @@ export const SCHOOL_IMAGE_SIZE_PX = 45;
 export const card = style({
   display: "grid",
   gap: scale.fluid.xxs,
-  gridTemplateColumns: `${scale.fluid.xxxl} repeat(auto-fit, minmax(1rem, auto))`,
+  // gridTemplateColumns: `${scale.fluid.xxxl} repeat(auto-fit, minmax(0.5rem, 1fr))`,
+  gridTemplateColumns: `${scale.fluid.xxxl} minmax(0.5rem, 1fr) minmax(0.5rem, 1fr)`,
   width: "100%",
 
   // "@media": {
@@ -60,8 +61,6 @@ export const title = style({
   fontWeight: 450,
   lineHeight: 1,
   textTransform: "uppercase",
-
-  hyphens: "auto",
 
   // wordBreak: "break-all",
   // overflowWrap: "break-word",
