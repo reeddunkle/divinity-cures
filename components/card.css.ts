@@ -6,6 +6,7 @@ import scale from "@/util/scale";
 export const SPELL_IMAGE_SIZE_PX = 64;
 export const SCHOOL_IMAGE_SIZE_PX = 45;
 
+/* Card */
 export const card = style({
   display: "grid",
   gap: scale.fluid.xxs,
@@ -47,25 +48,12 @@ export const col3 = style({
   // },
 });
 
-// Col 1
 export const skillImage = style({
   aspectRatio: "1/1",
   height: "auto",
   width: "80%",
 });
 
-export const point = style({
-  height: scale.fluid.half.min.md,
-  width: scale.fluid.half.min.md,
-});
-
-export const pointCostCol = style({
-  display: "flex",
-  flexWrap: "wrap",
-  justifyContent: "center",
-});
-
-// Col 2
 export const title = style({
   color: theme.color.primary,
   fontSize: scale.fluid.md,
@@ -74,6 +62,7 @@ export const title = style({
   textTransform: "uppercase",
 });
 
+/* School Icons */
 export const schoolIcons = style({
   display: "flex",
   gap: scale.fluid.half.min.xxxs,
@@ -85,6 +74,7 @@ export const schoolImage = style({
   width: scale.fluid.xl,
 });
 
+/* Cures List */
 const autoFitWidthMin = "6rem";
 
 export const listGrid = style({
@@ -92,10 +82,12 @@ export const listGrid = style({
   gridTemplateColumns: `repeat(auto-fit, minmax(${autoFitWidthMin}, 1fr));`,
 });
 
+/* Requirements */
 export const requirements = style({
   justifySelf: "end",
 });
 
+/* Cures List & Requirements */
 export const listTitle = style({
   fontSize: scale.fluid.sm,
   fontWeight: 500,
@@ -126,5 +118,3 @@ export const activeLink = style({
   fontWeight: 500,
   textDecoration: "none",
 });
-
-// export const curesWrapper = style({});
