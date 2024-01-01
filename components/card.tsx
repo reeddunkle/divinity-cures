@@ -18,19 +18,21 @@ function SchoolsAndReqs(props: SchoolsAndReqsProps) {
     <div className={styles.schoolsAndReqs}>
       {props.schools.map((school) => {
         return (
-          <div key={school.id}>
+          <div className={styles.pair} key={school.id}>
             <div>{school.name}</div>
-            {!!school.requires && school.requires > 0 ?
-              <div>{school.requires}</div>
-            : null}
-            <Image
-              alt={`Icon for ${school.name}`}
-              className={styles.schoolImage}
-              height={styles.SCHOOL_IMAGE_SIZE_PX}
-              key={school.id}
-              src={school.imageSrcColored}
-              width={styles.SCHOOL_IMAGE_SIZE_PX}
-            />
+            <div className={styles.numberAndImage}>
+              {!!school.requires && school.requires > 0 ?
+                <div className={styles.requireNumber}>({school.requires})</div>
+              : null}
+              <Image
+                alt={`Icon for ${school.name}`}
+                className={styles.schoolImage}
+                height={styles.SCHOOL_IMAGE_SIZE_PX}
+                key={school.id}
+                src={school.imageSrcColored}
+                width={styles.SCHOOL_IMAGE_SIZE_PX}
+              />
+            </div>
           </div>
         );
       })}

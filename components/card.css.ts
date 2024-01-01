@@ -74,20 +74,38 @@ export const schoolImage = style({
   width: scale.fluid.xl,
 });
 
-export const schoolsAndReqs = style({});
+export const pair = style({
+  alignItems: "center",
+  display: "flex",
+  flexWrap: "wrap-reverse",
+  fontSize: scale.fluid.sm,
+  gap: scale.fluid.half.min.xxxs,
+  justifyContent: "flex-end",
+});
+
+export const numberAndImage = style({
+  alignItems: "center",
+  display: "flex",
+  gap: scale.fluid.half.min.xxxs,
+  justifyContent: "flex-end",
+});
+
+export const schoolsAndReqs = style({
+  display: "flex",
+  flexDirection: "column",
+  gap: scale.fluid.half.min.xxxs,
+});
+
+export const requireNumber = style({
+  flexShrink: 0,
+});
+
 /* Cures List */
 const autoFitWidthMin = "6rem";
 
 export const listGrid = style({
   display: "grid",
   gridTemplateColumns: `repeat(auto-fit, minmax(${autoFitWidthMin}, 1fr));`,
-});
-
-/* Requirements */
-export const requirements = style({
-  display: "flex",
-  flexDirection: "column",
-  alignItems: "flex-end",
 });
 
 /* Cures List & Requirements */
