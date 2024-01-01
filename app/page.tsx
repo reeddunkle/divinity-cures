@@ -8,7 +8,7 @@ import {
   loadSpellSchools,
   loadStatusEffects,
 } from "@/data/loaders.ts";
-import type { Skill, SkillBase, StatusEffect } from "@/data/schemas.ts";
+import type { Skill, SkillBase, StatusEffect } from "@/data/skill-schema.ts";
 import type { School } from "@/data/spell-schools-schema.ts";
 import { keyBy } from "@/util/util.ts";
 

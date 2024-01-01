@@ -3,7 +3,7 @@ import Image from "next/image";
 import Link from "next/link";
 
 import { PointCosts } from "@/components/point-costs.tsx";
-import type { Skill } from "@/data/schemas.ts";
+import type { Skill } from "@/data/skill-schema.ts";
 import { addAsterisk, compareStrings, startsWith } from "@/util/util.ts";
 
 import * as styles from "./card.css.ts";

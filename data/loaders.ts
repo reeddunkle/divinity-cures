@@ -2,7 +2,7 @@ import { promises as fs } from "node:fs";
 
 import type { z } from "zod";
 
-import { skillSchemaArray, statusEffectSchemaArray } from "@/data/schemas.ts";
+import { skillSchemaArray, statusEffectSchemaArray } from "@/data/skill-schema";
 import { schoolSchemaArray } from "@/data/spell-schools-schema";
 
 async function loadJsonToZod<SchemaType extends z.ZodTypeAny>(
