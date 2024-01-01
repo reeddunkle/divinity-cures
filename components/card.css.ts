@@ -9,7 +9,7 @@ export const SCHOOL_IMAGE_SIZE_PX = 45;
 export const card = style({
   display: "grid",
   gap: scale.fluid.xxs,
-  gridTemplateColumns: `[col1-start] ${scale.fluid.xxxl} [col2-start] 1fr [col3-start] min-content [end]`,
+  gridTemplateColumns: `${scale.fluid.xxxl} 1fr 1fr`,
   width: "100%",
 
   // "@media": {
@@ -40,11 +40,11 @@ export const col3 = style({
   gap: scale.static.xxxs,
   justifyContent: "flex-start",
 
-  "@media": {
-    [scale.media.sm]: {
-      gridColumn: "col1-start / end",
-    },
-  },
+  // "@media": {
+  //   [scale.media.sm]: {
+  //     gridColumn: "col1-start / end",
+  //   },
+  // },
 });
 
 // Col 1
@@ -74,24 +74,13 @@ export const title = style({
   textTransform: "uppercase",
 });
 
-export const titleRow = style({
-  display: "flex",
-  justifyContent: "space-between",
-});
-
-export const schoolIconGroup = style({
+export const schoolIcons = style({
   display: "flex",
   gap: scale.fluid.half.min.xxxs,
   justifyContent: "flex-end",
-
-  // "@media": {
-  //   [scale.media.sm]: {
-  //     flexDirection: "column",
-  //   },
-  // },
 });
 
-export const schoolIcon = style({
+export const schoolImage = style({
   height: scale.fluid.xl,
   width: scale.fluid.xl,
 });
@@ -103,9 +92,7 @@ export const listGrid = style({
   gridTemplateColumns: `repeat(auto-fit, minmax(${autoFitWidthMin}, 1fr));`,
 });
 
-export const listGridColumn = style({});
-
-export const requirementsList = style({
+export const requirements = style({
   justifySelf: "end",
 });
 
@@ -125,7 +112,6 @@ export const statusEffectItem = style({
 
 export const statusEffectLink = style({
   color: theme.color.link,
-
   textDecoration: "underline",
   textTransform: "capitalize",
 

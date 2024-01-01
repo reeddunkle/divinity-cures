@@ -6,7 +6,6 @@ export const main = style({
   marginInline: "auto",
   maxWidth: 768,
   paddingBlock: scale.fluid.xxxs,
-  paddingInline: scale.fluid.lg,
 });
 
 export const h1 = style({

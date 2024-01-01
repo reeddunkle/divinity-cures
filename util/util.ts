@@ -85,5 +85,13 @@ export const compareStrings = (valueA: string, valueB: string) => {
 };
 
 export const compareNumbers = (valueA: number, valueB: number) => {
-  return valueA < valueB ? -1 : valueA > valueB ? 1 : 0;
+  return (
+    valueA < valueB ? -1
+    : valueA > valueB ? 1
+    : 0
+  );
+};
+
+export const addAsterisk = (str: string) => {
+  return `${str}*`;
 };
