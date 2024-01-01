@@ -18,7 +18,7 @@ export const input = style({
   borderRadius: 3,
   fontFamily: "inherit",
   fontSize: scale.fluid.half.max.sm,
-  padding: scale.fluid.xs,
+  padding: scale.fluid.half.max.sm,
   width: "100%",
 });
 

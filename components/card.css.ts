@@ -10,7 +10,7 @@ export const SCHOOL_IMAGE_SIZE_PX = 45;
 export const card = style({
   display: "grid",
   gap: scale.fluid.xxs,
-  gridTemplateColumns: `${scale.fluid.xxxl} 1fr 1fr`,
+  gridTemplateColumns: `${scale.fluid.xxxl} repeat(auto-fit, minmax(1rem, auto))`,
   width: "100%",
 
   // "@media": {
@@ -60,6 +60,13 @@ export const title = style({
   fontWeight: 450,
   lineHeight: 1,
   textTransform: "uppercase",
+
+  hyphens: "auto",
+
+  // wordBreak: "break-all",
+  // overflowWrap: "break-word",
+  // textWrap: "balance",
+  // wordWrap: "break-word",
 });
 
 /* School Icons */
@@ -70,7 +77,8 @@ export const schoolIcons = style({
 });
 
 export const schoolImage = style({
-  height: scale.fluid.xl,
+  aspectRatio: "1 / 1",
+  height: "auto",
   width: scale.fluid.xl,
 });
 

@@ -1,12 +1,25 @@
 "use client";
 
+import { clsx } from "clsx";
 import React from "react";
 
-type InputProps = React.InputHTMLAttributes<HTMLInputElement>;
+import * as styles from "./input.css";
+
+type Input = React.InputHTMLAttributes<HTMLInputElement>;
+
+type InputProps = Input & {
+  className: string;
+};
 
 export const Input = React.forwardRef<HTMLInputElement, InputProps>(
   (props, ref) => {
-    return <input ref={ref} {...props} />;
+    const { className, ...rest } = props;
+
+    return (
+      <div className={styles.inputWrapper}>
+        <input className={clsx(styles.input, className)} ref={ref} {...rest} />
+      </div>
+    );
   },
 );
 
