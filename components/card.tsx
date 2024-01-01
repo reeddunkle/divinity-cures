@@ -14,22 +14,22 @@ type RequirementsProps = {
 };
 
 function Requirements(props: RequirementsProps) {
+  if (props.reqs.length < 0) {
+    return null;
+  }
+
   return (
     <div className={styles.requirements}>
-      {props.reqs.length > 0 && (
-        <>
-          <div className={styles.listTitle}>Requires:</div>
-          <ul className={styles.list}>
-            {props.reqs.map((requirement) => {
-              return (
-                <li className={styles.statusEffectItem} key={requirement.id}>
-                  {requirement.name}: {requirement.number}
-                </li>
-              );
-            })}
-          </ul>
-        </>
-      )}
+      <div className={styles.listTitle}>Requires:</div>
+      <ul className={styles.list}>
+        {props.reqs.map((requirement) => {
+          return (
+            <li className={styles.statusEffectItem} key={requirement.id}>
+              {requirement.name}: {requirement.number}
+            </li>
+          );
+        })}
+      </ul>
     </div>
   );
 }
