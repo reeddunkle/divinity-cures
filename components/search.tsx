@@ -7,7 +7,7 @@ import { z } from "zod";
 
 import { Card } from "@/components/card.tsx";
 import { Input } from "@/components/input.tsx";
-import type { Skill, StatusEffect } from "@/data/schemas.ts";
+import type { Skill, SpellSchool, StatusEffect } from "@/data/schemas.ts";
 import { useUrlState } from "@/hooks/useUrlState.tsx";
 import { compareSkillsBy, searchCures } from "@/util/search.ts";
 
@@ -16,13 +16,14 @@ import * as styles from "./search.css.ts";
 type SearchCuresProps = {
   skills: Skill[];
   statusEffects: StatusEffect[];
+  spellSchools: SpellSchool[];
 };
 
 const searchParamSchema = z.object({
   search: z.coerce.string().optional(),
 });
 
-const DEBOUNCE_DELAY_MS = 300;
+const DEBOUNCE_DELAY_MS = 200;
 
 export function SearchCures(props: SearchCuresProps) {
   const router = useRouter();

@@ -38,15 +38,11 @@ const statusEffectNameSchema = z.string().refine(
 
 // Skills
 
-export const requirementsSchema = z.object(
-  SKILL_SCHOOLS.reduce(
-    (acc, school) => ({
-      ...acc,
-      [school]: z.number().optional(),
-    }),
-    {},
-  ),
-);
+const requirementSchema = z.object({
+  id: z.string(),
+  name: z.string(),
+  number: z.number(),
+});
 
 export const skillStatSchema = z.object({
   amount: z.number().optional(),
@@ -61,6 +57,11 @@ export const skillStatusEffectSchema = z.object({
   name: statusEffectNameSchema,
 });
 
+const skillSchoolSchema = z.object({
+  id: z.string(),
+  name: z.string(),
+});
+
 export const skillSchema = z.object({
   actionPoints: z.number(),
   cooldown: z.number(),
@@ -72,8 +73,8 @@ export const skillSchema = z.object({
   name: z.string(),
   range: z.number(),
   removes: z.array(z.string()).default([]),
-  requirements: requirementsSchema.default({}),
-  school: z.string(),
+  requirements: z.array(requirementSchema).default([]),
+  school: z.array(skillSchoolSchema),
   sourcePoints: z.number(),
   stats: z.array(skillStatSchema).default([]),
   statusEffects: z.array(skillStatusEffectSchema).default([]),
@@ -83,8 +84,6 @@ export const skillSchema = z.object({
 export const skillSchemaArray = z.array(skillSchema);
 
 export type Skill = z.infer<typeof skillSchema>;
-
-export type SkillsArray = Skill[];
 
 // Status Effects
 
@@ -103,8 +102,6 @@ export const statusEffectSchema = z.object({
 export const statusEffectSchemaArray = z.array(statusEffectSchema);
 
 export type StatusEffect = z.infer<typeof statusEffectSchema>;
-
-export type StatusEffectArray = StatusEffect[];
 
 // Spell Schools
 
@@ -132,5 +129,3 @@ export const spellSchoolSchema = z.object({
 export const spellSchoolSchemaArray = z.array(spellSchoolSchema);
 
 export type SpellSchool = z.infer<typeof spellSchoolSchema>;
-
-export type SpellSchoolArray = SpellSchool[];

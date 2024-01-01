@@ -1,7 +1,7 @@
 [
   {
     "id": "0",
-    "name": "Aerothurge",
+    "name": "Aerotheurge",
     "description": "Aerotheurge increase all Air damage you deal.",
     "modifies": [
       {
@@ -9,7 +9,8 @@
         "percent": 5
       }
     ],
-    "imageSrc": "https://divinityoriginalsin2.wiki.fextralife.com/file/Divinity-Original-Sin-2/abi_aerotheurge.png"
+    "imageSrc": "https://divinityoriginalsin2.wiki.fextralife.com/file/Divinity-Original-Sin-2/abi_aerotheurge.png",
+    "imageSrcColored": "https://divinityoriginalsin2.wiki.fextralife.com/file/Divinity-Original-Sin-2/Icn_Aer.png"
   },
   {
     "id": "1",
@@ -29,7 +30,8 @@
         "percent": 5
       }
     ],
-    "imageSrc": "https://divinityoriginalsin2.wiki.fextralife.com/file/Divinity-Original-Sin-2/abi_geomancer.png"
+    "imageSrc": "https://divinityoriginalsin2.wiki.fextralife.com/file/Divinity-Original-Sin-2/abi_geomancer.png",
+    "imageSrcColored": "https://divinityoriginalsin2.wiki.fextralife.com/file/Divinity-Original-Sin-2/Icn_Geo.png"
   },
   {
     "id": "2",
@@ -45,7 +47,8 @@
         "percent": -5
       }
     ],
-    "imageSrc": "https://divinityoriginalsin2.wiki.fextralife.com/file/Divinity-Original-Sin-2/abi_huntsman.png"
+    "imageSrc": "https://divinityoriginalsin2.wiki.fextralife.com/file/Divinity-Original-Sin-2/abi_huntsman.png",
+    "imageSrcColored": "https://divinityoriginalsin2.wiki.fextralife.com/file/Divinity-Original-Sin-2/Icn_Hun.png"
   },
   {
     "id": "3",
@@ -65,7 +68,8 @@
         "percent": 5
       }
     ],
-    "imageSrc": "https://divinityoriginalsin2.wiki.fextralife.com/file/Divinity-Original-Sin-2/abi_hydrosophist.png"
+    "imageSrc": "https://divinityoriginalsin2.wiki.fextralife.com/file/Divinity-Original-Sin-2/abi_hydrosophist.png",
+    "imageSrcColored": "https://divinityoriginalsin2.wiki.fextralife.com/file/Divinity-Original-Sin-2/Icn_Hyd.png"
   },
   {
     "id": "4",
@@ -77,7 +81,8 @@
         "percent": 10
       }
     ],
-    "imageSrc": "https://divinityoriginalsin2.wiki.fextralife.com/file/Divinity-Original-Sin-2/abi_necromancer.png"
+    "imageSrc": "https://divinityoriginalsin2.wiki.fextralife.com/file/Divinity-Original-Sin-2/abi_necromancer.png",
+    "imageSrcColored": "https://divinityoriginalsin2.wiki.fextralife.com/file/Divinity-Original-Sin-2/Icn_Nec.png"
   },
   {
     "id": "5",
@@ -89,7 +94,8 @@
         "amount": 1
       }
     ],
-    "imageSrc": "https://divinityoriginalsin2.wiki.fextralife.com/file/Divinity-Original-Sin-2/abi_polymorph.png"
+    "imageSrc": "https://divinityoriginalsin2.wiki.fextralife.com/file/Divinity-Original-Sin-2/abi_polymorph.png",
+    "imageSrcColored": "https://divinityoriginalsin2.wiki.fextralife.com/file/Divinity-Original-Sin-2/Icn_Pol.png"
   },
   {
     "id": "6",
@@ -101,7 +107,8 @@
         "percent": 5
       }
     ],
-    "imageSrc": "https://divinityoriginalsin2.wiki.fextralife.com/file/Divinity-Original-Sin-2/abi_pyrokinetic.png"
+    "imageSrc": "https://divinityoriginalsin2.wiki.fextralife.com/file/Divinity-Original-Sin-2/abi_pyrokinetic.png",
+    "imageSrcColored": "https://divinityoriginalsin2.wiki.fextralife.com/file/Divinity-Original-Sin-2/Icn_Pyr.png"
   },
   {
     "id": "7",
@@ -117,7 +124,8 @@
         "percent": 5
       }
     ],
-    "imageSrc": "https://divinityoriginalsin2.wiki.fextralife.com/file/Divinity-Original-Sin-2/abi_scoundrel.png"
+    "imageSrc": "https://divinityoriginalsin2.wiki.fextralife.com/file/Divinity-Original-Sin-2/abi_scoundrel.png",
+    "imageSrcColored": "https://divinityoriginalsin2.wiki.fextralife.com/file/Divinity-Original-Sin-2/Icn_Sco.png"
   },
   {
     "id": "8",
@@ -141,7 +149,8 @@
         "percent": 5
       }
     ],
-    "imageSrc": "https://divinityoriginalsin2.wiki.fextralife.com/file/Divinity-Original-Sin-2/abi_summoning.png"
+    "imageSrc": "https://divinityoriginalsin2.wiki.fextralife.com/file/Divinity-Original-Sin-2/abi_summoning.png",
+    "imageSrcColored": "https://divinityoriginalsin2.wiki.fextralife.com/file/Divinity-Original-Sin-2/Icn_Sum.png"
   },
   {
     "id": "9",
@@ -153,6 +162,19 @@
         "percent": 5
       }
     ],
-    "imageSrc": "https://divinityoriginalsin2.wiki.fextralife.com/file/Divinity-Original-Sin-2/abi_warfare.png"
+    "imageSrc": "https://divinityoriginalsin2.wiki.fextralife.com/file/Divinity-Original-Sin-2/abi_warfare.png",
+    "imageSrcColored": "https://divinityoriginalsin2.wiki.fextralife.com/file/Divinity-Original-Sin-2/Icn_War.png"
+  },
+  {
+    "id": "10",
+    "name": "Special",
+    "description": "Special skills in Divinity: Original Sin 2 are a collection of different but strong skills. Many of them are acquired during Character Creation or can only be used by certain Companions.",
+    "imageSrc": "/icons/school-special.jpg"
+  },
+  {
+    "id": "11",
+    "name": "Sourcery",
+    "description": "Sourcery Skills (not to be confused with Source skills) are a set of skills that is integral to the story of Divinity: Original Sin 2. As you progress through the game you'll come across points where you must interact with the Divine, and will grant you these skills to help your ascension into godhood.",
+    "imageSrc": "/icons/source-icon-custom.png"
   }
 ]

@@ -4,14 +4,14 @@ const fsp = fs.promises;
 
 // Dependencies
 
-const dependentPath = "./statusEffects.json";
+const dependentPath = "./spellSchools.json";
 const depFile = fs.readFileSync(dependentPath);
 
-const _statusEffects = JSON.parse(depFile);
+const _spellSchools = JSON.parse(depFile);
 
-function findStatusEffectByName(name) {
-  const found = _statusEffects.find(
-    (se) => se.name.toLowerCase() === name.toLowerCase(),
+function findSpellSchoolByName(name) {
+  const found = _spellSchools.find(
+    (school) => school.name.toLowerCase() === name.toLowerCase(),
   );
 
   if (!found) {
@@ -30,23 +30,44 @@ const file = fs.readFileSync(filePath);
 
 const skills = JSON.parse(file);
 
-const RESULT = skills.map((obj) => ({
-  ...obj,
-  statusEffects: obj.statusEffects.map((se) => ({
-    ...se,
-    id: findStatusEffectByName(se.name).id,
-  })),
-}));
+const RESULT = skills.map((obj) => {
+  if (obj.requirements) {
+    const requirements = obj.requirements;
+
+    const newRequirements = Object.entries(requirements).map(
+      ([reqName, reqNumber]) => {
+        const schoolData = findSpellSchoolByName(reqName);
+
+        return {
+          id: schoolData.id,
+          name: schoolData.name,
+          number: reqNumber,
+        };
+      },
+    );
+
+    return {
+      ...obj,
+      requirements: newRequirements,
+    };
+  }
+
+  return obj;
+});
+
+// const ex = RESULT[0];
+
+// console.log(ex.requirements);
 
 // Writing to file
 
-const newJson = JSON.stringify(RESULT, null, 2);
+// const newJson = JSON.stringify(RESULT, null, 2);
 
-fsp
-  .writeFile(filePath, newJson)
-  .then(() => {
-    console.log("Success.");
-  })
-  .catch((error) => {
-    console.error(error);
-  });
+// fsp
+//   .writeFile(filePath, newJson)
+//   .then(() => {
+//     console.log("Success.");
+//   })
+//   .catch((error) => {
+//     console.error(error);
+//   });

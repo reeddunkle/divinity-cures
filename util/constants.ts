@@ -9,6 +9,8 @@ export const SKILL_SCHOOLS = [
   "Scoundrel",
   "Summoning",
   "Warfare",
+  "Sourcery",
+  "Special",
 ];
 
 export const ATTRIBUTES = [
