@@ -39,21 +39,11 @@ export const resultWrapper = style({
   alignItems: "center",
   display: "flex",
   flexDirection: "column",
-
-  ":hover": {
-    backgroundColor: theme.color.hover.grey,
-  },
 });
 
 export const hr = style({
   borderBottom: "1px solid white",
   width: calc.subtract("100%", calc.multiply(RESULT_PADDING, 2)),
-
-  selectors: {
-    [`${resultWrapper}:hover &`]: {
-      borderColor: "transparent",
-    },
-  },
 });
 
 export const resultCard = style({

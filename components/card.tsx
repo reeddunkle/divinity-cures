@@ -24,7 +24,9 @@ export function Card(props: CardProps) {
   const removes = props.removes.sort(compareStrings);
   const immunities = props.immunities.sort(compareStrings);
 
-  const spellRequirements = keyBy(props.requirements, (req) => req.id);
+  const requirements = props.requirements.sort((reqA, reqB) => {
+    return compareStrings(reqA.name, reqB.name);
+  });
 
   return (
     <div className={clsx(styles.card, props.className)}>
@@ -65,7 +67,7 @@ export function Card(props: CardProps) {
           </div>
         </div>
         <div className={styles.listGrid}>
-          {removes.length > 0 ? (
+          {removes.length > 0 && (
             <div className={styles.listGridColumn}>
               <div className={styles.listTitle}>Removes:</div>
               <ul className={styles.list}>
@@ -91,8 +93,8 @@ export function Card(props: CardProps) {
                 })}
               </ul>
             </div>
-          ) : null}
-          {immunities.length > 0 ? (
+          )}
+          {immunities.length > 0 && (
             <div className={styles.listGridColumn}>
               <div className={styles.listTitle}>Immunities (*):</div>
               <ul className={styles.list}>
@@ -118,13 +120,13 @@ export function Card(props: CardProps) {
                 })}
               </ul>
             </div>
-          ) : null}
+          )}
           <div className={clsx(styles.listGridColumn, styles.requirementsList)}>
-            {props.requirements.length > 0 ? (
+            {requirements.length > 0 && (
               <>
                 <div className={styles.listTitle}>Requirements:</div>
                 <ul className={styles.list}>
-                  {props.requirements.map((requirement) => {
+                  {requirements.map((requirement) => {
                     return (
                       <li
                         className={styles.statusEffectItem}
@@ -136,7 +138,7 @@ export function Card(props: CardProps) {
                   })}
                 </ul>
               </>
-            ) : null}
+            )}
           </div>
         </div>
       </div>

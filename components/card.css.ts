@@ -115,7 +115,7 @@ export const listTitle = style({
 });
 
 export const list = style({
-  marginLeft: scale.static.md,
+  marginLeft: scale.static.sm,
 });
 
 export const statusEffectItem = style({
