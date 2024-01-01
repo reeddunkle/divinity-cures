@@ -30,9 +30,9 @@ export function Card(props: CardProps) {
         <Image
           alt={`Spell icon for ${props.name}`}
           className={styles.skillImage}
-          height={styles.IMAGE_SIZE_PX}
+          height={styles.SPELL_IMAGE_SIZE_PX}
           src={props.imageSrc}
-          width={styles.IMAGE_SIZE_PX}
+          width={styles.SPELL_IMAGE_SIZE_PX}
         />
         <div className={styles.pointCostCol}>
           {range(props.actionPoints).map((_, index) => (
@@ -45,7 +45,23 @@ export function Card(props: CardProps) {
         <Cooldown cooldown={props.cooldown} />
       </div>
       <div className={styles.col2}>
-        <div className={styles.title}>{props.name}</div>
+        <div className={styles.titleRow}>
+          <div className={styles.title}>{props.name}</div>
+          <div className={styles.schoolIconGroup}>
+            {props.spellSchools.map((school) => {
+              return (
+                <Image
+                  alt={`Icon for ${school.name}`}
+                  className={styles.schoolImage}
+                  height={styles.SCHOOL_IMAGE_SIZE_PX}
+                  key={school.id}
+                  src={school.imageSrcColored}
+                  width={styles.SCHOOL_IMAGE_SIZE_PX}
+                />
+              );
+            })}
+          </div>
+        </div>
         <div className={styles.listGrid}>
           {removes.length > 0 ? (
             <div className={styles.listGridColumn}>
@@ -103,7 +119,7 @@ export function Card(props: CardProps) {
           ) : null}
         </div>
       </div>
-      <div className={styles.col3}>
+      {/* <div className={styles.col3}>
         <div className={styles.schoolIconGroup}>
           {props.spellSchools.map((school) => {
             return (
@@ -118,7 +134,7 @@ export function Card(props: CardProps) {
           })}
         </div>
         <CollapsibleSection title="Description" text={props.description} />
-      </div>
+      </div> */}
     </div>
   );
 }

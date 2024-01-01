@@ -3,19 +3,20 @@ import { style } from "@vanilla-extract/css";
 import { theme } from "@/styles/theme.css";
 import scale from "@/util/scale";
 
-export const IMAGE_SIZE_PX = 64;
+export const SPELL_IMAGE_SIZE_PX = 64;
+export const SCHOOL_IMAGE_SIZE_PX = 48;
 
 export const card = style({
   display: "grid",
   gap: scale.fluid.xxs,
-  gridTemplateColumns: `[col1-start] ${scale.fluid.xxxl} [col2-start] 4fr [col3-start] ${scale.fluid.xxxxl} [end]`,
+  gridTemplateColumns: `[col1-start] ${scale.fluid.xxxl} [col2-start] 1fr [end]`,
   width: "100%",
 
-  "@media": {
-    [scale.media.sm]: {
-      gridTemplateColumns: "[col1-start] 1fr [col2-start] 4fr [end]",
-    },
-  },
+  // "@media": {
+  //   [scale.media.sm]: {
+  //     gridTemplateColumns: "[col1-start] 1fr [col2-start] 4fr [end]",
+  //   },
+  // },
 });
 
 export const col1 = style({
@@ -72,6 +73,16 @@ export const title = style({
   textTransform: "uppercase",
 });
 
+export const titleRow = style({
+  display: "flex",
+  justifyContent: "space-between",
+});
+
+export const schoolImage = style({
+  height: scale.fluid.lg,
+  width: scale.fluid.lg,
+});
+
 export const listGrid = style({
   display: "grid",
   gridTemplateColumns: "repeat(auto-fit, minmax(100px, 1fr));",
@@ -114,14 +125,14 @@ export const activeLink = style({
 
 export const schoolIconGroup = style({
   display: "flex",
-  gap: scale.static.xxxs,
+  gap: scale.fluid.half.min.xxxs,
   justifyContent: "flex-end",
 
-  "@media": {
-    [scale.media.sm]: {
-      justifyContent: "flex-start",
-    },
-  },
+  // "@media": {
+  //   [scale.media.sm]: {
+  //     flexDirection: "column",
+  //   },
+  // },
 });
 
 // export const curesWrapper = style({});
