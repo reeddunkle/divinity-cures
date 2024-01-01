@@ -8,19 +8,28 @@ import {
   loadSpellSchools,
   loadStatusEffects,
 } from "@/data/loaders.ts";
-import type { Skill, SpellSchool, StatusEffect } from "@/data/schemas.ts";
+import type { Skill, SkillBase, StatusEffect } from "@/data/schemas.ts";
+import type { School } from "@/data/spell-schools-schema.ts";
 import { keyBy } from "@/util/util.ts";
 
 import * as styles from "./_styles/page.css.ts";
 
 export default async function HomePage() {
-  const skills: Skill[] = (await loadSkills())!; // eslint-disable-line @typescript-eslint/no-non-null-assertion
+  const skills: SkillBase[] = (await loadSkills())!; // eslint-disable-line @typescript-eslint/no-non-null-assertion
 
   const statusEffects: StatusEffect[] = (await loadStatusEffects())!; // eslint-disable-line @typescript-eslint/no-non-null-assertion
 
-  const spellSchools: SpellSchool[] = (await loadSpellSchools())!; // eslint-disable-line @typescript-eslint/no-non-null-assertion
+  const spellSchools: School[] = (await loadSpellSchools())!; // eslint-disable-line @typescript-eslint/no-non-null-assertion
 
   const spellSchoolsById = keyBy(spellSchools, (school) => school.id);
+
+  const skillsWithSchools = skills.map((skill) => ({
+    ...skill,
+    schools: skill.schools.map((school: SkillBase["schools"][0]) => ({
+      ...school,
+      ...spellSchoolsById[school.id],
+    })),
+  })) as Skill[];
 
   console.log("Data loaded!");
 
@@ -31,11 +40,7 @@ export default async function HomePage() {
           Divinity Original Sin: 2
         </Link>
       </h1>
-      <SearchCures
-        skills={skills}
-        spellSchools={spellSchoolsById}
-        statusEffects={statusEffects}
-      />
+      <SearchCures skills={skillsWithSchools} statusEffects={statusEffects} />
     </main>
   );
 }

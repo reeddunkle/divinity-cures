@@ -4,22 +4,22 @@ const fsp = fs.promises;
 
 // Dependencies
 
-const dependentPath = "./spellSchools.json";
-const depFile = fs.readFileSync(dependentPath);
+// const dependentPath = "./spellSchools.json";
+// const depFile = fs.readFileSync(dependentPath);
 
-const _spellSchools = JSON.parse(depFile);
+// const _spellSchools = JSON.parse(depFile);
 
-function findSpellSchoolByName(name) {
-  const found = _spellSchools.find(
-    (school) => school.name.toLowerCase() === name.toLowerCase(),
-  );
+// function findSpellSchoolByName(name) {
+//   const found = _spellSchools.find(
+//     (school) => school.name.toLowerCase() === name.toLowerCase(),
+//   );
 
-  if (!found) {
-    throw Error(`'${name}' not found!!!`);
-  }
+//   if (!found) {
+//     throw Error(`'${name}' not found!!!`);
+//   }
 
-  return found;
-}
+//   return found;
+// }
 
 // DATA MANIPULATING
 const filePath = "./skills.json"; // <----- EDITING THIS
@@ -30,34 +30,46 @@ const file = fs.readFileSync(filePath);
 
 const skills = JSON.parse(file);
 
-const RESULT = skills.map((obj) => {
-  if (obj.requirements) {
-    const requirements = obj.requirements;
-
-    const newRequirements = Object.entries(requirements).map(
-      ([reqName, reqNumber]) => {
-        const schoolData = findSpellSchoolByName(reqName);
-
-        return {
-          id: schoolData.id,
-          name: schoolData.name,
-          number: reqNumber,
-        };
-      },
-    );
-
+const RESULT = skills
+  .map((obj) => {
     return {
       ...obj,
-      requirements: newRequirements,
-    };
-  }
+      schools: obj.schools.map((sch) => {
+        const requirements = obj?.requirements?.find(
+          (req) => req.id === sch.id,
+        );
 
-  return obj;
-});
+        if (!requirements) {
+          return sch;
+        }
+
+        return {
+          ...sch,
+          requires: requirements.number,
+        };
+      }),
+    };
+  })
+  .map((obj) => {
+    return Object.entries(obj).reduce((acc, [key, value]) => {
+      const isOmitted = key === "requirements";
+
+      if (isOmitted) {
+        console.log("Omitting: ", key);
+
+        return acc;
+      }
+
+      return {
+        ...acc,
+        [key]: value,
+      };
+    }, {});
+  });
 
 // const ex = RESULT[0];
 
-// console.log(ex.requirements);
+// console.log(ex);
 
 // Writing to file
 

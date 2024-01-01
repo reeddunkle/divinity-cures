@@ -1,6 +1,6 @@
 import { z } from "zod";
 
-import { ATTRIBUTES, SKILL_SCHOOLS, STATUS_EFFECTS } from "@/util/constants";
+import { ATTRIBUTES, STATUS_EFFECTS } from "@/util/constants";
 
 const normalizedStatusEffects = STATUS_EFFECTS.map((se) => se.toLowerCase());
 
@@ -38,12 +38,6 @@ const statusEffectNameSchema = z.string().refine(
 
 // Skills
 
-const requirementSchema = z.object({
-  id: z.string(),
-  name: z.string(),
-  number: z.number(),
-});
-
 const skillStatSchema = z.object({
   amount: z.number().optional(),
   name: attributeNameSchema,
@@ -60,6 +54,7 @@ const skillStatusEffectSchema = z.object({
 const skillSchoolSchema = z.object({
   id: z.string(),
   name: z.string(),
+  requires: z.number().optional(),
 });
 
 export const skillSchema = z.object({
@@ -73,7 +68,6 @@ export const skillSchema = z.object({
   name: z.string(),
   range: z.number(),
   removes: z.array(z.string()).default([]),
-  requirements: z.array(requirementSchema).default([]),
   schools: z.array(skillSchoolSchema),
   sourcePoints: z.number(),
   stats: z.array(skillStatSchema).default([]),
@@ -83,9 +77,13 @@ export const skillSchema = z.object({
 
 export const skillSchemaArray = z.array(skillSchema);
 
-export type Skill = z.infer<typeof skillSchema>;
+export type SkillBase = z.infer<typeof skillSchema>;
 
-export type SkillSchool = z.infer<typeof skillSchoolSchema>;
+export type Skill = SkillBase & {
+  schools: School[];
+};
+
+export type SkillSchool = Skill["schools"][0];
 
 // Status Effects
 
@@ -106,29 +104,3 @@ export const statusEffectSchemaArray = z.array(statusEffectSchema);
 export type StatusEffect = z.infer<typeof statusEffectSchema>;
 
 // Spell Schools
-
-const spellSchoolModifierSchema = z.object({
-  amount: z.number().optional(),
-  percent: z.number().optional(),
-  type: z.string(),
-});
-
-const spellSchoolEffectSchema = z.object({
-  amount: z.number().optional(),
-  percent: z.number().optional(),
-  type: z.string(),
-});
-
-const spellSchoolSchema = z.object({
-  description: z.string(),
-  effects: z.array(spellSchoolEffectSchema).optional().default([]),
-  id: z.string(),
-  imageSrc: z.string().optional(),
-  imageSrcColored: z.string(),
-  modifies: z.array(spellSchoolModifierSchema).optional().default([]),
-  name: z.string(),
-});
-
-export const spellSchoolSchemaArray = z.array(spellSchoolSchema);
-
-export type SpellSchool = z.infer<typeof spellSchoolSchema>;

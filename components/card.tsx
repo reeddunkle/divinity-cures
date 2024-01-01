@@ -3,54 +3,83 @@ import Image from "next/image";
 import Link from "next/link";
 
 import { PointCosts } from "@/components/point-costs.tsx";
-import type { Skill, SpellSchool } from "@/data/schemas.ts";
+import type { Skill } from "@/data/schemas.ts";
 import { addAsterisk, compareStrings, startsWith } from "@/util/util.ts";
 
 import * as styles from "./card.css.ts";
 import { Cooldown } from "./cooldown.tsx";
 
-type RequirementsProps = {
-  reqs: Skill["requirements"];
+// type RequirementsProps = {
+//   reqs: Skill["requirements"];
+// };
+
+// function Requirements(props: RequirementsProps) {
+//   if (props.reqs.length < 0) {
+//     return null;
+//   }
+
+//   return (
+//     <div className={styles.requirements}>
+//       <div className={styles.listTitle}>Requires</div>
+//       <ul className={styles.list}>
+//         {props.reqs.map((requirement) => {
+//           return (
+//             <li className={styles.statusEffectItem} key={requirement.id}>
+//               {requirement.name} ({requirement.number})
+//             </li>
+//           );
+//         })}
+//       </ul>
+//     </div>
+//   );
+// }
+
+// type SchoolIconsProps = {
+//   schools: SpellSchool[];
+// };
+
+// function SchoolIcons(props: SchoolIconsProps) {
+//   return (
+//     <div className={styles.schoolIcons}>
+//       {props.schools.map((school) => {
+//         return (
+//           <Image
+//             alt={`Icon for ${school.name}`}
+//             className={styles.schoolImage}
+//             height={styles.SCHOOL_IMAGE_SIZE_PX}
+//             key={school.id}
+//             src={school.imageSrcColored}
+//             width={styles.SCHOOL_IMAGE_SIZE_PX}
+//           />
+//         );
+//       })}
+//     </div>
+//   );
+// }
+
+type SchoolsAndReqsProps = {
+  schools: Skill["schools"];
 };
 
-function Requirements(props: RequirementsProps) {
-  if (props.reqs.length < 0) {
-    return null;
-  }
-
+function SchoolsAndReqs(props: SchoolsAndReqsProps) {
   return (
-    <div className={styles.requirements}>
-      <div className={styles.listTitle}>Requires</div>
-      <ul className={styles.list}>
-        {props.reqs.map((requirement) => {
-          return (
-            <li className={styles.statusEffectItem} key={requirement.id}>
-              {requirement.name} ({requirement.number})
-            </li>
-          );
-        })}
-      </ul>
-    </div>
-  );
-}
-
-type SchoolIconsProps = {
-  schools: SpellSchool[];
-};
-
-function SchoolIcons(props: SchoolIconsProps) {
-  return (
-    <div className={styles.schoolIcons}>
+    <div className={styles.schoolsAndReqs}>
       {props.schools.map((school) => {
         return (
-          <Image
-            alt={`Icon for ${school.name}`}
-            className={styles.schoolImage}
-            height={styles.SCHOOL_IMAGE_SIZE_PX}
-            key={school.id}
-            src={school.imageSrcColored}
-            width={styles.SCHOOL_IMAGE_SIZE_PX}
-          />
+          <div key={school.id}>
+            <div>{school.name}</div>
+            {school.requires > 0 ?
+              <div>{school.name}</div>
+            : null}
+            <Image
+              alt={`Icon for ${school.name}`}
+              className={styles.schoolImage}
+              height={styles.SCHOOL_IMAGE_SIZE_PX}
+              key={school.id}
+              src={school.imageSrcColored}
+              width={styles.SCHOOL_IMAGE_SIZE_PX}
+            />
+          </div>
         );
       })}
     </div>
@@ -128,16 +157,11 @@ function CuresList(props: CuresListProps) {
 type CardProps = Skill & {
   className?: string;
   searchText: string;
-  spellSchools: SpellSchool[];
 };
 
 export function Card(props: Skill & CardProps) {
   const removes = props.removes.sort(compareStrings);
   const immunities = props.immunities.sort(compareStrings);
-
-  const requirements = props.requirements.sort((reqA, reqB) => {
-    return compareStrings(reqA.name, reqB.name);
-  });
 
   return (
     <div className={clsx(styles.card, props.className)}>
@@ -161,8 +185,7 @@ export function Card(props: Skill & CardProps) {
         />
       </div>
       <div className={styles.col3}>
-        <SchoolIcons schools={props.spellSchools} />
-        <Requirements reqs={requirements} />
+        <SchoolsAndReqs schools={props.schools} />
         {/* <CollapsibleSection title="Description" text={props.description} /> */}
       </div>
     </div>

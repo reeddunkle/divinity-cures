@@ -74,6 +74,7 @@ export const schoolImage = style({
   width: scale.fluid.xl,
 });
 
+export const schoolsAndReqs = style({});
 /* Cures List */
 const autoFitWidthMin = "6rem";
 
