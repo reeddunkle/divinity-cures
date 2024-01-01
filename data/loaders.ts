@@ -2,8 +2,9 @@ import { promises as fs } from "node:fs";
 
 import type { z } from "zod";
 
-import { skillSchemaArray, statusEffectSchemaArray } from "@/data/skill-schema";
+import { skillSchemaArray } from "@/data/skill-schema";
 import { schoolSchemaArray } from "@/data/spell-schools-schema";
+import { statusEffectSchemaArray } from "@/data/status-effect-schema";
 
 async function loadJsonToZod<SchemaType extends z.ZodTypeAny>(
   filePath: string,
@@ -39,7 +40,7 @@ export async function loadSkills() {
 }
 
 export async function loadStatusEffects() {
-  const filePath = `${process.cwd()}/data/statusEffects.json`;
+  const filePath = `${process.cwd()}/data/status-effects.json`;
 
   const skillData = await loadJsonToZod(filePath, statusEffectSchemaArray);
 
@@ -47,7 +48,7 @@ export async function loadStatusEffects() {
 }
 
 export async function loadSpellSchools() {
-  const filePath = `${process.cwd()}/data/spellSchools.json`;
+  const filePath = `${process.cwd()}/data/spell-schools.json`;
 
   const skillData = await loadJsonToZod(filePath, schoolSchemaArray);
 
