@@ -9,17 +9,26 @@ import { addAsterisk, compareStrings, startsWith } from "@/util/util.ts";
 import * as styles from "./card.css.ts";
 import { Cooldown } from "./cooldown.tsx";
 
-type SchoolsAndReqsProps = {
-  schools: Skill["schools"];
+const abbreviations: Record<string, string> = {
+  Geomancer: "Geo",
+  Huntsman: "Hunts",
+  Hydrosophist: "Hydro",
+  Polymorph: "Poly",
+  Pyrokinetic: "Pyro",
+  Summoning: "Summon",
 };
 
-function SchoolsAndReqs(props: SchoolsAndReqsProps) {
+const abbreviateName = (name: string) => {
+  return abbreviations[name] ?? name;
+};
+
+function SchoolsAndReqs(props: { schools: Skill["schools"] }) {
   return (
     <div className={styles.schoolsAndReqs}>
       {props.schools.map((school) => {
         return (
           <div className={styles.pair} key={school.id}>
-            <div>{school.name}</div>
+            <div>{abbreviateName(school.name)}</div>
             <div className={styles.numberAndImage}>
               {!!school.requires && school.requires > 0 ?
                 <div className={styles.requireNumber}>({school.requires})</div>
@@ -40,14 +49,12 @@ function SchoolsAndReqs(props: SchoolsAndReqsProps) {
   );
 }
 
-type CuresListProps = {
+function CuresList(props: {
   className?: string;
   removes: Skill["removes"];
   immunities: Skill["immunities"];
   searchText: string;
-};
-
-function CuresList(props: CuresListProps) {
+}) {
   return (
     <div className={clsx(styles.listGrid, props.className)}>
       {props.removes.length > 0 && (
@@ -108,12 +115,12 @@ function CuresList(props: CuresListProps) {
   );
 }
 
-type CardProps = Skill & {
-  className?: string;
-  searchText: string;
-};
-
-export function Card(props: Skill & CardProps) {
+export function Card(
+  props: Skill & {
+    className?: string;
+    searchText: string;
+  },
+) {
   const removes = props.removes.sort(compareStrings);
   const immunities = props.immunities.sort(compareStrings);
 
