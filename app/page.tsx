@@ -9,19 +9,14 @@ import {
   loadSpellSchools,
   loadStatusEffects,
 } from "@/data/loaders.ts";
-import type {
-  Skill,
-  SkillSchool,
-  SpellSchool,
-  StatusEffect,
-} from "@/data/schemas.ts";
+import type { Skill, SpellSchool, StatusEffect } from "@/data/schemas.ts";
 import { keyBy } from "@/util/util.ts";
 
 import * as styles from "./_styles/page.css.ts";
 
-function SearchBarFallback() {
-  return <>Loading...</>;
-}
+// function SearchBarFallback() {
+//   return <>Loading...</>;
+// }
 
 export default async function HomePage() {
   const skills: Skill[] = (await loadSkills())!; // eslint-disable-line @typescript-eslint/no-non-null-assertion
@@ -39,13 +34,11 @@ export default async function HomePage() {
           Divinity Original Sin: 2
         </Link>
       </h1>
-      <Suspense fallback={<SearchBarFallback />}>
-        <SearchCures
-          skills={skills}
-          spellSchools={spellSchoolsById}
-          statusEffects={statusEffects}
-        />
-      </Suspense>
+      <SearchCures
+        skills={skills}
+        spellSchools={spellSchoolsById}
+        statusEffects={statusEffects}
+      />
     </main>
   );
 }
