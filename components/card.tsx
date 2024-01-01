@@ -4,7 +4,7 @@ import Link from "next/link";
 
 import { ActionPoint, SourcePoint } from "@/components/point.tsx";
 import type { Skill, SpellSchool } from "@/data/schemas.ts";
-import { compareStrings, range, startsWith } from "@/util/util.ts";
+import { compareStrings, keyBy, range, startsWith } from "@/util/util.ts";
 
 import * as styles from "./card.css.ts";
 import { CollapsibleSection } from "./collapsible-section.tsx";
@@ -23,6 +23,8 @@ type CardProps = React.HTMLProps<HTMLDivElement> &
 export function Card(props: CardProps) {
   const removes = props.removes.sort(compareStrings);
   const immunities = props.immunities.sort(compareStrings);
+
+  const spellRequirements = keyBy(props.requirements, (req) => req.id);
 
   return (
     <div className={clsx(styles.card, props.className)}>
@@ -52,7 +54,7 @@ export function Card(props: CardProps) {
               return (
                 <Image
                   alt={`Icon for ${school.name}`}
-                  className={styles.schoolImage}
+                  className={styles.schoolIcon}
                   height={styles.SCHOOL_IMAGE_SIZE_PX}
                   key={school.id}
                   src={school.imageSrcColored}
@@ -117,6 +119,22 @@ export function Card(props: CardProps) {
               </ul>
             </div>
           ) : null}
+          <div className={clsx(styles.listGridColumn, styles.requirementsList)}>
+            {props.requirements.length > 0 ? (
+              <>
+                <div className={styles.listTitle}>Requirements:</div>
+                <ul className={styles.list}>
+                  {props.requirements.map((requirement) => {
+                    return (
+                      <li key={requirement.id}>
+                        {requirement.name}: {requirement.number}
+                      </li>
+                    );
+                  })}
+                </ul>
+              </>
+            ) : null}
+          </div>
         </div>
       </div>
       {/* <div className={styles.col3}>

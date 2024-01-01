@@ -4,7 +4,7 @@ import { theme } from "@/styles/theme.css";
 import scale from "@/util/scale";
 
 export const SPELL_IMAGE_SIZE_PX = 64;
-export const SCHOOL_IMAGE_SIZE_PX = 48;
+export const SCHOOL_IMAGE_SIZE_PX = 45;
 
 export const card = style({
   display: "grid",
@@ -70,6 +70,7 @@ export const title = style({
   color: theme.color.primary,
   fontSize: scale.fluid.md,
   fontWeight: 450,
+  lineHeight: 1,
   textTransform: "uppercase",
 });
 
@@ -78,17 +79,35 @@ export const titleRow = style({
   justifyContent: "space-between",
 });
 
-export const schoolImage = style({
-  height: scale.fluid.lg,
-  width: scale.fluid.lg,
+export const schoolIconGroup = style({
+  display: "flex",
+  gap: scale.fluid.half.min.xxxs,
+  justifyContent: "flex-end",
+
+  // "@media": {
+  //   [scale.media.sm]: {
+  //     flexDirection: "column",
+  //   },
+  // },
 });
+
+export const schoolIcon = style({
+  height: scale.fluid.xl,
+  width: scale.fluid.xl,
+});
+
+const autoFitWidthMin = "7.5rem";
 
 export const listGrid = style({
   display: "grid",
-  gridTemplateColumns: "repeat(auto-fit, minmax(100px, 1fr));",
+  gridTemplateColumns: `repeat(auto-fit, minmax(${autoFitWidthMin}, 1fr));`,
 });
 
 export const listGridColumn = style({});
+
+export const requirementsList = style({
+  justifySelf: "end",
+});
 
 export const listTitle = style({
   fontWeight: 500,
@@ -119,20 +138,6 @@ export const activeLink = style({
   color: theme.color.secondary,
   fontWeight: 500,
   textDecoration: "none",
-});
-
-// Col 3
-
-export const schoolIconGroup = style({
-  display: "flex",
-  gap: scale.fluid.half.min.xxxs,
-  justifyContent: "flex-end",
-
-  // "@media": {
-  //   [scale.media.sm]: {
-  //     flexDirection: "column",
-  //   },
-  // },
 });
 
 // export const curesWrapper = style({});
