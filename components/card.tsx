@@ -20,12 +20,12 @@ function Requirements(props: RequirementsProps) {
 
   return (
     <div className={styles.requirements}>
-      <div className={styles.listTitle}>Requires:</div>
+      <div className={styles.listTitle}>Requires</div>
       <ul className={styles.list}>
         {props.reqs.map((requirement) => {
           return (
             <li className={styles.statusEffectItem} key={requirement.id}>
-              {requirement.name}: {requirement.number}
+              {requirement.name} ({requirement.number})
             </li>
           );
         })}

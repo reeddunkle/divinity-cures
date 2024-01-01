@@ -84,7 +84,9 @@ export const listGrid = style({
 
 /* Requirements */
 export const requirements = style({
-  justifySelf: "end",
+  display: "flex",
+  flexDirection: "column",
+  alignItems: "flex-end",
 });
 
 /* Cures List & Requirements */
