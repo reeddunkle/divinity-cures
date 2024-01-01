@@ -1,7 +1,6 @@
 import "server-only";
 
 import Link from "next/link";
-import { Suspense } from "react";
 
 import { SearchCures } from "@/components/search.tsx";
 import {
@@ -14,10 +13,6 @@ import { keyBy } from "@/util/util.ts";
 
 import * as styles from "./_styles/page.css.ts";
 
-// function SearchBarFallback() {
-//   return <>Loading...</>;
-// }
-
 export default async function HomePage() {
   const skills: Skill[] = (await loadSkills())!; // eslint-disable-line @typescript-eslint/no-non-null-assertion
 
@@ -26,6 +21,8 @@ export default async function HomePage() {
   const spellSchools: SpellSchool[] = (await loadSpellSchools())!; // eslint-disable-line @typescript-eslint/no-non-null-assertion
 
   const spellSchoolsById = keyBy(spellSchools, (school) => school.id);
+
+  console.log("Data loaded!");
 
   return (
     <main className={styles.main}>

@@ -126,7 +126,10 @@ export function Card(props: CardProps) {
                 <ul className={styles.list}>
                   {props.requirements.map((requirement) => {
                     return (
-                      <li key={requirement.id}>
+                      <li
+                        className={styles.statusEffectItem}
+                        key={requirement.id}
+                      >
                         {requirement.name}: {requirement.number}
                       </li>
                     );

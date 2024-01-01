@@ -96,7 +96,7 @@ export const schoolIcon = style({
   width: scale.fluid.xl,
 });
 
-const autoFitWidthMin = "7.5rem";
+const autoFitWidthMin = "6rem";
 
 export const listGrid = style({
   display: "grid",
@@ -110,20 +110,21 @@ export const requirementsList = style({
 });
 
 export const listTitle = style({
+  fontSize: scale.fluid.sm,
   fontWeight: 500,
 });
 
 export const list = style({
-  marginLeft: scale.fluid.md,
+  marginLeft: scale.static.md,
 });
 
 export const statusEffectItem = style({
+  fontSize: scale.fluid.sm,
   padding: scale.minorSixths[0],
 });
 
 export const statusEffectLink = style({
   color: theme.color.link,
-  fontSize: scale.fluid.sm,
 
   textDecoration: "underline",
   textTransform: "capitalize",
