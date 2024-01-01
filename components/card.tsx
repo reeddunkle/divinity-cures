@@ -104,18 +104,19 @@ export function Card(props: CardProps) {
         </div>
       </div>
       <div className={styles.col3}>
-        {props.spellSchools.map((school) => {
-          return (
-            <div className={styles.schoolIconGroup} key={school.id}>
+        <div className={styles.schoolIconGroup}>
+          {props.spellSchools.map((school) => {
+            return (
               <Image
                 alt={`Icon for ${school.name}`}
                 height={48}
+                key={school.id}
                 src={school.imageSrcColored}
                 width={48}
               />
-            </div>
-          );
-        })}
+            );
+          })}
+        </div>
         <CollapsibleSection title="Description" text={props.description} />
       </div>
     </div>

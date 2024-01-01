@@ -34,6 +34,11 @@ export const col2 = style({
 });
 
 export const col3 = style({
+  display: "flex",
+  flexDirection: "column",
+  gap: scale.static.xxxs,
+  justifyContent: "flex-start",
+
   "@media": {
     [scale.media.sm]: {
       gridColumn: "col1-start / end",
@@ -107,6 +112,16 @@ export const activeLink = style({
 
 // Col 3
 
-export const schoolIconGroup = style({});
+export const schoolIconGroup = style({
+  display: "flex",
+  gap: scale.static.xxxs,
+  justifyContent: "flex-end",
+
+  "@media": {
+    [scale.media.sm]: {
+      justifyContent: "flex-start",
+    },
+  },
+});
 
 // export const curesWrapper = style({});
