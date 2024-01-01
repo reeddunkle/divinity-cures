@@ -1,6 +1,7 @@
 /* eslint-disable no-param-reassign */
 
-import type { Skill, StatusEffect } from "@/data/skill-schema";
+import type { Skill } from "@/data/skill-schema";
+import type { StatusEffect } from "@/data/status-effect-schema";
 
 import {
   compareNumbers,
