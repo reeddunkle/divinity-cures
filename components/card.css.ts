@@ -56,7 +56,7 @@ export const skillImage = style({
 
 export const title = style({
   color: theme.color.primary,
-  fontSize: scale.fluid.md,
+  fontSize: scale.fluidThirdHalfSteps[10],
   fontWeight: 450,
   lineHeight: 1,
   textTransform: "uppercase",
@@ -78,7 +78,7 @@ export const pair = style({
   alignItems: "center",
   display: "flex",
   flexWrap: "wrap-reverse",
-  fontSize: scale.fluid.sm,
+  fontSize: scale.fluidThirdHalfSteps[7],
   gap: scale.fluid.half.min.xxxs,
   justifyContent: "flex-end",
 });
@@ -110,8 +110,10 @@ export const listGrid = style({
 });
 
 /* Cures List & Requirements */
+const listFontSize = scale.fluidThirdHalfSteps[7];
+
 export const listTitle = style({
-  fontSize: scale.fluid.sm,
+  fontSize: listFontSize,
   fontWeight: 500,
 });
 
@@ -120,7 +122,7 @@ export const list = style({
 });
 
 export const statusEffectItem = style({
-  fontSize: scale.fluid.sm,
+  fontSize: listFontSize,
   padding: scale.minorSixths[0],
 });
 

@@ -150,6 +150,9 @@ export default {
   fluid: fluidScale,
   static: staticScale,
 
+  fluidThirdHalfSteps,
+  fluidThirds,
+
   minorSixths,
   minorThirds,
 
