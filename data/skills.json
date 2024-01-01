@@ -1,7 +1,7 @@
 [
   {
     "name": "Fortify",
-    "school": [
+    "schools": [
       {
         "id": "1",
         "name": "Geomancer"
@@ -48,7 +48,7 @@
   },
   {
     "name": "Mend Metal",
-    "school": [
+    "schools": [
       {
         "id": "1",
         "name": "Geomancer"
@@ -86,7 +86,7 @@
   },
   {
     "name": "First Aid",
-    "school": [
+    "schools": [
       {
         "id": "2",
         "name": "Huntsman"
@@ -136,7 +136,7 @@
   },
   {
     "name": "Haste",
-    "school": [
+    "schools": [
       {
         "id": "6",
         "name": "Pyrokinetic"
@@ -168,7 +168,7 @@
   },
   {
     "name": "Peace of Mind",
-    "school": [
+    "schools": [
       {
         "id": "6",
         "name": "Pyrokinetic"
@@ -235,7 +235,7 @@
   },
   {
     "name": "Restoration",
-    "school": [
+    "schools": [
       {
         "id": "3",
         "name": "Hydrosophist"
@@ -253,10 +253,7 @@
     "cooldown": 4,
     "description": "Restore Vitality of a target character. Restoration also removes Poisoned and Bleeding.\nRestore [X] Vitality for 2 turn(s).",
     "memory": 1,
-    "removes": [
-      "Bleeding",
-      "Poisoned"
-    ],
+    "removes": ["Bleeding", "Poisoned"],
     "statusEffects": [
       {
         "name": "Regenerating",
@@ -272,7 +269,7 @@
   },
   {
     "name": "Cleanse Wounds",
-    "school": [
+    "schools": [
       {
         "id": "3",
         "name": "Hydrosophist"
@@ -315,16 +312,14 @@
       }
     ],
     "immunities": [],
-    "surfaces": [
-      "water"
-    ],
+    "surfaces": ["water"],
     "imageSrc": "https://divinityoriginalsin2.wiki.fextralife.com/file/Divinity-Original-Sin-2/hydrosophist-16-24.png",
     "range": 2,
     "id": "6"
   },
   {
     "name": "Mass Cleanse Wounds",
-    "school": [
+    "schools": [
       {
         "id": "3",
         "name": "Hydrosophist"
@@ -370,16 +365,14 @@
       }
     ],
     "immunities": [],
-    "surfaces": [
-      "water"
-    ],
+    "surfaces": ["water"],
     "imageSrc": "https://divinityoriginalsin2.wiki.fextralife.com/file/Divinity-Original-Sin-2/hydrosophist-16-23.png",
     "range": 8,
     "id": "7"
   },
   {
     "name": "Healing Ritual",
-    "school": [
+    "schools": [
       {
         "id": "3",
         "name": "Hydrosophist"
@@ -397,9 +390,7 @@
     "cooldown": 5,
     "description": "Shoot a bolt of healing energy that will jump to nearby allies.\nRestore 7 Vitality",
     "memory": 1,
-    "removes": [
-      "Infested"
-    ],
+    "removes": ["Infested"],
     "statusEffects": [],
     "stats": [
       {
@@ -419,7 +410,7 @@
   },
   {
     "name": "Cryogenic Stasis",
-    "school": [
+    "schools": [
       {
         "id": "3",
         "name": "Hydrosophist"
@@ -471,7 +462,7 @@
   },
   {
     "name": "Soothing Cold",
-    "school": [
+    "schools": [
       {
         "id": "3",
         "name": "Hydrosophist"
@@ -511,7 +502,7 @@
   },
   {
     "name": "Armor of Frost",
-    "school": [
+    "schools": [
       {
         "id": "3",
         "name": "Hydrosophist"
@@ -553,7 +544,7 @@
   },
   {
     "name": "Dominate Mind",
-    "school": [
+    "schools": [
       {
         "id": "8",
         "name": "Summoning"
@@ -588,7 +579,7 @@
   },
   {
     "name": "Rallying Cry",
-    "school": [
+    "schools": [
       {
         "id": "8",
         "name": "Summoning"
@@ -626,7 +617,7 @@
   },
   {
     "name": "Soul Mate",
-    "school": [
+    "schools": [
       {
         "id": "8",
         "name": "Summoning"
@@ -644,12 +635,7 @@
     "cooldown": 3,
     "memory": 1,
     "description": "Bind yourself to target character, copying any healing and Armor restoration that you receive to them. Clears Frozen, Stunned, Knocked Down and Petrified.\nSet Soul Mate for 3 turn(s).",
-    "removes": [
-      "Frozen",
-      "Knocked Down",
-      "Petrified",
-      "Stunned"
-    ],
+    "removes": ["Frozen", "Knocked Down", "Petrified", "Stunned"],
     "statusEffects": [
       {
         "name": "Soul Mate",
@@ -666,7 +652,7 @@
   },
   {
     "name": "Bless",
-    "school": [
+    "schools": [
       {
         "id": "11",
         "name": "Sourcery"
@@ -677,9 +663,7 @@
     "cooldown": 3,
     "memory": 1,
     "description": "Bless target character or surface.\nSet Blessed for 2 turn(s).\nProtects against: Diseased, Decaying Touch, Petrified, Stunned, Cursed.\nAccuracy 20%, Dodge 10%, Resist All 15%",
-    "removes": [
-      "Infested"
-    ],
+    "removes": ["Infested"],
     "statusEffects": [
       {
         "name": "Blessed",
@@ -688,13 +672,7 @@
       }
     ],
     "stats": [],
-    "immunities": [
-      "Cursed",
-      "Diseased",
-      "Decaying",
-      "Petrified",
-      "Stunned"
-    ],
+    "immunities": ["Cursed", "Diseased", "Decaying", "Petrified", "Stunned"],
     "surfaces": [],
     "imageSrc": "https://divinityoriginalsin2.wiki.fextralife.com/file/Divinity-Original-Sin-2/bless-icon.png",
     "range": 13,
@@ -702,7 +680,7 @@
   },
   {
     "name": "Farsight",
-    "school": [
+    "schools": [
       {
         "id": "2",
         "name": "Huntsman"
@@ -733,7 +711,7 @@
   },
   {
     "name": "Steam Lance",
-    "school": [
+    "schools": [
       {
         "id": "3",
         "name": "Hydrosophist"
@@ -781,7 +759,7 @@
   },
   {
     "name": "Arcane Stitch",
-    "school": [
+    "schools": [
       {
         "id": "3",
         "name": "Hydrosophist"
@@ -827,7 +805,7 @@
   },
   {
     "name": "Skin Graft",
-    "school": [
+    "schools": [
       {
         "id": "5",
         "name": "Polymorph"
@@ -845,12 +823,7 @@
     "cooldown": 0,
     "memory": 2,
     "description": "Reset all cooldowns. Removes Burning, Necrofire, Poisoned and Bleeding.\nSet Skin Graft",
-    "removes": [
-      "Bleeding",
-      "Burning",
-      "Necrofire",
-      "Poisoned"
-    ],
+    "removes": ["Bleeding", "Burning", "Necrofire", "Poisoned"],
     "statusEffects": [
       {
         "name": "Skin Graft",
@@ -866,7 +839,7 @@
   },
   {
     "name": "Uncanny Evasion",
-    "school": [
+    "schools": [
       {
         "id": "0",
         "name": "Aerotheurge"
@@ -901,7 +874,7 @@
   },
   {
     "name": "Break the Shackles",
-    "school": [
+    "schools": [
       {
         "id": "10",
         "name": "Special"

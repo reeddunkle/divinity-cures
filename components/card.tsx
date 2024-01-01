@@ -3,7 +3,7 @@ import Image from "next/image";
 import Link from "next/link";
 
 import { ActionPoint, SourcePoint } from "@/components/point.tsx";
-import type { Skill } from "@/data/schemas.ts";
+import type { Skill, SpellSchool } from "@/data/schemas.ts";
 import { compareStrings, range, startsWith } from "@/util/util.ts";
 
 import * as styles from "./card.css.ts";
@@ -16,15 +16,13 @@ const addAsterisk = (str: string) => {
 
 type CardProps = React.HTMLProps<HTMLDivElement> &
   Skill & {
+    spellSchools: SpellSchool[];
     searchText: string;
   };
 
 export function Card(props: CardProps) {
-  const { immunities, removes } = props;
-
-  const cures = Array.from(new Set([...removes, ...immunities])).sort(
-    compareStrings,
-  );
+  const removes = props.removes.sort(compareStrings);
+  const immunities = props.immunities.sort(compareStrings);
 
   return (
     <div className={clsx(styles.card, props.className)}>
@@ -103,36 +101,21 @@ export function Card(props: CardProps) {
               </ul>
             </div>
           ) : null}
-          {cures.length > 0 ? (
-            <div className={styles.listGridColumn}>
-              <div className={styles.listTitle}>Cures:</div>
-              <ul className={styles.list}>
-                {cures.map((statusEffect) => {
-                  const statusEffectLink = `?search=${statusEffect.toLowerCase()}`;
-                  const MIN_SEARCH_CHARACTERS = 3;
-
-                  return (
-                    <li className={styles.statusEffectItem} key={statusEffect}>
-                      <Link
-                        className={clsx(styles.statusEffectLink, {
-                          [styles.activeLink]:
-                            props.searchText.length > MIN_SEARCH_CHARACTERS &&
-                            startsWith(statusEffect, props.searchText),
-                        })}
-                        href={statusEffectLink}
-                        prefetch={false}
-                      >
-                        {statusEffect}
-                      </Link>
-                    </li>
-                  );
-                })}
-              </ul>
-            </div>
-          ) : null}
         </div>
       </div>
       <div className={styles.col3}>
+        {props.spellSchools.map((school) => {
+          return (
+            <div className={styles.schoolIconGroup} key={school.id}>
+              <Image
+                alt={`Icon for ${school.name}`}
+                height={48}
+                src={school.imageSrcColored}
+                width={48}
+              />
+            </div>
+          );
+        })}
         <CollapsibleSection title="Description" text={props.description} />
       </div>
     </div>

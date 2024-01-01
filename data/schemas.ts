@@ -44,14 +44,14 @@ const requirementSchema = z.object({
   number: z.number(),
 });
 
-export const skillStatSchema = z.object({
+const skillStatSchema = z.object({
   amount: z.number().optional(),
   name: attributeNameSchema,
   percent: z.number().optional(),
   scales: z.boolean().optional(),
 });
 
-export const skillStatusEffectSchema = z.object({
+const skillStatusEffectSchema = z.object({
   duration: z.number().optional(),
   id: z.string(),
   name: statusEffectNameSchema,
@@ -74,7 +74,7 @@ export const skillSchema = z.object({
   range: z.number(),
   removes: z.array(z.string()).default([]),
   requirements: z.array(requirementSchema).default([]),
-  school: z.array(skillSchoolSchema),
+  schools: z.array(skillSchoolSchema),
   sourcePoints: z.number(),
   stats: z.array(skillStatSchema).default([]),
   statusEffects: z.array(skillStatusEffectSchema).default([]),
@@ -85,9 +85,11 @@ export const skillSchemaArray = z.array(skillSchema);
 
 export type Skill = z.infer<typeof skillSchema>;
 
+export type SkillSchool = z.infer<typeof skillSchoolSchema>;
+
 // Status Effects
 
-export const statusEffectSchema = z.object({
+const statusEffectSchema = z.object({
   clearedBy: z.array(statusEffectNameSchema).default([]),
   description: z.string(),
   givenBy: z.array(z.string()).default([]),
@@ -105,23 +107,24 @@ export type StatusEffect = z.infer<typeof statusEffectSchema>;
 
 // Spell Schools
 
-export const spellSchoolModifierSchema = z.object({
+const spellSchoolModifierSchema = z.object({
   amount: z.number().optional(),
   percent: z.number().optional(),
   type: z.string(),
 });
 
-export const spellSchoolEffectSchema = z.object({
+const spellSchoolEffectSchema = z.object({
   amount: z.number().optional(),
   percent: z.number().optional(),
   type: z.string(),
 });
 
-export const spellSchoolSchema = z.object({
+const spellSchoolSchema = z.object({
   description: z.string(),
   effects: z.array(spellSchoolEffectSchema).optional().default([]),
   id: z.string(),
-  imageSrc: z.string(),
+  imageSrc: z.string().optional(),
+  imageSrcColored: z.string(),
   modifies: z.array(spellSchoolModifierSchema).optional().default([]),
   name: z.string(),
 });

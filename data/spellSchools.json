@@ -169,12 +169,12 @@
     "id": "10",
     "name": "Special",
     "description": "Special skills in Divinity: Original Sin 2 are a collection of different but strong skills. Many of them are acquired during Character Creation or can only be used by certain Companions.",
-    "imageSrc": "/icons/school-special.jpg"
+    "imageSrcColored": "/icons/school-special.jpg"
   },
   {
     "id": "11",
     "name": "Sourcery",
     "description": "Sourcery Skills (not to be confused with Source skills) are a set of skills that is integral to the story of Divinity: Original Sin 2. As you progress through the game you'll come across points where you must interact with the Divine, and will grant you these skills to help your ascension into godhood.",
-    "imageSrc": "/icons/source-icon-custom.png"
+    "imageSrcColored": "/icons/source-icon-custom.png"
   }
 ]

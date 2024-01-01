@@ -107,4 +107,6 @@ export const activeLink = style({
 
 // Col 3
 
+export const schoolIconGroup = style({});
+
 // export const curesWrapper = style({});

@@ -9,7 +9,13 @@ import {
   loadSpellSchools,
   loadStatusEffects,
 } from "@/data/loaders.ts";
-import type { Skill, SpellSchool, StatusEffect } from "@/data/schemas.ts";
+import type {
+  Skill,
+  SkillSchool,
+  SpellSchool,
+  StatusEffect,
+} from "@/data/schemas.ts";
+import { keyBy } from "@/util/util.ts";
 
 import * as styles from "./_styles/page.css.ts";
 
@@ -18,11 +24,13 @@ function SearchBarFallback() {
 }
 
 export default async function HomePage() {
-  const skillsData: Skill[] = (await loadSkills())!; // eslint-disable-line @typescript-eslint/no-non-null-assertion
+  const skills: Skill[] = (await loadSkills())!; // eslint-disable-line @typescript-eslint/no-non-null-assertion
 
-  const statusEffectsData: StatusEffect[] = (await loadStatusEffects())!; // eslint-disable-line @typescript-eslint/no-non-null-assertion
+  const statusEffects: StatusEffect[] = (await loadStatusEffects())!; // eslint-disable-line @typescript-eslint/no-non-null-assertion
 
-  const spellSchoolsData: SpellSchool[] = (await loadSpellSchools())!; // eslint-disable-line @typescript-eslint/no-non-null-assertion
+  const spellSchools: SpellSchool[] = (await loadSpellSchools())!; // eslint-disable-line @typescript-eslint/no-non-null-assertion
+
+  const spellSchoolsById = keyBy(spellSchools, (school) => school.id);
 
   return (
     <main className={styles.main}>
@@ -33,9 +41,9 @@ export default async function HomePage() {
       </h1>
       <Suspense fallback={<SearchBarFallback />}>
         <SearchCures
-          skills={skillsData}
-          spellSchools={spellSchoolsData}
-          statusEffects={statusEffectsData}
+          skills={skills}
+          spellSchools={spellSchoolsById}
+          statusEffects={statusEffects}
         />
       </Suspense>
     </main>

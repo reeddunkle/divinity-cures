@@ -16,7 +16,7 @@ import * as styles from "./search.css.ts";
 type SearchCuresProps = {
   skills: Skill[];
   statusEffects: StatusEffect[];
-  spellSchools: SpellSchool[];
+  spellSchools: Record<string, SpellSchool>;
 };
 
 const searchParamSchema = z.object({
@@ -71,18 +71,31 @@ export function SearchCures(props: SearchCuresProps) {
         placeholder='"Burning", "Decaying", etc."'
         value={searchText}
       />
-      {searchResults.length > 0 ? (
+      {sortedSearchResults.length > 0 ? (
         <div className={styles.searchResults}>
-          {sortedSearchResults.map((data) => (
-            <div className={styles.resultWrapper} key={data.name}>
-              <Card
-                className={styles.resultCard}
-                searchText={urlSearchState}
-                {...data}
-              />
-              <div className={styles.hr} />
-            </div>
-          ))}
+          {sortedSearchResults.map((skill) => {
+            const spellSchools = skill.schools.map((skillSchool) => {
+              const result = props.spellSchools[skillSchool.id];
+
+              if (!result) {
+                throw new Error("Spell school not found!");
+              }
+
+              return result;
+            });
+
+            return (
+              <div className={styles.resultWrapper} key={skill.name}>
+                <Card
+                  className={styles.resultCard}
+                  searchText={urlSearchState}
+                  spellSchools={spellSchools}
+                  {...skill}
+                />
+                <div className={styles.hr} />
+              </div>
+            );
+          })}
         </div>
       ) : null}
     </div>
