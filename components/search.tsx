@@ -40,7 +40,7 @@ export function SearchCures(props: SearchCuresProps) {
     .sort(compareSkillsBy("actionPoints"))
     .sort(compareSkillsBy("sourcePoints"));
 
-  // Read URL State
+  // Read on URL state change
   useEffect(() => {
     setSearchText(urlSearchState);
   }, [urlSearchState]);
@@ -61,7 +61,7 @@ export function SearchCures(props: SearchCuresProps) {
         placeholder='"Burning", "Decaying", etc."'
         value={searchText}
       />
-      {sortedSearchResults.length > 0 ? (
+      {sortedSearchResults.length > 0 ?
         <div className={styles.searchResults}>
           {sortedSearchResults.map((skill) => {
             const spellSchools = skill.schools.map((skillSchool) => {
@@ -87,7 +87,7 @@ export function SearchCures(props: SearchCuresProps) {
             );
           })}
         </div>
-      ) : null}
+      : null}
     </div>
   );
 }

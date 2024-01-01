@@ -4,21 +4,21 @@ import Link from "next/link";
 
 import { ActionPoint, SourcePoint } from "@/components/point.tsx";
 import type { Skill, SpellSchool } from "@/data/schemas.ts";
-import { compareStrings, keyBy, range, startsWith } from "@/util/util.ts";
+import type { Div } from "@/types/react.ts";
+import { compareStrings, range, startsWith } from "@/util/util.ts";
 
 import * as styles from "./card.css.ts";
-import { CollapsibleSection } from "./collapsible-section.tsx";
 import { Cooldown } from "./cooldown.tsx";
 
 const addAsterisk = (str: string) => {
   return `${str}*`;
 };
 
-type CardProps = React.HTMLProps<HTMLDivElement> &
-  Skill & {
-    spellSchools: SpellSchool[];
-    searchText: string;
-  };
+/* prettier-ignore */
+type CardProps = Div & Skill & {
+  searchText: string;
+  spellSchools: SpellSchool[];
+};
 
 export function Card(props: CardProps) {
   const removes = props.removes.sort(compareStrings);

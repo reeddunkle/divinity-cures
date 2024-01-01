@@ -9,7 +9,7 @@ export const SCHOOL_IMAGE_SIZE_PX = 45;
 export const card = style({
   display: "grid",
   gap: scale.fluid.xxs,
-  gridTemplateColumns: `[col1-start] ${scale.fluid.xxxl} [col2-start] 1fr [end]`,
+  gridTemplateColumns: `[col1-start] ${scale.fluid.xxxl} [col2-start] 1fr [col3-start] min-content [end]`,
   width: "100%",
 
   // "@media": {

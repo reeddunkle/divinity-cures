@@ -1,3 +1,5 @@
 {
+  "experimentalTernaries": true,
+  "parser": "typescript",
   "singleQuote": false
 }
