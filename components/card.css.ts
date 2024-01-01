@@ -106,6 +106,7 @@ const autoFitWidthMin = "6rem";
 export const listGrid = style({
   display: "grid",
   gridTemplateColumns: `repeat(auto-fit, minmax(${autoFitWidthMin}, 1fr));`,
+  rowGap: scale.static.xs,
 });
 
 /* Cures List & Requirements */
