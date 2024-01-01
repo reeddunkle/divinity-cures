@@ -12,7 +12,7 @@ const schoolEffectSchema = z.object({
   type: z.string(),
 });
 
-const schoolSchema = z.object({
+export const schoolSchema = z.object({
   description: z.string(),
   effects: z.array(schoolEffectSchema).optional().default([]),
   id: z.string(),

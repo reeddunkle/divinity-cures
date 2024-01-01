@@ -9,54 +9,6 @@ import { addAsterisk, compareStrings, startsWith } from "@/util/util.ts";
 import * as styles from "./card.css.ts";
 import { Cooldown } from "./cooldown.tsx";
 
-// type RequirementsProps = {
-//   reqs: Skill["requirements"];
-// };
-
-// function Requirements(props: RequirementsProps) {
-//   if (props.reqs.length < 0) {
-//     return null;
-//   }
-
-//   return (
-//     <div className={styles.requirements}>
-//       <div className={styles.listTitle}>Requires</div>
-//       <ul className={styles.list}>
-//         {props.reqs.map((requirement) => {
-//           return (
-//             <li className={styles.statusEffectItem} key={requirement.id}>
-//               {requirement.name} ({requirement.number})
-//             </li>
-//           );
-//         })}
-//       </ul>
-//     </div>
-//   );
-// }
-
-// type SchoolIconsProps = {
-//   schools: SpellSchool[];
-// };
-
-// function SchoolIcons(props: SchoolIconsProps) {
-//   return (
-//     <div className={styles.schoolIcons}>
-//       {props.schools.map((school) => {
-//         return (
-//           <Image
-//             alt={`Icon for ${school.name}`}
-//             className={styles.schoolImage}
-//             height={styles.SCHOOL_IMAGE_SIZE_PX}
-//             key={school.id}
-//             src={school.imageSrcColored}
-//             width={styles.SCHOOL_IMAGE_SIZE_PX}
-//           />
-//         );
-//       })}
-//     </div>
-//   );
-// }
-
 type SchoolsAndReqsProps = {
   schools: Skill["schools"];
 };
@@ -68,8 +20,8 @@ function SchoolsAndReqs(props: SchoolsAndReqsProps) {
         return (
           <div key={school.id}>
             <div>{school.name}</div>
-            {school.requires > 0 ?
-              <div>{school.name}</div>
+            {!!school.requires && school.requires > 0 ?
+              <div>{school.requires}</div>
             : null}
             <Image
               alt={`Icon for ${school.name}`}

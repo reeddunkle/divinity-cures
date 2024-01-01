@@ -8,7 +8,7 @@ import {
   loadSpellSchools,
   loadStatusEffects,
 } from "@/data/loaders.ts";
-import type { Skill, SkillBase } from "@/data/skill-schema.ts";
+import type { BaseSkill, Skill } from "@/data/skill-schema.ts";
 import type { School } from "@/data/spell-schools-schema.ts";
 import type { StatusEffect } from "@/data/status-effect-schema.ts";
 import { keyBy } from "@/util/util.ts";
@@ -16,7 +16,7 @@ import { keyBy } from "@/util/util.ts";
 import * as styles from "./_styles/page.css.ts";
 
 export default async function HomePage() {
-  const skills: SkillBase[] = (await loadSkills())!; // eslint-disable-line @typescript-eslint/no-non-null-assertion
+  const skills: BaseSkill[] = (await loadSkills())!; // eslint-disable-line @typescript-eslint/no-non-null-assertion
 
   const statusEffects: StatusEffect[] = (await loadStatusEffects())!; // eslint-disable-line @typescript-eslint/no-non-null-assertion
 
@@ -26,7 +26,7 @@ export default async function HomePage() {
 
   const skillsWithSchools = skills.map((skill) => ({
     ...skill,
-    schools: skill.schools.map((school: SkillBase["schools"][0]) => ({
+    schools: skill.schools.map((school) => ({
       ...school,
       ...spellSchoolsById[school.id],
     })),

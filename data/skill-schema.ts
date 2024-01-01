@@ -1,6 +1,7 @@
 import { z } from "zod";
 
 import { skillStatSchema, statusEffectNameSchema } from "./schemas";
+import { schoolSchema } from "./spell-schools-schema";
 import type { School } from "./spell-schools-schema";
 
 const skillStatusEffectSchema = z.object({
@@ -35,10 +36,16 @@ export const skillSchema = z.object({
 
 export const skillSchemaArray = z.array(skillSchema);
 
-export type SkillBase = z.infer<typeof skillSchema>;
+type BaseSkillSchool = z.infer<typeof skillSchoolSchema>;
 
-export type Skill = SkillBase & {
-  schools: School[];
-};
+export type BaseSkill = z.infer<typeof skillSchema>;
 
-export type SkillSchool = Skill["schools"][0];
+export const skillWithSchoolSchema = skillSchema.merge(
+  z.object({
+    schools: z.array(skillSchoolSchema.merge(schoolSchema)),
+  }),
+);
+
+export type Skill = z.infer<typeof skillWithSchoolSchema>;
+
+export type SkillSchool = BaseSkillSchool & School;

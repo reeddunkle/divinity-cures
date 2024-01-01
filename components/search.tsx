@@ -5,7 +5,8 @@ import { z } from "zod";
 
 import { Card } from "@/components/card.tsx";
 import { Input } from "@/components/input.tsx";
-import type { Skill, StatusEffect } from "@/data/skill-schema.ts";
+import type { Skill } from "@/data/skill-schema.ts";
+import type { StatusEffect } from "@/data/status-effect-schema.ts";
 import { useUrlState } from "@/hooks/useUrlState.tsx";
 import { compareSkillsBy, searchCures } from "@/util/search.ts";
 
