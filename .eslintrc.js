@@ -106,6 +106,14 @@ module.exports = {
     "@stylistic/jsx-newline": [1, { prevent: true, allowMultilines: false }],
     "@typescript-eslint/explicit-function-return-type": "off",
     "@typescript-eslint/consistent-type-definitions": ["error", "type"],
+    "@typescript-eslint/no-misused-promises": [
+      2,
+      {
+        checksVoidReturn: {
+          attributes: false,
+        },
+      },
+    ],
     "@typescript-eslint/prefer-reduce-type-parameter": "off",
     "eslint-comments/require-description": "off",
     "import/no-anonymous-default-export": "off",
