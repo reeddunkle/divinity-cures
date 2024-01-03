@@ -5,6 +5,12 @@ import React from "react";
 
 import * as styles from "./range.css";
 
+// const leftArrowWithLine = "M4 4V20M8 12H20M8 12L12 8M8 12L12 16";
+// const rightArrowWithLine = "M20 4V20M4 12H16M16 12L12 8M16 12L12 16";
+
+const leftArrow = "M4 4M8 12H20M8 12L12 8M8 12L12 16";
+const rightArrow = "M20 4M4 12H16M16 12L12 8M16 12L12 16";
+
 function LeftArrow(props: { className: string; arrowPathClass?: string }) {
   return (
     <svg
@@ -17,7 +23,7 @@ function LeftArrow(props: { className: string; arrowPathClass?: string }) {
     >
       <path
         className={props.arrowPathClass}
-        d="M4 4V20M8 12H20M8 12L12 8M8 12L12 16"
+        d={leftArrow}
         stroke="#000000"
         stroke-width="2"
         stroke-linecap="round"
@@ -39,7 +45,7 @@ function RightArrow(props: { className: string; arrowPathClass?: string }) {
     >
       <path
         className={props.arrowPathClass}
-        d="M20 4V20M4 12H16M16 12L12 8M16 12L12 16"
+        d={rightArrow}
         stroke="#ffffff"
         stroke-width="2"
         stroke-linecap="round"

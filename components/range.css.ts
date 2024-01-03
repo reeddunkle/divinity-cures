@@ -12,7 +12,8 @@ export const outerWrapper = style({
 export const innerWrapper = style({
   alignItems: "center",
   display: "inline-flex",
-  justifyContent: "space-evenly",
+  // justifyContent: "space-evenly",
+  gap: 2,
 
   // width: "70%",
 });
@@ -37,6 +38,6 @@ export const arrowRight = style({
 
 export const range = style({
   fontFamily: theme.font.mono,
-  fontSize: scale.fluid.half.min.md,
+  fontSize: scale.fluid.half.max.sm,
   lineHeight: 1,
 });
