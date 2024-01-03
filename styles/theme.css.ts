@@ -1,6 +1,8 @@
 import { createGlobalTheme } from "@vanilla-extract/css";
 import { calc } from "@vanilla-extract/css-utils";
 
+import { hsl } from "@/util/styles";
+
 // https://paletton.com/#uid=14n0u0ktPiAlqqgpXmxBddWN28G
 
 const twViolet = {
@@ -19,9 +21,22 @@ const twViolet = {
   1200: "#12022F",
 };
 
+const violet2 = {
+  100: hsl(291, 77, 80),
+  200: hsl(288, 77, 61),
+  400: hsl(288, 77, 48),
+  600: hsl(287, 77, 30),
+  800: hsl(285, 77, 15),
+};
+
+const violetTheme = {
+  background: "#350944",
+};
+
 export const theme = createGlobalTheme(":root", {
   color: {
-    background: twViolet[1100],
+    // background: twViolet[1100],
+    background: violetTheme.background,
     foreground: twViolet[100],
     foregroundDark: twViolet[600],
     link: twViolet[300],
