@@ -2,6 +2,7 @@ import { style } from "@vanilla-extract/css";
 
 import { theme } from "@/styles/theme.css";
 import scale from "@/util/scale";
+import { px } from "@/util/styles";
 
 export const SPELL_IMAGE_SIZE_PX = 64;
 export const SCHOOL_IMAGE_SIZE_PX = 45;
@@ -11,7 +12,7 @@ export const card = style({
   display: "grid",
   gap: scale.fluid.xxs,
   // gridTemplateColumns: `${scale.fluid.xxxl} repeat(auto-fit, minmax(0.5rem, 1fr))`,
-  gridTemplateColumns: `${scale.fluid.xxxl} minmax(0.5rem, 1fr) minmax(0.5rem, 1fr)`,
+  gridTemplateColumns: `${scale.fluid.xxxl} minmax(min(30%, 100%), 2fr) minmax(min(30%, 100%), 1fr)`,
   width: "100%",
 
   // "@media": {
@@ -88,6 +89,7 @@ export const pair = style({
   fontSize: scale.fluidThirdHalfSteps[7],
   gap: scale.fluid.half.min.xxxs,
   justifyContent: "flex-end",
+  flexShrink: 1,
 });
 
 export const numberAndImage = style({
@@ -104,7 +106,7 @@ export const schoolsAndReqs = style({
 });
 
 export const requireNumber = style({
-  flexShrink: 0,
+  flexShrink: 1,
 });
 
 /* Cures List */

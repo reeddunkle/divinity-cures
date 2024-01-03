@@ -5,3 +5,7 @@ export function hsl(
 ) {
   return `hsl(${hueAngleDegree} ${saturationPercent}% ${lightnessPercent}%)`;
 }
+
+export function px(n: number) {
+  return `${n}px`;
+}

@@ -30,10 +30,10 @@ function SchoolsAndReqs(props: { schools: Skill["schools"] }) {
         return (
           <div className={styles.pair} key={school.id}>
             <div>{abbreviateName(school.name)}</div>
+            {!!school.requires && school.requires > 0 && (
+              <div className={styles.requireNumber}>({school.requires})</div>
+            )}
             <div className={styles.numberAndImage}>
-              {!!school.requires && school.requires > 0 ?
-                <div className={styles.requireNumber}>({school.requires})</div>
-              : null}
               <Image
                 alt={`Icon for ${school.name}`}
                 className={styles.schoolImage}
