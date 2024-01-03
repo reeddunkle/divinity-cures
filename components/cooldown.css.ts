@@ -12,11 +12,13 @@ export const wrapper = style({
   position: "relative",
 });
 
+const dashStyle = "dashed";
+
 export const border = style({
   aspectRatio: "1 / 1",
   borderColor: theme.color.foreground,
   borderRadius: "50%",
-  borderStyle: "dotted solid dotted dotted",
+  borderStyle: `${dashStyle} solid ${dashStyle} ${dashStyle}`,
   borderWidth: borderThickness,
   height: "100%",
 
@@ -24,7 +26,7 @@ export const border = style({
 });
 
 export const cooldownText = style({
-  fontFamily: "monospace",
+  fontFamily: theme.font.mono,
   fontSize: scale.fluid.half.min.md,
   lineHeight: 1,
   padding: scale.fluid.half.min.xxs,

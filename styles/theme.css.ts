@@ -52,6 +52,7 @@ export const theme = createGlobalTheme(":root", {
     },
   },
   font: {
+    mono: "monospace",
     sansSerif: "system-ui, 'Segoe UI', sans-serif",
   },
 });

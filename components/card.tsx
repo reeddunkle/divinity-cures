@@ -8,6 +8,7 @@ import { addAsterisk, compareStrings, startsWith } from "@/util/util.ts";
 
 import * as styles from "./card.css.ts";
 import { Cooldown } from "./cooldown.tsx";
+import { Range } from "./range.tsx";
 
 const abbreviations: Record<string, string> = {
   Geomancer: "Geo",
@@ -136,6 +137,7 @@ export function Card(
         />
         <PointCosts ap={props.actionPoints} sp={props.sourcePoints} />
         <Cooldown cooldown={props.cooldown} />
+        <Range range={props.range} />
       </div>
       <div className={styles.col2}>
         <div className={styles.title}>{props.name}</div>
