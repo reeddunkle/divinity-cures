@@ -21,6 +21,14 @@ const twViolet = {
   1200: "#12022F",
 };
 
+const gray = {
+  100: "#cacacc",
+  200: "#c0bdc9",
+  300: "#a2a1a6",
+  400: "#7b7a80",
+  500: "#6c6b6e",
+};
+
 const violet2 = {
   100: hsl(291, 77, 80),
   200: hsl(288, 77, 61),
@@ -43,7 +51,10 @@ export const theme = createGlobalTheme(":root", {
     primary: "hsl(121 95% 65%)", // rgb(81, 251, 84)
     secondary: "#ff5252",
     tertiary: "rgb(0, 255, 255)",
+
+    gray,
     violet: twViolet,
+    violet2,
     yellow: "#fff0ad",
 
     hover: {

@@ -14,9 +14,12 @@ export const wrapper = style({
 
 const dashStyle = "dashed";
 
+const circleDark = theme.color.gray[300];
+const circleLight = theme.color.foreground;
+
 export const border = style({
   aspectRatio: "1 / 1",
-  borderColor: theme.color.foreground,
+  borderColor: `${circleDark} ${circleLight} ${circleDark} ${circleDark}`,
   borderRadius: "50%",
   borderStyle: `${dashStyle} solid ${dashStyle} ${dashStyle}`,
   borderWidth: borderThickness,
