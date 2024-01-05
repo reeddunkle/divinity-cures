@@ -25,9 +25,9 @@ function LeftArrow(props: { className: string; arrowPathClass?: string }) {
         className={props.arrowPathClass}
         d={leftArrow}
         stroke="#000000"
-        stroke-width="2"
-        stroke-linecap="round"
-        stroke-linejoin="round"
+        strokeWidth="2"
+        strokeLinecap="round"
+        strokeLinejoin="round"
       />
     </svg>
   );
@@ -47,9 +47,9 @@ function RightArrow(props: { className: string; arrowPathClass?: string }) {
         className={props.arrowPathClass}
         d={rightArrow}
         stroke="#ffffff"
-        stroke-width="2"
-        stroke-linecap="round"
-        stroke-linejoin="round"
+        strokeWidth="2"
+        strokeLinecap="round"
+        strokeLinejoin="round"
       />
     </svg>
   );

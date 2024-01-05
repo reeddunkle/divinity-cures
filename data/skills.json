@@ -802,7 +802,38 @@
     "immunities": [],
     "surfaces": [],
     "imageSrc": "https://divinityoriginalsin2.wiki.fextralife.com/file/Divinity-Original-Sin-2/break_the_shackles-icon.png",
-    "range": 13,
+    "range": 0,
     "id": "21"
+  },
+  {
+    "name": "Tornado",
+    "schools": [
+      {
+        "id": "0",
+        "name": "Aerotheurge",
+        "requires": 3
+      }
+    ],
+    "actionPoints": 2,
+    "sourcePoints": 0,
+    "cooldown": 5,
+    "memory": 1,
+    "description": "A tornado moves randomly around the battlefield, removing surfaces and revealing invisible characters. Also clears Invisible, Burning and Slowed.",
+    "removes": [
+      "Burning",
+      "Invisible",
+      "Slowed"
+    ],
+    "statusEffects": [],
+    "stats": [],
+    "immunities": [],
+    "surfaces": [],
+    "surfaceRemoves": [
+      "Deathfog",
+      "Lava"
+    ],
+    "imageSrc": "https://divinityoriginalsin2.wiki.fextralife.com/file/Divinity-Original-Sin/Skill_Air_Tornado.jpg",
+    "range": 13,
+    "id": "22"
   }
 ]

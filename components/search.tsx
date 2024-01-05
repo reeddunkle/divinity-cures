@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useRef } from "react";
+import React, { useEffect, useRef } from "react";
 import type { SubmitHandler } from "react-hook-form";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
@@ -29,18 +29,26 @@ const searchParamSchema = z.object({
 
 // const DEBOUNCE_DELAY_MS = 200;
 
+const SEARCH_INPUT_NAME = "searchText";
+
 export function SearchCures(props: SearchCuresProps) {
   const searchInputRef = useRef<HTMLInputElement>(null);
 
   const urlState = useUrlState(searchParamSchema);
   const urlSearchState = urlState.search ?? "";
 
-  const { control, handleSubmit, watch } = useForm<IFormState>({
+  console.log("SearchCures loaded");
+
+  const { control, handleSubmit, setValue, watch } = useForm<IFormState>({
     defaultValues: {
       searchText: urlSearchState,
     },
     mode: "onChange",
   });
+
+  useEffect(() => {
+    setValue(SEARCH_INPUT_NAME, urlSearchState);
+  }, [urlSearchState]); // eslint-disable-line
 
   const searchText = watch("searchText");
 
@@ -72,7 +80,7 @@ export function SearchCures(props: SearchCuresProps) {
           className={styles.input}
           control={control}
           id="searchInput"
-          name="searchText"
+          name={SEARCH_INPUT_NAME}
           placeholder='"Burning", "Decaying", etc."'
           ref={searchInputRef}
         />

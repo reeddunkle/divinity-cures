@@ -3,7 +3,7 @@
 import { useSearchParams } from "next/navigation";
 import type { z } from "zod";
 
-export function useUrlState<T extends z.ZodTypeAny>(schema: T) {
+export function useUrlState<TSchema extends z.ZodTypeAny>(schema: TSchema) {
   const searchParams = useSearchParams();
   // const schemaKeys = Object.keys(schema);
 
@@ -17,13 +17,16 @@ export function useUrlState<T extends z.ZodTypeAny>(schema: T) {
     {},
   );
 
-  const parsedUrlState = schema.safeParse(entities);
+  // https://github.com/colinhacks/zod/issues/2153#issuecomment-1457510901
+  const parsedUrlState = schema.safeParse(entities) as ReturnType<
+    TSchema["safeParse"]
+  >;
 
   if (!parsedUrlState.success) {
     throw parsedUrlState.error;
   }
 
-  const state = parsedUrlState.data as z.infer<typeof schema>;
+  const state = parsedUrlState.data as z.infer<TSchema>;
 
   return state; // eslint-disable-line @typescript-eslint/no-unsafe-return
 }
