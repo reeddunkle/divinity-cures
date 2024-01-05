@@ -27,8 +27,6 @@ const searchParamSchema = z.object({
   search: z.coerce.string().optional(),
 });
 
-// const DEBOUNCE_DELAY_MS = 200;
-
 const SEARCH_INPUT_NAME = "searchText";
 
 export function SearchCures(props: SearchCuresProps) {
@@ -36,8 +34,6 @@ export function SearchCures(props: SearchCuresProps) {
 
   const urlState = useUrlState(searchParamSchema);
   const urlSearchState = urlState.search ?? "";
-
-  console.log("SearchCures loaded");
 
   const { control, handleSubmit, setValue, watch } = useForm<IFormState>({
     defaultValues: {

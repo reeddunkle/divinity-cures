@@ -19,6 +19,7 @@
       "Burning",
       "Decaying",
       "Diseased",
+      "Infected",
       "Infectious Disease",
       "Poisoned"
     ],
@@ -96,7 +97,8 @@
       "Diseased",
       "Knocked Down",
       "Poisoned",
-      "Silenced"
+      "Silenced",
+      "Suffocating"
     ],
     "statusEffects": [
       {
@@ -160,32 +162,6 @@
       {
         "name": "Clear-Minded",
         "duration": 3,
-        "stats": [
-          {
-            "name": "Strength",
-            "amount": 1,
-            "scales": true
-          },
-          {
-            "name": "Finesse",
-            "amount": 1,
-            "scales": true
-          },
-          {
-            "name": "Intelligence",
-            "amount": 1,
-            "scales": true
-          },
-          {
-            "name": "Wits",
-            "amount": 2,
-            "scales": true
-          },
-          {
-            "name": "Accuracy",
-            "percent": 20
-          }
-        ],
         "id": "5"
       }
     ],
@@ -193,8 +169,10 @@
     "immunities": [
       "Blinded",
       "Charmed",
+      "Drunk",
       "Enraged",
-      "Mad",
+      "Frightened",
+      "Madness",
       "Sleeping",
       "Taunted",
       "Terrified"
@@ -259,6 +237,7 @@
       "Decaying",
       "Diseased",
       "Infested",
+      "Plagued",
       "Poisoned"
     ],
     "statusEffects": [],
@@ -302,8 +281,9 @@
       "Decaying",
       "Diseased",
       "Necrofire",
+      "Plagued",
       "Poisoned",
-      "Suffocation"
+      "Suffocating"
     ],
     "statusEffects": [],
     "stats": [
@@ -580,7 +560,8 @@
     "memory": 1,
     "description": "Bless target character or surface.\nSet Blessed for 2 turn(s).\nProtects against: Diseased, Decaying Touch, Petrified, Stunned, Cursed.\nAccuracy 20%, Dodge 10%, Resist All 15%",
     "removes": [
-      "Infested"
+      "Infested",
+      "Necrofire"
     ],
     "statusEffects": [
       {
@@ -595,6 +576,7 @@
       "Diseased",
       "Decaying",
       "Petrified",
+      "Plagued",
       "Stunned"
     ],
     "surfaces": [],
@@ -647,7 +629,8 @@
       "Decaying",
       "Diseased",
       "Frozen",
-      "Necrofire"
+      "Necrofire",
+      "Plagued"
     ],
     "statusEffects": [
       {
@@ -686,10 +669,10 @@
     "removes": [
       "Burning",
       "Frozen",
-      "Mad",
+      "Madness",
       "Necrofire",
       "Petrified",
-      "Plague",
+      "Plagued",
       "Poisoned",
       "Silenced",
       "Stunned",
@@ -835,5 +818,243 @@
     "imageSrc": "https://divinityoriginalsin2.wiki.fextralife.com/file/Divinity-Original-Sin/Skill_Air_Tornado.jpg",
     "range": 13,
     "id": "22"
+  },
+  {
+    "name": "Cryotherapy",
+    "id": "23",
+    "schools": [
+      {
+        "id": "3",
+        "name": "Hydrosophist",
+        "requires": 1
+      },
+      {
+        "id": "2",
+        "name": "Huntsman",
+        "requires": 1
+      }
+    ],
+    "actionPoints": 1,
+    "sourcePoints": 0,
+    "cooldown": 3,
+    "memory": 1,
+    "description": "Consume Frozen surfaces around you and convert them to Magic Armour. Removes Burning and Necrofire.\nRestore up to [400% of total heal value] Magic Armour depending on relevant surface area.",
+    "removes": [
+      "Burning",
+      "Necrofire"
+    ],
+    "statusEffects": [],
+    "stats": [
+      {
+        "name": "Magic Armor",
+        "percent": 400
+      }
+    ],
+    "immunities": [],
+    "surfaces": [],
+    "imageSrc": "https://divinityoriginalsin2.wiki.fextralife.com/file/Divinity-Original-Sin-2/hydrosophist-16-18.png",
+    "range": 2
+  },
+  {
+    "name": "Enrage",
+    "schools": [
+      {
+        "id": "9",
+        "name": "Warfare",
+        "requires": 2
+      }
+    ],
+    "actionPoints": 2,
+    "sourcePoints": 0,
+    "cooldown": 5,
+    "memory": 1,
+    "description": "Motivate an allied character with the power of rage. Target allied character is guaranteed to land critical hits with basic attacks and weapon skills, but is muted. Clears Taunted, Terrified, Charmed, Mad and Clear-Minded statuses.\nSet Enraged for 1 turn(s).",
+    "removes": [
+      "Charmed",
+      "Clear-Minded",
+      "Frightened",
+      "Madness",
+      "Taunted",
+      "Terrified"
+    ],
+    "statusEffects": [
+      {
+        "name": "Enraged",
+        "description": "MISSING INFO",
+        "imageSrc": "https://divinityoriginalsin2.wiki.fextralife.com/file/Divinity-Original-Sin-2/warfare_enrage-icon.png",
+        "id": "15"
+      }
+    ],
+    "stats": [
+      {
+        "name": "Magic Armor",
+        "percent": 400
+      }
+    ],
+    "immunities": [],
+    "surfaces": [],
+    "imageSrc": "https://divinityoriginalsin2.wiki.fextralife.com/file/Divinity-Original-Sin-2/warfare_enrage-icon.png",
+    "range": 2,
+    "id": "24"
+  },
+  {
+    "name": "Vaporize",
+    "id": "25",
+    "schools": [
+      {
+        "id": "0",
+        "name": "Aerotheurge",
+        "requires": 1
+      },
+      {
+        "id": "5",
+        "name": "Polymorph",
+        "requires": 1
+      }
+    ],
+    "actionPoints": 1,
+    "sourcePoints": 0,
+    "cooldown": 4,
+    "memory": 1,
+    "description": "Remove Petrified and Frozen from target character. Vaporise ground surfaces into clouds. Does not work on Oil, Ice or Lava surfaces.",
+    "removes": [
+      "Frozen",
+      "Petrified"
+    ],
+    "immunities": [],
+    "surfaces": [],
+    "imageSrc": "https://divinityoriginalsin2.wiki.fextralife.com/file/Divinity-Original-Sin-2/aerotheurge_vaporise-icon.png",
+    "range": 13
+  },
+  {
+    "name": "Breathing Bubble",
+    "id": "26",
+    "description": "Creates a bubble of clean air around your head, allowing you to ignore effects of cloud surfaces. Immune to Suffocation and Silence.\nThe bubble protects characters from all cloud effects, including healing from Blessed clouds. This also means the bubble will prevent the Invisibilty buff and removal of Silenced from Blessed Smoke Clouds.\nAlso protects from Deathfog.",
+    "schools": [
+      {
+        "id": "0",
+        "name": "Aerotheurge",
+        "requires": 1
+      },
+      {
+        "id": "9",
+        "name": "Warfare",
+        "requires": 1
+      }
+    ],
+    "actionPoints": 1,
+    "sourcePoints": 0,
+    "cooldown": 4,
+    "memory": 1,
+    "immunities": [
+      "Silenced",
+      "Suffocating"
+    ],
+    "statusEffects": [
+      {
+        "name": "Breathing Bubble",
+        "duration": 1,
+        "id": "19"
+      }
+    ],
+    "surfaces": [],
+    "imageSrc": "https://divinityoriginalsin2.wiki.fextralife.com/file/Divinity-Original-Sin-2/aerotheurge-16-13.png",
+    "range": 0
+  },
+  {
+    "name": "Mass Breathing Bubbles",
+    "id": "27",
+    "schools": [
+      {
+        "id": "0",
+        "name": "Aerotheurge",
+        "requires": 2
+      },
+      {
+        "id": "9",
+        "name": "Warfare",
+        "requires": 2
+      }
+    ],
+    "actionPoints": 1,
+    "sourcePoints": 1,
+    "cooldown": 5,
+    "memory": 1,
+    "description": "Set Breathing Bubbles on allies around you, allowing them to ignore effects of cloud surfaces and making them immune to Suffocation and Silence.\nThe bubble protects characters from all cloud effects, including healing from Blessed clouds. This also means the bubble will prevent the Invisibilty buff and removal of Silenced from Blessed Smoke Clouds.\nAlso protects from Deathfog.",
+    "immunities": [
+      "Silenced",
+      "Suffocating"
+    ],
+    "statusEffects": [
+      {
+        "name": "Breathing Bubble",
+        "id": "19"
+      }
+    ],
+    "surfaces": [],
+    "imageSrc": "https://divinityoriginalsin2.wiki.fextralife.com/file/Divinity-Original-Sin-2/aerotheurge-16-14.png",
+    "range": 13
+  },
+  {
+    "name": "Tactical Retreat",
+    "id": "28",
+    "schools": [
+      {
+        "id": "2",
+        "name": "Huntsman",
+        "requires": 2
+      }
+    ],
+    "actionPoints": 1,
+    "sourcePoints": 0,
+    "cooldown": 4,
+    "memory": 1,
+    "description": "Apply haste to yourself, then teleport away from imminent danger.",
+    "statusEffects": [
+      {
+        "name": "Hasted",
+        "duration": 1,
+        "id": "4"
+      }
+    ],
+    "surfaces": [],
+    "imageSrc": "https://divinityoriginalsin2.wiki.fextralife.com/file/Divinity-Original-Sin-2/huntsman_tactical_retreat-icon.png",
+    "range": 13
+  },
+  {
+    "name": "Mass Cryotherapy",
+    "id": "29",
+    "schools": [
+      {
+        "id": "3",
+        "name": "Hydrosophist",
+        "requires": 2
+      },
+      {
+        "id": "2",
+        "name": "Huntsman",
+        "requires": 2
+      }
+    ],
+    "actionPoints": 2,
+    "sourcePoints": 1,
+    "cooldown": 5,
+    "memory": 2,
+    "description": "Each ally consumes Frozen surfaces around them, converting the frozen surfaces to Magic Armour. Removes Burning and Necrofire.",
+    "removes": [
+      "Burning",
+      "Necrofire"
+    ],
+    "statusEffects": [],
+    "stats": [
+      {
+        "name": "Magic Armor",
+        "percent": 400
+      }
+    ],
+    "immunities": [],
+    "surfaces": [],
+    "imageSrc": "https://divinityoriginalsin2.wiki.fextralife.com/file/Divinity-Original-Sin-2/hydrosophist-16-17.png",
+    "range": 13
   }
 ]

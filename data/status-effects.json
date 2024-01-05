@@ -57,6 +57,7 @@
   },
   {
     "name": "Hasted",
+    "id": "4",
     "description": "Character is hasted.\nMovement: +2\nStart AP: +1\nAP Recovery: +1",
     "removes": [
       "Slowed",
@@ -80,12 +81,11 @@
       "Slowed",
       "Crippled"
     ],
-    "imageSrc": "https://divinityoriginalsin2.wiki.fextralife.com/file/Divinity-Original-Sin-2/status_effect_hasted-icon.png",
-    "id": "4"
+    "imageSrc": "https://divinityoriginalsin2.wiki.fextralife.com/file/Divinity-Original-Sin-2/status_effect_hasted-icon.png"
   },
   {
     "name": "Clear-Minded",
-    "description": "Strength: +?? (Scales, starting with +1)\nFinesse: +?? (Scales, starting with +1)\nIntelligence: +?? (Scales, starting with +1)\nWits: +?? (Scales, starting with +2)\nAccuracy: +20%\nProtected from mind-controlling effects.",
+    "description": "Increases Strength: +?? (Scales, starting with +1)\nFinesse: +?? (Scales, starting with +1)\nIntelligence: +?? (Scales, starting with +1)\nWits: +?? (Scales, starting with +2)\nAccuracy: +20%\nProtected from mind-controlling effects.\nProtects against and removes Blinded, Terrified, Charmed, Taunted, Sleeping, Enraged and Mad.",
     "stats": [
       {
         "name": "Strength",
@@ -118,12 +118,13 @@
     ],
     "immunities": [
       "Blinded",
-      "Terrified",
       "Charmed",
-      "Taunted",
-      "Sleeping",
       "Enraged",
-      "Mad"
+      "Mad",
+      "Madness",
+      "Sleeping",
+      "Taunted",
+      "Terrified"
     ],
     "imageSrc": "https://divinityoriginalsin2.wiki.fextralife.com/file/Divinity-Original-Sin-2/pyrokinetic_burn_my_eyes-icon.png",
     "id": "5"
@@ -208,7 +209,7 @@
         "percent": 15
       }
     ],
-    "imageSrc": "https://divinityoriginalsin2.wiki.fextralife.com/file/Divinity-Original-Sin-2/bless-icon.png",
+    "imageSrc": "https://divinityoriginalsin2.wiki.fextralife.com/file/Divinity-Original-Sin-2/status_effect_blessed-icon.png",
     "id": "11"
   },
   {
@@ -250,5 +251,52 @@
     "description": "MISSING INFO",
     "imageSrc": "https://divinityoriginalsin2.wiki.fextralife.com/file/Divinity-Original-Sin-2/polymorph-12-13.png",
     "id": "15"
+  },
+  {
+    "name": "Enraged",
+    "id": "16",
+    "description": "Character is enraged. Critical hits are guaranteed, but character is Muted and can only use weapon skills.",
+    "imageSrc": "https://divinityoriginalsin2.wiki.fextralife.com/file/Divinity-Original-Sin-2/status_effect_raged-icon.png",
+    "stats": [
+      {
+        "name": "Critical Change",
+        "percent": 100
+      }
+    ]
+  },
+  {
+    "name": "Infected",
+    "description": "Contagious (can spread to nearby players/enemies)",
+    "imageSrc": "https://divinityoriginalsin2.wiki.fextralife.com/file/Divinity-Original-Sin-2/status_effect_infectious_disease-icon.png",
+    "stats": [
+      {
+        "name": "Constitution",
+        "amount": -3
+      },
+      {
+        "name": "Damage",
+        "percent": -35
+      }
+    ],
+    "id": "17"
+  },
+  {
+    "name": "Madness",
+    "aliases": [
+      "Mad"
+    ],
+    "description": "This character has been driven mad. While in this state, they will attack friend and foe alike.\nMaddened characters will attack those nearest them, regardless of alignment.",
+    "imageSrc": "https://divinityoriginalsin2.wiki.fextralife.com/file/Divinity-Original-Sin-2/maddening_song-icon.png",
+    "id": "18"
+  },
+  {
+    "name": "Breathing Bubble",
+    "id": "19",
+    "immunities": [
+      "Silenced",
+      "Suffocating"
+    ],
+    "description": "Allows you to ignore effects of cloud surfaces and making them immune to Suffocation and Silence.",
+    "imageSrc": "https://divinityoriginalsin2.wiki.fextralife.com/file/Divinity-Original-Sin-2/aerotheurge-16-14.png"
   }
 ]
