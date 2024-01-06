@@ -30,7 +30,6 @@ export const inputLabel = style({
 
 export const searchResults = style({
   blockSize: "75svh", // Magic Number
-  // border: `2px solid ${theme.color.yellow}`,
   border: `2px solid ${theme.color.violet2[100]}`,
   overflowY: "auto",
   scrollbarGutter: "stable",

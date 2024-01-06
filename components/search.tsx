@@ -107,6 +107,9 @@ export function SearchCures(props: SearchCuresProps) {
           control={control}
           id="searchInput"
           name={SEARCH_INPUT_NAME}
+          onClear={() => {
+            setValue(SEARCH_INPUT_NAME, "");
+          }}
           placeholder='"Burning", "Decaying", etc.'
           ref={searchInputRef}
         />
