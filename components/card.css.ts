@@ -62,11 +62,6 @@ export const title = style({
   fontWeight: 450,
   lineHeight: 1,
   textTransform: "uppercase",
-
-  // wordBreak: "break-all",
-  // overflowWrap: "break-word",
-  // textWrap: "balance",
-  // wordWrap: "break-word",
 });
 
 /* School Icons */
@@ -89,7 +84,6 @@ export const pair = style({
   fontSize: scale.fluidThirdHalfSteps[7],
   gap: scale.fluid.half.min.xxxs,
   justifyContent: "flex-end",
-  flexShrink: 1,
 });
 
 export const numberAndImage = style({
