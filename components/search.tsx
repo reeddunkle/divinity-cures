@@ -123,7 +123,7 @@ export function SearchCures(props: SearchCuresProps) {
                 <Card
                   className={styles.resultCard}
                   searchText={searchText}
-                  {...skill}
+                  skill={skill}
                 />
                 <div className={styles.hr} />
               </div>

@@ -1,4 +1,5 @@
 import { style } from "@vanilla-extract/css";
+import { calc } from "@vanilla-extract/css-utils";
 
 import { theme } from "@/styles/theme.css";
 import scale from "@/util/scale";
@@ -7,11 +8,24 @@ import { hsl, px } from "@/util/styles";
 export const SPELL_IMAGE_SIZE_PX = 64;
 
 /* Card */
-export const card = style({
+export const wrapper = style({
+  display: "flex",
+  justifyContent: "space-between",
+  width: "100%",
+});
+
+export const body = style({
+  flexGrow: 1,
+});
+
+export const gutter = style({
+  flexGrow: 0,
+});
+
+export const mainGrid = style({
   display: "grid",
   gap: scale.fluid.xxs,
   gridTemplateColumns: `${scale.fluid.xxxl} minmax(min(60%, 70%), 2fr) auto`,
-  width: "100%",
 });
 
 export const col1 = style({
@@ -23,13 +37,6 @@ export const col1 = style({
 });
 
 export const col2 = style({
-  display: "flex",
-  flexDirection: "column",
-  gap: scale.static.xxxs,
-  justifyContent: "flex-start",
-});
-
-export const col3 = style({
   display: "flex",
   flexDirection: "column",
   gap: scale.static.xxxs,
@@ -48,4 +55,7 @@ export const title = style({
   fontWeight: 450,
   lineHeight: 1,
   textTransform: "uppercase",
+
+  paddingBlock: scale.static.xxxs,
+  paddingInline: calc.multiply(scale.static.xxxs, 2),
 });
