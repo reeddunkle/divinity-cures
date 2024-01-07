@@ -5,6 +5,7 @@ import "@/styles/globals.css.ts";
 import type { Metadata } from "next";
 import Link from "next/link";
 
+import { Footer } from "@/components/footer.tsx";
 import { siteConfig } from "@/config/site";
 
 import * as styles from "./layout.css.ts";
@@ -24,24 +25,15 @@ export const metadata: Metadata = {
 };
 /* eslint-enable sort-keys */
 
-function Footer() {
+function Header(props: { title: string; href: string }) {
   return (
-    <footer className={styles.footer}>
-      <Link className={styles.footerLink} href="/">
-        Cures
-      </Link>
-      <Link className={styles.footerLink} href="/about">
-        About
-      </Link>
-      <Link
-        className={styles.footerLink}
-        href={siteConfig.links.github}
-        rel="noreferrer"
-        target="_blank"
-      >
-        GitHub
-      </Link>
-    </footer>
+    <header>
+      <h1 className={styles.pageTitle}>
+        <Link href="/" prefetch={false}>
+          Divinity Original Sin: 2
+        </Link>
+      </h1>
+    </header>
   );
 }
 
@@ -49,6 +41,7 @@ export default function RootLayout(props: { children: React.ReactNode }) {
   return (
     <html lang="en">
       <body>
+        <Header title="Divinity Original Sin: 2" href="/" />
         <div className={styles.wrapper}>{props.children}</div>
         <Footer />
       </body>

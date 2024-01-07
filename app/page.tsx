@@ -34,11 +34,6 @@ export default async function CuresPage() {
 
   return (
     <main className={styles.main}>
-      <h1 className={styles.pageTitle}>
-        <Link href="/" prefetch={false}>
-          Divinity Original Sin: 2
-        </Link>
-      </h1>
       <SearchCures skills={skillsWithSchools} statusEffects={statusEffects} />
     </main>
   );
