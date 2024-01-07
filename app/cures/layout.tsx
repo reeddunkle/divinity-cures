@@ -4,10 +4,7 @@ import "@/styles/globals.css.ts";
 
 import type { Metadata } from "next";
 
-// import { Inter } from "next/font/google";
-// const inter = Inter({ subsets: ["latin"] });
-
-import * as styles from "./_styles/layout.css.ts";
+import * as styles from "./layout.css.ts";
 
 export const metadata: Metadata = {
   description: "Find cures in Divinity: Original Sin 2",

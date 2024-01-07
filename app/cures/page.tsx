@@ -13,7 +13,7 @@ import type { School } from "@/data/spell-schools-schema.ts";
 import type { StatusEffect } from "@/data/status-effect-schema.ts";
 import { keyBy } from "@/util/util.ts";
 
-import * as styles from "./_styles/page.css.ts";
+import * as styles from "./page.css.ts";
 
 export default async function HomePage() {
   const skills: BaseSkill[] = (await loadSkills())!; // eslint-disable-line @typescript-eslint/no-non-null-assertion
@@ -31,8 +31,6 @@ export default async function HomePage() {
       ...spellSchoolsById[school.id],
     })),
   })) as Skill[];
-
-  console.log("Data loaded!");
 
   return (
     <main className={styles.main}>
