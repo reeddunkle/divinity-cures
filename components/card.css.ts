@@ -10,6 +10,7 @@ export const SPELL_IMAGE_SIZE_PX = 64;
 /* Card */
 export const wrapper = style({
   display: "flex",
+  gap: scale.fluid.xxs,
   justifyContent: "space-between",
   width: "100%",
 });
@@ -25,7 +26,8 @@ export const gutter = style({
 export const mainGrid = style({
   display: "grid",
   gap: scale.fluid.xxs,
-  gridTemplateColumns: `${scale.fluid.xxxl} minmax(min(60%, 70%), 2fr) auto`,
+  // gridTemplateColumns: `${scale.fluid.xxxl} minmax(min(60%, 70%), 2fr) auto`,
+  gridTemplateColumns: "1fr 5fr",
 });
 
 export const col1 = style({
