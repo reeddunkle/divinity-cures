@@ -143,6 +143,7 @@ module.exports = {
     "no-implicit-coercion": "off",
     "no-nested-ternary": "off",
     "prefer-const": "off",
+    "react/jsx-no-leaked-render": "off",
     "react/no-array-index-key": "off",
     "sort-imports": [
       "error",

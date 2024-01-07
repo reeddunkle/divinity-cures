@@ -59,28 +59,21 @@ export const SearchInput = React.forwardRef<HTMLInputElement, SearchInputProps>(
           ref={ref}
           id={props.id}
         />
-        <button
-          className={styles.clearButton}
-          disabled={!props.canClear}
-          onClick={() => {
-            props.onClear?.();
-          }}
-          type="button"
-        >
-          <CrossIcon
-            className={styles.crossIcon}
-            foreground={theme.color.foreground}
-          />
-        </button>
-        {/* <button
-          className={styles.clearButton}
-          onClick={() => {
-            props.onClear?.();
-          }}
-          type="button"
-        >
-          <CrossIcon className={styles.crossIcon} />
-        </button> */}
+        {props.canClear && (
+          <button
+            className={styles.clearButton}
+            disabled={!props.canClear}
+            onClick={() => {
+              props.onClear?.();
+            }}
+            type="button"
+          >
+            <CrossIcon
+              className={styles.crossIcon}
+              foreground={theme.color.foreground}
+            />
+          </button>
+        )}
       </div>
     );
   },
