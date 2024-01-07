@@ -2,7 +2,7 @@ import { style } from "@vanilla-extract/css";
 
 import { theme } from "@/styles/theme.css";
 import scale from "@/util/scale";
-import { px } from "@/util/styles";
+import { hsl, px } from "@/util/styles";
 
 export const SPELL_IMAGE_SIZE_PX = 64;
 export const SCHOOL_IMAGE_SIZE_PX = 45;
@@ -45,6 +45,7 @@ export const skillImage = style({
 
 export const title = style({
   color: theme.color.primary,
+  color: hsl(121, 53, 75),
   fontSize: scale.fluidThirdHalfSteps[10],
   fontWeight: 450,
   lineHeight: 1,
