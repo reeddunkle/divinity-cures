@@ -9,7 +9,7 @@ const listFontSize = scale.fluidThirdHalfSteps[7];
 export const listGrid = style({
   display: "grid",
   gridTemplateColumns: `repeat(auto-fit, minmax(${autoFitWidthMin}, 1fr));`,
-  rowGap: scale.static.xs,
+  columnGap: scale.static.xs,
 });
 
 export const listTitle = style({
@@ -18,27 +18,6 @@ export const listTitle = style({
 });
 
 export const list = style({
-  marginLeft: scale.static.sm,
-});
-
-export const statusEffectItem = style({
-  fontSize: listFontSize,
-  padding: scale.minorSixths[0],
-});
-
-export const statusEffectLink = style({
-  color: theme.color.link,
-  textDecoration: "underline",
-  textTransform: "capitalize",
-
-  ":hover": {
-    color: theme.color.tertiary,
-    textDecoration: "underline",
-  },
-});
-
-export const activeLink = style({
-  color: theme.color.secondary,
-  fontWeight: 500,
-  textDecoration: "none",
+  display: "grid",
+  gap: scale.fluid.half.min.xxxs,
 });

@@ -1,35 +1,32 @@
 import { clsx } from "clsx";
-import Link from "next/link";
 
 import type { Skill } from "@/data/skill-schema.ts";
-import { addAsterisk, startsWith } from "@/util/util.ts";
+import { addAsterisk, identity, startsWith } from "@/util/util.ts";
 
+import { CureBadge } from "./cure-badge.tsx";
 import * as styles from "./cures-list.css.ts";
 
 function CuresUl(props: {
   cures: string[];
+  format?: (text: string) => string;
   isActive?: (text: string) => boolean;
 }) {
+  const format = props.format ?? identity;
+
   return (
-    <ul className={styles.list}>
+    <div className={styles.list}>
       {props.cures.map((statusEffect) => {
-        const statusEffectLink = `?search=${statusEffect.toLowerCase()}`;
+        const href = `?search=${statusEffect.toLowerCase()}`;
 
         return (
-          <li className={styles.statusEffectItem} key={statusEffect}>
-            <Link
-              className={clsx(styles.statusEffectLink, {
-                [styles.activeLink]: props.isActive?.(statusEffect),
-              })}
-              href={statusEffectLink}
-              prefetch={false}
-            >
-              {statusEffect}
-            </Link>
-          </li>
+          <CureBadge
+            cure={format(statusEffect)}
+            href={href}
+            key={statusEffect}
+          />
         );
       })}
-    </ul>
+    </div>
   );
 }
 
