@@ -1,7 +1,5 @@
 import "server-only";
 
-import Link from "next/link";
-
 import { SearchCures } from "@/components/search.tsx";
 import {
   loadSkills,

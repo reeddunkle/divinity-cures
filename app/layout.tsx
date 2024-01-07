@@ -3,9 +3,9 @@ import "@/styles/theme.css.ts";
 import "@/styles/globals.css.ts";
 
 import type { Metadata } from "next";
-import Link from "next/link";
 
 import { Footer } from "@/components/footer.tsx";
+import { Header } from "@/components/header.tsx";
 import { siteConfig } from "@/config/site";
 
 import * as styles from "./layout.css.ts";
@@ -24,18 +24,6 @@ export const metadata: Metadata = {
   },
 };
 /* eslint-enable sort-keys */
-
-function Header(props: { title: string; href: string }) {
-  return (
-    <header>
-      <h1 className={styles.pageTitle}>
-        <Link href="/" prefetch={false}>
-          Divinity Original Sin: 2
-        </Link>
-      </h1>
-    </header>
-  );
-}
 
 export default function RootLayout(props: { children: React.ReactNode }) {
   return (
