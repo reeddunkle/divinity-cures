@@ -1,7 +1,6 @@
 /* eslint-disable sort-keys */
 
 export type SiteConfig = typeof siteConfig;
-export type Nav = SiteConfig["mainNav"]["0"];
 
 export const siteConfig = {
   name: "Divinity Cures",
