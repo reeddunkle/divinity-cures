@@ -4,10 +4,12 @@ import { theme } from "@/styles/theme.css";
 import scale from "@/util/scale";
 
 export const main = style({
+  display: "grid",
+  gap: scale.fluid.md,
   marginInline: "auto",
   maxWidth: 768,
   paddingBlock: scale.fluid.xxxs,
-  paddingInline: 5,
+  paddingInline: scale.fluid.md,
 });
 
 export const title = style({
@@ -26,4 +28,17 @@ export const siteLink = style({
     color: theme.color.tertiary,
     textDecoration: "underline",
   },
+});
+
+export const list = style({
+  marginLeft: scale.static.sm,
+});
+
+export const listItem = style({
+  textWrap: "pretty",
+});
+
+export const multiParagraph = style({
+  display: "grid",
+  gap: scale.fluid.xs,
 });

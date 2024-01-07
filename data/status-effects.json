@@ -47,10 +47,10 @@
       }
     ],
     "immunities": [
-      "Muted",
       "Blinded",
       "Crippled",
-      "Knocked Down"
+      "Knocked Down",
+      "Muted"
     ],
     "imageSrc": "https://divinityoriginalsin2.wiki.fextralife.com/file/Divinity-Original-Sin-2/rested.png",
     "id": "3"
