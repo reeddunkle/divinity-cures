@@ -4,45 +4,41 @@ import Link from "next/link";
 
 import { PointCosts } from "@/components/point-costs.tsx";
 import type { Skill } from "@/data/skill-schema.ts";
-import { addAsterisk, compareStrings, startsWith } from "@/util/util.ts";
+import { addAsterisk, compareStrings, range, startsWith } from "@/util/util.ts";
 
 import * as styles from "./card.css.ts";
 import { Cooldown } from "./cooldown.tsx";
 import { Range } from "./range.tsx";
 
-const abbreviations: Record<string, string> = {
-  Geomancer: "Geo",
-  Huntsman: "Hunts",
-  Hydrosophist: "Hydro",
-  Polymorph: "Poly",
-  Pyrokinetic: "Pyro",
-  Summoning: "Summon",
-};
-
-const abbreviateName = (name: string) => {
-  return abbreviations[name] ?? name;
-};
-
 function SchoolsAndReqs(props: { schools: Skill["schools"] }) {
+  const sortedSchools = props.schools
+    .sort((schoolA, schoolB) => {
+      return compareStrings(schoolA.name, schoolB.name);
+    })
+    .sort((schoolA, schoolB) => {
+      const requiresA = schoolA.requires ?? 0;
+      const requiresB = schoolB.requires ?? 0;
+
+      return requiresA > requiresB ? 1 : -1;
+    });
+
   return (
     <div className={styles.schoolsAndReqs}>
-      {props.schools.map((school) => {
+      {sortedSchools.map((school) => {
+        const reqNumber = school.requires ?? 1;
+
         return (
-          <div className={styles.pair} key={school.id}>
-            <div>{abbreviateName(school.name)}</div>
-            {!!school.requires && school.requires > 0 && (
-              <div className={styles.requireNumber}>({school.requires})</div>
-            )}
-            <div className={styles.numberAndImage}>
+          <div className={styles.schoolRow} key={school.id}>
+            {range(reqNumber).map((n) => (
               <Image
                 alt={`Icon for ${school.name}`}
                 className={styles.schoolImage}
                 height={styles.SCHOOL_IMAGE_SIZE_PX}
-                key={school.id}
+                key={`${school.id}-${n}`}
                 src={school.imageSrcColored}
                 width={styles.SCHOOL_IMAGE_SIZE_PX}
               />
-            </div>
+            ))}
           </div>
         );
       })}

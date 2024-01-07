@@ -11,15 +11,8 @@ export const SCHOOL_IMAGE_SIZE_PX = 45;
 export const card = style({
   display: "grid",
   gap: scale.fluid.xxs,
-  // gridTemplateColumns: `${scale.fluid.xxxl} repeat(auto-fit, minmax(0.5rem, 1fr))`,
-  gridTemplateColumns: `${scale.fluid.xxxl} minmax(min(30%, 100%), 2fr) minmax(min(30%, 100%), 1fr)`,
+  gridTemplateColumns: `${scale.fluid.xxxl} minmax(min(60%, 70%), 2fr) auto`,
   width: "100%",
-
-  // "@media": {
-  //   [scale.media.sm]: {
-  //     gridTemplateColumns: "[col1-start] 1fr [col2-start] 4fr [end]",
-  //   },
-  // },
 });
 
 export const col1 = style({
@@ -42,12 +35,6 @@ export const col3 = style({
   flexDirection: "column",
   gap: scale.static.xxxs,
   justifyContent: "flex-start",
-
-  // "@media": {
-  //   [scale.media.sm]: {
-  //     gridColumn: "col1-start / end",
-  //   },
-  // },
 });
 
 export const skillImage = style({
@@ -77,30 +64,16 @@ export const schoolImage = style({
   width: scale.fluid.xl,
 });
 
-export const pair = style({
-  alignItems: "center",
-  display: "flex",
-  flexWrap: "wrap-reverse",
-  fontSize: scale.fluidThirdHalfSteps[7],
-  gap: scale.fluid.half.min.xxxs,
-  justifyContent: "flex-end",
-});
-
-export const numberAndImage = style({
-  alignItems: "center",
-  display: "flex",
-  gap: scale.fluid.half.min.xxxs,
-  justifyContent: "flex-end",
-});
-
 export const schoolsAndReqs = style({
   display: "flex",
   flexDirection: "column",
   gap: scale.fluid.half.min.xxxs,
 });
 
-export const requireNumber = style({
-  flexShrink: 1,
+export const schoolRow = style({
+  display: "flex",
+  flexWrap: "wrap",
+  justifyContent: "flex-end",
 });
 
 /* Cures List */
