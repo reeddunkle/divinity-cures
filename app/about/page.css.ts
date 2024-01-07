@@ -16,7 +16,6 @@ export const title = style({
   fontSize: scale.fluid.lg,
   paddingBlock: scale.fluid.md,
   textAlign: "center",
-  textWrap: "pretty",
 });
 
 export const siteLink = style({

@@ -27,3 +27,12 @@ globalStyle("img, picture, svg", {
   display: "block",
   maxWidth: "100%",
 });
+
+globalStyle("h1, h2, h3, h4, h5, h6", {
+  textWrap: "balance",
+});
+
+globalStyle("p", {
+  maxWidth: "80ch",
+  textWrap: "pretty",
+});
