@@ -55,9 +55,9 @@ export const SearchInput = React.forwardRef<HTMLInputElement, SearchInputProps>(
         <input
           {...field}
           className={clsx(styles.input, props.className)}
+          id={props.id}
           placeholder={props.placeholder}
           ref={ref}
-          id={props.id}
         />
         {props.canClear && (
           <button

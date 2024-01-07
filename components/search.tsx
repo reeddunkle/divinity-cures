@@ -119,7 +119,7 @@ export function SearchCures(props: SearchCuresProps) {
         <div className={styles.searchResults} ref={searchResultsRef}>
           {sortedSearchResults.map((skill) => {
             return (
-              <div className={styles.resultWrapper} key={skill.name}>
+              <div className={styles.resultWrapper} key={skill.id}>
                 <Card
                   className={styles.resultCard}
                   searchText={searchText}
