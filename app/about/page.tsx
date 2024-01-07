@@ -22,11 +22,11 @@ export default function AboutPage() {
       </section>
       <section>
         <ul>
-          {Object.entries(siteConfig.links).map(([name, href]) => {
+          {siteConfig.external.map((nav) => {
             return (
-              <li key={name}>
-                <Link className={styles.siteLink} href={href}>
-                  {name}
+              <li key={nav.href}>
+                <Link className={styles.siteLink} href={nav.href}>
+                  {nav.title}
                 </Link>
               </li>
             );
