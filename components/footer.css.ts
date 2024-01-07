@@ -8,7 +8,7 @@ export const footer = style({
   display: "flex",
   gap: scale.fluid.md,
   justifyContent: "center",
-  marginTop: "0.5rem",
+  // marginTop: "0.5rem",
   padding: "0.5rem",
 });
 

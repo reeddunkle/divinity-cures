@@ -28,9 +28,9 @@ export const metadata: Metadata = {
 export default function RootLayout(props: { children: React.ReactNode }) {
   return (
     <html lang="en">
-      <body>
+      <body className={styles.body}>
         <Header title="Divinity Original Sin: 2" href="/" />
-        <div className={styles.wrapper}>{props.children}</div>
+        <section className={styles.section}>{props.children}</section>
         <Footer />
       </body>
     </html>

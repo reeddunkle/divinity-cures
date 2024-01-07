@@ -3,31 +3,24 @@ import { style } from "@vanilla-extract/css";
 import { theme } from "@/styles/theme.css";
 import scale from "@/util/scale";
 
-export const wrapper = style({});
-
-export const footer = style({
-  borderTop: "1px solid white",
-  display: "flex",
-  gap: scale.fluid.md,
-  justifyContent: "center",
-  marginTop: "0.5rem",
-  padding: "0.5rem",
-});
-
-export const footerLink = style({
-  color: theme.color.yellow[200],
-  textDecoration: "underline",
-  textTransform: "capitalize",
-
-  ":hover": {
-    color: theme.color.tertiary,
-    textDecoration: "underline",
-  },
-});
-
 export const title = style({
-  fontSize: scale.fluid.lg,
-  paddingBlock: scale.fluid.md,
+  fontSize: scale.fluidThirds[9],
+  lineHeight: 1,
   textAlign: "center",
   textWrap: "pretty",
+});
+
+export const header = style({
+  alignItems: "center",
+  columnGap: "0.5rem",
+  display: "flex",
+  flexWrap: "wrap",
+  justifyContent: "center",
+  paddingBlock: scale.fluid.md,
+});
+
+export const headerImage = style({
+  height: "auto",
+  marginTop: 4,
+  width: scale.fluid.xl,
 });
