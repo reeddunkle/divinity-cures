@@ -9,7 +9,7 @@ export const main = style({
   paddingInline: 5,
 });
 
-export const h1 = style({
+export const pageTitle = style({
   fontSize: scale.fluid.lg,
   paddingBlock: scale.fluid.md,
   textAlign: "center",

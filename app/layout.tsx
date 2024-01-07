@@ -24,26 +24,33 @@ export const metadata: Metadata = {
 };
 /* eslint-enable sort-keys */
 
-type RootLayoutProps = {
-  children: React.ReactNode;
-};
+function Footer() {
+  return (
+    <footer className={styles.footer}>
+      <Link className={styles.footerLink} href="/">
+        Cures
+      </Link>
+      <Link className={styles.footerLink} href="/about">
+        About
+      </Link>
+      <Link
+        className={styles.footerLink}
+        href={siteConfig.links.github}
+        rel="noreferrer"
+        target="_blank"
+      >
+        GitHub
+      </Link>
+    </footer>
+  );
+}
 
-export default function RootLayout({ children }: RootLayoutProps) {
+export default function RootLayout(props: { children: React.ReactNode }) {
   return (
     <html lang="en">
       <body>
-        <div className={styles.wrapper}>{children}</div>
-        <footer className={styles.footer}>
-          <Link className={styles.footerLink} href="/cures">
-            Cures
-          </Link>
-          <Link className={styles.footerLink} href="/about">
-            About
-          </Link>
-          <Link className={styles.footerLink} href="/about">
-            GitHub
-          </Link>
-        </footer>
+        <div className={styles.wrapper}>{props.children}</div>
+        <Footer />
       </body>
     </html>
   );

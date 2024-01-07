@@ -6,14 +6,16 @@ import scale from "@/util/scale";
 export const wrapper = style({});
 
 export const footer = style({
-  border: "1px solid white",
+  borderTop: "1px solid white",
   display: "flex",
   gap: scale.fluid.md,
-  justifyContent: "flex-start",
+  justifyContent: "center",
+  marginTop: "0.5rem",
+  padding: "0.5rem",
 });
 
 export const footerLink = style({
-  color: theme.color.link,
+  color: theme.color.yellow[200],
   textDecoration: "underline",
   textTransform: "capitalize",
 

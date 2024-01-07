@@ -17,13 +17,6 @@ const nextConfig = {
       },
     ],
   },
-  redirects: async () => [
-    {
-      source: "/",
-      destination: "/cures",
-      permanent: true,
-    },
-  ],
 };
 
 module.exports = withVanillaExtract(nextConfig);

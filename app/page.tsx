@@ -34,7 +34,7 @@ export default async function CuresPage() {
 
   return (
     <main className={styles.main}>
-      <h1 className={styles.h1}>
+      <h1 className={styles.pageTitle}>
         <Link href="/" prefetch={false}>
           Divinity Original Sin: 2
         </Link>
