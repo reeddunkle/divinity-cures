@@ -7,4 +7,6 @@ export const body = style({
   scrollSnapType: "y mandatory",
 });
 
-export const section = style({});
+export const section = style({
+  scrollSnapAlign: "start",
+});
