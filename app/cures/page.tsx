@@ -15,7 +15,7 @@ import { keyBy } from "@/util/util.ts";
 
 import * as styles from "./page.css.ts";
 
-export default async function HomePage() {
+export default async function CuresPage() {
   const skills: BaseSkill[] = (await loadSkills())!; // eslint-disable-line @typescript-eslint/no-non-null-assertion
 
   const statusEffects: StatusEffect[] = (await loadStatusEffects())!; // eslint-disable-line @typescript-eslint/no-non-null-assertion
