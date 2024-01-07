@@ -36,5 +36,9 @@ export const crossIcon = style({
       backgroundColor: theme.color.gray[400],
       filter: "drop-shadow(0px 0px 2px rgb(0 0 0 / 0.4))",
     },
+    [`${clearButton}:disabled &`]: {
+      backgroundColor: theme.color.gray[100],
+      filter: "none",
+    },
   },
 });

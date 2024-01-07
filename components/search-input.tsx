@@ -9,17 +9,6 @@ import { theme } from "@/styles/theme.css";
 
 import * as styles from "./search-input.css";
 
-type FormValues = {
-  searchText: string;
-};
-
-type SearchInputProps = UseControllerProps<FormValues> & {
-  className: string;
-  id: string;
-  onClear?: () => void;
-  placeholder: string;
-};
-
 function CrossIcon(props: {
   background?: string;
   className?: string;
@@ -45,6 +34,18 @@ function CrossIcon(props: {
   );
 }
 
+type FormValues = {
+  searchText: string;
+};
+
+type SearchInputProps = UseControllerProps<FormValues> & {
+  className: string;
+  canClear?: boolean;
+  id: string;
+  onClear?: () => void;
+  placeholder: string;
+};
+
 export const SearchInput = React.forwardRef<HTMLInputElement, SearchInputProps>(
   (props, ref) => {
     const { field } = useController(props);
@@ -60,6 +61,7 @@ export const SearchInput = React.forwardRef<HTMLInputElement, SearchInputProps>(
         />
         <button
           className={styles.clearButton}
+          disabled={!props.canClear}
           onClick={() => {
             props.onClear?.();
           }}

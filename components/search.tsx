@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useRef } from "react";
 import type { SubmitHandler } from "react-hook-form";
 import { useForm } from "react-hook-form";
 import { useDebouncedCallback } from "use-debounce";
@@ -103,6 +103,7 @@ export function SearchCures(props: SearchCuresProps) {
           Find cures for...
         </label>
         <SearchInput
+          canClear={searchText.length > 0}
           className={styles.input}
           control={control}
           id="searchInput"
