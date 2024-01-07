@@ -16,7 +16,7 @@ export const header = style({
   display: "flex",
   flexWrap: "wrap",
   justifyContent: "center",
-  paddingBlock: scale.fluid.md,
+  padding: `${scale.fluid.md} 0 ${scale.fluid.sm}`,
 });
 
 export const headerImage = style({

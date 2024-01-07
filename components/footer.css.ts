@@ -4,11 +4,10 @@ import { theme } from "@/styles/theme.css";
 import scale from "@/util/scale";
 
 export const footer = style({
-  borderTop: "1px solid white",
+  // borderTop: "1px solid white",
   display: "flex",
   gap: scale.fluid.md,
   justifyContent: "center",
-  // marginTop: "0.5rem",
   padding: "0.5rem",
 });
 
