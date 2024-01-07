@@ -1,116 +1,15 @@
 import { clsx } from "clsx";
 import Image from "next/image";
-import Link from "next/link";
 
 import { PointCosts } from "@/components/point-costs.tsx";
 import type { Skill } from "@/data/skill-schema.ts";
-import { addAsterisk, compareStrings, range, startsWith } from "@/util/util.ts";
+import { compareStrings } from "@/util/util.ts";
 
 import * as styles from "./card.css.ts";
 import { Cooldown } from "./cooldown.tsx";
+import { CuresList } from "./cures-list.tsx";
 import { Range } from "./range.tsx";
-
-function SchoolsAndReqs(props: { schools: Skill["schools"] }) {
-  const sortedSchools = props.schools
-    .sort((schoolA, schoolB) => {
-      return compareStrings(schoolA.name, schoolB.name);
-    })
-    .sort((schoolA, schoolB) => {
-      const requiresA = schoolA.requires ?? 0;
-      const requiresB = schoolB.requires ?? 0;
-
-      return requiresA > requiresB ? 1 : -1;
-    });
-
-  return (
-    <div className={styles.schoolsAndReqs}>
-      {sortedSchools.map((school) => {
-        const reqNumber = school.requires ?? 1;
-
-        return (
-          <div className={styles.schoolRow} key={school.id}>
-            {range(reqNumber).map((n) => (
-              <Image
-                alt={`Icon for ${school.name}`}
-                className={styles.schoolImage}
-                height={styles.SCHOOL_IMAGE_SIZE_PX}
-                key={`${school.id}-${n}`}
-                src={school.imageSrcColored}
-                width={styles.SCHOOL_IMAGE_SIZE_PX}
-              />
-            ))}
-          </div>
-        );
-      })}
-    </div>
-  );
-}
-
-function CuresList(props: {
-  className?: string;
-  removes: Skill["removes"];
-  immunities: Skill["immunities"];
-  searchText: string;
-}) {
-  return (
-    <div className={clsx(styles.listGrid, props.className)}>
-      {props.removes.length > 0 && (
-        <div>
-          <div className={styles.listTitle}>Removes:</div>
-          <ul className={styles.list}>
-            {props.removes.map((statusEffect) => {
-              const statusEffectLink = `?search=${statusEffect.toLowerCase()}`;
-              const MIN_SEARCH_CHARACTERS = 3;
-
-              return (
-                <li className={styles.statusEffectItem} key={statusEffect}>
-                  <Link
-                    className={clsx(styles.statusEffectLink, {
-                      [styles.activeLink]:
-                        props.searchText.length > MIN_SEARCH_CHARACTERS &&
-                        startsWith(statusEffect, props.searchText),
-                    })}
-                    href={statusEffectLink}
-                    prefetch={false}
-                  >
-                    {statusEffect}
-                  </Link>
-                </li>
-              );
-            })}
-          </ul>
-        </div>
-      )}
-      {props.immunities.length > 0 && (
-        <div>
-          <div className={styles.listTitle}>Immunities (*):</div>
-          <ul className={styles.list}>
-            {props.immunities.map((statusEffect) => {
-              const statusEffectLink = `?search=${statusEffect.toLowerCase()}`;
-              const MIN_SEARCH_CHARACTERS = 3;
-
-              return (
-                <li className={styles.statusEffectItem} key={statusEffect}>
-                  <Link
-                    className={clsx(styles.statusEffectLink, {
-                      [styles.activeLink]:
-                        props.searchText.length > MIN_SEARCH_CHARACTERS &&
-                        startsWith(statusEffect, props.searchText),
-                    })}
-                    href={statusEffectLink}
-                    prefetch={false}
-                  >
-                    {addAsterisk(statusEffect)}
-                  </Link>
-                </li>
-              );
-            })}
-          </ul>
-        </div>
-      )}
-    </div>
-  );
-}
+import { SchoolsAndReqs } from "./school-requirements.tsx";
 
 export function Card(
   props: Skill & {
