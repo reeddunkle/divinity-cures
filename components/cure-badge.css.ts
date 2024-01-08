@@ -5,8 +5,9 @@ import scale from "@/util/scale";
 import { hsl } from "@/util/styles";
 
 export const badgeLink = style({
-  backgroundColor: theme.color.violet2[500],
-  borderRadius: 7,
+  backgroundColor: theme.color.violet[1200],
+  border: "1px solid transparent", // Hack: Occupy space
+  borderRadius: "20px 5px 20px 5px",
   boxShadow: `1px 1px 5px 0px ${hsl(0, 4, 30)}`,
   color: theme.color.yellow[100],
   fontWeight: 600,
@@ -15,16 +16,22 @@ export const badgeLink = style({
   textTransform: "capitalize",
 
   ":hover": {
-    backgroundColor: theme.color.violet2[400],
+    backgroundColor: theme.color.violet[1100],
+    border: "1px solid hsl(285 40% 40%)",
   },
 
   ":active": {
-    backgroundColor: theme.color.violet2[600],
+    backgroundColor: theme.color.violet[1000],
     boxShadow: "none",
   },
 });
 
 export const highlightedLink = style({
-  backgroundColor: theme.color.secondary,
+  border: `1px solid ${theme.color.primary}`,
   color: theme.color.secondary,
+
+  ":hover": {
+    border: `1px solid ${theme.color.primary}`,
+    color: theme.color.secondary,
+  },
 });

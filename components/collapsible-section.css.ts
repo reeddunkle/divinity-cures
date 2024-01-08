@@ -11,7 +11,7 @@ export const details = style({
 
   selectors: {
     "&[open]": {
-      backgroundColor: theme.color.violet[950],
+      backgroundColor: theme.color.violet[1000],
       borderBottom: "1px solid #aaa",
     },
   },

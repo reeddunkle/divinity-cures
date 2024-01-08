@@ -7,9 +7,9 @@ const autoFitWidthMin = "6rem";
 const listFontSize = scale.fluidThirdHalfSteps[7];
 
 export const listGrid = style({
+  columnGap: scale.static.xs,
   display: "grid",
   gridTemplateColumns: `repeat(auto-fit, minmax(${autoFitWidthMin}, 1fr));`,
-  columnGap: scale.static.xs,
 });
 
 export const listTitle = style({
@@ -18,6 +18,7 @@ export const listTitle = style({
 });
 
 export const list = style({
+  boxSizing: "border-box",
   display: "grid",
-  gap: scale.fluid.half.min.xxxs,
+  gap: 1,
 });

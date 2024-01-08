@@ -57,7 +57,8 @@ export function CuresList(props: {
         <div>
           <div className={styles.listTitle}>Immunities (*):</div>
           <CuresUl
-            cures={props.immunities.map(addAsterisk)}
+            cures={props.immunities}
+            format={addAsterisk}
             isHighlighted={(statusEffect) =>
               props.searchText.length > MIN_SEARCH_CHARACTERS &&
               startsWith(statusEffect, props.searchText)
