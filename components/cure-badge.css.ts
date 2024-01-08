@@ -2,22 +2,27 @@ import { style } from "@vanilla-extract/css";
 
 import { theme } from "@/styles/theme.css";
 import scale from "@/util/scale";
-
-const badgeColor = "teal";
+import { hsl } from "@/util/styles";
 
 export const badgeLink = style({
-  backgroundColor: badgeColor,
-  border: "2px solid gray",
+  backgroundColor: theme.color.violet2[500],
   borderRadius: 7,
-  color: theme.color.link,
+  boxShadow: `1px 1px 5px 0px ${hsl(0, 4, 30)}`,
+  color: theme.color.yellow,
   fontWeight: 600,
   padding: scale.fluid.half.min.xxxs,
   textAlign: "center",
   textTransform: "capitalize",
 
   ":hover": {
-    color: theme.color.tertiary,
-    textDecoration: "underline",
+    // color: theme.color.tertiary,
+    // textDecoration: "underline",
+    backgroundColor: theme.color.violet2[400],
+  },
+
+  ":active": {
+    backgroundColor: theme.color.violet2[600],
+    boxShadow: "none",
   },
 });
 
