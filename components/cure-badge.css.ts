@@ -10,6 +10,7 @@ export const badgeLink = style({
   border: "2px solid gray",
   borderRadius: 7,
   color: theme.color.link,
+  fontWeight: 600,
   padding: scale.fluid.half.min.xxxs,
   textAlign: "center",
   textTransform: "capitalize",

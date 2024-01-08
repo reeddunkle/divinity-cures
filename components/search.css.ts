@@ -28,8 +28,13 @@ export const inputLabel = style({
   fontSize: scale.fluid.half.max.sm,
 });
 
+const boxShadowBlurRadius = "max(0px, min(6vw - 1.5rem, 1.5rem))";
+const boxShadowSpreadRadius = "max(0px, min(0.25vw - 0.25rem, 0.25rem))";
+
 export const searchResults = style({
   border: `2px solid ${theme.color.violet2[100]}`,
+  borderRadius: 3,
+  boxShadow: `0px 0px ${boxShadowBlurRadius} ${boxShadowSpreadRadius} ${theme.color.gray[300]}`,
   maxHeight: "73svh", // Magic Number
   overflowY: "auto",
   scrollbarGutter: "stable",
