@@ -1,5 +1,6 @@
 "use client";
 
+import { useRouter } from "next/navigation";
 import React, { useEffect, useRef } from "react";
 import type { SubmitHandler } from "react-hook-form";
 import { useForm } from "react-hook-form";
@@ -31,6 +32,7 @@ const searchParamSchema = z.object({
 const SEARCH_INPUT_NAME = "searchText";
 
 export function SearchCures(props: SearchCuresProps) {
+  const router = useRouter();
   const searchInputRef = useRef<HTMLInputElement>(null);
   const searchResultsRef = useRef<HTMLDivElement>(null);
 
@@ -109,7 +111,7 @@ export function SearchCures(props: SearchCuresProps) {
           id="searchInput"
           name={SEARCH_INPUT_NAME}
           onClear={() => {
-            setValue(SEARCH_INPUT_NAME, "");
+            router.push("/");
           }}
           placeholder='"Burning", "Decaying", etc.'
           ref={searchInputRef}
