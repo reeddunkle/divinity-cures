@@ -9,13 +9,15 @@ export function CureBadge(
   props: ClassName & {
     cure: string;
     href: string;
-    isActive?: (text: string) => boolean;
+    isHighlighted?: (text: string) => boolean;
   },
 ) {
+  const isHighlighted = props.isHighlighted?.(props.cure);
+
   return (
     <Link
       className={clsx(styles.badgeLink, props.className, {
-        [styles.activeLink]: props.isActive?.(props.cure),
+        [styles.highlightedLink]: isHighlighted,
       })}
       href={props.href}
       prefetch={false}

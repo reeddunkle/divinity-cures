@@ -8,15 +8,13 @@ export const badgeLink = style({
   backgroundColor: theme.color.violet2[500],
   borderRadius: 7,
   boxShadow: `1px 1px 5px 0px ${hsl(0, 4, 30)}`,
-  color: theme.color.yellow,
+  color: theme.color.yellow[100],
   fontWeight: 600,
   padding: scale.fluid.half.min.xxxs,
   textAlign: "center",
   textTransform: "capitalize",
 
   ":hover": {
-    // color: theme.color.tertiary,
-    // textDecoration: "underline",
     backgroundColor: theme.color.violet2[400],
   },
 
@@ -26,8 +24,7 @@ export const badgeLink = style({
   },
 });
 
-export const activeLink = style({
+export const highlightedLink = style({
+  backgroundColor: theme.color.secondary,
   color: theme.color.secondary,
-  fontWeight: 500,
-  textDecoration: "none",
 });

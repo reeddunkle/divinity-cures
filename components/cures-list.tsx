@@ -9,7 +9,7 @@ import * as styles from "./cures-list.css.ts";
 function CuresUl(props: {
   cures: string[];
   format?: (text: string) => string;
-  isActive?: (text: string) => boolean;
+  isHighlighted?: (text: string) => boolean;
 }) {
   const format = props.format ?? identity;
 
@@ -22,6 +22,7 @@ function CuresUl(props: {
           <CureBadge
             cure={format(statusEffect)}
             href={href}
+            isHighlighted={props.isHighlighted}
             key={statusEffect}
           />
         );
@@ -45,7 +46,7 @@ export function CuresList(props: {
           <div className={styles.listTitle}>Removes:</div>
           <CuresUl
             cures={props.removes}
-            isActive={(statusEffect) =>
+            isHighlighted={(statusEffect) =>
               props.searchText.length > MIN_SEARCH_CHARACTERS &&
               startsWith(statusEffect, props.searchText)
             }
@@ -57,7 +58,7 @@ export function CuresList(props: {
           <div className={styles.listTitle}>Immunities (*):</div>
           <CuresUl
             cures={props.immunities.map(addAsterisk)}
-            isActive={(statusEffect) =>
+            isHighlighted={(statusEffect) =>
               props.searchText.length > MIN_SEARCH_CHARACTERS &&
               startsWith(statusEffect, props.searchText)
             }
