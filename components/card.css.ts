@@ -26,7 +26,7 @@ export const gutter = style({
 export const mainGrid = style({
   display: "grid",
   gap: scale.fluid.xxs,
-  gridTemplateColumns: "1fr 5fr",
+  gridTemplateColumns: "1fr 4fr",
 });
 
 export const col1 = style({

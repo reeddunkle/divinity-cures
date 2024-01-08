@@ -14,4 +14,5 @@ export const schoolImage = style({
 export const schoolsAndReqs = style({
   display: "flex",
   flexDirection: "column",
+  gap: 1,
 });
