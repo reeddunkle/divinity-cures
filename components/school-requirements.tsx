@@ -1,5 +1,6 @@
 import { clsx } from "clsx";
 import Image from "next/image";
+import * as React from "react";
 
 import type { Skill } from "@/data/skill-schema.ts";
 import type { ClassName } from "@/types/react.ts";
@@ -21,24 +22,24 @@ export function SchoolsAndReqs(
       return requiresA > requiresB ? 1 : -1;
     });
 
+  const schoolRequirements = sortedSchools.flatMap((school) => {
+    const reqNumber = school.requires ?? 1;
+
+    return range(reqNumber).map(() => school);
+  });
+
   return (
     <div className={clsx(styles.schoolsAndReqs, props.className)}>
-      {sortedSchools.map((school) => {
-        const reqNumber = school.requires ?? 1;
-
+      {schoolRequirements.map((school, i) => {
         return (
-          <div className={styles.schoolRow} key={school.id}>
-            {range(reqNumber).map((n) => (
-              <Image
-                alt={`Icon for ${school.name}`}
-                className={styles.schoolImage}
-                height={styles.SCHOOL_IMAGE_SIZE_PX}
-                key={`${school.id}-${n}`}
-                src={school.imageSrcColored}
-                width={styles.SCHOOL_IMAGE_SIZE_PX}
-              />
-            ))}
-          </div>
+          <Image
+            alt={`Icon for ${school.name}`}
+            className={styles.schoolImage}
+            height={styles.SCHOOL_IMAGE_SIZE_PX}
+            key={`${school.id}-${i}`}
+            src={school.imageSrcColored}
+            width={styles.SCHOOL_IMAGE_SIZE_PX}
+          />
         );
       })}
     </div>

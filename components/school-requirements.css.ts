@@ -14,11 +14,4 @@ export const schoolImage = style({
 export const schoolsAndReqs = style({
   display: "flex",
   flexDirection: "column",
-  gap: scale.fluid.half.min.xxxs,
-});
-
-export const schoolRow = style({
-  display: "flex",
-  flexWrap: "wrap",
-  justifyContent: "flex-end",
 });

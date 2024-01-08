@@ -20,13 +20,12 @@ export const body = style({
 });
 
 export const gutter = style({
-  flexGrow: 0,
+  flexShrink: 0,
 });
 
 export const mainGrid = style({
   display: "grid",
   gap: scale.fluid.xxs,
-  // gridTemplateColumns: `${scale.fluid.xxxl} minmax(min(60%, 70%), 2fr) auto`,
   gridTemplateColumns: "1fr 5fr",
 });
 
@@ -59,5 +58,6 @@ export const title = style({
   textTransform: "uppercase",
 
   paddingBlock: scale.static.xxxs,
-  paddingInline: calc.multiply(scale.static.xxxs, 2),
+  paddingInline: scale.fluid.xxxs,
+  // paddingInline: calc.multiply(scale.fluid.xxxs, 2),
 });

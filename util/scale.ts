@@ -132,6 +132,7 @@ const fluidScale = {
 };
 
 const staticScale = {
+  xxxxs: minorThirds[0],
   xxxs: minorThirds[1],
   xxs: minorThirds[3],
   xs: minorThirds[5],
