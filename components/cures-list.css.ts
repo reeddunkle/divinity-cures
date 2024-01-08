@@ -7,9 +7,7 @@ const autoFitWidthMin = "6rem";
 const listFontSize = scale.fluidThirdHalfSteps[7];
 
 export const listGrid = style({
-  columnGap: scale.static.xs,
-  display: "grid",
-  gridTemplateColumns: `repeat(auto-fit, minmax(${autoFitWidthMin}, 1fr));`,
+  // display: "grid",
 });
 
 export const listTitle = style({
@@ -18,7 +16,20 @@ export const listTitle = style({
 });
 
 export const list = style({
-  boxSizing: "border-box",
-  display: "grid",
-  gap: 1,
+  display: "flex",
+  flexWrap: "wrap",
+  gap: scale.fluid.half.min.xxxs,
+});
+
+export const titleRow = style({
+  display: "flex",
+});
+
+export const immunityLabel = style({
+  flexGrow: 1,
+  textAlign: "center",
+});
+
+export const green = style({
+  color: theme.color.primary,
 });

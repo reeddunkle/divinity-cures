@@ -91,18 +91,6 @@ export function SearchCures(props: SearchCuresProps) {
     statusEffects: props.statusEffects,
   });
 
-  const take = (n: number, arr: any[]) => {
-    let i = 0;
-    const res = [];
-
-    while (i < arr.length - 1 && i < n) {
-      res.push(arr[i]);
-      i++;
-    }
-
-    return res;
-  };
-
   const sortedSearchResults = searchResults
     .sort(compareSkillsBy("name"))
     .sort(compareSkillsBy("actionPoints"))

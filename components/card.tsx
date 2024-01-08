@@ -44,8 +44,11 @@ export function Card(
     skill: Skill;
   },
 ) {
-  const removes = props.skill.removes.sort(compareStrings);
   const immunities = props.skill.immunities.sort(compareStrings);
+
+  const removes = props.skill.removes
+    .filter((rm) => !immunities.includes(rm))
+    .sort(compareStrings);
 
   return (
     <div className={clsx(styles.wrapper, props.className)}>
