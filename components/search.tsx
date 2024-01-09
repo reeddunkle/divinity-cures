@@ -101,7 +101,7 @@ export function SearchCures(props: SearchCuresProps) {
 
   const findCuresWithText = (skill: Skill, text: string) => {
     if (text.length === 0) {
-      return true;
+      return skill.immunities.length > 0 || skill.removes.length > 0;
     }
 
     return (

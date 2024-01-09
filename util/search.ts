@@ -20,17 +20,22 @@ export function buildSkills({
   skills: Skill[];
   statusEffects: StatusEffect[];
 }): Skill[] {
-  const seByName = keyBy(statusEffects, (se) => se.name);
+  const seById = keyBy(statusEffects, (se) => se.id);
 
   return skills.map((skill) => {
-    const removesSet = uniqueArrayString([
-      ...skill.removes,
-      ...(seByName[skill.name]?.removes ?? []),
-    ]);
+    const seRemoves = skill.statusEffects.flatMap(
+      (se) => seById[se.id]?.removes ?? [],
+    );
+
+    const seImmunities = skill.statusEffects.flatMap(
+      (se) => seById[se.id]?.immunities ?? [],
+    );
+
+    const removesSet = uniqueArrayString([...skill.removes, ...seRemoves]);
 
     const immunitiesSet = uniqueArrayString([
       ...skill.immunities,
-      ...(seByName[skill.name]?.immunities ?? []),
+      ...seImmunities,
     ]);
 
     return {

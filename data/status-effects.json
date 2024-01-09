@@ -214,6 +214,7 @@
   },
   {
     "name": "Farsight",
+    "id": "12",
     "description": "Character's accuracy and range of ranged weapons and skills are increased. The range increase is 3m.\nAccuracy: +50%",
     "stats": [
       {
@@ -221,8 +222,8 @@
         "percent": 50
       }
     ],
-    "imageSrc": "https://divinityoriginalsin2.wiki.fextralife.com/file/Divinity-Original-Sin-2/huntsman-15-24.png",
-    "id": "12"
+    "immunities": ["Atrophy"],
+    "imageSrc": "https://divinityoriginalsin2.wiki.fextralife.com/file/Divinity-Original-Sin-2/huntsman-15-24.png"
   },
   {
     "name": "Evading",
@@ -298,5 +299,11 @@
     ],
     "description": "Allows you to ignore effects of cloud surfaces and making them immune to Suffocation and Silence.",
     "imageSrc": "https://divinityoriginalsin2.wiki.fextralife.com/file/Divinity-Original-Sin-2/aerotheurge-16-14.png"
+  },
+  {
+    "name": "Atrophy",
+    "id": "20",
+    "description": "Character cannot use weapons for attacks or skills. Atrophy prevents the target from using their physical weapon or skills tied to their weapon. It does not prevent casters from using spells.",
+    "imageSrc": ""
   }
 ]
