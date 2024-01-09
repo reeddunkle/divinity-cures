@@ -1,12 +1,7 @@
 import { clsx } from "clsx";
 
 import type { Skill } from "@/data/skill-schema.ts";
-import {
-  addAsterisk,
-  compareStrings,
-  identity,
-  startsWith,
-} from "@/util/util.ts";
+import { addAsterisk, compareStrings, identity } from "@/util/util.ts";
 
 import { CureBadge } from "./cure-badge.tsx";
 import * as styles from "./cures-list.css.ts";
@@ -36,14 +31,11 @@ function CuresUl(props: {
   );
 }
 
-const MIN_SEARCH_CHARACTERS = 3;
-
 export function CuresList(props: {
   className?: string;
   isCureHighlighted: (cure: string) => boolean;
   removes: Skill["removes"];
   immunities: Skill["immunities"];
-  searchText: string;
 }) {
   const isImmunity = (se: string) => props.immunities.includes(se);
 
