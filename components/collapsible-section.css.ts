@@ -7,7 +7,6 @@ export const details = style({
   border: "1px solid #aaa",
   borderRadius: "4px",
   fontSize: scale.fluid.half.min.sm,
-  paddingBlock: scale.fluid.xxs,
 
   selectors: {
     "&[open]": {
@@ -23,6 +22,8 @@ export const title = style({
 
 export const summary = style({
   fontWeight: "500",
+  paddingBlock: scale.fluid.xxs,
+
   paddingLeft: scale.fluid.xxs,
 
   selectors: {

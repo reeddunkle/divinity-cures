@@ -7,6 +7,7 @@ import type { ClassName } from "@/types/react.ts";
 import { compareStrings } from "@/util/util.ts";
 
 import * as styles from "./card.css.ts";
+import { CollapsibleSection } from "./collapsible-section.tsx";
 import { Cooldown } from "./cooldown.tsx";
 import { CuresList } from "./cures-list.tsx";
 import { Range } from "./range.tsx";
@@ -50,18 +51,28 @@ export function Card(
     .filter((rm) => !immunities.includes(rm))
     .sort(compareStrings);
 
+  const hasCures = immunities.length > 0 || removes.length > 0;
+
   return (
     <div className={clsx(styles.wrapper, props.className)}>
       <div className={styles.body}>
         <div className={styles.title}>{props.skill.name}</div>
         <div className={styles.mainGrid}>
           <SkillInfo className={styles.col1} {...props.skill} />
-          <CuresList
-            className={styles.col2}
-            isCureHighlighted={props.isCureHighlighted}
-            immunities={immunities}
-            removes={removes}
-          />
+          <div className={styles.col2}>
+            {hasCures && (
+              <CuresList
+                className={styles.col2}
+                isCureHighlighted={props.isCureHighlighted}
+                immunities={immunities}
+                removes={removes}
+              />
+            )}
+            <CollapsibleSection
+              title="Description"
+              text={props.skill.description}
+            />
+          </div>
         </div>
       </div>
       <SchoolsAndReqs className={styles.gutter} schools={props.skill.schools} />

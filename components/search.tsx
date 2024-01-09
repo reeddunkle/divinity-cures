@@ -1,7 +1,7 @@
 "use client";
 
 import { useRouter } from "next/navigation";
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useRef } from "react";
 import type { SubmitHandler } from "react-hook-form";
 import { useForm } from "react-hook-form";
 import { useDebouncedCallback } from "use-debounce";
@@ -16,8 +16,6 @@ import { buildSkills, compareSkillsBy } from "@/util/search.ts";
 import { startsWith } from "@/util/util.ts";
 
 import * as styles from "./search.css.ts";
-
-const MIN_SEARCH_CHARACTERS = 3;
 
 type IFormState = {
   searchText: string;
@@ -144,6 +142,10 @@ export function SearchCures(props: SearchCuresProps) {
           onClear={() => {
             setValue(SEARCH_INPUT_NAME, "");
             router.push("/");
+
+            if (searchInputRef.current) {
+              searchInputRef.current.focus();
+            }
           }}
           placeholder='"Burning", "Decaying", etc.'
           ref={searchInputRef}

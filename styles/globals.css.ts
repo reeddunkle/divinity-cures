@@ -36,3 +36,7 @@ globalStyle("p", {
   maxWidth: "80ch",
   textWrap: "pretty",
 });
+
+globalStyle("details summary", {
+  cursor: "pointer",
+});
