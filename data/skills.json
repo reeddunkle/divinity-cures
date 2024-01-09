@@ -465,7 +465,7 @@
     "cooldown": 5,
     "memory": 1,
     "description": "Charm target non-allied character, causing them to join your side in combat for the duration of the status.\nSet Charmed for 2 turn(s).",
-    "removes": [],
+    "removes": ["Madness"],
     "statusEffects": [
       {
         "name": "Charmed",
