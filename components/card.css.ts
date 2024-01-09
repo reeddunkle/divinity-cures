@@ -40,7 +40,7 @@ export const col1 = style({
 export const col2 = style({
   display: "flex",
   flexDirection: "column",
-  gap: scale.static.xxxs,
+  gap: scale.static.xs,
   justifyContent: "flex-start",
 });
 

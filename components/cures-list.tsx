@@ -45,7 +45,7 @@ export function CuresList(props: {
 
   return (
     <div className={clsx(styles.listGrid, props.className)}>
-      <div className={styles.listTitle}>Cures</div>
+      <p className={styles.listTitle}>Cures:</p>
       {mergedList.length > 0 && (
         <CuresUl
           cures={mergedList}

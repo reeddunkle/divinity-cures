@@ -62,7 +62,6 @@ export function Card(
           <div className={styles.col2}>
             {hasCures && (
               <CuresList
-                className={styles.col2}
                 isCureHighlighted={props.isCureHighlighted}
                 immunities={immunities}
                 removes={removes}

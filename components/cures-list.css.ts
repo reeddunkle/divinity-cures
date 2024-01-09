@@ -7,10 +7,12 @@ import scale from "@/util/scale";
 const listFontSize = scale.fluidThirdHalfSteps[7];
 
 export const listGrid = style({
-  // display: "grid",
+  display: "grid",
+  gap: scale.fluid.half.min.xxxs,
 });
 
 export const listTitle = style({
+  // backgroundColor: "blue",
   fontSize: listFontSize,
   fontWeight: 500,
 });

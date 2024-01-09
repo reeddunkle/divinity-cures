@@ -54,3 +54,7 @@ export const hr = style({
 export const resultCard = style({
   padding: RESULT_PADDING,
 });
+
+export const searchSummary = style({
+  textAlign: "center",
+});

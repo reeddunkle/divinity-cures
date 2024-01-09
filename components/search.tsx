@@ -128,7 +128,9 @@ export function SearchCures(props: SearchCuresProps) {
 
   return (
     <div className={styles.searchWrapper}>
-      <div>{filteredResults.length} results</div>
+      <div className={styles.searchSummary}>
+        {filteredResults.length} results
+      </div>
       <form onSubmit={handleSubmit(onFormSubmit)}>
         <label className={styles.inputLabel} htmlFor="searchInput">
           Find cures for...
