@@ -130,7 +130,7 @@ export function SearchCures(props: SearchCuresProps) {
 
   return (
     <div className={styles.searchWrapper}>
-      <div>{filteredResults.length} results showing</div>
+      <div>{filteredResults.length} results</div>
       <form onSubmit={handleSubmit(onFormSubmit)}>
         <label className={styles.inputLabel} htmlFor="searchInput">
           Find cures for...
