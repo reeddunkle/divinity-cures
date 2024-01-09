@@ -40,3 +40,7 @@ globalStyle("p", {
 globalStyle("details summary", {
   cursor: "pointer",
 });
+
+globalStyle("details summary > *", {
+  display: "inline",
+});

@@ -18,9 +18,9 @@ export function CollapsibleSection(props: CollapsibleSection) {
       open={props.open}
     >
       <summary className={styles.summary}>
-        <div className={styles.title}>{props.title}</div>
+        <h3 className={styles.title}>{props.title}</h3>
       </summary>
-      <div className={styles.rest}>{props.text}</div>
+      <p className={styles.summaryContents}>{props.text}</p>
     </details>
   );
 }
