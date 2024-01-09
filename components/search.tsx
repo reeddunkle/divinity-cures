@@ -130,6 +130,7 @@ export function SearchCures(props: SearchCuresProps) {
 
   return (
     <div className={styles.searchWrapper}>
+      <div>{filteredResults.length} results showing</div>
       <form onSubmit={handleSubmit(onFormSubmit)}>
         <label className={styles.inputLabel} htmlFor="searchInput">
           Find cures for...
@@ -156,8 +157,7 @@ export function SearchCures(props: SearchCuresProps) {
                 <Card
                   className={styles.resultCard}
                   isCureHighlighted={(cure: string) =>
-                    lastSearch.length > MIN_SEARCH_CHARACTERS &&
-                    startsWith(cure, lastSearch)
+                    lastSearch.length > 0 && startsWith(cure, lastSearch)
                   }
                   skill={skill}
                 />
