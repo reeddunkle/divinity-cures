@@ -40,6 +40,7 @@ const MIN_SEARCH_CHARACTERS = 3;
 
 export function CuresList(props: {
   className?: string;
+  isCureHighlighted: (cure: string) => boolean;
   removes: Skill["removes"];
   immunities: Skill["immunities"];
   searchText: string;
@@ -59,10 +60,7 @@ export function CuresList(props: {
           format={(se) => {
             return isImmunity(se) ? addAsterisk(se) : se;
           }}
-          isHighlighted={(statusEffect) =>
-            props.searchText.length > MIN_SEARCH_CHARACTERS &&
-            startsWith(statusEffect, props.searchText)
-          }
+          isHighlighted={props.isCureHighlighted}
         />
       )}
     </div>

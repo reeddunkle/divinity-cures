@@ -1,80 +1,44 @@
-/* eslint-disable no-param-reassign */
-
 import type { Skill } from "@/data/skill-schema";
 import type { StatusEffect } from "@/data/status-effect-schema";
 
 import {
   compareNumbers,
   compareStrings,
-  identity,
   isNumber,
   isString,
   keyBy,
-  lowerCase,
-  startsWith,
-  uniqueBy,
 } from "./util";
 
-const mapEffectToSkills = (statusEffect: StatusEffect, skills: Skill[]) => {
-  return skills
-    .filter((skill) => {
-      return skill.statusEffects.map(({ id }) => id).includes(statusEffect.id);
-    })
-    .map(({ immunities, removes, ...rest }) => {
-      const mappedImmunities = uniqueBy(
-        [...statusEffect.immunities, ...immunities],
-        identity,
-      );
-
-      const mappedRemoves = uniqueBy(
-        [...statusEffect.removes, ...removes].filter(
-          (rm) => !mappedImmunities.includes(rm),
-        ),
-        identity,
-      );
-
-      return {
-        ...rest,
-        immunities: mappedImmunities,
-        removes: mappedRemoves,
-      };
-    });
+const uniqueArrayString = (arr: string[]) => {
+  return Array.from(new Set(arr));
 };
 
-//
-
-type SearchData = {
+export function buildSkills({
+  skills,
+  statusEffects,
+}: {
   skills: Skill[];
   statusEffects: StatusEffect[];
-};
+}): Skill[] {
+  const seByName = keyBy(statusEffects, (se) => se.name);
 
-export function searchCures(ailment: string, data: SearchData) {
-  ailment = lowerCase(ailment);
+  return skills.map((skill) => {
+    const removesSet = uniqueArrayString([
+      ...skill.removes,
+      ...(seByName[skill.name]?.removes ?? []),
+    ]);
 
-  const { skills, statusEffects } = data;
+    const immunitiesSet = uniqueArrayString([
+      ...skill.immunities,
+      ...(seByName[skill.name]?.immunities ?? []),
+    ]);
 
-  const skillCures = skills.filter(
-    (skill) =>
-      skill.immunities.some((value) => startsWith(value, ailment)) ||
-      skill.removes.some((value) => startsWith(value, ailment)),
-  );
-
-  const effectCures = statusEffects.filter(
-    ({ immunities = [], removes = [] }) =>
-      immunities.some((value) => startsWith(value, ailment)) ||
-      removes.some((value) => startsWith(value, ailment)),
-  );
-
-  const skillCuresFromEffects = effectCures
-    .map((effect) => mapEffectToSkills(effect, skills))
-    .flat();
-
-  const results = Object.values({
-    ...keyBy(skillCures, (sk) => sk.name.toLowerCase()),
-    ...keyBy(skillCuresFromEffects, (sk) => sk.name.toLowerCase()),
+    return {
+      ...skill,
+      immunities: immunitiesSet,
+      removes: removesSet,
+    };
   });
-
-  return results;
 }
 
 export const compareSkillsBy = (...properties: (keyof Skill)[]) => {

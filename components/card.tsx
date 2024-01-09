@@ -40,6 +40,7 @@ function SkillInfo(
 
 export function Card(
   props: ClassName & {
+    isCureHighlighted: (cure: string) => boolean;
     searchText: string;
     skill: Skill;
   },
@@ -58,6 +59,7 @@ export function Card(
           <SkillInfo className={styles.col1} {...props.skill} />
           <CuresList
             className={styles.col2}
+            isCureHighlighted={props.isCureHighlighted}
             immunities={immunities}
             removes={removes}
             searchText={props.searchText}

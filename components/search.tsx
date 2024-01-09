@@ -12,9 +12,12 @@ import { SearchInput } from "@/components/search-input.tsx";
 import type { Skill } from "@/data/skill-schema.ts";
 import type { StatusEffect } from "@/data/status-effect-schema.ts";
 import { useUrlState } from "@/hooks/useUrlState.tsx";
-import { compareSkillsBy, searchCures } from "@/util/search.ts";
+import { buildSkills, compareSkillsBy, filterSkills } from "@/util/search.ts";
+import { startsWith } from "@/util/util.ts";
 
 import * as styles from "./search.css.ts";
+
+const MIN_SEARCH_CHARACTERS = 3;
 
 type IFormState = {
   searchText: string;
@@ -88,12 +91,24 @@ export function SearchCures(props: SearchCuresProps) {
     }
   }, [searchText]); // eslint-disable-line
 
-  const searchResults = searchCures(searchText, {
+  const merged = buildSkills({
     skills: props.skills,
     statusEffects: props.statusEffects,
   });
 
-  const sortedSearchResults = searchResults
+  let filteredResults = merged.filter((skill) => {
+    if (searchText.length === 0) {
+      return true;
+    }
+
+    return (
+      skill.immunities.some((se) => startsWith(se, searchText)) ||
+      skill.removes.some((se) => startsWith(se, searchText)) ||
+      startsWith(skill.name, searchText)
+    );
+  });
+
+  const sortedSearchResults = filteredResults
     .sort(compareSkillsBy("name"))
     .sort(compareSkillsBy("actionPoints"))
     .sort(compareSkillsBy("sourcePoints"));
@@ -124,6 +139,10 @@ export function SearchCures(props: SearchCuresProps) {
               <div className={styles.resultWrapper} key={skill.id}>
                 <Card
                   className={styles.resultCard}
+                  isCureHighlighted={(cure: string) =>
+                    searchText.length > MIN_SEARCH_CHARACTERS &&
+                    startsWith(cure, searchText)
+                  }
                   searchText={searchText}
                   skill={skill}
                 />
