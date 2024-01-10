@@ -8,7 +8,6 @@ const tickLength = 10;
 
 export const wrapper = style({
   aspectRatio: "1 / 1",
-  padding: tickLength / 2 - borderThickness / 2,
   position: "relative",
 });
 
@@ -19,9 +18,9 @@ const circleLight = theme.color.foreground;
 
 export const border = style({
   aspectRatio: "1 / 1",
-  borderColor: `${circleDark} ${circleLight} ${circleDark} ${circleDark}`,
+  borderColor: `${circleLight} ${circleLight} ${circleDark} ${circleLight}`,
   borderRadius: "50%",
-  borderStyle: `${dashStyle} solid ${dashStyle} ${dashStyle}`,
+  borderStyle: `solid solid ${dashStyle} solid`,
   borderWidth: borderThickness,
   height: "100%",
 
@@ -48,7 +47,7 @@ export const tick = style({
 
 export const tickTop = style({
   backgroundColor: theme.color.foreground,
-  height: tickLength,
+  height: tickLength / 2,
   width: borderThickness,
 
   position: "absolute",
@@ -68,4 +67,28 @@ export const tickRight = style({
 
   top: "50%",
   translate: "none -50%",
+});
+
+export const arrowHeadRight = style({
+  backgroundColor: theme.color.foreground,
+  borderRadius: 20,
+  height: tickLength,
+  position: "absolute",
+  right: -1.25 * borderThickness,
+  top: `calc(50% - ${tickLength}px + 1px)`,
+  width: borderThickness,
+
+  rotate: "-155deg",
+});
+
+export const arrowHeadLeft = style({
+  backgroundColor: theme.color.foreground,
+  borderRadius: 20,
+  height: tickLength,
+  position: "absolute",
+  right: borderThickness + 1,
+  top: `calc(50% - ${tickLength}px + 2px)`,
+  width: borderThickness,
+
+  rotate: "130deg",
 });
