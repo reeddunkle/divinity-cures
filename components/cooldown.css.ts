@@ -37,38 +37,6 @@ export const cooldownText = style({
   rotate: "45deg",
 });
 
-export const tick = style({
-  backgroundColor: theme.color.foreground,
-  height: 1,
-  width: 10,
-
-  position: "absolute",
-});
-
-export const tickTop = style({
-  backgroundColor: theme.color.foreground,
-  height: tickLength / 2,
-  width: borderThickness,
-
-  position: "absolute",
-  top: 0,
-
-  left: "50%",
-  translate: "-50%",
-});
-
-export const tickRight = style({
-  backgroundColor: theme.color.foreground,
-  height: borderThickness,
-  width: tickLength,
-
-  position: "absolute",
-  right: 0,
-
-  top: "50%",
-  translate: "none -50%",
-});
-
 export const arrowHeadRight = style({
   backgroundColor: theme.color.foreground,
   borderRadius: 20,
