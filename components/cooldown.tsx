@@ -15,7 +15,6 @@ export function Cooldown(props: CooldownProps) {
           : props.cooldown}
         </div>
       </div>
-      {/* <div className={styles.tickTop} /> */}
       <div className={styles.arrowHeadRight} />
       <div className={styles.arrowHeadLeft} />
     </div>

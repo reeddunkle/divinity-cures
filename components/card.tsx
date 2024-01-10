@@ -10,7 +10,6 @@ import * as styles from "./card.css.ts";
 import { CollapsibleSection } from "./collapsible-section.tsx";
 import { Cooldown } from "./cooldown.tsx";
 import { CuresList } from "./cures-list.tsx";
-import { Clock } from "./icons/clock.tsx";
 import { Range } from "./range.tsx";
 import { SchoolsAndReqs } from "./school-requirements.tsx";
 
