@@ -34,8 +34,7 @@ function SkillInfo(
         width={styles.SPELL_IMAGE_SIZE_PX}
       />
       <PointCosts ap={props.actionPoints} sp={props.sourcePoints} />
-      {/* <Cooldown cooldown={props.cooldown} /> */}
-      <Clock className={styles.clock} />
+      <Cooldown cooldown={props.cooldown} />
       <Range range={props.range} />
     </div>
   );
