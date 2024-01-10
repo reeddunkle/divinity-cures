@@ -10,6 +10,7 @@ import * as styles from "./card.css.ts";
 import { CollapsibleSection } from "./collapsible-section.tsx";
 import { Cooldown } from "./cooldown.tsx";
 import { CuresList } from "./cures-list.tsx";
+import { Clock } from "./icons/clock.tsx";
 import { Range } from "./range.tsx";
 import { SchoolsAndReqs } from "./school-requirements.tsx";
 
@@ -33,7 +34,8 @@ function SkillInfo(
         width={styles.SPELL_IMAGE_SIZE_PX}
       />
       <PointCosts ap={props.actionPoints} sp={props.sourcePoints} />
-      <Cooldown cooldown={props.cooldown} />
+      {/* <Cooldown cooldown={props.cooldown} /> */}
+      <Clock className={styles.clock} />
       <Range range={props.range} />
     </div>
   );
@@ -68,8 +70,9 @@ export function Card(
               />
             )}
             <CollapsibleSection
-              title="Description"
+              className={styles.description}
               text={props.skill.description}
+              title="Description"
             />
           </div>
         </div>

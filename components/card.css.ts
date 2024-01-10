@@ -59,5 +59,24 @@ export const title = style({
 
   paddingBlock: scale.static.xxxs,
   paddingInline: scale.fluid.xxxs,
-  // paddingInline: calc.multiply(scale.fluid.xxxs, 2),
 });
+
+export const description = style({
+  backgroundColor: theme.color.gray[400],
+  border: `1px solid ${theme.color.gray[200]}`,
+  color: theme.color.foreground,
+
+  ":hover": {
+    backgroundColor: theme.color.gray[500],
+    border: `1px solid ${theme.color.gray[300]}`,
+  },
+
+  selectors: {
+    "&[open]": {
+      backgroundColor: theme.color.violet[1000],
+      borderBottom: "1px solid #aaa",
+    },
+  },
+});
+
+export const clock = style({});

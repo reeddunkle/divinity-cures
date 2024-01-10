@@ -1,4 +1,7 @@
 {
+  "plugins": [
+    "@prettier/plugin-xml"
+  ],
   "experimentalTernaries": true,
   "parser": "typescript",
   "singleQuote": false

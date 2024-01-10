@@ -25,6 +25,7 @@
     "zod": "^3.22.4"
   },
   "devDependencies": {
+    "@prettier/plugin-xml": "^3.2.2",
     "@stylistic/eslint-plugin": "^1.5.1",
     "@types/node": "^20",
     "@types/react": "^18",
@@ -35,7 +36,7 @@
     "eslint-config-next": "14.0.4",
     "eslint-config-prettier": "^9.1.0",
     "eslint-plugin-only-warn": "^1.1.0",
-    "prettier": "3.1.1",
+    "prettier": "^3.1.1",
     "typescript": "^5"
   }
 }

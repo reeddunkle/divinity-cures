@@ -7,16 +7,8 @@ import scale from "@/util/scale";
 const summaryPadding = scale.fluid.xxs;
 
 export const details = style({
-  border: "1px solid #aaa",
   borderRadius: "4px",
   fontSize: scale.fluid.half.min.sm,
-
-  selectors: {
-    "&[open]": {
-      backgroundColor: theme.color.violet[1000],
-      borderBottom: "1px solid #aaa",
-    },
-  },
 });
 
 export const summary = style({
@@ -36,6 +28,7 @@ export const summary = style({
 
 export const title = style({
   fontSize: scale.fluidThirdHalfSteps[6],
+  paddingLeft: scale.fluid.half.min.xxxs,
 });
 
 export const summaryContents = style({
