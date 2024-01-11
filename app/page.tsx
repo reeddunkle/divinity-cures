@@ -14,11 +14,11 @@ import { keyBy } from "@/util/util.ts";
 import * as styles from "./page.css.ts";
 
 export default async function CuresPage() {
-  const skills: BaseSkill[] = (await loadSkills())!; // eslint-disable-line @typescript-eslint/no-non-null-assertion
+  const skills: BaseSkill[] = await loadSkills();
 
-  const statusEffects: StatusEffect[] = (await loadStatusEffects())!; // eslint-disable-line @typescript-eslint/no-non-null-assertion
+  const statusEffects: StatusEffect[] = await loadStatusEffects();
 
-  const spellSchools: School[] = (await loadSpellSchools())!; // eslint-disable-line @typescript-eslint/no-non-null-assertion
+  const spellSchools: School[] = await loadSpellSchools();
 
   const spellSchoolsById = keyBy(spellSchools, (school) => school.id);
 
