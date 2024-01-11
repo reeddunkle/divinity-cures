@@ -1,3 +1,5 @@
+/* eslint-disable sort-keys */
+
 import { relations } from "drizzle-orm";
 import { integer, sqliteTable, text } from "drizzle-orm/sqlite-core";
 
@@ -10,9 +12,9 @@ export const spellSchools = sqliteTable("spellSchools", {
   name: text("name"),
 });
 
-export const skillSchoolRequirements = sqliteTable("spellSchools", {
+export const skillSchoolRequirements = sqliteTable("skillSchoolRequirements", {
   id: integer("id").primaryKey({ autoIncrement: true }),
-  requires: integer("requires"),
+  pointsRequired: integer("pointsRequired"),
   spellSchoolId: integer("spellSchoolId").references(() => spellSchools.id),
 });
 
@@ -37,15 +39,63 @@ export const skills = sqliteTable("skills", {
   sourcePoints: integer("sourcePoints"),
 });
 
+export const skillImmunities = sqliteTable("skillImmunities", {
+  skillId: integer("skillId")
+    .notNull()
+    .references(() => skills.id),
+  immuneToStatusEffectId: integer("immuneToStatusEffectId")
+    .notNull()
+    .references(() => statusEffects.id),
+});
+
+export const skillRemoves = sqliteTable("skillRemoves", {
+  skillId: integer("skillId")
+    .notNull()
+    .references(() => skills.id),
+  removesStatusEffectId: integer("removesStatusEffectId")
+    .notNull()
+    .references(() => statusEffects.id),
+});
+
+export const skillStatusEffects = sqliteTable("skillStatusEffects", {
+  skillId: integer("skillId")
+    .notNull()
+    .references(() => skills.id),
+  appliesStatusEffectId: integer("appliesStatusEffectId")
+    .notNull()
+    .references(() => statusEffects.id),
+});
+
+export const statusEffectImmunities = sqliteTable("statusEffectImmunities", {
+  statusEffectId: integer("statusEffectId")
+    .notNull()
+    .references(() => statusEffects.id),
+  immuneToStatusEffectId: integer("immuneToStatusEffectId")
+    .notNull()
+    .references(() => statusEffects.id),
+});
+
+export const statusEffectRemoves = sqliteTable("statusEffectRemoves", {
+  statusEffectId: integer("statusEffectId")
+    .notNull()
+    .references(() => statusEffects.id),
+  removesStatusEffectId: integer("removesStatusEffectId")
+    .notNull()
+    .references(() => statusEffects.id),
+});
+
 export const skillRelations = relations(skills, ({ many }) => ({
-  immunities: many(statusEffects),
-  removes: many(statusEffects),
+  immunities: many(skillImmunities),
+  removes: many(skillRemoves),
   schools: many(skillSchoolRequirements),
-  statusEffects: many(statusEffects),
+  statusEffects: many(skillStatusEffects),
 }));
 
 export const statusEffectRelations = relations(statusEffects, ({ many }) => ({
-  clearedBy: many(statusEffects),
-  immunities: many(statusEffects),
-  removes: many(statusEffects),
+  immunities: many(statusEffectImmunities),
+  removes: many(statusEffectRemoves),
+
+  skillImmunities: many(skillImmunities),
+  skillRemoves: many(skillRemoves),
+  skillStatusEffects: many(skillStatusEffects),
 }));

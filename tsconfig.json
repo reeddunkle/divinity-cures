@@ -3,7 +3,7 @@
     /* Base Options: */
     "esModuleInterop": true,
     "skipLibCheck": true,
-    "target": "es5",
+    "target": "es2022",
     "verbatimModuleSyntax": true,
     "allowJs": true,
     "resolveJsonModule": true,
@@ -26,11 +26,10 @@
     "isolatedModules": true,
     "jsx": "preserve",
 
-    "plugins": [
-      {
-        "name": "next"
-      }
-    ],
+    "plugins": [{ "name": "next" }],
+
+    /* Path Aliases */
+    "baseUrl": ".",
     "paths": {
       "@/*": ["./*"]
     }
