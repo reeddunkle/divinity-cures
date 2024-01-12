@@ -13,10 +13,25 @@ export const spellSchools = sqliteTable("spellSchools", {
 });
 
 export const skillSchoolRequirements = sqliteTable("skillSchoolRequirements", {
-  id: integer("id").primaryKey({ autoIncrement: true }),
   pointsRequired: integer("pointsRequired"),
   spellSchoolId: integer("spellSchoolId").references(() => spellSchools.id),
+  skillId: integer("skillId").references(() => skills.id),
 });
+
+export const skillSchoolRequirementsRelations = relations(
+  skillSchoolRequirements,
+  ({ one }) => ({
+    spellSchool: one(spellSchools, {
+      fields: [skillSchoolRequirements.spellSchoolId],
+      references: [spellSchools.id],
+    }),
+
+    skill: one(skills, {
+      fields: [skillSchoolRequirements.skillId],
+      references: [skills.id],
+    }),
+  }),
+);
 
 export const statusEffects = sqliteTable("statusEffects", {
   id: integer("id").primaryKey({ autoIncrement: true }),
@@ -48,6 +63,20 @@ export const skillImmunities = sqliteTable("skillImmunities", {
     .references(() => statusEffects.id),
 });
 
+export const skillImmunitiesRelations = relations(
+  skillImmunities,
+  ({ one }) => ({
+    skill: one(skills, {
+      fields: [skillImmunities.skillId],
+      references: [skills.id],
+    }),
+    statusEffect: one(statusEffects, {
+      fields: [skillImmunities.immuneToStatusEffectId],
+      references: [statusEffects.id],
+    }),
+  }),
+);
+
 export const skillRemoves = sqliteTable("skillRemoves", {
   skillId: integer("skillId")
     .notNull()
@@ -56,6 +85,17 @@ export const skillRemoves = sqliteTable("skillRemoves", {
     .notNull()
     .references(() => statusEffects.id),
 });
+
+export const skillRemovesRelations = relations(skillRemoves, ({ one }) => ({
+  skill: one(skills, {
+    fields: [skillRemoves.skillId],
+    references: [skills.id],
+  }),
+  statusEffect: one(statusEffects, {
+    fields: [skillRemoves.removesStatusEffectId],
+    references: [statusEffects.id],
+  }),
+}));
 
 export const skillStatusEffects = sqliteTable("skillStatusEffects", {
   skillId: integer("skillId")
@@ -66,6 +106,20 @@ export const skillStatusEffects = sqliteTable("skillStatusEffects", {
     .references(() => statusEffects.id),
 });
 
+export const skillStatusEffectsRelations = relations(
+  skillStatusEffects,
+  ({ one }) => ({
+    skill: one(skills, {
+      fields: [skillStatusEffects.skillId],
+      references: [skills.id],
+    }),
+    statusEffect: one(statusEffects, {
+      fields: [skillStatusEffects.appliesStatusEffectId],
+      references: [statusEffects.id],
+    }),
+  }),
+);
+
 export const statusEffectImmunities = sqliteTable("statusEffectImmunities", {
   statusEffectId: integer("statusEffectId")
     .notNull()
@@ -75,6 +129,20 @@ export const statusEffectImmunities = sqliteTable("statusEffectImmunities", {
     .references(() => statusEffects.id),
 });
 
+export const statusEffectImmunitiesRelations = relations(
+  statusEffectImmunities,
+  ({ one }) => ({
+    skill: one(statusEffects, {
+      fields: [statusEffectImmunities.statusEffectId],
+      references: [statusEffects.id],
+    }),
+    statusEffect: one(statusEffects, {
+      fields: [statusEffectImmunities.immuneToStatusEffectId],
+      references: [statusEffects.id],
+    }),
+  }),
+);
+
 export const statusEffectRemoves = sqliteTable("statusEffectRemoves", {
   statusEffectId: integer("statusEffectId")
     .notNull()
@@ -83,6 +151,20 @@ export const statusEffectRemoves = sqliteTable("statusEffectRemoves", {
     .notNull()
     .references(() => statusEffects.id),
 });
+
+export const statusEffectRemovesRelations = relations(
+  statusEffectRemoves,
+  ({ one }) => ({
+    skill: one(statusEffects, {
+      fields: [statusEffectRemoves.statusEffectId],
+      references: [statusEffects.id],
+    }),
+    statusEffect: one(statusEffects, {
+      fields: [statusEffectRemoves.removesStatusEffectId],
+      references: [statusEffects.id],
+    }),
+  }),
+);
 
 export const skillRelations = relations(skills, ({ many }) => ({
   immunities: many(skillImmunities),
