@@ -47,7 +47,7 @@ export default function AboutPage() {
       </p>
       <p>
         I hand-coded this data. If I missed anything, please&nbsp;
-        <Link className={styles.siteLink} href={siteConfig.nav.issues}>
+        <Link className={styles.siteLink} href={siteConfig.nav.issues.href}>
           let me know.
         </Link>
       </p>
