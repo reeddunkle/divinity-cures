@@ -15,7 +15,7 @@ function ActionPoint(props: PointProps) {
       alt="Action point icon"
       className={clsx(styles.point, props.className)}
       height="19"
-      src="/images/AP.webp"
+      src="https://d124vy484dv6tz.cloudfront.net/icons/AP.webp"
       width="19"
     />
   );
@@ -27,7 +27,7 @@ function SourcePoint(props: PointProps) {
       alt="Source point icon"
       className={clsx(styles.point, props.className)}
       height="19"
-      src="/images/SP.webp"
+      src="https://d124vy484dv6tz.cloudfront.net/icons/SP.webp"
       width="19"
     />
   );
