@@ -15,6 +15,10 @@ const nextConfig = {
         protocol: "https",
         hostname: "divinityoriginalsin2.wiki.fextralife.com",
       },
+      {
+        protocol: "https",
+        hostname: "d124vy484dv6tz.cloudfront.net",
+      },
     ],
   },
 };
