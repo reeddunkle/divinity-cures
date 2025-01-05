@@ -1,5 +1,7 @@
 import "server-only";
 
+import { Suspense } from "react";
+
 import { SearchCures } from "@/components/search.tsx";
 import {
   loadSkills,
@@ -32,7 +34,9 @@ export default async function CuresPage() {
 
   return (
     <main className={styles.main}>
-      <SearchCures skills={skillsWithSchools} statusEffects={statusEffects} />
+      <Suspense fallback="Loading...">
+        <SearchCures skills={skillsWithSchools} statusEffects={statusEffects} />
+      </Suspense>
     </main>
   );
 }
