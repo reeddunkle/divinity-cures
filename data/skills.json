@@ -37,7 +37,7 @@
         "scales": true
       }
     ],
-    "imageSrc": "https://divinityoriginalsin2.wiki.fextralife.com/file/Divinity-Original-Sin-2/geomancer_fortify-icon.png",
+    "imageSrc": "https://d124vy484dv6tz.cloudfront.net/icons/geomancer_fortify-icon.png",
     "range": 15,
     "id": "0"
   },
@@ -69,7 +69,7 @@
         "scales": true
       }
     ],
-    "imageSrc": "https://divinityoriginalsin2.wiki.fextralife.com/file/Divinity-Original-Sin-2/geomancer_mend_metal-icon.png",
+    "imageSrc": "https://d124vy484dv6tz.cloudfront.net/icons/geomancer_mend_metal-icon.webp",
     "range": 5,
     "id": "1"
   },
@@ -114,7 +114,7 @@
         "scales": true
       }
     ],
-    "imageSrc": "https://divinityoriginalsin2.wiki.fextralife.com/file/Divinity-Original-Sin-2/huntsman_first_aid-icon.png",
+    "imageSrc": "https://d124vy484dv6tz.cloudfront.net/icons/huntsman_first_aid-icon.png",
     "range": 8,
     "id": "2"
   },
@@ -140,7 +140,7 @@
       }
     ],
     "stats": [],
-    "imageSrc": "https://divinityoriginalsin2.wiki.fextralife.com/file/Divinity-Original-Sin-2/pyrokinetic_haste-icon.png",
+    "imageSrc": "https://d124vy484dv6tz.cloudfront.net/icons/pyrokinetic_haste-icon.png",
     "range": 13,
     "id": "3"
   },
@@ -177,7 +177,7 @@
       "Taunted",
       "Terrified"
     ],
-    "imageSrc": "https://divinityoriginalsin2.wiki.fextralife.com/file/Divinity-Original-Sin-2/pyrokinetic_burn_my_eyes-icon.png",
+    "imageSrc": "https://d124vy484dv6tz.cloudfront.net/icons/pyrokinetic_burn_my_eyes-icon.png",
     "range": 13,
     "id": "4"
   },
@@ -195,10 +195,7 @@
     "cooldown": 4,
     "description": "Restore Vitality of a target character. Restoration also removes Poisoned and Bleeding.\nRestore [X] Vitality for 2 turn(s).",
     "memory": 1,
-    "removes": [
-      "Bleeding",
-      "Poisoned"
-    ],
+    "removes": ["Bleeding", "Poisoned"],
     "statusEffects": [
       {
         "name": "Regenerating",
@@ -208,7 +205,7 @@
     ],
     "stats": [],
     "immunities": [],
-    "imageSrc": "https://divinityoriginalsin2.wiki.fextralife.com/file/Divinity-Original-Sin-2/hydrosophist_restoration-icon.png",
+    "imageSrc": "https://d124vy484dv6tz.cloudfront.net/icons/hydrosophist_restoration-icon.png",
     "range": 13,
     "id": "5"
   },
@@ -248,10 +245,8 @@
       }
     ],
     "immunities": [],
-    "surfaces": [
-      "water"
-    ],
-    "imageSrc": "https://divinityoriginalsin2.wiki.fextralife.com/file/Divinity-Original-Sin-2/hydrosophist-16-24.png",
+    "surfaces": ["water"],
+    "imageSrc": "https://d124vy484dv6tz.cloudfront.net/icons/hydrosophist-16-24.png",
     "range": 2,
     "id": "6"
   },
@@ -294,10 +289,8 @@
       }
     ],
     "immunities": [],
-    "surfaces": [
-      "water"
-    ],
-    "imageSrc": "https://divinityoriginalsin2.wiki.fextralife.com/file/Divinity-Original-Sin-2/hydrosophist-16-23.png",
+    "surfaces": ["water"],
+    "imageSrc": "https://d124vy484dv6tz.cloudfront.net/icons/hydrosophist-16-23.png",
     "range": 8,
     "id": "7"
   },
@@ -315,9 +308,7 @@
     "cooldown": 5,
     "description": "Shoot a bolt of healing energy that will jump to nearby allies.\nRestore 7 Vitality",
     "memory": 1,
-    "removes": [
-      "Infested"
-    ],
+    "removes": ["Infested"],
     "statusEffects": [],
     "stats": [
       {
@@ -328,7 +319,7 @@
     ],
     "immunities": [],
     "surfaces": [],
-    "imageSrc": "https://divinityoriginalsin2.wiki.fextralife.com/file/Divinity-Original-Sin-2/hydrosophist_healing_ritual-icon.png",
+    "imageSrc": "https://d124vy484dv6tz.cloudfront.net/icons/hydrosophist_healing_ritual-icon.webp",
     "range": 13,
     "notes": [
       "Won't move unto undead allies, not allies under effects such as decay that would cause the healing to harm them."
@@ -377,7 +368,7 @@
       "Terrified"
     ],
     "surfaces": [],
-    "imageSrc": "https://divinityoriginalsin2.wiki.fextralife.com/file/Divinity-Original-Sin-2/hydrosophist_cryogenic_statis-icon.png",
+    "imageSrc": "https://d124vy484dv6tz.cloudfront.net/icons/hydrosophist_cryogenic_statis-icon.png",
     "range": 13,
     "id": "9"
   },
@@ -411,7 +402,7 @@
     "stats": [],
     "immunities": [],
     "surfaces": [],
-    "imageSrc": "https://divinityoriginalsin2.wiki.fextralife.com/file/Divinity-Original-Sin-2/hydrosophist_cryogenic_statis-icon.png",
+    "imageSrc": "https://d124vy484dv6tz.cloudfront.net/icons/hydrosophist_cryogenic_statis-icon.png",
     "range": 13,
     "id": "10"
   },
@@ -447,7 +438,7 @@
     "stats": [],
     "immunities": [],
     "surfaces": [],
-    "imageSrc": "https://divinityoriginalsin2.wiki.fextralife.com/file/Divinity-Original-Sin-2/hydrosophist_armour_of_frost.png",
+    "imageSrc": "https://d124vy484dv6tz.cloudfront.net/icons/hydrosophist_armour_of_frost.png",
     "range": 13,
     "id": "11"
   },
@@ -476,7 +467,7 @@
     "stats": [],
     "immunities": [],
     "surfaces": [],
-    "imageSrc": "https://divinityoriginalsin2.wiki.fextralife.com/file/Divinity-Original-Sin-2/summoning-18-6.png",
+    "imageSrc": "https://d124vy484dv6tz.cloudfront.net/icons/summoning-18-6.webp",
     "range": 13,
     "id": "12"
   },
@@ -508,7 +499,7 @@
     ],
     "immunities": [],
     "surfaces": [],
-    "imageSrc": "https://divinityoriginalsin2.wiki.fextralife.com/file/Divinity-Original-Sin-2/summoning_harmony-icon.png",
+    "imageSrc": "https://d124vy484dv6tz.cloudfront.net/icons/summoning_harmony-icon.png",
     "range": 13,
     "id": "13"
   },
@@ -526,12 +517,7 @@
     "cooldown": 3,
     "memory": 1,
     "description": "Bind yourself to target character, copying any healing and Armor restoration that you receive to them. Clears Frozen, Stunned, Knocked Down and Petrified.\nSet Soul Mate for 3 turn(s).",
-    "removes": [
-      "Frozen",
-      "Knocked Down",
-      "Petrified",
-      "Stunned"
-    ],
+    "removes": ["Frozen", "Knocked Down", "Petrified", "Stunned"],
     "statusEffects": [
       {
         "name": "Soul Mate",
@@ -542,7 +528,7 @@
     "stats": [],
     "immunities": [],
     "surfaces": [],
-    "imageSrc": "https://divinityoriginalsin2.wiki.fextralife.com/file/Divinity-Original-Sin-2/summoning-14-21.png",
+    "imageSrc": "https://d124vy484dv6tz.cloudfront.net/icons/summoning-14-21.webp",
     "range": 13,
     "id": "14"
   },
@@ -559,10 +545,7 @@
     "cooldown": 3,
     "memory": 1,
     "description": "Bless target character or surface.\nSet Blessed for 2 turn(s).\nProtects against: Diseased, Decaying Touch, Petrified, Stunned, Cursed.\nAccuracy 20%, Dodge 10%, Resist All 15%",
-    "removes": [
-      "Infested",
-      "Necrofire"
-    ],
+    "removes": ["Infested", "Necrofire"],
     "statusEffects": [
       {
         "name": "Blessed",
@@ -580,7 +563,7 @@
       "Stunned"
     ],
     "surfaces": [],
-    "imageSrc": "https://divinityoriginalsin2.wiki.fextralife.com/file/Divinity-Original-Sin-2/bless-icon.png",
+    "imageSrc": "https://d124vy484dv6tz.cloudfront.net/icons/bless-icon.webp",
     "range": 13,
     "id": "15"
   },
@@ -605,7 +588,7 @@
         "id": "12"
       }
     ],
-    "imageSrc": "https://divinityoriginalsin2.wiki.fextralife.com/file/Divinity-Original-Sin-2/huntsman-15-24.png",
+    "imageSrc": "https://d124vy484dv6tz.cloudfront.net/icons/huntsman-15-24.png",
     "range": 13,
     "id": "16"
   },
@@ -648,7 +631,7 @@
     "stats": [],
     "immunities": [],
     "surfaces": [],
-    "imageSrc": "https://divinityoriginalsin2.wiki.fextralife.com/file/Divinity-Original-Sin-2/hydrosophist_steam_lance-icon.png",
+    "imageSrc": "https://d124vy484dv6tz.cloudfront.net/icons/hydrosophist_steam_lance-icon.webp",
     "range": 13,
     "id": "17"
   },
@@ -688,7 +671,7 @@
     ],
     "immunities": [],
     "surfaces": [],
-    "imageSrc": "https://divinityoriginalsin2.wiki.fextralife.com/file/Divinity-Original-Sin-2/hydrosophist-14-16.png",
+    "imageSrc": "https://d124vy484dv6tz.cloudfront.net/icons/hydrosophist-14-16.png",
     "range": 13,
     "id": "18"
   },
@@ -706,12 +689,7 @@
     "cooldown": 0,
     "memory": 2,
     "description": "Reset all cooldowns. Removes Burning, Necrofire, Poisoned and Bleeding.\nSet Skin Graft",
-    "removes": [
-      "Bleeding",
-      "Burning",
-      "Necrofire",
-      "Poisoned"
-    ],
+    "removes": ["Bleeding", "Burning", "Necrofire", "Poisoned"],
     "statusEffects": [
       {
         "name": "Skin Graft",
@@ -721,7 +699,7 @@
     "stats": [],
     "immunities": [],
     "surfaces": [],
-    "imageSrc": "https://divinityoriginalsin2.wiki.fextralife.com/file/Divinity-Original-Sin-2/polymorph-12-13.png",
+    "imageSrc": "https://d124vy484dv6tz.cloudfront.net/icons/polymorph-12-13.png",
     "range": 0,
     "id": "19"
   },
@@ -750,7 +728,7 @@
     "stats": [],
     "immunities": [],
     "surfaces": [],
-    "imageSrc": "https://divinityoriginalsin2.wiki.fextralife.com/file/Divinity-Original-Sin-2/aerotheurge-17-1.png",
+    "imageSrc": "https://d124vy484dv6tz.cloudfront.net/icons/aerotheurge-17-1.webp",
     "range": 15,
     "id": "20"
   },
@@ -784,7 +762,7 @@
     "stats": [],
     "immunities": [],
     "surfaces": [],
-    "imageSrc": "https://divinityoriginalsin2.wiki.fextralife.com/file/Divinity-Original-Sin-2/break_the_shackles-icon.png",
+    "imageSrc": "https://d124vy484dv6tz.cloudfront.net/icons/break_the_shackles-icon.png",
     "range": 0,
     "id": "21"
   },
@@ -802,20 +780,13 @@
     "cooldown": 5,
     "memory": 1,
     "description": "A tornado moves randomly around the battlefield, removing surfaces and revealing invisible characters. Also clears Invisible, Burning and Slowed.",
-    "removes": [
-      "Burning",
-      "Invisible",
-      "Slowed"
-    ],
+    "removes": ["Burning", "Invisible", "Slowed"],
     "statusEffects": [],
     "stats": [],
     "immunities": [],
     "surfaces": [],
-    "surfaceRemoves": [
-      "Deathfog",
-      "Lava"
-    ],
-    "imageSrc": "https://divinityoriginalsin2.wiki.fextralife.com/file/Divinity-Original-Sin/Skill_Air_Tornado.jpg",
+    "surfaceRemoves": ["Deathfog", "Lava"],
+    "imageSrc": "https://d124vy484dv6tz.cloudfront.net/icons/Skill_Air_Tornado.jpg",
     "range": 13,
     "id": "22"
   },
@@ -839,10 +810,7 @@
     "cooldown": 3,
     "memory": 1,
     "description": "Consume Frozen surfaces around you and convert them to Magic Armour. Removes Burning and Necrofire.\nRestore up to [400% of total heal value] Magic Armour depending on relevant surface area.",
-    "removes": [
-      "Burning",
-      "Necrofire"
-    ],
+    "removes": ["Burning", "Necrofire"],
     "statusEffects": [],
     "stats": [
       {
@@ -852,7 +820,7 @@
     ],
     "immunities": [],
     "surfaces": [],
-    "imageSrc": "https://divinityoriginalsin2.wiki.fextralife.com/file/Divinity-Original-Sin-2/hydrosophist-16-18.png",
+    "imageSrc": "https://d124vy484dv6tz.cloudfront.net/icons/hydrosophist-16-18.png",
     "range": 2
   },
   {
@@ -881,7 +849,7 @@
       {
         "name": "Enraged",
         "description": "MISSING INFO",
-        "imageSrc": "https://divinityoriginalsin2.wiki.fextralife.com/file/Divinity-Original-Sin-2/warfare_enrage-icon.png",
+        "imageSrc": "https://d124vy484dv6tz.cloudfront.net/icons/warfare_enrage-icon.webp",
         "id": "15"
       }
     ],
@@ -893,7 +861,7 @@
     ],
     "immunities": [],
     "surfaces": [],
-    "imageSrc": "https://divinityoriginalsin2.wiki.fextralife.com/file/Divinity-Original-Sin-2/warfare_enrage-icon.png",
+    "imageSrc": "https://d124vy484dv6tz.cloudfront.net/icons/warfare_enrage-icon.webp",
     "range": 2,
     "id": "24"
   },
@@ -917,13 +885,10 @@
     "cooldown": 4,
     "memory": 1,
     "description": "Remove Petrified and Frozen from target character. Vaporise ground surfaces into clouds. Does not work on Oil, Ice or Lava surfaces.",
-    "removes": [
-      "Frozen",
-      "Petrified"
-    ],
+    "removes": ["Frozen", "Petrified"],
     "immunities": [],
     "surfaces": [],
-    "imageSrc": "https://divinityoriginalsin2.wiki.fextralife.com/file/Divinity-Original-Sin-2/aerotheurge_vaporise-icon.png",
+    "imageSrc": "https://d124vy484dv6tz.cloudfront.net/icons/aerotheurge_vaporise-icon.png",
     "range": 13
   },
   {
@@ -946,10 +911,7 @@
     "sourcePoints": 0,
     "cooldown": 4,
     "memory": 1,
-    "immunities": [
-      "Silenced",
-      "Suffocating"
-    ],
+    "immunities": ["Silenced", "Suffocating"],
     "statusEffects": [
       {
         "name": "Breathing Bubble",
@@ -958,7 +920,7 @@
       }
     ],
     "surfaces": [],
-    "imageSrc": "https://divinityoriginalsin2.wiki.fextralife.com/file/Divinity-Original-Sin-2/aerotheurge-16-13.png",
+    "imageSrc": "https://d124vy484dv6tz.cloudfront.net/icons/aerotheurge-16-13.webp",
     "range": 0
   },
   {
@@ -981,10 +943,7 @@
     "cooldown": 5,
     "memory": 1,
     "description": "Set Breathing Bubbles on allies around you, allowing them to ignore effects of cloud surfaces and making them immune to Suffocation and Silence.\nThe bubble protects characters from all cloud effects, including healing from Blessed clouds. This also means the bubble will prevent the Invisibilty buff and removal of Silenced from Blessed Smoke Clouds.\nAlso protects from Deathfog.",
-    "immunities": [
-      "Silenced",
-      "Suffocating"
-    ],
+    "immunities": ["Silenced", "Suffocating"],
     "statusEffects": [
       {
         "name": "Breathing Bubble",
@@ -992,7 +951,7 @@
       }
     ],
     "surfaces": [],
-    "imageSrc": "https://divinityoriginalsin2.wiki.fextralife.com/file/Divinity-Original-Sin-2/aerotheurge-16-14.png",
+    "imageSrc": "https://d124vy484dv6tz.cloudfront.net/icons/aerotheurge-16-14.png",
     "range": 13
   },
   {
@@ -1018,7 +977,7 @@
       }
     ],
     "surfaces": [],
-    "imageSrc": "https://divinityoriginalsin2.wiki.fextralife.com/file/Divinity-Original-Sin-2/huntsman_tactical_retreat-icon.png",
+    "imageSrc": "https://d124vy484dv6tz.cloudfront.net/icons/huntsman_tactical_retreat-icon.webp",
     "range": 13
   },
   {
@@ -1041,10 +1000,7 @@
     "cooldown": 5,
     "memory": 2,
     "description": "Each ally consumes Frozen surfaces around them, converting the frozen surfaces to Magic Armour. Removes Burning and Necrofire.",
-    "removes": [
-      "Burning",
-      "Necrofire"
-    ],
+    "removes": ["Burning", "Necrofire"],
     "statusEffects": [],
     "stats": [
       {
@@ -1054,7 +1010,7 @@
     ],
     "immunities": [],
     "surfaces": [],
-    "imageSrc": "https://divinityoriginalsin2.wiki.fextralife.com/file/Divinity-Original-Sin-2/hydrosophist-16-17.png",
+    "imageSrc": "https://d124vy484dv6tz.cloudfront.net/icons/hydrosophist-16-17.png",
     "range": 13
   }
 ]

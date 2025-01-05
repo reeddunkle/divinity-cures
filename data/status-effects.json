@@ -2,31 +2,23 @@
   {
     "name": "Regenerating",
     "description": "Restores Vitality per turn, healing the living and dealing physical damage to the undead.",
-    "clearedBy": [
-      "Bleeding"
-    ],
-    "removes": [
-      "Infested"
-    ],
-    "imageSrc": "https://divinityoriginalsin2.wiki.fextralife.com/file/Divinity-Original-Sin-2/status_effect_regenerate-icon.png",
+    "clearedBy": ["Bleeding"],
+    "removes": ["Infested"],
+    "imageSrc": "https://d124vy484dv6tz.cloudfront.net/icons/status_effect_regenerate-icon.webp",
     "id": "0"
   },
   {
     "name": "Fortified",
     "description": "Maximum Physical Armor increased.\nPhysical Armor: +??\nImmunity to being teleported.",
-    "immunities": [
-      "Teleport"
-    ],
-    "givenBy": [
-      "Blessed Oil Surface"
-    ],
-    "imageSrc": "https://divinityoriginalsin2.wiki.fextralife.com/file/Divinity-Original-Sin-2/status_effect_fortified-icon.png",
+    "immunities": ["Teleport"],
+    "givenBy": ["Blessed Oil Surface"],
+    "imageSrc": "https://d124vy484dv6tz.cloudfront.net/icons/status_effect_fortified-icon.webp",
     "id": "1"
   },
   {
     "name": "Mending Metal",
     "description": "Restores Physical Armor per turn.",
-    "imageSrc": "https://divinityoriginalsin2.wiki.fextralife.com/file/Divinity-Original-Sin-2/geomancer_mend_metal-icon.png",
+    "imageSrc": "https://d124vy484dv6tz.cloudfront.net/icons/geomancer_mend_metal-icon.webp",
     "id": "2"
   },
   {
@@ -46,23 +38,15 @@
         "amount": 2
       }
     ],
-    "immunities": [
-      "Blinded",
-      "Crippled",
-      "Knocked Down",
-      "Muted"
-    ],
-    "imageSrc": "https://divinityoriginalsin2.wiki.fextralife.com/file/Divinity-Original-Sin-2/rested.png",
+    "immunities": ["Blinded", "Crippled", "Knocked Down", "Muted"],
+    "imageSrc": "https://d124vy484dv6tz.cloudfront.net/icons/rested.webp",
     "id": "3"
   },
   {
     "name": "Hasted",
     "id": "4",
     "description": "Character is hasted.\nMovement: +2\nStart AP: +1\nAP Recovery: +1",
-    "removes": [
-      "Slowed",
-      "Crippled"
-    ],
+    "removes": ["Slowed", "Crippled"],
     "stats": [
       {
         "name": "Movement",
@@ -77,11 +61,8 @@
         "amount": 1
       }
     ],
-    "clearedBy": [
-      "Slowed",
-      "Crippled"
-    ],
-    "imageSrc": "https://divinityoriginalsin2.wiki.fextralife.com/file/Divinity-Original-Sin-2/status_effect_hasted-icon.png"
+    "clearedBy": ["Slowed", "Crippled"],
+    "imageSrc": "https://d124vy484dv6tz.cloudfront.net/icons/status_effect_hasted-icon.png"
   },
   {
     "name": "Clear-Minded",
@@ -113,9 +94,7 @@
       }
     ],
     "scales": true,
-    "clearedBy": [
-      "Enraged"
-    ],
+    "clearedBy": ["Enraged"],
     "immunities": [
       "Blinded",
       "Charmed",
@@ -126,7 +105,7 @@
       "Taunted",
       "Terrified"
     ],
-    "imageSrc": "https://divinityoriginalsin2.wiki.fextralife.com/file/Divinity-Original-Sin-2/pyrokinetic_burn_my_eyes-icon.png",
+    "imageSrc": "https://d124vy484dv6tz.cloudfront.net/icons/pyrokinetic_burn_my_eyes-icon.png",
     "id": "5"
   },
   {
@@ -145,7 +124,7 @@
       "Shocked",
       "Shackles of Pain"
     ],
-    "imageSrc": "https://divinityoriginalsin2.wiki.fextralife.com/file/Divinity-Original-Sin-2/status_effect_frozen-icon.png",
+    "imageSrc": "https://d124vy484dv6tz.cloudfront.net/icons/status_effect_frozen-icon.webp",
     "id": "6"
   },
   {
@@ -156,7 +135,7 @@
         "name": "Magical Armor"
       }
     ],
-    "imageSrc": "https://divinityoriginalsin2.wiki.fextralife.com/file/Divinity-Original-Sin-2/hydrosophist_soothing_cold-icon.png",
+    "imageSrc": "https://d124vy484dv6tz.cloudfront.net/icons/hydrosophist_soothing_cold-icon.webp",
     "id": "7"
   },
   {
@@ -167,34 +146,26 @@
         "name": "Magical Armor Max"
       }
     ],
-    "imageSrc": "https://divinityoriginalsin2.wiki.fextralife.com/file/Divinity-Original-Sin-2/status_effect_frozen_shell-icon.png",
+    "imageSrc": "https://d124vy484dv6tz.cloudfront.net/icons/status_effect_frozen_shell-icon.png",
     "id": "8"
   },
   {
     "name": "Charmed",
     "description": "Temporarily turns the target's allegiance around. (Your character can be charmed to attack your party). Resisted by Magic Armor.",
-    "imageSrc": "https://divinityoriginalsin2.wiki.fextralife.com/file/Divinity-Original-Sin-2/status_effect_charmed-icon.png",
+    "imageSrc": "https://d124vy484dv6tz.cloudfront.net/icons/status_effect_charmed-icon.png",
     "id": "9"
   },
   {
     "name": "Soul Mate",
     "description": "Caster: Character is copying 50% of healing and Armor restoration to linked character.\nTarget: Character is receiving healing and Armor restoration from linked character.",
-    "imageSrc": "https://divinityoriginalsin2.wiki.fextralife.com/file/Divinity-Original-Sin-2/summoning-14-21.png",
+    "imageSrc": "https://d124vy484dv6tz.cloudfront.net/icons/summoning-14-21.webp",
     "id": "10"
   },
   {
     "name": "Blessed",
     "description": "Protects against Diseased, Decaying Touch, Petrified, Stunned.\nAccuracy +20%\nDodging +10%\nResistances: +15%",
-    "immunities": [
-      "Cursed",
-      "Diseased",
-      "Decaying",
-      "Petrified",
-      "Stunned"
-    ],
-    "removes": [
-      "Infested"
-    ],
+    "immunities": ["Cursed", "Diseased", "Decaying", "Petrified", "Stunned"],
+    "removes": ["Infested"],
     "stats": [
       {
         "name": "Accuracy",
@@ -209,7 +180,7 @@
         "percent": 15
       }
     ],
-    "imageSrc": "https://divinityoriginalsin2.wiki.fextralife.com/file/Divinity-Original-Sin-2/status_effect_blessed-icon.png",
+    "imageSrc": "https://d124vy484dv6tz.cloudfront.net/icons/status_effect_blessed-icon.webp",
     "id": "11"
   },
   {
@@ -223,7 +194,7 @@
       }
     ],
     "immunities": ["Atrophy"],
-    "imageSrc": "https://divinityoriginalsin2.wiki.fextralife.com/file/Divinity-Original-Sin-2/huntsman-15-24.png"
+    "imageSrc": "https://d124vy484dv6tz.cloudfront.net/icons/huntsman-15-24.png"
   },
   {
     "name": "Evading",
@@ -238,26 +209,26 @@
         "percent": 90
       }
     ],
-    "imageSrc": "https://divinityoriginalsin2.wiki.fextralife.com/file/Divinity-Original-Sin-2/aerotheurge-17-1.png",
+    "imageSrc": "https://d124vy484dv6tz.cloudfront.net/icons/aerotheurge-17-1.webp",
     "id": "13"
   },
   {
     "name": "Steam Lance",
     "description": "MISSING INFO",
-    "imageSrc": "https://divinityoriginalsin2.wiki.fextralife.com/file/Divinity-Original-Sin-2/hydrosophist_steam_lance-icon.png",
+    "imageSrc": "https://d124vy484dv6tz.cloudfront.net/icons/hydrosophist_steam_lance-icon.webp",
     "id": "14"
   },
   {
     "name": "Skin Graft",
     "description": "MISSING INFO",
-    "imageSrc": "https://divinityoriginalsin2.wiki.fextralife.com/file/Divinity-Original-Sin-2/polymorph-12-13.png",
+    "imageSrc": "https://d124vy484dv6tz.cloudfront.net/icons/polymorph-12-13.png",
     "id": "15"
   },
   {
     "name": "Enraged",
     "id": "16",
     "description": "Character is enraged. Critical hits are guaranteed, but character is Muted and can only use weapon skills.",
-    "imageSrc": "https://divinityoriginalsin2.wiki.fextralife.com/file/Divinity-Original-Sin-2/status_effect_raged-icon.png",
+    "imageSrc": "https://d124vy484dv6tz.cloudfront.net/icons/status_effect_raged-icon.webp",
     "stats": [
       {
         "name": "Critical Change",
@@ -268,7 +239,7 @@
   {
     "name": "Infected",
     "description": "Contagious (can spread to nearby players/enemies)",
-    "imageSrc": "https://divinityoriginalsin2.wiki.fextralife.com/file/Divinity-Original-Sin-2/status_effect_infectious_disease-icon.png",
+    "imageSrc": "https://d124vy484dv6tz.cloudfront.net/icons/status_effect_infectious_disease-icon.png",
     "stats": [
       {
         "name": "Constitution",
@@ -283,22 +254,17 @@
   },
   {
     "name": "Madness",
-    "aliases": [
-      "Mad"
-    ],
+    "aliases": ["Mad"],
     "description": "This character has been driven mad. While in this state, they will attack friend and foe alike.\nMaddened characters will attack those nearest them, regardless of alignment.",
-    "imageSrc": "https://divinityoriginalsin2.wiki.fextralife.com/file/Divinity-Original-Sin-2/maddening_song-icon.png",
+    "imageSrc": "https://d124vy484dv6tz.cloudfront.net/icons/maddening_song-icon.webp",
     "id": "18"
   },
   {
     "name": "Breathing Bubble",
     "id": "19",
-    "immunities": [
-      "Silenced",
-      "Suffocating"
-    ],
+    "immunities": ["Silenced", "Suffocating"],
     "description": "Allows you to ignore effects of cloud surfaces and making them immune to Suffocation and Silence.",
-    "imageSrc": "https://divinityoriginalsin2.wiki.fextralife.com/file/Divinity-Original-Sin-2/aerotheurge-16-14.png"
+    "imageSrc": "https://d124vy484dv6tz.cloudfront.net/icons/aerotheurge-16-14.png"
   },
   {
     "name": "Atrophy",
