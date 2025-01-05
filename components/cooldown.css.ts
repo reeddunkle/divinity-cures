@@ -17,12 +17,15 @@ const circleDark = theme.color.gray[300];
 const circleLight = theme.color.foreground;
 
 export const border = style({
+  alignItems: "center",
   aspectRatio: "1 / 1",
   borderColor: `${circleLight} ${circleLight} ${circleDark} ${circleLight}`,
   borderRadius: "50%",
   borderStyle: `solid solid ${dashStyle} solid`,
   borderWidth: borderThickness,
+  display: "flex",
   height: "100%",
+  justifyContent: "center",
 
   rotate: "-45deg",
 });
