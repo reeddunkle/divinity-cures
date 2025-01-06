@@ -131,7 +131,7 @@ export function SearchCures(props: SearchCuresProps) {
       <div className={styles.searchSummary}>
         {filteredResults.length} results
       </div>
-      <form onSubmit={handleSubmit(onFormSubmit)}>
+      <form className={styles.form} onSubmit={handleSubmit(onFormSubmit)}>
         <label className={styles.inputLabel} htmlFor="searchInput">
           Find cures for...
         </label>
@@ -153,25 +153,23 @@ export function SearchCures(props: SearchCuresProps) {
           ref={searchInputRef}
         />
       </form>
-      {sortedSearchResults.length > 0 ?
-        <div className={styles.searchResults} ref={searchResultsRef}>
-          {sortedSearchResults.map((skill) => {
-            return (
-              <div className={styles.resultWrapper} key={skill.id}>
-                <Card
-                  className={styles.resultCard}
-                  isCureHighlighted={(cure: string) =>
-                    lastSearch.length > 0 && startsWith(cure, lastSearch)
-                  }
-                  skill={skill}
-                />
-                <div className={styles.hr} />
-              </div>
-            );
-          })}
-        </div>
-      : null}
-      <div>* Grants immunity</div>
+      <div className={styles.searchResults} ref={searchResultsRef}>
+        {sortedSearchResults.map((skill) => {
+          return (
+            <div className={styles.resultWrapper} key={skill.id}>
+              <Card
+                className={styles.resultCard}
+                isCureHighlighted={(cure: string) =>
+                  lastSearch.length > 0 && startsWith(cure, lastSearch)
+                }
+                skill={skill}
+              />
+              <div className={styles.hr} />
+            </div>
+          );
+        })}
+      </div>
+      <div className={styles.legend}>* Grants immunity</div>
     </div>
   );
 }

@@ -8,8 +8,11 @@ const VERTICAL_SPACING = scale.static.xxxs;
 const RESULT_PADDING = scale.fluid.xxs;
 
 export const searchWrapper = style({
-  display: "grid",
+  display: "flex",
+  flexDirection: "column",
   gap: VERTICAL_SPACING,
+  flexGrow: 1,
+  minHeight: 0,
 });
 
 export const input = style({
@@ -28,14 +31,15 @@ export const inputLabel = style({
   fontSize: scale.fluid.half.max.sm,
 });
 
-const boxShadowBlurRadius = "max(0px, min(6vw - 1.5rem, 1.5rem))";
-const boxShadowSpreadRadius = "max(0px, min(0.25vw - 0.25rem, 0.25rem))";
+const boxShadowBlurRadius = "max(0px, min(6vw - 1.5rem, 1.5rem))" as const;
+const boxShadowSpreadRadius =
+  "max(0px, min(0.25vw - 0.25rem, 0.25rem))" as const;
 
 export const searchResults = style({
   border: `2px solid ${theme.color.violet2[100]}`,
   borderRadius: 3,
   boxShadow: `0px 0px ${boxShadowBlurRadius} ${boxShadowSpreadRadius} ${theme.color.gray[300]}`,
-  maxHeight: "73svh", // Magic Number
+  flexGrow: 1,
   overflowY: "auto",
   scrollbarGutter: "stable",
 });
@@ -56,5 +60,14 @@ export const resultCard = style({
 });
 
 export const searchSummary = style({
+  flexShrink: 0,
   textAlign: "center",
+});
+
+export const form = style({
+  flexShrink: 0,
+});
+
+export const legend = style({
+  flexShrink: 0,
 });
