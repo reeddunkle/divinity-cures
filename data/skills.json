@@ -85,7 +85,7 @@
     "actionPoints": 1,
     "sourcePoints": 0,
     "cooldown": 3,
-    "description": "Heals target for 80% Vitality. removes Crippled, Atrophy, Knocked Down, Blind, Silenced, Bleeding, Burning, Poisoned, Diseased.\nRestore [X] Vitality.\nSet Rested for 1 turn(s).",
+    "description": "Heals target for 80% Vitality. Removes Crippled, Atrophy, Knocked Down, Blind, Silenced, Bleeding, Burning, Poisoned, Diseased.\nRestore [X] Vitality.\nSet Rested for 1 turn(s).",
     "memory": 1,
     "removes": [
       "Atrophy",

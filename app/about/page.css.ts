@@ -21,6 +21,16 @@ export const title = style({
   textAlign: "center",
 });
 
+export const link = style({
+  color: theme.color.link,
+  textDecoration: "underline",
+
+  ":hover": {
+    color: theme.color.tertiary,
+    textDecoration: "underline",
+  },
+});
+
 export const siteLink = style({
   color: theme.color.link,
   textDecoration: "underline",
