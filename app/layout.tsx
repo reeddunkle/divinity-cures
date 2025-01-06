@@ -34,7 +34,7 @@ export default function RootLayout(props: { children: React.ReactNode }) {
           title="Divinity Original Sin: 2"
           href="/"
         />
-        <section className={styles.section}>{props.children}</section>
+        {props.children}
         <Footer className={styles.footer} />
       </body>
     </html>

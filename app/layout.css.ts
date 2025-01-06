@@ -10,10 +10,14 @@ export const body = style({
   scrollSnapType: "y mandatory",
 });
 
-export const section = style({
-  scrollSnapAlign: "start",
+// export const section = style({
+//   scrollSnapAlign: "start",
+// });
+
+export const header = style({
+  flexShrink: 0,
 });
 
-export const header = style({});
-
-export const footer = style({});
+export const footer = style({
+  flexShrink: 0,
+});
