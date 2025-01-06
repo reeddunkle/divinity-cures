@@ -16,7 +16,7 @@ export default function AboutPage() {
         <b>&quot;Status Effect&quot;</b> in one or more ways:
       </p>
       <ul className={styles.list}>
-        <li className={styles.listItem}>Directly removes a status effect</li>
+        <li className={styles.listItem}>Directly removes a status effect.</li>
         <li className={styles.listItem}>
           <div className={styles.multiParagraph}>
             <p>
@@ -33,9 +33,9 @@ export default function AboutPage() {
         </li>
       </ul>
       <p>
-        For example, my data says that the spell&nbsp;<b>First Aid</b>
-        &nbsp;removes <b>Disarmed</b> and <b>Knocked Down</b>, and that it
-        grants the Status Effect&nbsp;<b>Rested</b>.
+        For example, the spell&nbsp;<b>First Aid</b>
+        &nbsp;removes <b>Disarmed</b> and <b>Knocked Down</b>, and grants the
+        Status Effect&nbsp;<b>Rested</b>.
       </p>
       <p>
         <b>Rested</b>, in turn, grants immunity to&nbsp;<b>Blinded</b>,&nbsp;

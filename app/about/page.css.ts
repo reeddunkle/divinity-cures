@@ -4,10 +4,13 @@ import { theme } from "@/styles/theme.css";
 import scale from "@/util/scale";
 
 export const main = style({
-  display: "grid",
+  display: "flex",
+  flexDirection: "column",
+  flexGrow: 1,
   gap: scale.fluid.md,
   marginInline: "auto",
   maxWidth: 768,
+  minHeight: 0,
   paddingBlock: scale.fluid.xxxs,
   paddingInline: scale.fluid.md,
 });
