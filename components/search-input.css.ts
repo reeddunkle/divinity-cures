@@ -14,6 +14,7 @@ const buttonSizePercent = "60%";
 export const clearButton = style({
   backgroundColor: "inherit",
   border: "none",
+  cursor: "pointer",
   height: buttonSizePercent,
   padding: "0.5%",
   position: "absolute",

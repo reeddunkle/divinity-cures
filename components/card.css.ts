@@ -1,13 +1,11 @@
 import { style } from "@vanilla-extract/css";
-import { calc } from "@vanilla-extract/css-utils";
 
 import { theme } from "@/styles/theme.css";
 import scale from "@/util/scale";
-import { hsl, px } from "@/util/styles";
+import { hsl } from "@/util/styles";
 
 export const SPELL_IMAGE_SIZE_PX = 64;
 
-/* Card */
 export const wrapper = style({
   display: "flex",
   gap: scale.fluid.xxs,

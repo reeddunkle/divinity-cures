@@ -1,7 +1,6 @@
 import { style } from "@vanilla-extract/css";
 import { calc } from "@vanilla-extract/css-utils";
 
-import { theme } from "@/styles/theme.css";
 import scale from "@/util/scale";
 
 const summaryPadding = scale.fluid.xxs;
