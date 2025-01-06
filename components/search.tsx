@@ -171,6 +171,7 @@ export function SearchCures(props: SearchCuresProps) {
           })}
         </div>
       : null}
+      <div>* Grants immunity</div>
     </div>
   );
 }
