@@ -2,7 +2,7 @@ import { describe, expect, it } from "vitest";
 
 import { catalog } from "../catalog/bundled-catalog.ts";
 import type { Skill } from "../catalog/catalog.ts";
-import type { StatusEffectRecord } from "../catalog/schemas.ts";
+import { SkillId, StatusEffectId, type StatusEffectRecord } from "../catalog/schemas.ts";
 import { normalizeSearchText, prepareCureSkills, searchCures } from "./search.ts";
 
 const makeStatusEffect = (overrides: Partial<StatusEffectRecord>): StatusEffectRecord => ({
@@ -10,7 +10,7 @@ const makeStatusEffect = (overrides: Partial<StatusEffectRecord>): StatusEffectR
   clearedBy: [],
   description: "",
   givenBy: [],
-  id: "status",
+  id: StatusEffectId.make("status"),
   imageSrc: "",
   immunities: [],
   name: "Status",
@@ -23,7 +23,7 @@ const makeSkill = (overrides: Partial<Skill>): Skill => ({
   actionPoints: 1,
   cooldown: 1,
   description: "",
-  id: "skill",
+  id: SkillId.make("skill"),
   imageSrc: "",
   immunities: [],
   memory: 1,
@@ -43,18 +43,18 @@ const makeSkill = (overrides: Partial<Skill>): Skill => ({
 const applied = (statusEffect: StatusEffectRecord) => ({ stats: [], statusEffect });
 
 const fortify = makeSkill({
-  id: "fortify",
+  id: SkillId.make("fortify"),
   name: "Fortify",
   removes: ["Poisoned", "Burning"],
 });
 const firstAid = makeSkill({
-  id: "first-aid",
+  id: SkillId.make("first-aid"),
   name: "First Aid",
   removes: ["Infectious Disease", "Blinded"],
 });
 const restoration = makeSkill({
   actionPoints: 2,
-  id: "restoration",
+  id: SkillId.make("restoration"),
   name: "Restoration",
   statusEffects: [
     applied(
@@ -68,13 +68,13 @@ const restoration = makeSkill({
 });
 const sourceCure = makeSkill({
   actionPoints: 1,
-  id: "source-cure",
+  id: SkillId.make("source-cure"),
   name: "Arcane Cure",
   removes: ["Burning"],
   sourcePoints: 1,
 });
 const noCures = makeSkill({
-  id: "no-cures",
+  id: SkillId.make("no-cures"),
   name: "Burning Touch",
 });
 

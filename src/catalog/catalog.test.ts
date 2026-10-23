@@ -5,6 +5,7 @@ import { loadCatalog } from "./catalog.ts";
 import skills from "./data/skills.json";
 import spellSchools from "./data/spell-schools.json";
 import statusEffects from "./data/status-effects.json";
+import type { SkillId, StatusEffectId } from "./schemas.ts";
 
 const validInput = {
   skills,
@@ -44,6 +45,53 @@ describe("loadCatalog", () => {
 
     expect(error).toMatchObject({ _tag: "CatalogDecodeError" });
     expect(error.message).toContain("cooldown");
+  });
+
+  it.each([
+    ["negative action points", { actionPoints: -1 }, "actionPoints"],
+    ["fractional action points", { actionPoints: 1.5 }, "actionPoints"],
+    ["more source points than the pool holds", { sourcePoints: 4 }, "sourcePoints"],
+    ["negative memory", { memory: -1 }, "memory"],
+    ["a negative cooldown", { cooldown: -2 }, "cooldown"],
+    ["a fractional cooldown", { cooldown: 2.5 }, "cooldown"],
+    ["a negative range", { range: -1 }, "range"],
+    ["an empty identifier", { id: "" }, "id"],
+    [
+      "a school requirement below 1",
+      { schools: [{ id: spellSchools[0]?.id, name: spellSchools[0]?.name, requires: 0 }] },
+      "requires",
+    ],
+    [
+      "an applied status lasting no turns",
+      { statusEffects: [{ ...skills[0]?.statusEffects?.[0], duration: 0 }] },
+      "duration",
+    ],
+  ])("rejects a skill with %s", (_case, override, field) => {
+    const error = loadCatalog({
+      ...validInput,
+      skills: [{ ...skills[0], ...override }],
+    }).pipe(E.flip, E.runSync);
+
+    expect(error).toMatchObject({ _tag: "CatalogDecodeError" });
+    expect(error.message).toContain(field);
+  });
+
+  it("keeps identifiers from different datasets apart", () => {
+    const catalog = loadCatalog(validInput).pipe(E.runSync);
+    const skillId: SkillId | undefined = catalog.skills[0]?.id;
+    // @ts-expect-error A skill identifier is not a status-effect identifier.
+    const statusEffectId: StatusEffectId | undefined = skillId;
+
+    expect(statusEffectId).toBe("0");
+  });
+
+  it("accepts fractional ranges", () => {
+    const catalog = loadCatalog({
+      ...validInput,
+      skills: [{ ...skills[0], range: 2.5 }],
+    }).pipe(E.runSync);
+
+    expect(catalog.skills[0]?.range).toBe(2.5);
   });
 
   it("rejects unknown fields and reports every decoding issue", () => {

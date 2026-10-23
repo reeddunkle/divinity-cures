@@ -13,9 +13,6 @@ The original schemas silently stripped fields that exist in the datasets, includ
 ## Work
 
 - Decide which concepts belong in the catalog and name them consistently.
-- Review redundant names stored beside identifier references and decide whether to remove or validate them.
-- Define numeric constraints for costs, cooldowns, ranges, durations, requirements, amounts, and percentages.
-- Decide whether string identifiers remain appropriate or should become branded domain values.
 - Audit aliases and normalization rules used by future search behavior.
 - Review factual game content against trustworthy sources without silently changing inherited data.
 - Separate factual corrections from structural migrations so each change is reviewable.
@@ -31,6 +28,5 @@ The original schemas silently stripped fields that exist in the datasets, includ
 
 - Every retained field has an intentional domain meaning.
 - Redundant and derived data is removed or checked by an invariant.
-- Numeric and identifier constraints are encoded in Effect Schema.
 - Factual corrections cite their source and have focused tests where applicable.
 - Search consumes canonical names and aliases through one catalog interface.

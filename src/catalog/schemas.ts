@@ -5,6 +5,22 @@ const emptyStringArray = Schema.Array(Schema.String).pipe(
   Schema.withDecodingDefaultKey(E.succeed([])),
 );
 
+const Identifier = Schema.String.check(Schema.isMinLength(1));
+
+export const SchoolId = Identifier.pipe(Schema.brand("SchoolId"));
+export const SkillId = Identifier.pipe(Schema.brand("SkillId"));
+export const StatusEffectId = Identifier.pipe(Schema.brand("StatusEffectId"));
+
+export type SchoolId = typeof SchoolId.Type;
+export type SkillId = typeof SkillId.Type;
+export type StatusEffectId = typeof StatusEffectId.Type;
+
+const AtLeastOne = Schema.Natural.check(Schema.isGreaterThanOrEqualTo(1));
+
+const SourcePoints = Schema.Natural.check(Schema.isLessThanOrEqualTo(3));
+
+const Meters = Schema.Finite.check(Schema.isGreaterThanOrEqualTo(0));
+
 const Stat = Schema.Struct({
   amount: Schema.optionalKey(Schema.Finite),
   name: Schema.String,
@@ -14,7 +30,7 @@ const Stat = Schema.Struct({
 
 const emptyStats = Schema.Array(Stat).pipe(Schema.withDecodingDefaultKey(E.succeed([])));
 
-const Cooldown = Schema.Union([Schema.Finite, Schema.Literal("oncePerCombat")]);
+const Cooldown = Schema.Union([Schema.Natural, Schema.Literal("oncePerCombat")]);
 
 const SchoolAdjustment = Schema.Struct({
   amount: Schema.optionalKey(Schema.Finite),
@@ -25,7 +41,7 @@ const SchoolAdjustment = Schema.Struct({
 export const SchoolRecord = Schema.Struct({
   description: Schema.String,
   effects: Schema.Array(SchoolAdjustment).pipe(Schema.withDecodingDefaultKey(E.succeed([]))),
-  id: Schema.String,
+  id: SchoolId,
   imageSrc: Schema.optionalKey(Schema.String),
   imageSrcColored: Schema.String,
   modifies: Schema.Array(SchoolAdjustment).pipe(Schema.withDecodingDefaultKey(E.succeed([]))),
@@ -33,34 +49,34 @@ export const SchoolRecord = Schema.Struct({
 });
 
 const SkillSchoolReference = Schema.Struct({
-  id: Schema.String,
+  id: SchoolId,
   name: Schema.String,
-  requires: Schema.optionalKey(Schema.Finite),
+  requires: Schema.optionalKey(AtLeastOne),
 });
 
 const SkillStatusEffectReference = Schema.Struct({
   description: Schema.optionalKey(Schema.String),
-  duration: Schema.optionalKey(Schema.Finite),
-  id: Schema.String,
+  duration: Schema.optionalKey(AtLeastOne),
+  id: StatusEffectId,
   imageSrc: Schema.optionalKey(Schema.String),
   name: Schema.String,
   stats: emptyStats,
 });
 
 export const SkillRecord = Schema.Struct({
-  actionPoints: Schema.Finite,
+  actionPoints: Schema.Natural,
   cooldown: Cooldown,
   description: Schema.String,
-  id: Schema.String,
+  id: SkillId,
   imageSrc: Schema.String,
   immunities: emptyStringArray,
-  memory: Schema.Finite,
+  memory: Schema.Natural,
   name: Schema.String,
   notes: emptyStringArray,
-  range: Schema.Finite,
+  range: Meters,
   removes: emptyStringArray,
   schools: Schema.Array(SkillSchoolReference),
-  sourcePoints: Schema.Finite,
+  sourcePoints: SourcePoints,
   stats: emptyStats,
   statusEffects: Schema.Array(SkillStatusEffectReference).pipe(
     Schema.withDecodingDefaultKey(E.succeed([])),
@@ -74,7 +90,7 @@ export const StatusEffectRecord = Schema.Struct({
   clearedBy: emptyStringArray,
   description: Schema.String,
   givenBy: emptyStringArray,
-  id: Schema.String,
+  id: StatusEffectId,
   imageSrc: Schema.optionalKey(Schema.String),
   immunities: emptyStringArray,
   name: Schema.String,
