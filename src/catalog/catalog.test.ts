@@ -31,6 +31,60 @@ describe("loadCatalog", () => {
     expect(enrage?.statusEffects.map((applied) => applied.statusEffect.name)).toEqual(["Enraged"]);
   });
 
+  describe("content corrections", () => {
+    const catalog = loadCatalog(validInput).pipe(E.runSync);
+    const statusNamed = (name: string) =>
+      catalog.statusEffects.find((statusEffect) => statusEffect.name === name);
+    const curedStatuses = [
+      ...catalog.skills.flatMap((skill) => [...skill.removes, ...skill.immunities]),
+      ...catalog.statusEffects.flatMap((statusEffect) => [
+        ...statusEffect.removes,
+        ...statusEffect.immunities,
+      ]),
+    ];
+
+    it("names the Maddening Song status Mad, as the game does, with Madness as an alias", () => {
+      expect(statusNamed("Mad")?.aliases).toEqual(["Madness"]);
+      expect(curedStatuses).toContain("Mad");
+      expect(curedStatuses).not.toContain("Madness");
+    });
+
+    it("lists Mad once among Clear-Minded's immunities", () => {
+      expect(statusNamed("Clear-Minded")?.immunities.filter((status) => status === "Mad")).toEqual([
+        "Mad",
+      ]);
+    });
+
+    it("applies Shed Skin from Skin Graft", () => {
+      const skinGraft = catalog.skills.find((skill) => skill.name === "Skin Graft");
+
+      expect(skinGraft?.statusEffects.map((applied) => applied.statusEffect.name)).toEqual([
+        "Shed Skin",
+      ]);
+      expect(statusNamed("Shed Skin")?.description).toBe("Resets all cooldowns.");
+    });
+
+    it("names Enraged's stat Critical Chance", () => {
+      expect(statusNamed("Enraged")?.stats.map((stat) => stat.name)).toEqual(["Critical Chance"]);
+    });
+
+    it("keeps Skin Graft as the only once-per-combat skill", () => {
+      expect(
+        catalog.skills
+          .filter((skill) => skill.cooldown === "oncePerCombat")
+          .map((skill) => skill.name),
+      ).toEqual(["Skin Graft"]);
+    });
+
+    it("keeps Fortify's immunity to being teleported", () => {
+      expect(
+        catalog.skills
+          .find((skill) => skill.name === "Fortify")
+          ?.statusEffects.flatMap((applied) => applied.statusEffect.immunities),
+      ).toContain("Teleport");
+    });
+  });
+
   it("decodes once-per-combat cooldowns and rejects other cooldown labels", () => {
     const catalog = loadCatalog(validInput).pipe(E.runSync);
 
@@ -196,14 +250,14 @@ describe("loadCatalog", () => {
   });
 
   it("rejects applied-status references whose name differs from the status effect", () => {
-    const skinGraft = statusEffects.find((statusEffect) => statusEffect.name === "Skin Graft");
+    const shedSkin = statusEffects.find((statusEffect) => statusEffect.name === "Shed Skin");
 
     const error = loadCatalog({
       ...validInput,
       skills: [
         {
           ...skills[0],
-          statusEffects: [{ id: skinGraft?.id ?? "", name: "Enraged" }],
+          statusEffects: [{ id: shedSkin?.id ?? "", name: "Enraged" }],
         },
       ],
     }).pipe(E.flip, E.runSync);
@@ -214,8 +268,8 @@ describe("loadCatalog", () => {
       sourceDataset: "skills",
       sourceId: skills[0]?.id,
       targetDataset: "statusEffects",
-      targetId: skinGraft?.id,
-      targetName: "Skin Graft",
+      targetId: shedSkin?.id,
+      targetName: "Shed Skin",
     });
   });
 });

@@ -95,16 +95,7 @@
     ],
     "scales": true,
     "clearedBy": ["Enraged"],
-    "immunities": [
-      "Blinded",
-      "Charmed",
-      "Enraged",
-      "Mad",
-      "Madness",
-      "Sleeping",
-      "Taunted",
-      "Terrified"
-    ],
+    "immunities": ["Blinded", "Charmed", "Enraged", "Mad", "Sleeping", "Taunted", "Terrified"],
     "imageSrc": "/images/icons/pyrokinetic-burn-my-eyes-icon.png",
     "id": "5"
   },
@@ -219,8 +210,8 @@
     "id": "14"
   },
   {
-    "name": "Skin Graft",
-    "description": "MISSING INFO",
+    "name": "Shed Skin",
+    "description": "Resets all cooldowns.",
     "imageSrc": "/images/icons/polymorph-12-13.png",
     "id": "15"
   },
@@ -231,7 +222,7 @@
     "imageSrc": "/images/icons/status-effect-raged-icon.webp",
     "stats": [
       {
-        "name": "Critical Change",
+        "name": "Critical Chance",
         "percent": 100
       }
     ]
@@ -253,8 +244,8 @@
     "id": "17"
   },
   {
-    "name": "Madness",
-    "aliases": ["Mad"],
+    "name": "Mad",
+    "aliases": ["Madness"],
     "description": "This character has been driven mad. While in this state, they will attack friend and foe alike.\nMaddened characters will attack those nearest them, regardless of alignment.",
     "imageSrc": "/images/icons/maddening-song-icon.webp",
     "id": "18"

@@ -79,7 +79,8 @@ const noCures = makeSkill({
 });
 
 const skills = [sourceCure, restoration, noCures, firstAid, fortify];
-const cureSkills = prepareCureSkills(skills);
+const statusAliases = [makeStatusEffect({ aliases: ["Aflame"], name: "Burning" })];
+const cureSkills = prepareCureSkills(skills, statusAliases);
 
 const names = (results: ReturnType<typeof searchCures>) =>
   results.map((result) => result.skill.name);
@@ -101,9 +102,9 @@ describe("prepareCureSkills", () => {
     )?.cures;
 
     expect(restorationCures).toEqual([
-      { grantsImmunity: true, status: "Blinded" },
-      { grantsImmunity: false, status: "Crippled" },
-      { grantsImmunity: true, status: "Muted" },
+      { aliases: [], grantsImmunity: true, status: "Blinded" },
+      { aliases: [], grantsImmunity: false, status: "Crippled" },
+      { aliases: [], grantsImmunity: true, status: "Muted" },
     ]);
   });
 
@@ -123,7 +124,7 @@ describe("prepareCureSkills", () => {
   it("does not mutate its input", () => {
     const frozen = Object.freeze([...skills]);
 
-    expect(() => prepareCureSkills(frozen)).not.toThrow();
+    expect(() => prepareCureSkills(frozen, statusAliases)).not.toThrow();
     expect(frozen).toEqual(skills);
   });
 });
@@ -147,8 +148,8 @@ describe("searchCures", () => {
 
     expect(names(results)).toEqual(["Fortify", "Arcane Cure"]);
     expect(results[0]?.cures).toEqual([
-      { grantsImmunity: false, isMatch: true, status: "Burning" },
-      { grantsImmunity: false, isMatch: false, status: "Poisoned" },
+      { aliases: ["Aflame"], grantsImmunity: false, isMatch: true, status: "Burning" },
+      { aliases: [], grantsImmunity: false, isMatch: false, status: "Poisoned" },
     ]);
   });
 
@@ -157,10 +158,20 @@ describe("searchCures", () => {
 
     expect(names(results)).toEqual(["Restoration"]);
     expect(results[0]?.cures.find((cure) => cure.isMatch)).toEqual({
+      aliases: [],
       grantsImmunity: true,
       isMatch: true,
       status: "Muted",
     });
+  });
+
+  it("matches a status by its alias and highlights the canonical name", () => {
+    const results = searchCures(cureSkills, "aflame");
+
+    expect(names(results)).toEqual(["Fortify", "Arcane Cure"]);
+    expect(results[0]?.cures.filter((cure) => cure.isMatch).map((cure) => cure.status)).toEqual([
+      "Burning",
+    ]);
   });
 
   it("ignores casing and surrounding whitespace", () => {
@@ -207,9 +218,17 @@ describe("searchCures", () => {
   });
 
   it("finds cures in the real catalog", () => {
-    const catalogCures = prepareCureSkills(catalog.skills);
+    const catalogCures = prepareCureSkills(catalog.skills, catalog.statusEffects);
 
     expect(names(searchCures(catalogCures, "first aid"))).toContain("First Aid");
     expect(searchCures(catalogCures, "burning").length).toBeGreaterThan(0);
+  });
+
+  it("finds Mad cures in the real catalog by its Madness alias", () => {
+    const catalogCures = prepareCureSkills(catalog.skills, catalog.statusEffects);
+
+    expect(names(searchCures(catalogCures, "madness"))).toEqual(
+      names(searchCures(catalogCures, "mad")),
+    );
   });
 });

@@ -4,8 +4,10 @@ import * as Order from "effect/Order";
 import * as Str from "effect/String";
 
 import type { Skill } from "../catalog/catalog.ts";
+import type { StatusEffectRecord } from "../catalog/schemas.ts";
 
 export type Cure = {
+  readonly aliases: readonly string[];
   readonly grantsImmunity: boolean;
   readonly status: string;
 };
@@ -51,7 +53,10 @@ const byCost = [
   Order.mapInput(Order.String, (cureSkill: CureSkill) => cureSkill.skill.id),
 ] as const;
 
-const expandCures = (skill: Skill): readonly Cure[] => {
+const expandCures = (
+  skill: Skill,
+  aliasesOf: (status: string) => readonly string[],
+): readonly Cure[] => {
   const immunities = A.union(
     skill.immunities,
     A.flatMap(skill.statusEffects, (applied) => applied.statusEffect.immunities),
@@ -64,6 +69,7 @@ const expandCures = (skill: Skill): readonly Cure[] => {
   return pipe(
     A.union(immunities, removals),
     A.map((status) => ({
+      aliases: aliasesOf(status),
       grantsImmunity: A.contains(immunities, status),
       status,
     })),
@@ -71,16 +77,28 @@ const expandCures = (skill: Skill): readonly Cure[] => {
   );
 };
 
-export const prepareCureSkills = (skills: readonly Skill[]): readonly CureSkill[] =>
-  pipe(
+export const prepareCureSkills = (
+  skills: readonly Skill[],
+  statusEffects: readonly Pick<StatusEffectRecord, "aliases" | "name">[],
+): readonly CureSkill[] => {
+  const aliasesByStatus = new Map(
+    A.map(statusEffects, (statusEffect) => [statusEffect.name, statusEffect.aliases] as const),
+  );
+  const aliasesOf = (status: string) => aliasesByStatus.get(status) ?? [];
+
+  return pipe(
     skills,
-    A.map((skill) => ({ cures: expandCures(skill), skill })),
+    A.map((skill) => ({ cures: expandCures(skill, aliasesOf), skill })),
     A.filter((cureSkill) => A.isReadonlyArrayNonEmpty(cureSkill.cures)),
     A.sortBy(...byCost),
   );
+};
+
+const curesMatch = (cure: Cure, matches: (text: string) => boolean) =>
+  matches(cure.status) || A.some(cure.aliases, matches);
 
 const toResult = (cureSkill: CureSkill, matches: (text: string) => boolean): SearchResult => ({
-  cures: A.map(cureSkill.cures, (cure) => ({ ...cure, isMatch: matches(cure.status) })),
+  cures: A.map(cureSkill.cures, (cure) => ({ ...cure, isMatch: curesMatch(cure, matches) })),
   isNameMatch: matches(cureSkill.skill.name),
   skill: cureSkill.skill,
 });

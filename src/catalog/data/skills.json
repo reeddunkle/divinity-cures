@@ -172,7 +172,7 @@
       "Drunk",
       "Enraged",
       "Frightened",
-      "Madness",
+      "Mad",
       "Sleeping",
       "Taunted",
       "Terrified"
@@ -441,7 +441,7 @@
     "cooldown": 5,
     "memory": 1,
     "description": "Charm target non-allied character, causing them to join your side in combat for the duration of the status.\nSet Charmed for 2 turn(s).",
-    "removes": ["Madness"],
+    "removes": ["Mad"],
     "statusEffects": [
       {
         "name": "Charmed",
@@ -622,7 +622,7 @@
     "removes": [
       "Burning",
       "Frozen",
-      "Madness",
+      "Mad",
       "Necrofire",
       "Petrified",
       "Plagued",
@@ -658,11 +658,11 @@
     "sourcePoints": 1,
     "cooldown": "oncePerCombat",
     "memory": 2,
-    "description": "Reset all cooldowns. Removes Burning, Necrofire, Poisoned and Bleeding.\nSet Skin Graft",
+    "description": "Reset all cooldowns. Removes Burning, Necrofire, Poisoned and Bleeding.\nSet Shed Skin for 0 turn(s).",
     "removes": ["Bleeding", "Burning", "Necrofire", "Poisoned"],
     "statusEffects": [
       {
-        "name": "Skin Graft",
+        "name": "Shed Skin",
         "id": "15"
       }
     ],
@@ -807,7 +807,7 @@
     "cooldown": 5,
     "memory": 1,
     "description": "Motivate an allied character with the power of rage. Target allied character is guaranteed to land critical hits with basic attacks and weapon skills, but is muted. Clears Taunted, Terrified, Charmed, Mad and Clear-Minded statuses.\nSet Enraged for 1 turn(s).",
-    "removes": ["Charmed", "Clear-Minded", "Frightened", "Madness", "Taunted", "Terrified"],
+    "removes": ["Charmed", "Clear-Minded", "Frightened", "Mad", "Taunted", "Terrified"],
     "statusEffects": [
       {
         "name": "Enraged",

@@ -12,7 +12,7 @@ import { canonicalLink, pageTitle } from "../site.ts";
 import { latestQuery, navigateToQuery } from "../url-state/search-navigation.ts";
 import { decodeSearchParams, queryOf, syncFormQuery } from "../url-state/search-params.ts";
 
-const cureSkills = prepareCureSkills(catalog.skills);
+const cureSkills = prepareCureSkills(catalog.skills, catalog.statusEffects);
 
 const resultSummary = (count: number, query: string) => {
   if (query === "") {
