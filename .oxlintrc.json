@@ -16,7 +16,15 @@
     "reportUnusedDisableDirectives": "error",
     "typeAware": true
   },
-  "plugins": ["eslint", "oxc", "react", "typescript"],
+  "overrides": [
+    {
+      "files": ["src/routes/**/*.ts", "src/routes/**/*.tsx"],
+      "rules": {
+        "unicorn/filename-case": "off"
+      }
+    }
+  ],
+  "plugins": ["eslint", "oxc", "react", "typescript", "unicorn"],
   "rules": {
     "@pandacss/consistent-property-style": [
       "error",
@@ -31,7 +39,24 @@
     "@pandacss/no-important": "error",
     "@pandacss/no-invalid-nesting": "error",
     "@pandacss/no-invalid-token-paths": "error",
+    "curly": ["error", "all"],
+    "eqeqeq": ["error", "always"],
+    "no-continue": "error",
+    "no-param-reassign": "error",
+    "no-shadow": "error",
+    "one-var": ["error", "never"],
+    "oxc/no-accumulating-spread": "error",
     "react/hooks": "error",
-    "react/react-in-jsx-scope": "off"
+    "react/react-in-jsx-scope": "off",
+    "typescript/array-type": "error",
+    "typescript/consistent-type-imports": [
+      "error",
+      {
+        "fixStyle": "inline-type-imports"
+      }
+    ],
+    "typescript/prefer-as-const": "error",
+    "unicorn/filename-case": "error",
+    "unicorn/prefer-at": "error"
   }
 }

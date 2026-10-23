@@ -1,10 +1,10 @@
 import * as E from "effect/Effect";
 import { describe, expect, it } from "vitest";
 
+import { loadCatalog } from "./catalog.ts";
 import skills from "./data/skills.json";
 import spellSchools from "./data/spell-schools.json";
 import statusEffects from "./data/status-effects.json";
-import { loadCatalog } from "./catalog.ts";
 
 const validInput = {
   skills,
@@ -14,7 +14,7 @@ const validInput = {
 
 describe("loadCatalog", () => {
   it("loads and resolves the current catalog", () => {
-    const catalog = E.runSync(loadCatalog(validInput));
+    const catalog = loadCatalog(validInput).pipe(E.runSync);
 
     expect(catalog.skills).toHaveLength(30);
     expect(catalog.schools).toHaveLength(12);
@@ -24,26 +24,22 @@ describe("loadCatalog", () => {
   });
 
   it("rejects unknown fields and reports every decoding issue", () => {
-    const error = E.runSync(
-      E.flip(
-        loadCatalog({
-          skills: [
-            {
-              ...skills[0],
-              actionPoints: "one",
-            },
-          ],
-          spellSchools: [
-            {
-              ...spellSchools[0],
-              description: 42,
-              unexpected: true,
-            },
-          ],
-          statusEffects,
-        }),
-      ),
-    );
+    const error = loadCatalog({
+      skills: [
+        {
+          ...skills[0],
+          actionPoints: "one",
+        },
+      ],
+      spellSchools: [
+        {
+          ...spellSchools[0],
+          description: 42,
+          unexpected: true,
+        },
+      ],
+      statusEffects,
+    }).pipe(E.flip, E.runSync);
 
     expect(error).toMatchObject({
       _tag: "CatalogDecodeError",
@@ -56,14 +52,10 @@ describe("loadCatalog", () => {
   });
 
   it("rejects duplicate identifiers", () => {
-    const error = E.runSync(
-      E.flip(
-        loadCatalog({
-          ...validInput,
-          spellSchools: [spellSchools[0], spellSchools[0]],
-        }),
-      ),
-    );
+    const error = loadCatalog({
+      ...validInput,
+      spellSchools: [spellSchools[0], spellSchools[0]],
+    }).pipe(E.flip, E.runSync);
 
     expect(error).toMatchObject({
       _tag: "DuplicateCatalogIdError",
@@ -73,19 +65,15 @@ describe("loadCatalog", () => {
   });
 
   it("rejects broken school references", () => {
-    const error = E.runSync(
-      E.flip(
-        loadCatalog({
-          ...validInput,
-          skills: [
-            {
-              ...skills[0],
-              schools: [{ id: "missing", name: "Missing" }],
-            },
-          ],
-        }),
-      ),
-    );
+    const error = loadCatalog({
+      ...validInput,
+      skills: [
+        {
+          ...skills[0],
+          schools: [{ id: "missing", name: "Missing" }],
+        },
+      ],
+    }).pipe(E.flip, E.runSync);
 
     expect(error).toMatchObject({
       _tag: "BrokenCatalogReferenceError",
@@ -96,19 +84,15 @@ describe("loadCatalog", () => {
   });
 
   it("rejects broken applied-status references", () => {
-    const error = E.runSync(
-      E.flip(
-        loadCatalog({
-          ...validInput,
-          skills: [
-            {
-              ...skills[0],
-              statusEffects: [{ id: "missing", name: "Missing" }],
-            },
-          ],
-        }),
-      ),
-    );
+    const error = loadCatalog({
+      ...validInput,
+      skills: [
+        {
+          ...skills[0],
+          statusEffects: [{ id: "missing", name: "Missing" }],
+        },
+      ],
+    }).pipe(E.flip, E.runSync);
 
     expect(error).toMatchObject({
       _tag: "BrokenCatalogReferenceError",

@@ -39,14 +39,14 @@ export type AppliedStatusEffect = {
 };
 
 export type Skill = Omit<SkillRecord, "schools" | "statusEffects"> & {
-  readonly schools: ReadonlyArray<SkillSchool>;
-  readonly statusEffects: ReadonlyArray<AppliedStatusEffect>;
+  readonly schools: readonly SkillSchool[];
+  readonly statusEffects: readonly AppliedStatusEffect[];
 };
 
 export type Catalog = {
-  readonly schools: ReadonlyArray<SchoolRecord>;
-  readonly skills: ReadonlyArray<Skill>;
-  readonly statusEffects: ReadonlyArray<StatusEffectRecord>;
+  readonly schools: readonly SchoolRecord[];
+  readonly skills: readonly Skill[];
+  readonly statusEffects: readonly StatusEffectRecord[];
 };
 
 type CatalogRecord = {
@@ -71,7 +71,7 @@ const decodeCatalog = (input: CatalogInput) =>
     ),
   );
 
-const validateUniqueIds = (dataset: DatasetName, records: ReadonlyArray<CatalogRecord>) => {
+const validateUniqueIds = (dataset: DatasetName, records: readonly CatalogRecord[]) => {
   const duplicateId = pipe(
     records,
     A.groupBy((record) => record.id),
@@ -89,7 +89,7 @@ const validateUniqueIds = (dataset: DatasetName, records: ReadonlyArray<CatalogR
     );
   }
 
-  return E.succeed(undefined);
+  return E.void;
 };
 
 const brokenReference = (

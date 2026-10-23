@@ -4,17 +4,17 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "build": "vite build && tsc -b",
-    "check": "pnpm typecheck && pnpm lint && pnpm format:check && pnpm test && pnpm build",
+    "build": "pnpm typecheck && vite build",
+    "check": "pnpm lint && pnpm format:check && pnpm test && pnpm build",
     "dev": "vite",
     "format": "oxfmt",
     "format:check": "oxfmt --check",
     "lint": "oxlint .",
-    "prepare": "panda codegen",
+    "prepare": "effect-tsgo patch --typescript --no-oxlint && panda codegen",
     "preview": "vite preview",
     "test": "vitest run",
     "test:watch": "vitest",
-    "typecheck": "tsc -b --pretty false"
+    "typecheck": "tsc --project tsconfig.effect.json --pretty false"
   },
   "dependencies": {
     "@tanstack/react-form": "catalog:tanstack",
@@ -24,6 +24,7 @@
     "react-dom": "catalog:react"
   },
   "devDependencies": {
+    "@effect/tsgo": "catalog:effect",
     "@oxlint/plugins": "catalog:lint",
     "@pandacss/dev": "catalog:panda",
     "@pandacss/eslint-plugin": "catalog:panda",

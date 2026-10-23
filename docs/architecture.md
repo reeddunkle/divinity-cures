@@ -30,7 +30,9 @@ Expected failures use tagged errors. Defects remain defects. The Effect runtime 
 
 ## Tooling policy
 
-TypeScript 7 is the project compiler. Oxlint uses its native TypeScript-aware engine for correctness, suspicious code, React Compiler validation, and Panda CSS diagnostics. Oxfmt owns formatting; lint rules do not duplicate formatter policy.
+TypeScript 7 is the project compiler. Effect TSGo patches the TypeScript compiler during installation and applies Effect language-service diagnostics through the separate `tsconfig.effect.json`; unstable API diagnostics remain disabled. Oxlint stays on its native TypeScript-aware engine rather than receiving the Effect TSGo patch.
+
+Oxlint owns correctness, suspicious-code, React Compiler, Panda CSS, and selected maintainability rules. Oxfmt owns formatting and side-effect-safe import organization; lint rules do not duplicate formatter policy.
 
 ## Dependency direction
 
