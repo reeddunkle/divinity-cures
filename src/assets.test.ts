@@ -3,7 +3,7 @@ import { describe, expect, it } from "vitest";
 
 import indexHtml from "../index.html?raw";
 import { uiImages } from "./assets.ts";
-import { catalog } from "./catalog/index.ts";
+import { catalog } from "./catalog/bundled-catalog.ts";
 
 const publicFiles = A.map(Object.keys(import.meta.glob("/public/**/*")), (path) =>
   path.replace(/^\/public/u, ""),

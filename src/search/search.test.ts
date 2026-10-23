@@ -1,7 +1,7 @@
 import { describe, expect, it } from "vitest";
 
+import { catalog } from "../catalog/bundled-catalog.ts";
 import type { Skill } from "../catalog/catalog.ts";
-import { catalog } from "../catalog/index.ts";
 import type { StatusEffectRecord } from "../catalog/schemas.ts";
 import { normalizeSearchText, prepareCureSkills, searchCures } from "./search.ts";
 

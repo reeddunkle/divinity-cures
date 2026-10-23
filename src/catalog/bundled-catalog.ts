@@ -5,16 +5,6 @@ import skills from "./data/skills.json";
 import spellSchools from "./data/spell-schools.json";
 import statusEffects from "./data/status-effects.json";
 
-export type { AppliedStatusEffect, Catalog, CatalogInput, Skill, SkillSchool } from "./catalog.ts";
-export { loadCatalog } from "./catalog.ts";
-export type { CatalogError } from "./errors.ts";
-export {
-  BrokenCatalogReferenceError,
-  CatalogDecodeError,
-  DuplicateCatalogIdError,
-  MismatchedCatalogReferenceError,
-} from "./errors.ts";
-
 export const catalog = E.runSync(
   loadCatalog({
     skills,

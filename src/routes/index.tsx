@@ -4,7 +4,7 @@ import { useEffect, useRef } from "react";
 
 import { css } from "../../styled-system/css";
 import { button } from "../../styled-system/recipes";
-import { catalog } from "../catalog/index.ts";
+import { catalog } from "../catalog/bundled-catalog.ts";
 import { Page } from "../components/page.tsx";
 import { SkillCard } from "../components/skill-card.tsx";
 import { prepareCureSkills, searchCures } from "../search/search.ts";

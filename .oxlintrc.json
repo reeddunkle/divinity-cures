@@ -10,7 +10,7 @@
     "vitest": true
   },
   "ignorePatterns": ["dist", "src/routeTree.gen.ts", "styled-system"],
-  "jsPlugins": ["@pandacss/eslint-plugin/oxlint"],
+  "jsPlugins": ["@pandacss/eslint-plugin/oxlint", "./lint/local-plugin.ts"],
   "options": {
     "denyWarnings": true,
     "reportUnusedDisableDirectives": "error",
@@ -41,11 +41,13 @@
     "@pandacss/no-invalid-token-paths": "error",
     "curly": ["error", "all"],
     "eqeqeq": ["error", "always"],
+    "local/no-re-export": "error",
     "no-continue": "error",
     "no-param-reassign": "error",
     "no-shadow": "error",
     "one-var": ["error", "never"],
     "oxc/no-accumulating-spread": "error",
+    "oxc/no-barrel-file": ["error", { "threshold": 0 }],
     "react/hooks": "error",
     "react/react-in-jsx-scope": "off",
     "typescript/array-type": "error",

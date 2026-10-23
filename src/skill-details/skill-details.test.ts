@@ -1,6 +1,6 @@
 import { describe, expect, it } from "vitest";
 
-import { catalog } from "../catalog/index.ts";
+import { catalog } from "../catalog/bundled-catalog.ts";
 import {
   cooldownGlyph,
   cooldownLabel,
