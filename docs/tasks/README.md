@@ -2,14 +2,13 @@
 
 This directory contains only outstanding work. Tasks are ordered by dependency and risk rather than visual impact.
 
-| Priority | Task                                                                                            | Outcome                                              |
-| -------- | ----------------------------------------------------------------------------------------------- | ---------------------------------------------------- |
-| P0       | [04 — Rebuild search, form, and URL state](./04-rebuild-search-and-url-state.md)                | TanStack Form search with shareable, restorable URLs |
-| P1       | [05 — Rebuild routes, assets, and presentation](./05-rebuild-routes-assets-and-presentation.md) | A complete accessible UI with self-hosted assets     |
-| P1       | [07 — Enable and measure React Compiler](./07-enable-react-compiler.md)                         | An evidence-based compiler adoption decision         |
-| P1       | [08 — Audit catalog semantics and content](./08-audit-catalog-semantics-and-content.md)         | Deliberate domain rules and trustworthy source data  |
-| P1       | [09 — Remove barrel files](./09-remove-barrel-files.md)                                         | Explicit module paths enforced by Oxlint             |
-| P2       | [06 — Verify and prepare deployment](./06-verify-and-prepare-deployment.md)                     | Production checks and a safe Netlify cutover plan    |
+| Priority | Task                                                                                            | Outcome                                             |
+| -------- | ----------------------------------------------------------------------------------------------- | --------------------------------------------------- |
+| P1       | [05 — Rebuild routes, assets, and presentation](./05-rebuild-routes-assets-and-presentation.md) | A complete accessible UI with self-hosted assets    |
+| P1       | [07 — Enable and measure React Compiler](./07-enable-react-compiler.md)                         | An evidence-based compiler adoption decision        |
+| P1       | [08 — Audit catalog semantics and content](./08-audit-catalog-semantics-and-content.md)         | Deliberate domain rules and trustworthy source data |
+| P1       | [09 — Remove barrel files](./09-remove-barrel-files.md)                                         | Explicit module paths enforced by Oxlint            |
+| P2       | [06 — Verify and prepare deployment](./06-verify-and-prepare-deployment.md)                     | Production checks and a safe Netlify cutover plan   |
 
 ## Working principles
 

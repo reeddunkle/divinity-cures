@@ -12,6 +12,7 @@ Prove that the rewrite can safely replace the production application.
 - Verify a clean install patches TypeScript with Effect TSGo while leaving Oxlint on its native engine.
 - Verify Oxlint reports React correctness and React Compiler diagnostics.
 - Verify Panda CSS diagnostics run through its Oxlint plugin.
+- Add component tests for the search form's URL synchronization after choosing a DOM test environment, which requires new packages.
 - Compare the rewrite against the parity checklist at representative viewport sizes.
 - Verify Netlify direct-route handling and SPA fallback configuration.
 - Check asset paths, caching, compression, bundle composition, and unexpected third-party requests.

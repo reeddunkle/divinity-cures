@@ -1,0 +1,215 @@
+import { describe, expect, it } from "vitest";
+
+import type { Skill } from "../catalog/catalog.ts";
+import { catalog } from "../catalog/index.ts";
+import type { StatusEffectRecord } from "../catalog/schemas.ts";
+import { normalizeSearchText, prepareCureSkills, searchCures } from "./search.ts";
+
+const makeStatusEffect = (overrides: Partial<StatusEffectRecord>): StatusEffectRecord => ({
+  aliases: [],
+  clearedBy: [],
+  description: "",
+  givenBy: [],
+  id: "status",
+  imageSrc: "",
+  immunities: [],
+  name: "Status",
+  removes: [],
+  stats: [],
+  ...overrides,
+});
+
+const makeSkill = (overrides: Partial<Skill>): Skill => ({
+  actionPoints: 1,
+  cooldown: 1,
+  description: "",
+  id: "skill",
+  imageSrc: "",
+  immunities: [],
+  memory: 1,
+  name: "Skill",
+  notes: [],
+  range: 1,
+  removes: [],
+  schools: [],
+  sourcePoints: 0,
+  stats: [],
+  statusEffects: [],
+  surfaceRemoves: [],
+  surfaces: [],
+  ...overrides,
+});
+
+const applied = (statusEffect: StatusEffectRecord) => ({ stats: [], statusEffect });
+
+const fortify = makeSkill({
+  id: "fortify",
+  name: "Fortify",
+  removes: ["Poisoned", "Burning"],
+});
+const firstAid = makeSkill({
+  id: "first-aid",
+  name: "First Aid",
+  removes: ["Infectious Disease", "Blinded"],
+});
+const restoration = makeSkill({
+  actionPoints: 2,
+  id: "restoration",
+  name: "Restoration",
+  statusEffects: [
+    applied(
+      makeStatusEffect({
+        immunities: ["Blinded", "Muted"],
+        name: "Rested",
+        removes: ["Blinded", "Muted", "Crippled"],
+      }),
+    ),
+  ],
+});
+const sourceCure = makeSkill({
+  actionPoints: 1,
+  id: "source-cure",
+  name: "Arcane Cure",
+  removes: ["Burning"],
+  sourcePoints: 1,
+});
+const noCures = makeSkill({
+  id: "no-cures",
+  name: "Burning Touch",
+});
+
+const skills = [sourceCure, restoration, noCures, firstAid, fortify];
+const cureSkills = prepareCureSkills(skills);
+
+const names = (results: ReturnType<typeof searchCures>) =>
+  results.map((result) => result.skill.name);
+
+describe("normalizeSearchText", () => {
+  it("lowercases, trims, and collapses whitespace", () => {
+    expect(normalizeSearchText("  First \t  AID ")).toBe("first aid");
+  });
+
+  it("folds compatibility characters", () => {
+    expect(normalizeSearchText("ＢＵＲＮ")).toBe("burn");
+  });
+});
+
+describe("prepareCureSkills", () => {
+  it("combines direct cures with cures from applied status effects", () => {
+    const restorationCures = cureSkills.find(
+      (cureSkill) => cureSkill.skill.id === "restoration",
+    )?.cures;
+
+    expect(restorationCures).toEqual([
+      { grantsImmunity: true, status: "Blinded" },
+      { grantsImmunity: false, status: "Crippled" },
+      { grantsImmunity: true, status: "Muted" },
+    ]);
+  });
+
+  it("excludes skills that cure nothing", () => {
+    expect(cureSkills.map((cureSkill) => cureSkill.skill.id)).not.toContain("no-cures");
+  });
+
+  it("orders by Source Points, then Action Points, then name", () => {
+    expect(cureSkills.map((cureSkill) => cureSkill.skill.name)).toEqual([
+      "First Aid",
+      "Fortify",
+      "Restoration",
+      "Arcane Cure",
+    ]);
+  });
+
+  it("does not mutate its input", () => {
+    const frozen = Object.freeze([...skills]);
+
+    expect(() => prepareCureSkills(frozen)).not.toThrow();
+    expect(frozen).toEqual(skills);
+  });
+});
+
+describe("searchCures", () => {
+  it("returns every cure skill without highlights for an empty query", () => {
+    const results = searchCures(cureSkills, "");
+
+    expect(names(results)).toEqual(["First Aid", "Fortify", "Restoration", "Arcane Cure"]);
+    expect(
+      results.every((result) => !result.isNameMatch && result.cures.every((cure) => !cure.isMatch)),
+    ).toBe(true);
+  });
+
+  it("treats a whitespace-only query as empty", () => {
+    expect(searchCures(cureSkills, "   ")).toEqual(searchCures(cureSkills, ""));
+  });
+
+  it("matches removed statuses by prefix and highlights only the matching cures", () => {
+    const results = searchCures(cureSkills, "burn");
+
+    expect(names(results)).toEqual(["Fortify", "Arcane Cure"]);
+    expect(results[0]?.cures).toEqual([
+      { grantsImmunity: false, isMatch: true, status: "Burning" },
+      { grantsImmunity: false, isMatch: false, status: "Poisoned" },
+    ]);
+  });
+
+  it("matches granted immunities", () => {
+    const results = searchCures(cureSkills, "mut");
+
+    expect(names(results)).toEqual(["Restoration"]);
+    expect(results[0]?.cures.find((cure) => cure.isMatch)).toEqual({
+      grantsImmunity: true,
+      isMatch: true,
+      status: "Muted",
+    });
+  });
+
+  it("ignores casing and surrounding whitespace", () => {
+    expect(names(searchCures(cureSkills, "  BuRnInG "))).toEqual(["Fortify", "Arcane Cure"]);
+  });
+
+  it("matches the start of any word", () => {
+    expect(names(searchCures(cureSkills, "disease"))).toEqual(["First Aid"]);
+  });
+
+  it("does not match inside a word", () => {
+    expect(searchCures(cureSkills, "urning")).toEqual([]);
+  });
+
+  it("matches queries that span words", () => {
+    expect(names(searchCures(cureSkills, "infectious dis"))).toEqual(["First Aid"]);
+  });
+
+  it("matches skill names without highlighting their cures", () => {
+    const results = searchCures(cureSkills, "first aid");
+
+    expect(names(results)).toEqual(["First Aid"]);
+    expect(results[0]?.isNameMatch).toBe(true);
+    expect(results[0]?.cures.every((cure) => !cure.isMatch)).toBe(true);
+  });
+
+  it("never returns skills that cure nothing, even when their name matches", () => {
+    expect(names(searchCures(cureSkills, "burning touch"))).toEqual([]);
+  });
+
+  it("returns no results instead of falling back to an earlier query", () => {
+    searchCures(cureSkills, "burn");
+
+    expect(searchCures(cureSkills, "zzz")).toEqual([]);
+  });
+
+  it("keeps the prepared order", () => {
+    expect(names(searchCures(cureSkills, "b"))).toEqual([
+      "First Aid",
+      "Fortify",
+      "Restoration",
+      "Arcane Cure",
+    ]);
+  });
+
+  it("finds cures in the real catalog", () => {
+    const catalogCures = prepareCureSkills(catalog.skills);
+
+    expect(names(searchCures(catalogCures, "first aid"))).toContain("First Aid");
+    expect(searchCures(catalogCures, "burning").length).toBeGreaterThan(0);
+  });
+});
