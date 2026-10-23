@@ -11,6 +11,7 @@ import {
   CatalogDecodeError,
   type DatasetName,
   DuplicateCatalogIdError,
+  MismatchedCatalogReferenceError,
 } from "./errors.ts";
 import {
   CatalogRecords,
@@ -51,6 +52,10 @@ export type Catalog = {
 
 type CatalogRecord = {
   readonly id: string;
+};
+
+type NamedCatalogRecord = CatalogRecord & {
+  readonly name: string;
 };
 
 const decodeOptions = {
@@ -105,47 +110,66 @@ const brokenReference = (
     targetId,
   });
 
+const resolveReference = <Target extends NamedCatalogRecord>(
+  skill: SkillRecord,
+  targetDataset: DatasetName,
+  targetsById: ReadonlyMap<string, Target>,
+  reference: NamedCatalogRecord,
+): E.Effect<Target, BrokenCatalogReferenceError | MismatchedCatalogReferenceError> => {
+  const target = targetsById.get(reference.id);
+
+  if (target === undefined) {
+    return E.fail(brokenReference("skills", skill.id, targetDataset, reference.id));
+  }
+
+  if (target.name !== reference.name) {
+    return E.fail(
+      new MismatchedCatalogReferenceError({
+        referenceName: reference.name,
+        sourceDataset: "skills",
+        sourceId: skill.id,
+        targetDataset,
+        targetId: reference.id,
+        targetName: target.name,
+      }),
+    );
+  }
+
+  return E.succeed(target);
+};
+
 const resolveSkill = E.fnUntraced(function* (
   skill: SkillRecord,
   schoolsById: ReadonlyMap<string, SchoolRecord>,
   statusEffectsById: ReadonlyMap<string, StatusEffectRecord>,
-): E.fn.Return<Skill, BrokenCatalogReferenceError> {
+): E.fn.Return<Skill, BrokenCatalogReferenceError | MismatchedCatalogReferenceError> {
   const schools = yield* E.all(
     pipe(
       skill.schools,
-      A.map((reference) => {
-        const school = schoolsById.get(reference.id);
-
-        if (school === undefined) {
-          return E.fail(brokenReference("skills", skill.id, "spellSchools", reference.id));
-        }
-
-        return E.succeed({
+      A.map((reference) =>
+        E.map(resolveReference(skill, "spellSchools", schoolsById, reference), (school) => ({
           ...(reference.requires === undefined ? {} : { requires: reference.requires }),
           school,
-        });
-      }),
+        })),
+      ),
     ),
   );
 
   const statusEffects = yield* E.all(
     pipe(
       skill.statusEffects,
-      A.map((reference) => {
-        const statusEffect = statusEffectsById.get(reference.id);
-
-        if (statusEffect === undefined) {
-          return E.fail(brokenReference("skills", skill.id, "statusEffects", reference.id));
-        }
-
-        return E.succeed({
-          ...(reference.description === undefined ? {} : { description: reference.description }),
-          ...(reference.duration === undefined ? {} : { duration: reference.duration }),
-          ...(reference.imageSrc === undefined ? {} : { imageSrc: reference.imageSrc }),
-          stats: reference.stats,
-          statusEffect,
-        });
-      }),
+      A.map((reference) =>
+        E.map(
+          resolveReference(skill, "statusEffects", statusEffectsById, reference),
+          (statusEffect) => ({
+            ...(reference.description === undefined ? {} : { description: reference.description }),
+            ...(reference.duration === undefined ? {} : { duration: reference.duration }),
+            ...(reference.imageSrc === undefined ? {} : { imageSrc: reference.imageSrc }),
+            stats: reference.stats,
+            statusEffect,
+          }),
+        ),
+      ),
     ),
   );
 

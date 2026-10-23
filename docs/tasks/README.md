@@ -4,7 +4,6 @@ This directory contains only outstanding work. Tasks are ordered by dependency a
 
 | Priority | Task                                                                                          | Outcome                                             |
 | -------- | --------------------------------------------------------------------------------------------- | --------------------------------------------------- |
-| P0       | [11 — Fix broken catalog references](./11-fix-broken-catalog-references.md)                   | Every reference resolves to the record it names     |
 | P1       | [07 — Enable and measure React Compiler](./07-enable-react-compiler.md)                       | An evidence-based compiler adoption decision        |
 | P1       | [08 — Audit catalog semantics and content](./08-audit-catalog-semantics-and-content.md)       | Deliberate domain rules and trustworthy source data |
 | P1       | [09 — Remove barrel files](./09-remove-barrel-files.md)                                       | Explicit module paths enforced by Oxlint            |

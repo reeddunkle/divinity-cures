@@ -23,6 +23,13 @@ describe("loadCatalog", () => {
     expect(catalog.skills[0]?.statusEffects[0]?.statusEffect.name).toBe("Fortified");
   });
 
+  it("resolves Enrage to the Enraged status effect", () => {
+    const catalog = loadCatalog(validInput).pipe(E.runSync);
+    const enrage = catalog.skills.find((skill) => skill.name === "Enrage");
+
+    expect(enrage?.statusEffects.map((applied) => applied.statusEffect.name)).toEqual(["Enraged"]);
+  });
+
   it("decodes once-per-combat cooldowns and rejects other cooldown labels", () => {
     const catalog = loadCatalog(validInput).pipe(E.runSync);
 
@@ -115,6 +122,52 @@ describe("loadCatalog", () => {
       sourceDataset: "skills",
       targetDataset: "statusEffects",
       targetId: "missing",
+    });
+  });
+
+  it("rejects school references whose name differs from the school", () => {
+    const error = loadCatalog({
+      ...validInput,
+      skills: [
+        {
+          ...skills[0],
+          schools: [{ id: "0", name: "Pyrokinetic" }],
+        },
+      ],
+    }).pipe(E.flip, E.runSync);
+
+    expect(error).toMatchObject({
+      _tag: "MismatchedCatalogReferenceError",
+      referenceName: "Pyrokinetic",
+      sourceDataset: "skills",
+      sourceId: skills[0]?.id,
+      targetDataset: "spellSchools",
+      targetId: "0",
+      targetName: spellSchools[0]?.name,
+    });
+  });
+
+  it("rejects applied-status references whose name differs from the status effect", () => {
+    const skinGraft = statusEffects.find((statusEffect) => statusEffect.name === "Skin Graft");
+
+    const error = loadCatalog({
+      ...validInput,
+      skills: [
+        {
+          ...skills[0],
+          statusEffects: [{ id: skinGraft?.id ?? "", name: "Enraged" }],
+        },
+      ],
+    }).pipe(E.flip, E.runSync);
+
+    expect(error).toMatchObject({
+      _tag: "MismatchedCatalogReferenceError",
+      referenceName: "Enraged",
+      sourceDataset: "skills",
+      sourceId: skills[0]?.id,
+      targetDataset: "statusEffects",
+      targetId: skinGraft?.id,
+      targetName: "Skin Graft",
     });
   });
 });

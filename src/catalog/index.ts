@@ -12,6 +12,7 @@ export {
   BrokenCatalogReferenceError,
   CatalogDecodeError,
   DuplicateCatalogIdError,
+  MismatchedCatalogReferenceError,
 } from "./errors.ts";
 
 export const catalog = E.runSync(

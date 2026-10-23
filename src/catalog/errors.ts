@@ -29,7 +29,20 @@ export class BrokenCatalogReferenceError extends Schema.TaggedError<
   targetId: Schema.String,
 }) {}
 
+export class MismatchedCatalogReferenceError extends Schema.TaggedError<
+  MismatchedCatalogReferenceError,
+  { readonly brand: unique symbol }
+>()("MismatchedCatalogReferenceError", {
+  referenceName: Schema.String,
+  sourceDataset: DatasetName,
+  sourceId: Schema.String,
+  targetDataset: DatasetName,
+  targetId: Schema.String,
+  targetName: Schema.String,
+}) {}
+
 export type CatalogError =
   | CatalogDecodeError
   | DuplicateCatalogIdError
-  | BrokenCatalogReferenceError;
+  | BrokenCatalogReferenceError
+  | MismatchedCatalogReferenceError;
