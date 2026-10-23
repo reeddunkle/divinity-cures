@@ -8,6 +8,8 @@ The site is static: Vite builds it into `dist/`, and Netlify serves that folder.
 - **Routes:** `/` is served by `index.html`. `/about` and `/about/` are rewritten to `index.html` with status 200. Every other path that does not match a file gets `index.html` with status 404, so the app renders its not-found page and crawlers see a real 404.
 - **Caching:** hashed files under `/assets/*` are cached for a year as immutable. Images under `/images/*` are cached for a week, because their names are not hashed. `index.html` keeps Netlify's default of revalidating on every request.
 - **Headers:** every response sets `X-Content-Type-Options: nosniff` and `Referrer-Policy: strict-origin-when-cross-origin`.
+- **Content Security Policy:** every response enforces a policy that allows scripts, styles, images, fetches, and manifests only from the site's own origin, and blocks everything else, including inline scripts, inline `<style>` elements, plugins, `<base>` changes, and framing (`frame-ancestors 'none'`). The production build has no inline script or style, and Panda emits one static stylesheet. Anything that adds a third-party resource or an inline script must update the policy in `netlify.toml`.
+- **Permissions Policy:** every response disables the accelerometer, Topics API, camera, screen capture, geolocation, gyroscope, magnetometer, microphone, Payment Request API, and WebUSB, none of which the site uses.
 - **Compression:** Netlify compresses text responses with Brotli or gzip automatically.
 - **Indexing:** `robots.txt` allows everything. Netlify does not add an `x-robots-tag: noindex` header to branch deploys, so a branch deploy URL such as `deploy-preview--divinity-cures.netlify.app` can be indexed if it is linked publicly. To consolidate those duplicates and the `divinity-cures.netlify.app` host, each route sets a canonical link to its path on `https://divinitycures.com`, without the query string. The not-found page sets none.
 
@@ -17,7 +19,7 @@ As of the cutover preparation, the entry chunk is 387 kB (125 kB gzipped), the h
 
 ## Checks
 
-The full `pnpm check`, including the browser tests, runs locally. Netlify runs only `pnpm build`, so a deploy never needs a browser download. There is no other CI service yet; see [task 10](./tasks/10-add-continuous-integration.md).
+The full `pnpm check`, including the browser tests, runs locally and in GitHub Actions on every push and pull request. Netlify runs only `pnpm build`, so a deploy never needs a browser download.
 
 ## Preview a deploy
 
@@ -39,6 +41,8 @@ The full `pnpm check`, including the browser tests, runs locally. Netlify runs o
 | `curl -sI -H "Accept-Encoding: br" <preview>/assets/<entry>.js`                                     | `content-encoding: br` and `cache-control: public, max-age=31536000, immutable`     |
 | `curl -sI <preview>/images/logo.png`                                                                | `cache-control: public, max-age=604800`                                             |
 | `curl -sI <preview>/robots.txt`                                                                     | `HTTP/2 200` with `content-type: text/plain`                                        |
+| `curl -sI <preview>/about`                                                                          | `content-security-policy` with `frame-ancestors 'none'`, and `permissions-policy`   |
+| Open every route, search, follow a badge, and open a description with the console open              | No Content Security Policy violations                                               |
 | Browser network panel on `/?search=burn`                                                            | No request leaves the site's own origin                                             |
 | Favicon and Apple touch icon                                                                        | The "D" logo                                                                        |
 | Type a search, use Back and Forward, follow a cure badge, use **Clear**                             | The input, results, and URL stay in sync                                            |
