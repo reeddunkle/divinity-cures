@@ -45,6 +45,7 @@
     "no-continue": "error",
     "no-param-reassign": "error",
     "no-shadow": "error",
+    "no-underscore-dangle": ["error", { "allow": ["_notFound"] }],
     "one-var": ["error", "never"],
     "oxc/no-accumulating-spread": "error",
     "oxc/no-barrel-file": ["error", { "threshold": 0 }],

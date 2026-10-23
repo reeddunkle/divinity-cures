@@ -7,17 +7,19 @@ PNPM_VERSION = "12.15.0"
 
 [[redirects]]
 from = "/about"
-to = "/index.html"
+to = "/about/index.html"
 status = 200
+force = true
 
 [[redirects]]
 from = "/about/"
-to = "/index.html"
+to = "/about/index.html"
 status = 200
+force = true
 
 [[redirects]]
 from = "/*"
-to = "/index.html"
+to = "/404.html"
 status = 404
 
 [[headers]]

@@ -1,8 +1,8 @@
 import { RouterProvider } from "@tanstack/react-router";
 import { StrictMode } from "react";
-import { createRoot } from "react-dom/client";
+import { createRoot, hydrateRoot } from "react-dom/client";
 
-import { createAppRouter } from "./router.ts";
+import { createAppRouter, prepareForHydration, prerenderKey } from "./router.ts";
 
 import "./styles.css";
 
@@ -14,8 +14,21 @@ if (rootElement === null) {
   throw new Error("Root element was not found");
 }
 
-createRoot(rootElement).render(
+await router.load();
+
+for (const element of document.head.querySelectorAll("[data-prerendered]")) {
+  element.remove();
+}
+
+const app = (
   <StrictMode>
     <RouterProvider router={router} />
-  </StrictMode>,
+  </StrictMode>
 );
+
+if (rootElement.dataset["prerendered"] === prerenderKey(router)) {
+  prepareForHydration(router);
+  hydrateRoot(rootElement, app);
+} else {
+  createRoot(rootElement).render(app);
+}

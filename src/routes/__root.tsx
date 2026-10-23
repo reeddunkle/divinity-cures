@@ -5,7 +5,7 @@ import { css } from "../../styled-system/css";
 import { NotFound, RouteError } from "../components/route-fallbacks.tsx";
 import { SiteFooter } from "../components/site-footer.tsx";
 import { SiteHeader } from "../components/site-header.tsx";
-import { pageTitle } from "../site.ts";
+import { pageHead } from "../site.ts";
 
 function useFocusMainOnPageChange() {
   const mainRef = useRef<HTMLElement>(null);
@@ -90,8 +90,7 @@ function RootLayout() {
 export const Route = createRootRoute({
   component: RootLayout,
   errorComponent: RouteError,
-  head: ({ matches }) => ({
-    meta: [{ title: pageTitle(matches.length === 1 ? "Page not found" : undefined) }],
-  }),
+  head: ({ matches }) =>
+    matches.some((match) => match._notFound === true) ? pageHead({ title: "Page not found" }) : {},
   notFoundComponent: NotFound,
 });

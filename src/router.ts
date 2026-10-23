@@ -23,6 +23,17 @@ export const createAppRouter = (options: AppRouterOptions = {}) =>
     stringifySearch,
   });
 
+export type AppRouter = ReturnType<typeof createAppRouter>;
+
+export const prepareForHydration = (router: AppRouter) => {
+  router.ssr = { manifest: undefined };
+};
+
+export const prerenderKey = (router: AppRouter) =>
+  router.state.matches.some((match) => match._notFound === true)
+    ? "not-found"
+    : router.state.location.href;
+
 declare module "@tanstack/react-router" {
   interface Register {
     router: ReturnType<typeof createAppRouter>;

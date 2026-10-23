@@ -9,6 +9,8 @@ Every image is served from `public/` and referenced by a root-relative path. `sr
 | `favicon.ico`, `favicon-16x16.png`, `favicon-32x32.png`, `apple-icon.png` | `app/` in the Next.js application                                                   | Project-owned artwork      |
 | `images/logo.png`                                                         | `public/images/d-icon.png` in the Next.js application, scaled from 800 px to 128 px | Project-owned artwork      |
 
+`apple-icon.png` (180 × 180) is also the Open Graph and Twitter card image, referenced as `uiImages.shareImage`. It meets the 144 × 144 minimum for a Twitter summary card.
+
 The Next.js `android-chrome-*` icons were not carried over because nothing referenced them. Add them back together with a web app manifest if one is introduced.
 
 ## Game icons

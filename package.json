@@ -4,7 +4,7 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "build": "panda codegen && pnpm typecheck && vite build",
+    "build": "panda codegen && pnpm typecheck && vite build && node build-plugins/prerender.ts",
     "check": "pnpm lint && pnpm format:check && pnpm test && pnpm build",
     "dev": "vite",
     "format": "oxfmt",

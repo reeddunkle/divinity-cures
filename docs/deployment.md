@@ -4,31 +4,33 @@ The site is static: Vite builds it into `dist/`, and Netlify serves that folder.
 
 ## Netlify configuration
 
-- **Build:** `pnpm build` typechecks and builds. Netlify reads Node from `.node-version` and pnpm from `PNPM_VERSION`, because Node 26 no longer ships Corepack. Installing runs `prepare`, which patches TypeScript with Effect TSGo and generates `styled-system/`. Netlify restores a cached `node_modules`, and when the lockfile is unchanged pnpm skips the install and `prepare` with it, so `pnpm build` runs `panda codegen` itself before typechecking.
-- **Routes:** `/` is served by `index.html`. `/about` and `/about/` are rewritten to `index.html` with status 200. Every other path that does not match a file gets `index.html` with status 404, so the app renders its not-found page and crawlers see a real 404.
+- **Build:** `pnpm build` typechecks, builds, and prerenders. Netlify reads Node from `.node-version` and pnpm from `PNPM_VERSION`, because Node 26 no longer ships Corepack. Installing runs `prepare`, which patches TypeScript with Effect TSGo and generates `styled-system/`. Netlify restores a cached `node_modules`, and when the lockfile is unchanged pnpm skips the install and `prepare` with it, so `pnpm build` runs `panda codegen` itself before typechecking. After `vite build`, `build-plugins/prerender.ts` loads `src/entry-server.tsx` through Vite, renders `/`, `/about`, and the not-found page to `index.html`, `about/index.html`, and `404.html`, and writes `sitemap.xml` and `robots.txt`.
+- **Routes:** `/` is served by `index.html`. `/about` and `/about/` are rewritten to `about/index.html` with status 200, forced so Netlify's directory handling cannot redirect them. Every other path that does not match a file gets `404.html` with status 404. Each file holds its page's title, description, canonical link, Open Graph and Twitter card tags, and full content, so crawlers and link previews need no JavaScript. A search such as `/?search=burn` is served `index.html`, and the client renders its results.
 - **Caching:** hashed files under `/assets/*` are cached for a year as immutable. Images under `/images/*` are cached for a week, because their names are not hashed. `index.html` keeps Netlify's default of revalidating on every request.
 - **Headers:** every response sets `X-Content-Type-Options: nosniff` and `Referrer-Policy: strict-origin-when-cross-origin`.
 - **Content Security Policy:** every response enforces a policy that allows scripts, styles, images, fetches, and manifests only from the site's own origin, and blocks everything else, including inline scripts, inline `<style>` elements, plugins, `<base>` changes, and framing (`frame-ancestors 'none'`). The production build has no inline script or style, and Panda emits one static stylesheet. Anything that adds a third-party resource or an inline script must update the policy in `netlify.toml`.
 - **Permissions Policy:** every response disables the accelerometer, Topics API, camera, screen capture, geolocation, gyroscope, magnetometer, microphone, Payment Request API, and WebUSB, none of which the site uses.
 - **Compression:** Netlify compresses text responses with Brotli or gzip automatically.
-- **Indexing:** `robots.txt` allows everything. Netlify does not add an `x-robots-tag: noindex` header to branch deploys, so a branch deploy URL such as `deploy-preview--divinity-cures.netlify.app` can be indexed if it is linked publicly. To consolidate those duplicates and the `divinity-cures.netlify.app` host, each route sets a canonical link to its path on `https://divinitycures.com`, without the query string. The not-found page sets none.
+- **Indexing:** `robots.txt` allows everything and points to `sitemap.xml`, which lists `/` and `/about`. Netlify does not add an `x-robots-tag: noindex` header to branch deploys, so a branch deploy URL such as `deploy-preview--divinity-cures.netlify.app` can be indexed if it is linked publicly. To consolidate those duplicates and the `divinity-cures.netlify.app` host, each route sets a canonical link to its path on `https://divinitycures.com`, without the query string. The not-found page sets none.
 
 ## Bundle
 
 Measured on 2026-10-23 with `vite build`; sizes are minified, with gzipped sizes in parentheses. The first load fetches the entry chunk and, once Effect Schema left the browser bundle, a shared `site` chunk that `index.html` preloads.
 
-| JavaScript          | Before              | Catalog built ahead | Schema removed      |
-| ------------------- | ------------------- | ------------------- | ------------------- |
-| First load          | 387.6 kB (125.7 kB) | 377.2 kB (122.5 kB) | 316.4 kB (103.7 kB) |
-| Entry chunk         | 387.6 kB (125.7 kB) | 377.2 kB (122.5 kB) | 247.2 kB (78.7 kB)  |
-| Shared `site` chunk | none                | none                | 69.2 kB (25.0 kB)   |
-| Home route          | 107.3 kB (28.6 kB)  | 126.7 kB (28.3 kB)  | 128.2 kB (28.8 kB)  |
-| About route         | 2.0 kB (0.7 kB)     | 2.0 kB (0.7 kB)     | 2.0 kB (0.7 kB)     |
+| JavaScript          | Before              | Catalog built ahead | Schema removed      | Prerendered         |
+| ------------------- | ------------------- | ------------------- | ------------------- | ------------------- |
+| First load          | 387.6 kB (125.7 kB) | 377.2 kB (122.5 kB) | 316.4 kB (103.7 kB) | 318.0 kB (104.8 kB) |
+| Entry chunk         | 387.6 kB (125.7 kB) | 377.2 kB (122.5 kB) | 247.2 kB (78.7 kB)  | 227.2 kB (71.7 kB)  |
+| Shared `site` chunk | none                | none                | 69.2 kB (25.0 kB)   | 69.8 kB (25.2 kB)   |
+| Route tree chunk    | none                | none                | none                | 21.0 kB (7.9 kB)    |
+| Home route          | 107.3 kB (28.6 kB)  | 126.7 kB (28.3 kB)  | 128.2 kB (28.8 kB)  | 128.2 kB (28.8 kB)  |
+| About route         | 2.0 kB (0.7 kB)     | 2.0 kB (0.7 kB)     | 2.0 kB (0.7 kB)     | 2.0 kB (0.7 kB)     |
 
 The stylesheet is 32.6 kB (8.9 kB) throughout.
 
 - **Catalog built ahead:** the build validates the catalog with `loadCatalog` and ships the decoded result, so visitors no longer run Effect Schema or the Effect runtime to load data, and an invalid catalog fails the build instead of the page. The home route chunk grows uncompressed because shared status and school records are repeated in each skill, but it barely changes gzipped.
 - **Schema removed:** the `search` parameter was then the only value decoded with Effect Schema in the browser. Schema also pulled in modules the app never uses, such as `Duration`, `DateTime`, `BigDecimal`, and HTTP cookie and DNS helpers. Decoding it with `Predicate` instead takes Schema out of the browser bundle.
+- **Prerendered:** the client loads the router before rendering so it can hydrate the prerendered markup, which moves the route tree into its own chunk that `index.html` also preloads.
 
 Before minification, the remaining JavaScript is mostly React DOM, TanStack Router, and, in the home route, TanStack Form and the catalog.
 
@@ -49,22 +51,25 @@ The full `pnpm check`, including the browser tests, runs locally and in GitHub A
 
 ### Preview checklist
 
-| Check                                                                                               | Expected                                                                            |
-| --------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------- |
-| Open `/`, `/about`, `/about/`, and `/?search=first+aid` directly, and reload each                   | The right page renders with no console errors                                       |
-| Open `/missing` directly                                                                            | The not-found page, titled "Page not found - Divinity Cures"                        |
-| `curl -sI <preview>/missing`                                                                        | `HTTP/2 404`                                                                        |
-| `curl -sI <preview>/about`                                                                          | `HTTP/2 200`                                                                        |
-| `curl -sI -H "Accept-Encoding: br" <preview>/assets/<entry>.js`                                     | `content-encoding: br` and `cache-control: public, max-age=31536000, immutable`     |
-| `curl -sI <preview>/images/logo.png`                                                                | `cache-control: public, max-age=604800`                                             |
-| `curl -sI <preview>/robots.txt`                                                                     | `HTTP/2 200` with `content-type: text/plain`                                        |
-| `curl -sI <preview>/about`                                                                          | `content-security-policy` with `frame-ancestors 'none'`, and `permissions-policy`   |
-| Open every route, search, follow a badge, and open a description with the console open              | No Content Security Policy violations                                               |
-| Browser network panel on `/?search=burn`                                                            | No request leaves the site's own origin                                             |
-| Favicon and Apple touch icon                                                                        | The "D" logo                                                                        |
-| Type a search, use Back and Forward, follow a cure badge, use **Clear**                             | The input, results, and URL stay in sync                                            |
-| Zoom to 200% and 400%, and turn on reduced motion in the OS                                         | Nothing overflows horizontally, and scrolling isn't animated                        |
-| Screen reader on a phone (VoiceOver or TalkBack): search, then read the result summary and one card | The summary is announced, and the card reads name, cost, cooldown, range, and cures |
+| Check                                                                                               | Expected                                                                                                                                                 |
+| --------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Open `/`, `/about`, `/about/`, and `/?search=first+aid` directly, and reload each                   | The right page renders with no console errors                                                                                                            |
+| Open `/missing` directly                                                                            | The not-found page, titled "Page not found - Divinity Cures"                                                                                             |
+| `curl -sI <preview>/missing`                                                                        | `HTTP/2 404`                                                                                                                                             |
+| `curl -sI <preview>/about`                                                                          | `HTTP/2 200`                                                                                                                                             |
+| `curl -sI -H "Accept-Encoding: br" <preview>/assets/<entry>.js`                                     | `content-encoding: br` and `cache-control: public, max-age=31536000, immutable`                                                                          |
+| `curl -sI <preview>/images/logo.png`                                                                | `cache-control: public, max-age=604800`                                                                                                                  |
+| `curl -sI <preview>/robots.txt`                                                                     | `HTTP/2 200` with `content-type: text/plain`                                                                                                             |
+| `curl -s <preview>/about` and `curl -s <preview>/missing`                                           | Each page's title, description, Open Graph tags, and main heading, with no `<script>` other than the entry module; only real pages have a canonical link |
+| `curl -s <preview>/sitemap.xml`                                                                     | `/` and `/about` on `https://divinitycures.com`                                                                                                          |
+| Share `<preview>/about` in a chat app that unfurls links                                            | A card with the page title, description, and the "D" logo                                                                                                |
+| `curl -sI <preview>/about`                                                                          | `content-security-policy` with `frame-ancestors 'none'`, and `permissions-policy`                                                                        |
+| Open every route, search, follow a badge, and open a description with the console open              | No Content Security Policy violations                                                                                                                    |
+| Browser network panel on `/?search=burn`                                                            | No request leaves the site's own origin                                                                                                                  |
+| Favicon and Apple touch icon                                                                        | The "D" logo                                                                                                                                             |
+| Type a search, use Back and Forward, follow a cure badge, use **Clear**                             | The input, results, and URL stay in sync                                                                                                                 |
+| Zoom to 200% and 400%, and turn on reduced motion in the OS                                         | Nothing overflows horizontally, and scrolling isn't animated                                                                                             |
+| Screen reader on a phone (VoiceOver or TalkBack): search, then read the result summary and one card | The summary is announced, and the card reads name, cost, cooldown, range, and cures                                                                      |
 
 ## Cut over
 

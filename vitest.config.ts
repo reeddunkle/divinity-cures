@@ -15,6 +15,7 @@ export default defineConfig({
         },
       },
       {
+        optimizeDeps: { include: ["react-dom/server"] },
         plugins: [pandacss({ transform: true }), bundledCatalog()],
         test: {
           browser: {

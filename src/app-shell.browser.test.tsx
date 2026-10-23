@@ -61,6 +61,15 @@ describe("not-found route", () => {
     await expect.poll(() => document.title).toBe("Page not found - Divinity Cures");
     expect(canonicalHref()).toBeNull();
   });
+
+  it("titles a missing page below a real route as not found", async () => {
+    const { screen } = await renderApp("/about/nope");
+
+    await expect
+      .element(screen.getByRole("heading", { level: 1, name: "Page not found" }))
+      .toBeVisible();
+    await expect.poll(() => document.title).toBe("Page not found - Divinity Cures");
+  });
 });
 
 describe("focus management", () => {
