@@ -1,7 +1,13 @@
 import { describe, expect, it } from "vitest";
 
 import { catalog } from "../catalog/index.ts";
-import { cooldownLabel, costLabel, rangeLabel, schoolRequirements } from "./skill-details.ts";
+import {
+  cooldownGlyph,
+  cooldownLabel,
+  costLabel,
+  rangeLabel,
+  schoolRequirements,
+} from "./skill-details.ts";
 
 const skillNamed = (name: string) => {
   const skill = catalog.skills.find((candidate) => candidate.name === name);
@@ -36,6 +42,14 @@ describe("cooldownLabel", () => {
   });
 });
 
+describe("cooldownGlyph", () => {
+  it("abbreviates special cooldowns for the cooldown dial", () => {
+    expect(cooldownGlyph("oncePerCombat")).toBe("1×");
+    expect(cooldownGlyph(0)).toBe("–");
+    expect(cooldownGlyph(4)).toBe("4");
+  });
+});
+
 describe("rangeLabel", () => {
   it("formats meters", () => {
     expect(rangeLabel(13)).toBe("13 m");
@@ -45,14 +59,14 @@ describe("rangeLabel", () => {
 describe("schoolRequirements", () => {
   it("keeps catalog order and includes required levels", () => {
     expect(schoolRequirements(skillNamed("Mass Cleanse Wounds"))).toMatchObject([
-      { label: "Hydrosophist 2", name: "Hydrosophist" },
-      { label: "Warfare 2", name: "Warfare" },
+      { count: 2, label: "Hydrosophist 2", name: "Hydrosophist" },
+      { count: 2, label: "Warfare 2", name: "Warfare" },
     ]);
   });
 
   it("omits the level for schools without one", () => {
     expect(schoolRequirements(skillNamed("Bless"))).toMatchObject([
-      { label: "Sourcery", name: "Sourcery" },
+      { count: 1, label: "Sourcery", name: "Sourcery" },
     ]);
   });
 });

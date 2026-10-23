@@ -26,6 +26,7 @@ export const semanticTokens = defineSemanticTokens({
       default: { value: "{colors.violet.100}" },
       muted: { value: "{colors.violet.300}" },
       onAccent: { value: "{colors.plum.950}" },
+      skillName: { value: "{colors.green.300}" },
     },
     border: {
       subtle: { value: "{colors.violet.900}" },
@@ -52,6 +53,9 @@ export const semanticTokens = defineSemanticTokens({
       },
     },
   },
+  shadows: {
+    results: { value: "0 0 1.5rem 0.125rem rgb(139 92 246 / 0.35)" },
+  },
   radii: {
     card: { value: "{radii.lg}" },
     control: { value: "{radii.md}" },
@@ -62,6 +66,8 @@ export const semanticTokens = defineSemanticTokens({
       logo: { value: "{sizes.10}" },
       skill: { value: "{sizes.14}" },
       school: { value: "{sizes.6}" },
+      schoolGutter: { value: "{sizes.8}" },
+      cooldown: { value: "{sizes.11}" },
       point: { value: "{sizes.5}" },
       control: { value: "{sizes.5}" },
     },

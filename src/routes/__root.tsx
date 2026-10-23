@@ -31,7 +31,8 @@ function RootLayout() {
       <div
         className={css({
           display: "grid",
-          gridTemplateRows: "auto 1fr auto",
+          gridTemplateRows: "auto minmax(0, 1fr) auto",
+          height: { md: "dvh" },
           minHeight: "dvh",
         })}
       >
@@ -58,6 +59,7 @@ function RootLayout() {
             marginInline: "auto",
             maxWidth: "content",
             outlineStyle: "none",
+            overflowY: { md: "auto" },
             paddingBlock: "8",
             paddingInline: "page",
             width: "full",

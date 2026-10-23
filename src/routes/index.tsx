@@ -52,9 +52,9 @@ function HomeRoute() {
   };
 
   return (
-    <Page title="Find a cure">
+    <Page fillHeight title="Find a cure">
       <form
-        className={css({ display: "grid", gap: "2" })}
+        className={css({ display: "grid", flexShrink: "0", gap: "2" })}
         onSubmit={(event) => {
           event.preventDefault();
           void form.handleSubmit();
@@ -120,6 +120,7 @@ function HomeRoute() {
           color: "text.muted",
           columnGap: "4",
           display: "flex",
+          flexShrink: "0",
           flexWrap: "wrap",
           fontSize: "sm",
           justifyContent: "space-between",
@@ -133,16 +134,43 @@ function HomeRoute() {
           <span aria-hidden="true">*</span> Grants immunity
         </p>
       </div>
-      <ol
-        aria-label="Cure skills"
-        className={css({ display: "grid", gap: "4", listStyleType: "none" })}
-      >
-        {results.map((result) => (
-          <li key={result.skill.id}>
-            <SkillCard result={result} />
-          </li>
-        ))}
-      </ol>
+      {results.length > 0 && (
+        <ol
+          aria-label="Cure skills"
+          className={css({
+            backgroundColor: "surface.sunken",
+            borderColor: "border.strong",
+            borderRadius: "card",
+            borderStyle: "solid",
+            borderWidth: "2px",
+            boxShadow: "results",
+            listStyleType: "none",
+            position: "relative",
+            md: {
+              flexGrow: "1",
+              minHeight: "0",
+              overflowY: "auto",
+              scrollbarGutter: "stable",
+            },
+          })}
+          key={query}
+        >
+          {results.map((result) => (
+            <li
+              className={css({
+                "& + &": {
+                  borderTopColor: "border.default",
+                  borderTopStyle: "solid",
+                  borderTopWidth: "1px",
+                },
+              })}
+              key={result.skill.id}
+            >
+              <SkillCard result={result} />
+            </li>
+          ))}
+        </ol>
+      )}
     </Page>
   );
 }

@@ -1,0 +1,15 @@
+{
+  "version": "0.0.1",
+  "configurations": [
+    {
+      "name": "dev",
+      "runtimeExecutable": "pwsh",
+      "runtimeArgs": [
+        "-NoProfile",
+        "-Command",
+        "fnm env | Out-String | Invoke-Expression; fnm use --silent-if-unchanged; pnpm dev --port 5173 --strictPort"
+      ],
+      "port": 5173
+    }
+  ]
+}

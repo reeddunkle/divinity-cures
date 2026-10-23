@@ -15,7 +15,15 @@ export function PointCosts(props: {
   readonly sourcePoints: number;
 }) {
   return (
-    <span className={css({ alignItems: "center", display: "inline-flex", gap: "0.5" })}>
+    <span
+      className={css({
+        alignItems: "center",
+        display: "inline-flex",
+        flexWrap: "wrap",
+        gap: "0.5",
+        justifyContent: "center",
+      })}
+    >
       <span aria-hidden="true" className={css({ display: "contents" })}>
         {points(props.actionPoints, uiImages.actionPoint, "ap")}
         {points(props.sourcePoints, uiImages.sourcePoint, "sp")}
