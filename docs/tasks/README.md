@@ -4,7 +4,6 @@ This directory contains only outstanding work. Tasks are ordered by dependency a
 
 | Priority | Task                                                                                          | Outcome                                             |
 | -------- | --------------------------------------------------------------------------------------------- | --------------------------------------------------- |
-| P1       | [07 — Enable and measure React Compiler](./07-enable-react-compiler.md)                       | An evidence-based compiler adoption decision        |
 | P1       | [08 — Audit catalog semantics and content](./08-audit-catalog-semantics-and-content.md)       | Deliberate domain rules and trustworthy source data |
 | P2       | [12 — Serve page metadata without JavaScript](./12-serve-page-metadata-without-javascript.md) | Complete prerendered HTML for every route           |
 | P2       | [13 — Reduce initial JavaScript](./13-reduce-initial-javascript.md)                           | A measured, smaller first load                      |

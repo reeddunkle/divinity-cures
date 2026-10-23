@@ -52,6 +52,8 @@ TypeScript 7 is the project compiler. Effect TSGo patches the TypeScript compile
 
 Oxlint owns correctness, suspicious-code, React Compiler, Panda CSS, and selected maintainability rules. Oxfmt owns formatting and side-effect-safe import organization; lint rules do not duplicate formatter policy.
 
+React Compiler is not enabled. On 2026-10-23 it was measured through `@vitejs/plugin-react`'s native `oxc-transform-react` integration. Every component compiled without diagnostics, and tests and the production build passed. It added about 2.7 kB gzipped across the JavaScript chunks and left build time unchanged. In a profiled session of typing, submitting, following a cure badge, and clearing, it changed neither the number of commits nor the render time, beyond run-to-run noise. The results list is keyed by the query, so every edit remounts every card, and search returns new result objects for each query, so memoization has nothing to skip. Oxlint's React Compiler rules stay on so the code remains compatible. Revisit the decision if the results list stops remounting on each query or the interface gains expensive components that re-render with unchanged props.
+
 ## Dependency direction
 
 Presentation depends on URL state and domain interfaces. URL state depends on TanStack Router. Search depends on catalog domain types. Catalog implementation depends on Effect and raw static data. Dependencies do not point back toward presentation.
