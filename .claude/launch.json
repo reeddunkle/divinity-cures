@@ -10,6 +10,16 @@
         "fnm env | Out-String | Invoke-Expression; fnm use --silent-if-unchanged; pnpm dev --port 5173 --strictPort"
       ],
       "port": 5173
+    },
+    {
+      "name": "dev-alt",
+      "runtimeExecutable": "pwsh",
+      "runtimeArgs": [
+        "-NoProfile",
+        "-Command",
+        "fnm env | Out-String | Invoke-Expression; fnm use --silent-if-unchanged; pnpm dev --port 5174 --strictPort"
+      ],
+      "port": 5174
     }
   ]
 }

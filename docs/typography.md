@@ -19,6 +19,7 @@ git show nextjs-final:util/scale.ts
 
 Notes and transcript: [tasks/fluid-type.md](./tasks/fluid-type.md)
 
+- [Video](https://www.youtube.com/watch?v=bLB90QwRki4)
 - [Utopia](https://utopia.fyi/)
 - [MDN: `progress()`](https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/Values/progress)
 - [Matthew Morete](https://matthewmorete.com/)

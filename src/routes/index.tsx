@@ -96,19 +96,14 @@ function HomeRoute() {
                   type="search"
                   value={field.state.value}
                 />
-                <div className={css({ display: "flex", gap: "2" })}>
-                  <button className={button()} type="submit">
-                    Search
-                  </button>
-                  <button
-                    className={button({ tone: "quiet" })}
-                    disabled={query === ""}
-                    onClick={clear}
-                    type="button"
-                  >
-                    Clear
-                  </button>
-                </div>
+                <button
+                  className={button({ tone: "quiet" })}
+                  disabled={query === ""}
+                  onClick={clear}
+                  type="button"
+                >
+                  Clear
+                </button>
               </div>
             </>
           )}
