@@ -7,7 +7,16 @@ const pointIcon = css({ height: "icon.point", width: "icon.point" });
 
 const points = (amount: number, src: string, kind: string) =>
   Array.from({ length: amount }, (_, index) => (
-    <img alt="" className={pointIcon} height={20} key={`${kind}-${index}`} src={src} width={20} />
+    <img
+      alt=""
+      className={pointIcon}
+      decoding="async"
+      height={20}
+      key={`${kind}-${index}`}
+      loading="lazy"
+      src={src}
+      width={20}
+    />
   ));
 
 export function PointCosts(props: {

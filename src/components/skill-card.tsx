@@ -37,7 +37,15 @@ export function SkillCard(props: { readonly result: SearchResult }) {
         {isNameMatch ? <mark>{skill.name}</mark> : skill.name}
       </h2>
       <div className={styles.stats}>
-        <img alt="" className={styles.icon} height={56} src={skill.imageSrc} width={56} />
+        <img
+          alt=""
+          className={styles.icon}
+          decoding="async"
+          height={56}
+          loading="lazy"
+          src={skill.imageSrc}
+          width={56}
+        />
         <dl className={css({ display: "grid", gap: "2" })}>
           <Stat term="Cost">
             <PointCosts actionPoints={skill.actionPoints} sourcePoints={skill.sourcePoints} />
@@ -79,8 +87,10 @@ export function SkillCard(props: { readonly result: SearchResult }) {
               <img
                 alt=""
                 className={css({ height: "icon.schoolGutter", width: "icon.schoolGutter" })}
+                decoding="async"
                 height={32}
                 key={index}
+                loading="lazy"
                 src={requirement.imageSrc}
                 width={32}
               />

@@ -8,7 +8,7 @@ Divinity Cures is a static client-side reference application. It has no server r
 
 ### Catalog
 
-The catalog module owns decoding raw game data, validating cross-record invariants, joining related records, and exposing immutable domain data. Callers do not coordinate raw datasets or depend on Effect Schema details. [Catalog content](./catalog-content.md) records sourced corrections to the inherited data and the questions that remain open.
+The catalog module owns decoding raw game data, validating cross-record invariants, joining related records, and exposing immutable domain data. Callers do not coordinate raw datasets or depend on Effect Schema details. The `build-plugins/catalog.ts` Vite plugin runs `loadCatalog` at build and test time and serves the decoded catalog as the `virtual:bundled-catalog` module, so an invalid catalog fails the build and the tests rather than a visitor's page load. [Catalog content](./catalog-content.md) records sourced corrections to the inherited data and the questions that remain open.
 
 - Identifiers are non-empty strings branded per dataset as `SkillId`, `StatusEffectId`, and `SchoolId`, so one kind cannot stand in for another. Every reference must point at an existing record whose name matches the name stored beside the reference.
 - Action points, memory, and numeric cooldowns are whole numbers of at least 0; a cooldown of 0 means none. Source points are whole numbers from 0 to 3, the size of the Source pool. Ranges are meters of at least 0 and may be fractional. School requirements and applied-status durations are whole numbers of at least 1. Stat amounts and percentages stay signed because penalties are negative.

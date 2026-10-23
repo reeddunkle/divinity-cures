@@ -1,6 +1,6 @@
+import { catalog } from "virtual:bundled-catalog";
 import { describe, expect, it } from "vitest";
 
-import { catalog } from "../catalog/bundled-catalog.ts";
 import type { Skill } from "../catalog/catalog.ts";
 import { SkillId, StatusEffectId, type StatusEffectRecord } from "../catalog/schemas.ts";
 import { normalizeSearchText, prepareCureSkills, searchCures } from "./search.ts";

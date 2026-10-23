@@ -130,6 +130,19 @@ describe("results layout", () => {
     expect(pageScrolls()).toBe(false);
   });
 
+  it("defers loading and decoding every card image", async () => {
+    const { screen } = await renderApp("/");
+    const list = screen.getByRole("list", { name: "Cure skills" });
+
+    await expect.element(list).toBeVisible();
+    const images = [...list.element().querySelectorAll("img")];
+
+    expect(images.length).toBeGreaterThan(0);
+    expect(
+      images.filter((image) => image.loading !== "lazy" || image.decoding !== "async"),
+    ).toEqual([]);
+  });
+
   it("scrolls the whole page on narrow screens", async () => {
     await page.viewport(375, 812);
     const { screen } = await renderApp("/");
