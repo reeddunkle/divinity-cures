@@ -9,7 +9,7 @@ The site is static: Vite builds it into `dist/`, and Netlify serves that folder.
 - **Caching:** hashed files under `/assets/*` are cached for a year as immutable. Images under `/images/*` are cached for a week, because their names are not hashed. `index.html` keeps Netlify's default of revalidating on every request.
 - **Headers:** every response sets `X-Content-Type-Options: nosniff` and `Referrer-Policy: strict-origin-when-cross-origin`.
 - **Compression:** Netlify compresses text responses with Brotli or gzip automatically.
-- **Indexing:** `robots.txt` allows everything. Deploy Previews and branch deploys should carry Netlify's `x-robots-tag: noindex` header, which the preview checklist verifies. There is no canonical link yet, because the production domain isn't recorded in the repository.
+- **Indexing:** `robots.txt` allows everything. Netlify does not add an `x-robots-tag: noindex` header to branch deploys, so a branch deploy URL such as `deploy-preview--divinity-cures.netlify.app` can be indexed if it is linked publicly. There is no canonical link yet.
 
 ## Bundle
 
@@ -21,13 +21,12 @@ The full `pnpm check`, including the browser tests, runs locally. Netlify runs o
 
 ## Preview a deploy
 
-1. Push the `vite-rewrite` branch to GitHub.
-2. In Netlify, open the site and go to **Site configuration → Build & deploy → Continuous deployment**.
-   - Under **Build settings**, check for a build command, publish directory, or base directory left over from Next.js. `netlify.toml` takes precedence over the build command and publish directory, but a base directory would still apply, and clearing all three avoids confusion.
-   - Under **Branches and deploy contexts**, keep the production branch as `main`. Add `vite-rewrite` to **Branch deploys**, or open a pull request from it to get a Deploy Preview.
-3. Under **Build & deploy → Build plugins**, remove `@netlify/plugin-nextjs` if it was installed from the UI. It fails on a project without Next.js.
-4. Under **Environment variables**, remove `NEXT_DISABLE_EDGE_IMAGES` and any other Next.js variables once production is cut over. They do nothing for the new build.
-5. When the deploy finishes, open its unique URL and run the checklist below.
+1. In Netlify, open the project and go to **Project configuration → Build & deploy → Continuous deployment**.
+   - Under **Build settings**, set **Runtime** to not set, so the Next.js runtime doesn't run. Keep the base directory as `/`. `netlify.toml` takes precedence over the build command and publish directory, but setting them to `pnpm build` and `dist` keeps the UI accurate.
+   - Under **Branches and deploy contexts**, keep the production branch as `main`, and add `deploy-preview` to **Branch deploys**.
+2. Under **Environment variables**, make sure neither `NODE_VERSION` nor `PNPM_VERSION` is set, because either would override the repository. Remove `NEXT_DISABLE_EDGE_IMAGES` once production is cut over.
+3. Push the commit to test with `git push origin main:deploy-preview`. Netlify builds it at `https://deploy-preview--divinity-cures.netlify.app/`.
+4. When the deploy finishes, run the checklist below against that URL.
 
 ### Preview checklist
 
@@ -39,7 +38,7 @@ The full `pnpm check`, including the browser tests, runs locally. Netlify runs o
 | `curl -sI <preview>/about`                                                                          | `HTTP/2 200`                                                                        |
 | `curl -sI -H "Accept-Encoding: br" <preview>/assets/<entry>.js`                                     | `content-encoding: br` and `cache-control: public, max-age=31536000, immutable`     |
 | `curl -sI <preview>/images/logo.png`                                                                | `cache-control: public, max-age=604800`                                             |
-| `curl -sI <preview>/`                                                                               | `x-robots-tag: noindex` on a preview, but not in production                         |
+| `curl -sI <preview>/robots.txt`                                                                     | `HTTP/2 200` with `content-type: text/plain`                                        |
 | Browser network panel on `/?search=burn`                                                            | No request leaves the site's own origin                                             |
 | Favicon and Apple touch icon                                                                        | The "D" logo                                                                        |
 | Type a search, use Back and Forward, follow a cure badge, use **Clear**                             | The input, results, and URL stay in sync                                            |
