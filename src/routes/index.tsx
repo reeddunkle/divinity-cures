@@ -8,7 +8,7 @@ import { catalog } from "../catalog/index.ts";
 import { Page } from "../components/page.tsx";
 import { SkillCard } from "../components/skill-card.tsx";
 import { prepareCureSkills, searchCures } from "../search/search.ts";
-import { pageTitle } from "../site.ts";
+import { canonicalLink, pageTitle } from "../site.ts";
 import { latestQuery, navigateToQuery } from "../url-state/search-navigation.ts";
 import { decodeSearchParams, queryOf, syncFormQuery } from "../url-state/search-params.ts";
 
@@ -149,6 +149,9 @@ function HomeRoute() {
 
 export const Route = createFileRoute("/")({
   component: HomeRoute,
-  head: () => ({ meta: [{ title: pageTitle() }] }),
+  head: () => ({
+    links: [canonicalLink("/")],
+    meta: [{ title: pageTitle() }],
+  }),
   validateSearch: decodeSearchParams,
 });

@@ -7,7 +7,6 @@ This directory contains only outstanding work. Tasks are ordered by dependency a
 | P1       | [07 — Enable and measure React Compiler](./07-enable-react-compiler.md)                 | An evidence-based compiler adoption decision        |
 | P1       | [08 — Audit catalog semantics and content](./08-audit-catalog-semantics-and-content.md) | Deliberate domain rules and trustworthy source data |
 | P1       | [09 — Remove barrel files](./09-remove-barrel-files.md)                                 | Explicit module paths enforced by Oxlint            |
-| P2       | [06 — Verify and prepare deployment](./06-verify-and-prepare-deployment.md)             | A verified Netlify preview and a reversible cutover |
 | P2       | [10 — Add continuous integration](./10-add-continuous-integration.md)                   | `pnpm check` runs on every push                     |
 
 ## Working principles

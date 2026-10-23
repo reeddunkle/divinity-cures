@@ -27,6 +27,14 @@ describe("home route search form", () => {
     await expect.element(status).toHaveTextContent("1 skill matches “first aid”");
   });
 
+  it("points the canonical link at the production home page without the query", async () => {
+    await renderApp("/?search=first+aid");
+
+    await expect
+      .poll(() => document.querySelector('link[rel="canonical"]')?.getAttribute("href"))
+      .toBe("https://divinitycures.com/");
+  });
+
   it("updates the URL on every edit using one draft history entry", async () => {
     const { history, href, input, status } = await renderApp("/");
 

@@ -3,7 +3,7 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import { css } from "../../styled-system/css";
 import { textLink } from "../../styled-system/recipes";
 import { Page } from "../components/page.tsx";
-import { pageTitle, site } from "../site.ts";
+import { canonicalLink, pageTitle, site } from "../site.ts";
 
 const list = css({
   display: "grid",
@@ -62,5 +62,8 @@ function AboutRoute() {
 
 export const Route = createFileRoute("/about")({
   component: AboutRoute,
-  head: () => ({ meta: [{ title: pageTitle("About") }] }),
+  head: () => ({
+    links: [canonicalLink("/about")],
+    meta: [{ title: pageTitle("About") }],
+  }),
 });

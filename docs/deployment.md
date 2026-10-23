@@ -9,7 +9,7 @@ The site is static: Vite builds it into `dist/`, and Netlify serves that folder.
 - **Caching:** hashed files under `/assets/*` are cached for a year as immutable. Images under `/images/*` are cached for a week, because their names are not hashed. `index.html` keeps Netlify's default of revalidating on every request.
 - **Headers:** every response sets `X-Content-Type-Options: nosniff` and `Referrer-Policy: strict-origin-when-cross-origin`.
 - **Compression:** Netlify compresses text responses with Brotli or gzip automatically.
-- **Indexing:** `robots.txt` allows everything. Netlify does not add an `x-robots-tag: noindex` header to branch deploys, so a branch deploy URL such as `deploy-preview--divinity-cures.netlify.app` can be indexed if it is linked publicly. There is no canonical link yet.
+- **Indexing:** `robots.txt` allows everything. Netlify does not add an `x-robots-tag: noindex` header to branch deploys, so a branch deploy URL such as `deploy-preview--divinity-cures.netlify.app` can be indexed if it is linked publicly. To consolidate those duplicates and the `divinity-cures.netlify.app` host, each route sets a canonical link to its path on `https://divinitycures.com`, without the query string. The not-found page sets none.
 
 ## Bundle
 
@@ -24,7 +24,7 @@ The full `pnpm check`, including the browser tests, runs locally. Netlify runs o
 1. In Netlify, open the project and go to **Project configuration → Build & deploy → Continuous deployment**.
    - Under **Build settings**, set **Runtime** to not set, so the Next.js runtime doesn't run. Keep the base directory as `/`. `netlify.toml` takes precedence over the build command and publish directory, but setting them to `pnpm build` and `dist` keeps the UI accurate.
    - Under **Branches and deploy contexts**, keep the production branch as `main`, and add `deploy-preview` to **Branch deploys**.
-2. Under **Environment variables**, make sure neither `NODE_VERSION` nor `PNPM_VERSION` is set, because either would override the repository. Remove `NEXT_DISABLE_EDGE_IMAGES` once production is cut over.
+2. Under **Environment variables**, make sure neither `NODE_VERSION` nor `PNPM_VERSION` is set, because either would override the repository. No Next.js variables such as `NEXT_DISABLE_EDGE_IMAGES` should remain.
 3. Push the commit to test with `git push origin main:deploy-preview`. Netlify builds it at `https://deploy-preview--divinity-cures.netlify.app/`.
 4. When the deploy finishes, run the checklist below against that URL.
 
