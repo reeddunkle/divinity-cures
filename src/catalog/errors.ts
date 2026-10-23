@@ -1,10 +1,6 @@
 import * as Schema from "effect/Schema";
 
-const DatasetName = Schema.Literals([
-  "skills",
-  "spellSchools",
-  "statusEffects",
-]);
+const DatasetName = Schema.Literals(["skills", "spellSchools", "statusEffects"]);
 
 export type DatasetName = typeof DatasetName.Type;
 
@@ -33,7 +29,7 @@ export class BrokenCatalogReferenceError extends Schema.TaggedError<BrokenCatalo
   },
 ) {}
 
-export type CatalogError
-  = | CatalogDecodeError
-    | DuplicateCatalogIdError
-    | BrokenCatalogReferenceError;
+export type CatalogError =
+  | CatalogDecodeError
+  | DuplicateCatalogIdError
+  | BrokenCatalogReferenceError;

@@ -20,9 +20,7 @@ describe("loadCatalog", () => {
     expect(catalog.schools).toHaveLength(12);
     expect(catalog.statusEffects).toHaveLength(21);
     expect(catalog.skills[0]?.schools[0]?.school.name).toBe("Geomancer");
-    expect(catalog.skills[0]?.statusEffects[0]?.statusEffect.name).toBe(
-      "Fortified",
-    );
+    expect(catalog.skills[0]?.statusEffects[0]?.statusEffect.name).toBe("Fortified");
   });
 
   it("rejects unknown fields and reports every decoding issue", () => {

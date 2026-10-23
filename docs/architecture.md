@@ -28,6 +28,10 @@ Effect v4 is the default TypeScript standard library for schema decoding, typed 
 
 Expected failures use tagged errors. Defects remain defects. The Effect runtime is used for typed failure, dependencies, resources, concurrency, or observability rather than wrapping every synchronous value.
 
+## Tooling policy
+
+TypeScript 7 is the project compiler. Oxlint uses its native TypeScript-aware engine for correctness, suspicious code, React Compiler validation, and Panda CSS diagnostics. Oxfmt owns formatting; lint rules do not duplicate formatter policy.
+
 ## Dependency direction
 
 Presentation depends on URL state and domain interfaces. URL state depends on TanStack Router. Search depends on catalog domain types. Catalog implementation depends on Effect and raw static data. Dependencies do not point back toward presentation.

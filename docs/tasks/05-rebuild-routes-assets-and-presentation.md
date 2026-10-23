@@ -27,4 +27,3 @@ Build the complete accessible interface with Panda CSS v2 and repository-owned a
 - No AWS or wiki image request remains unless documented.
 - Shared visual patterns expose small recipe interfaces and semantic tokens.
 - The UI works at narrow widths and with keyboard-only navigation.
-

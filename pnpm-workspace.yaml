@@ -2,48 +2,53 @@ packages:
   - .
 
 allowBuilds:
-  '@parcel/watcher': true
+  "@parcel/watcher": true
 
 catalogMode: strict
 catalogPrune: true
 
 catalogs:
   build:
-    '@vitejs/plugin-react': 6.1.2
+    "@vitejs/plugin-react": 6.1.2
     typescript: 7.0.2
     vite: 8.3.5
   effect:
     effect: 4.0.6
   lint:
-    '@eslint/js': 10.0.1
-    '@stylistic/eslint-plugin': 5.10.0
-    eslint: 10.13.0
-    eslint-plugin-react-hooks: 7.1.1
-    globals: 17.13.0
-    typescript-eslint: 8.72.0
+    "@oxlint/plugins": 1.89.0
+    oxfmt: 0.74.0
+    oxlint: 1.89.0
+    oxlint-tsgolint: 7.0.2005
   panda:
-    '@pandacss/dev': 2.4.0
-    '@pandacss/eslint-plugin': 2.4.0
-    '@pandacss/preset-base': 2.4.0
-    '@pandacss/preset-panda': 2.4.0
-    '@pandacss/vite': 2.4.0
+    "@pandacss/dev": 2.4.0
+    "@pandacss/eslint-plugin": 2.4.0
+    "@pandacss/preset-base": 2.4.0
+    "@pandacss/preset-panda": 2.4.0
+    "@pandacss/vite": 2.4.0
   react:
     react: 19.3.1
     react-dom: 19.3.1
   tanstack:
-    '@tanstack/react-form': 1.33.5
-    '@tanstack/react-router': 1.170.46
-    '@tanstack/router-plugin': 1.168.48
+    "@tanstack/react-form": 1.33.5
+    "@tanstack/react-router": 1.170.46
+    "@tanstack/router-plugin": 1.168.48
   test:
     vitest: 5.0.5
   types:
-    '@types/node': 26.6.5
-    '@types/react': 19.3.0
-    '@types/react-dom': 19.3.0
+    "@types/node": 26.6.5
+    "@types/react": 19.3.0
+    "@types/react-dom": 19.3.0
 
 minimumReleaseAgeExclude:
-  - '@tanstack/react-router@1.170.46'
-  - '@tanstack/router-core@1.171.39'
-  - '@tanstack/router-generator@1.167.46'
-  - '@tanstack/router-plugin@1.168.48'
+  - "@tanstack/react-router@1.170.46"
+  - "@tanstack/router-core@1.171.39"
+  - "@tanstack/router-generator@1.167.46"
+  - "@tanstack/router-plugin@1.168.48"
   - effect@4.0.6
+  - "@oxlint-tsgolint/darwin-arm64@7.0.2005"
+  - "@oxlint-tsgolint/darwin-x64@7.0.2005"
+  - "@oxlint-tsgolint/linux-arm64@7.0.2005"
+  - "@oxlint-tsgolint/linux-x64@7.0.2005"
+  - "@oxlint-tsgolint/win32-arm64@7.0.2005"
+  - "@oxlint-tsgolint/win32-x64@7.0.2005"
+  - oxlint-tsgolint@7.0.2005

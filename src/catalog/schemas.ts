@@ -12,9 +12,7 @@ const Stat = Schema.Struct({
   scales: Schema.optionalKey(Schema.Boolean),
 });
 
-const emptyStats = Schema.Array(Stat).pipe(
-  Schema.withDecodingDefaultKey(E.succeed([])),
-);
+const emptyStats = Schema.Array(Stat).pipe(Schema.withDecodingDefaultKey(E.succeed([])));
 
 const SchoolAdjustment = Schema.Struct({
   amount: Schema.optionalKey(Schema.Finite),
@@ -24,15 +22,11 @@ const SchoolAdjustment = Schema.Struct({
 
 export const SchoolRecord = Schema.Struct({
   description: Schema.String,
-  effects: Schema.Array(SchoolAdjustment).pipe(
-    Schema.withDecodingDefaultKey(E.succeed([])),
-  ),
+  effects: Schema.Array(SchoolAdjustment).pipe(Schema.withDecodingDefaultKey(E.succeed([]))),
   id: Schema.String,
   imageSrc: Schema.optionalKey(Schema.String),
   imageSrcColored: Schema.String,
-  modifies: Schema.Array(SchoolAdjustment).pipe(
-    Schema.withDecodingDefaultKey(E.succeed([])),
-  ),
+  modifies: Schema.Array(SchoolAdjustment).pipe(Schema.withDecodingDefaultKey(E.succeed([]))),
   name: Schema.String,
 });
 

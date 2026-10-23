@@ -8,7 +8,7 @@ Enable React Compiler after the first interactive React slice exists and verify 
 
 ## Work
 
-- Resolve React Compiler diagnostics surfaced by `eslint-plugin-react-hooks`.
+- Resolve React Compiler diagnostics surfaced by Oxlint's native React plugin.
 - Record baseline production build and bundle measurements.
 - Enable the compiler through the supported Vite React integration.
 - Compare build behavior and output with the baseline.

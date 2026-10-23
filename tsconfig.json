@@ -22,12 +22,5 @@
     "target": "ES2024",
     "types": ["vite/client", "vitest/globals"]
   },
-  "include": [
-    "eslint.config.ts",
-    "panda.config.ts",
-    "src",
-    "styled-system",
-    "vite.config.ts",
-    "vitest.config.ts"
-  ]
+  "include": ["panda.config.ts", "src", "styled-system", "vite.config.ts", "vitest.config.ts"]
 }

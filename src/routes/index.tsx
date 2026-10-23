@@ -7,19 +7,8 @@ function HomeRoute() {
     <main>
       <h1>Divinity Cures</h1>
       <p>
-        Catalog ready:
-        {" "}
-        {catalog.skills.length}
-        {" "}
-        skills,
-        {" "}
-        {catalog.statusEffects.length}
-        {" "}
-        status effects, and
-        {" "}
-        {catalog.schools.length}
-        {" "}
-        schools.
+        Catalog ready: {catalog.skills.length} skills, {catalog.statusEffects.length} status
+        effects, and {catalog.schools.length} schools.
       </p>
     </main>
   );

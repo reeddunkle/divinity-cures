@@ -228,15 +228,7 @@
     "cooldown": 5,
     "description": "Heal target and create a water puddle beneath them. Remove Burning, Diseased, Decaying Touch, Poisoned and Bleeding.\nRestore X Vitality",
     "memory": 1,
-    "removes": [
-      "Bleeding",
-      "Burning",
-      "Decaying",
-      "Diseased",
-      "Infested",
-      "Plagued",
-      "Poisoned"
-    ],
+    "removes": ["Bleeding", "Burning", "Decaying", "Diseased", "Infested", "Plagued", "Poisoned"],
     "statusEffects": [],
     "stats": [
       {
@@ -420,14 +412,7 @@
     "cooldown": 4,
     "description": "Ice forms a defensive barrier around the target, providing [X] Magical Armor. Removes Burning, Poisoned, Stunned, Frozen, Suffocating and Petrified.\nSet Magic Shell for 3 turn(s).",
     "memory": 1,
-    "removes": [
-      "Burning",
-      "Frozen",
-      "Petrified",
-      "Poisoned",
-      "Stunned",
-      "Suffocating"
-    ],
+    "removes": ["Burning", "Frozen", "Petrified", "Poisoned", "Stunned", "Suffocating"],
     "statusEffects": [
       {
         "name": "Magic Shell",
@@ -554,14 +539,7 @@
       }
     ],
     "stats": [],
-    "immunities": [
-      "Cursed",
-      "Diseased",
-      "Decaying",
-      "Petrified",
-      "Plagued",
-      "Stunned"
-    ],
+    "immunities": ["Cursed", "Diseased", "Decaying", "Petrified", "Plagued", "Stunned"],
     "surfaces": [],
     "imageSrc": "https://d124vy484dv6tz.cloudfront.net/icons/bless-icon.webp",
     "range": 13,
@@ -606,15 +584,7 @@
     "cooldown": 3,
     "memory": 2,
     "description": "Releases a stream of Blessed Steam that heals characters in its path.\nRestore 6 Vitality for 3 Turn(s)",
-    "removes": [
-      "Burning",
-      "Chilled",
-      "Decaying",
-      "Diseased",
-      "Frozen",
-      "Necrofire",
-      "Plagued"
-    ],
+    "removes": ["Burning", "Chilled", "Decaying", "Diseased", "Frozen", "Necrofire", "Plagued"],
     "statusEffects": [
       {
         "name": "Steam Lance",
@@ -837,14 +807,7 @@
     "cooldown": 5,
     "memory": 1,
     "description": "Motivate an allied character with the power of rage. Target allied character is guaranteed to land critical hits with basic attacks and weapon skills, but is muted. Clears Taunted, Terrified, Charmed, Mad and Clear-Minded statuses.\nSet Enraged for 1 turn(s).",
-    "removes": [
-      "Charmed",
-      "Clear-Minded",
-      "Frightened",
-      "Madness",
-      "Taunted",
-      "Terrified"
-    ],
+    "removes": ["Charmed", "Clear-Minded", "Frightened", "Madness", "Taunted", "Terrified"],
     "statusEffects": [
       {
         "name": "Enraged",
