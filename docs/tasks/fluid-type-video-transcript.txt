@@ -1,0 +1,503 @@
+
+The problem with clamp()
+0:00
+The thing that's confusing when you're using clamp is always this middle value,
+0:03
+because like, what do you put there?
+0:05
+What size viewport width should you put?
+0:08
+And usually we're going to have a plus or minus in there to deal with zooming.
+0:12
+And, yeah, it just makes it, like, awkward to know because, say, I change those
+0:15
+numbers, the start and end point for where that's happening is going to change
+0:19
+compared to where it was before.
+0:21
+Now, I change it again and you just end up magic numbering those and trying to figure
+0:25
+out where they're starting, where they're ending, And it's all really a bit of a
+0:28
+mess, and we can simplify that with the progress function that looks a bit weird,
+0:32
+it's a little bit longer, but oh my goodness, is it so much easier to use.
+0:36
+We're going to be breaking all of that down and we're going to look at ways to make
+0:39
+it more readable as well. But first, let's look at one of the things.
+Why clamp() type scales fall out of sync
+0:42
+This is all set up with clamp, and I magic numbered all of my points, and I'm sure
+0:46
+you've run into situations... Where you get this type of thing going on where you can
+0:50
+see like some of the font sizes are currently changing and some of them aren't and
+0:54
+then other ones start changing and then they stop changing at different points and
+0:59
+the whole thing can be really hard, especially like to coordinate things across
+1:03
+proper type scales and other stuff like that.
+1:05
+And it's often why we use tools like Utopia to help us out to create fluid type
+1:09
+scales that actually work and don't run into the problems like I'm looking at right
+1:13
+here. But, we can do with progress.
+1:16
+I've set all of this up and you can see that everything is actually changing all at
+1:19
+the same size altogether. It's just, it's super cool, how this works.
+1:23
+And the reason I'm talking about it today is because it's recently hit Baseline newly
+1:27
+available, meaning it's in all the browser engines.
+1:29
+And before you go, if you're like, oh, I can't use this yet.
+1:31
+We're going to look at how you can use it today, just using a little bit of a
+1:35
+different technique that works exactly in the same way that has actually quite good
+1:39
+browser support. So stick around for that, but yeah, progress is really cool and
+1:43
+something to keep an eye on because it's not only for typography that this is going
+1:45
+to make our lives easier, but, I do think type is a very nice example of where we can
+1:50
+be using it. So to get started with this, let's take a look at a little bit of how
+How progress() works
+1:54
+progress is even working.
+1:56
+Where you can see here, I've set up this fluid custom property and this custom
+2:00
+property is looking at the viewport width and then has a 500 and 1000 here.
+2:05
+And currently we're going to use this for our font size.
+2:07
+It's not currently working. But you can see I have this fluid of 1 right here.
+2:11
+And the progress will always output a value between 0 and 1.
+2:15
+It will always be unitless, which is, kind of interesting, because CSS doesn't have a
+2:19
+lot of things that give us unitless values.
+2:22
+But you can see here, if my viewport is larger than the 1000, we're at 1.
+2:27
+And then once I go smaller than 1000 here,
+2:31
+it starts doing the progress until we get all the way down to, as you'd guess, 500
+2:36
+there. And when I hit the 500, my font's disappearing because the font size of zero
+2:40
+is valid. So it is, that font size up here is, is disappearing.
+2:44
+But yeah, we, we get the progress from between 500 and 1000,
+2:50
+as a unitless value. And then what we can do with that is multiply it and add it to
+2:54
+some other numbers to actually give us some numbers up here.
+2:57
+So now you can see this is actually fluid.
+2:59
+So smaller than 500 pixels, my font size will not adjust.
+3:03
+It's going to be at 48. Then as this gets bigger, once I get past that point, we're
+3:07
+always multiplying now this fluid times 16 pixels.
+3:10
+That would probably be one rem.
+3:12
+We're going to switch things to rem soon, as I mentioned.
+3:14
+But now, so like 0.66 times 16 plus 48.
+3:18
+So it's always going to be increasing by a little bit,
+3:21
+slowly but surely until we get to our one.
+3:25
+And then we hit that top of our progress.
+3:27
+And now it's the 16 pixels. Plus 48 pixels, which gives us a total of 64.
+3:33
+So it not only is it predictable the ranges we're working with, but it's actually
+3:37
+really easy to set the math to know exactly what your minimum and maximum font sizes
+3:41
+will be, just like when you're using a clamp as well.
+Making it more readable
+3:43
+Now, the hard part with this is reading it,
+3:46
+which I completely agree with. The hardest thing I had with this was being able to
+3:50
+make sense of what I was looking at as I was playing around with this.
+3:53
+So, the first thing I would probably do is something like this, where I'm just
+3:56
+passing the minimum and maximum font sizes off somewhere else, like, to a, somewhere
+4:01
+else, to a custom property, so I know I'm playing with this, and then I don't ever
+4:05
+have to come into this area here to set any of this up.
+4:09
+And then all of it works in exactly the same way that we had it before,
+4:13
+and it just makes our life a little bit easier.
+4:16
+Of course, then we could change other things too, or we could set up other minimum
+4:19
+and maximum values. This one, maybe you don't need to do, but I do think it makes it
+4:23
+a little bit easier as well by setting our, vmin and our vmax here for the fluid type
+4:28
+scale.
+4:29
+And then again, just having a, using those where you need them.
+4:32
+And so this just makes the code so much more readable.
+4:34
+You get there, you can see the values you want to update and you don't have to worry
+4:37
+about the complicated math stuff that's going on.
+4:40
+And that always makes me pretty happy, right?
+4:42
+And then you just come in and change the values.
+4:44
+So now I've changed my maximum value to get larger than I can even get on my screen
+4:49
+right now. Yeah, I think it works pretty well.
+Switching to rem
+4:51
+And as I said, we can switch all of these to rem.
+4:53
+There's no reason to actually be using pixels for any of these.
+4:56
+These ones could definitely be pixels.
+4:58
+I don't think it's going to cause any issues if they are.
+5:00
+'Cause it's really just measuring where the viewport is.
+5:02
+If you're zooming in and out, that will impact the size of a pixel anyway.
+5:06
+So that should be fine. But then we can continue using our actual font sizes,
+5:11
+all being set up using rem values.
+5:14
+So the multiplications, everything else will always be on rem.
+5:16
+So if somebody is zooming in and out, it will be impacting, beyond it.
+5:19
+It's not like those issues where if you've only used a viewport unit where you end up
+5:22
+getting locked in, Maybe with pixels it would be okay, but just zooming would still
+5:26
+work, but pixel values for font sizes are always something to be avoided, so I'd
+5:30
+probably use these still as pixels, and then over here,
+5:34
+use these in rem most of the time anyway.
+Fluid type scales with progress()
+5:37
+And this works really well if you just have specific sizes that you want to be
+5:40
+setting, but sometimes you're going to have type scales, right?
+5:42
+Like you'd get on a site like Utopia.
+5:44
+And,
+5:45
+if you have something like that, where you want everything to grow and shrink at the
+5:48
+same time, it also makes this incredibly easy to do.
+5:51
+And what's better than using a generator like Utopia or something else, and I love
+5:55
+Utopia, it's a fantastic tool, but the nice thing with this is it makes it much
+5:59
+easier to customize if ever you want to make changes to it.
+6:02
+So, it looks complicated right now, how I have this set up, but if we break it down,
+6:07
+it's really not that bad. The top half of it, like, everything here is what we've
+6:11
+already looked at, even up to here.
+6:12
+This base is just setting the font size, basically how I was doing it before.
+6:17
+What's different is now I've introduced a type scale, And if you go on Utopia, when
+6:20
+you're setting things up, you always have the type scales you choose for your small
+6:23
+screens and large screens. So I've set that up here.
+6:26
+And now I'm also using the power.
+6:28
+Look at this. We can do power,
+6:29
+set things to the power of, so I have my type scale.
+6:32
+So I'm just multiplying that by my type scale.
+6:34
+And the type scale is following the same fluid, feature that we had set up here.
+6:39
+So that as the font sizes are increasing, the type scale is also increasing with it.
+6:43
+And what that means, if you're not familiar with the type scale, It's just, like,
+6:46
+when you're at small screens, all the font sizes are closer in size to one another,
+6:51
+so, like, there's not a huge difference between each one of the steps up here, but
+6:55
+then as this gets bigger, the larger font size are getting progressively bigger and
+6:59
+bigger and bigger compared to the other ones.
+7:02
+One of those hockey stick ones,
+7:04
+exponential scale instead of a linear scale, and that helps us with our power things
+7:09
+that we're using right here. And if you're worried about browser support of the pow
+7:12
+function, it's been around for, like, four or five years in all browsers now, so it
+7:16
+should be pretty safe to use. It's definitely Baseline widely available, and it has
+7:20
+been for a while now. So yeah, that's basically what we're doing.
+7:23
+Take our base, multiply it by our type scale, and then do it by a power of for the
+7:28
+other ones, so it scales in that way that I was talking about.
+Cleaning up the type scale math
+7:31
+The thing is, it's still kind of weird to look at this if, you know, readability is
+7:34
+always a thing. People, whenever I look at more complicated things like we see here,
+7:38
+people like to comment on, like, oh, you're writing CSS that teams would never use.
+7:42
+I think teams should be using this, and I think we can make this super easy to read.
+7:46
+The first problem with all of this, in my opinion, is on the type scale, though, of
+7:50
+the first number being really straightforward, but this other number here...
+7:54
+Just feeling really random because we had to do some math to figure what that would
+7:58
+be to actually get to this. So, of course, we could just pass that math in, you know,
+8:02
+do the math in the CSS instead.
+8:04
+So, just set your small type scale, set your large type scale, and then do the math
+8:08
+the same way we were doing the math for our font size previously.
+8:12
+Exact same thing here to be able to have the different font sizes that we actually
+8:15
+want. And that's just, to me, makes things a lot easier because now we just set all
+8:20
+of those up there. And then if I do change the values here, so now I have a bit more
+8:24
+of, like, slightly larger at small sizes, but much more aggressive at big sizes.
+8:29
+So just to compare, this is before, and then after, we can see the larger font sizes
+8:33
+are getting even bigger. So very easy to come in and adjust these.
+8:37
+If I want to make it smaller and less aggressive, just as easy to do.
+8:41
+Very similar there, but even less aggressive here, because I've also lowered the
+8:44
+larger type scale. So these are super easy changes to make now.
+8:48
+And my code is more readable. We can even rearrange this, add a couple of comments.
+8:51
+We'll see an example at the end, where we can do that just to like get rid of any
+8:55
+readability issues as far as I'm concerned.
+Using it today: browser support
+8:57
+But before we do that, the other thing that I mentioned was browser support and how
+9:01
+progress is in all browsers now, but you might want to use this today.
+9:05
+And you're like, ah, Kevin's talking about this new CSS feature again.
+9:08
+I can't use it for three years.
+9:09
+You can use it.
+9:11
+And to know how to use it, we want to sort of understand how progress is working.
+9:15
+And basically, this is what it's doing.
+9:16
+It's saying, like, 100vw minus the 500 pixels I was mentioning before, divided by
+9:22
+1000 pixels minus 500 pixels. This is the math that happens inside the
+9:28
+progress function. We can do math in CSS, so we could do that inside of a calc.
+9:33
+Passing those exact numbers into the calc should work, except there's an issue, and I
+9:39
+can't do this in Firefox, at least not yet.
+9:42
+Typed arithmetic is something that is in CSS now, and Chrome and Safari support it,
+9:47
+so I could divide lengths by each other and actually end up with a unitless value,
+9:51
+but currently Firefox isn't supporting that, which makes it, oh, maybe this is a
+9:55
+deal-breaker, but it's not a deal-breaker, because we have tan and atan.
+9:58
+With tan and atan2 specifically, we can actually get the exact same math that
+10:04
+progress is doing and get it as a unitless value because the tan(atan2()) trick has
+10:09
+long been used by those CSS wizards that are out there to do all sorts of crazy
+10:13
+things to get unitless values to then do other stuff with.
+The tan(atan2()) fallback
+10:16
+So if we want to see how to do that, it's a little bit more complicated, but not that
+10:20
+much more complicated, to be honest.
+10:22
+We still have our fluid vmin and vmax that I would set up.
+10:25
+And then for my fluid, instead of using the progress, I would put a clamp.
+10:29
+The reason I'm doing a clamp is because I'm doing a clamp between zero and one to
+10:32
+contain that. You'll notice the progress always clamped there.
+10:36
+There's actually a no-clamp keyword that you could put in progress, but it's only in
+10:41
+Safari now, or only in, I don't, it's only in one of the browsers.
+10:44
+I think it's only Firefox actually.
+10:46
+So yeah, we're always generally speaking for now, at least going to be clamping
+10:50
+between zero and one. And then I'm doing the math that I just broke down on that
+10:55
+earlier slide, but I'm doing it inside of a tan(atan2()) function that gives me
+11:01
+the exact same thing. It looks weird, but we're getting the exact same thing that we
+11:04
+were getting of a zero to one unitless value, meaning we can do the exact same math
+11:09
+we were doing previously. And we can see here is an example of it in action where
+11:14
+this is the code that's currently on the screen and it's working exactly as it was
+11:18
+working before without any issues.
+Why this beats a generator
+11:20
+And once again, people are going to say, Kevin, it's just this unreadable mess, but
+11:23
+like, they're happy with this. This is just pure magic numbers in a big way that a
+11:28
+generator basically has to be required to set this up.
+11:32
+And the reason we need a generator for this is because of the complexity in here to
+11:37
+have a
+11:38
+type scale. If we do want a type scale, like I have right here, like I mentioned,
+11:42
+where the fonts are growing at different rates, depending on the screen size, there's
+11:46
+not really a way of setting that up with clamp, at least that I can think of.
+11:50
+So we end up with these, you know,
+11:52
+magic numbers all the way down.
+11:53
+And then you leave a comment in the code going, if you need to change these, go to
+11:57
+this generator. And this is how they figure out how it works, I guess, or if they
+12:00
+need a new step or something like that.
+12:02
+Whereas if we're using progress or if you're using atan2, you know, either one, it
+12:05
+wouldn't really make a difference here.
+12:07
+The atan2 version, you set up your custom properties here, you set up your bases
+12:11
+here, you set up your type scales here.
+12:13
+These are the only values that you ever need to change.
+12:16
+And then you just come in here, project to project, paste this snippet in, and then
+12:19
+just change the values you need for your given project.
+12:22
+And then all of this will never change.
+12:25
+It doesn't have to change. And if someone's like, I don't understand what's happening
+12:28
+here, you can leave a little bit more of a comment pointing to this video if you
+12:31
+want, to help explain it to them.
+12:33
+But if they are fine with something like this, I don't see why you wouldn't be fine
+12:37
+with something like this, that you could actually at least understand the inputs that
+12:40
+would have to go into it to change things.
+Specific font sizes (no type scale)
+12:42
+And beyond that, going back to what we were talking about at the very beginning is I
+12:45
+know not all the time people are using type scales.
+12:48
+You have a Figma file and you need to follow specific values that are in your Figma
+12:51
+file. We can do what we did at the beginning.
+12:54
+We set up our fluid vmin and our fluid vmax.
+12:58
+We use our progress or the tan(atan2()) trick here, which is a calculation not to be
+13:02
+touched to figure out what our fluid value of zero to one is.
+13:06
+We set up our font size before I was only doing it for the demo text.
+13:09
+I could just say that all of my important text here is, and these could be classes as
+13:13
+well, fluid classes, are going to be using that font size.
+13:17
+And then on each one of the elements, I just say what I need my min and max font
+13:20
+sizes to be. And like magic, this one's not very aggressive because I went with
+13:24
+pretty small font sizes, but you can come in with any values you want along the way
+13:28
+here, and it's going to work. And to me, this is so much more readable, once again,
+13:32
+than the clamp versions we were looking at before.
+Wrapping up
+13:34
+So if you learned a couple things along the way here and you really did enjoy this, I
+13:37
+would encourage you to go and check out the first link that is right below this
+13:39
+video, which is to my course, CSS Demystified.
+13:41
+That can teach you a whole bunch more about how CSS works and help you work with the
+13:45
+browser instead of fighting against it.
+13:46
+And with that, I'm going to say a very big thank you to my
+13:48
+enabler of awesome, Johnny, as well as all my other patrons and channel members for
+13:51
+their continued support. And of course, until next time, don't forget to make your
+13:55
+corner of the internet just a little bit more awesome.
