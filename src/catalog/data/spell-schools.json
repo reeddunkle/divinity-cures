@@ -9,8 +9,8 @@
         "percent": 5
       }
     ],
-    "imageSrc": "https://d124vy484dv6tz.cloudfront.net/icons/abi_aerotheurge.png",
-    "imageSrcColored": "https://d124vy484dv6tz.cloudfront.net/icons/Icn_Aer.png"
+    "imageSrc": "/images/icons/abi-aerotheurge.png",
+    "imageSrcColored": "/images/icons/icn-aer.png"
   },
   {
     "id": "1",
@@ -30,8 +30,8 @@
         "percent": 5
       }
     ],
-    "imageSrc": "https://d124vy484dv6tz.cloudfront.net/icons/abi_geomancer.png",
-    "imageSrcColored": "https://d124vy484dv6tz.cloudfront.net/icons/Icn_Geo.webp"
+    "imageSrc": "/images/icons/abi-geomancer.png",
+    "imageSrcColored": "/images/icons/icn-geo.webp"
   },
   {
     "id": "2",
@@ -47,8 +47,8 @@
         "percent": -5
       }
     ],
-    "imageSrc": "https://d124vy484dv6tz.cloudfront.net/icons/abi_huntsman.png",
-    "imageSrcColored": "https://d124vy484dv6tz.cloudfront.net/icons/Icn_Hun.webp"
+    "imageSrc": "/images/icons/abi-huntsman.png",
+    "imageSrcColored": "/images/icons/icn-hun.webp"
   },
   {
     "id": "3",
@@ -68,8 +68,8 @@
         "percent": 5
       }
     ],
-    "imageSrc": "https://d124vy484dv6tz.cloudfront.net/icons/abi_hydrosophist.png",
-    "imageSrcColored": "https://d124vy484dv6tz.cloudfront.net/icons/Icn_Hyd.webp"
+    "imageSrc": "/images/icons/abi-hydrosophist.png",
+    "imageSrcColored": "/images/icons/icn-hyd.webp"
   },
   {
     "id": "4",
@@ -81,8 +81,8 @@
         "percent": 10
       }
     ],
-    "imageSrc": "https://d124vy484dv6tz.cloudfront.net/icons/abi_necromancer.png",
-    "imageSrcColored": "https://d124vy484dv6tz.cloudfront.net/icons/Icn_Nec.png"
+    "imageSrc": "/images/icons/abi-necromancer.png",
+    "imageSrcColored": "/images/icons/icn-nec.png"
   },
   {
     "id": "5",
@@ -94,8 +94,8 @@
         "amount": 1
       }
     ],
-    "imageSrc": "https://d124vy484dv6tz.cloudfront.net/icons/abi_polymorph.png",
-    "imageSrcColored": "https://d124vy484dv6tz.cloudfront.net/icons/Icn_Pol.png"
+    "imageSrc": "/images/icons/abi-polymorph.png",
+    "imageSrcColored": "/images/icons/icn-pol.png"
   },
   {
     "id": "6",
@@ -107,8 +107,8 @@
         "percent": 5
       }
     ],
-    "imageSrc": "https://d124vy484dv6tz.cloudfront.net/icons/abi_pyrokinetic.png",
-    "imageSrcColored": "https://d124vy484dv6tz.cloudfront.net/icons/Icn_Pyr.png"
+    "imageSrc": "/images/icons/abi-pyrokinetic.png",
+    "imageSrcColored": "/images/icons/icn-pyr.png"
   },
   {
     "id": "7",
@@ -124,8 +124,8 @@
         "percent": 5
       }
     ],
-    "imageSrc": "https://d124vy484dv6tz.cloudfront.net/icons/abi_scoundrel.png",
-    "imageSrcColored": "https://d124vy484dv6tz.cloudfront.net/icons/Icn_Sco.png"
+    "imageSrc": "/images/icons/abi-scoundrel.png",
+    "imageSrcColored": "/images/icons/icn-sco.png"
   },
   {
     "id": "8",
@@ -149,8 +149,8 @@
         "percent": 5
       }
     ],
-    "imageSrc": "https://d124vy484dv6tz.cloudfront.net/icons/abi_summoning.png",
-    "imageSrcColored": "https://d124vy484dv6tz.cloudfront.net/icons/Icn_Sum.webp"
+    "imageSrc": "/images/icons/abi-summoning.png",
+    "imageSrcColored": "/images/icons/icn-sum.webp"
   },
   {
     "id": "9",
@@ -162,19 +162,19 @@
         "percent": 5
       }
     ],
-    "imageSrc": "https://d124vy484dv6tz.cloudfront.net/icons/abi_warfare.png",
-    "imageSrcColored": "https://d124vy484dv6tz.cloudfront.net/icons/Icn_War.png"
+    "imageSrc": "/images/icons/abi-warfare.png",
+    "imageSrcColored": "/images/icons/icn-war.png"
   },
   {
     "id": "10",
     "name": "Special",
     "description": "Special skills in Divinity: Original Sin 2 are a collection of different but strong skills. Many of them are acquired during Character Creation or can only be used by certain Companions.",
-    "imageSrcColored": "https://d124vy484dv6tz.cloudfront.net/icons/school-special.jpg"
+    "imageSrcColored": "/images/icons/school-special.jpg"
   },
   {
     "id": "11",
     "name": "Sourcery",
     "description": "Sourcery Skills (not to be confused with Source skills) are a set of skills that is integral to the story of Divinity: Original Sin 2. As you progress through the game you'll come across points where you must interact with the Divine, and will grant you these skills to help your ascension into godhood.",
-    "imageSrcColored": "https://d124vy484dv6tz.cloudfront.net/icons/source-icon-custom.png"
+    "imageSrcColored": "/images/icons/source-icon-custom.png"
   }
 ]

@@ -17,6 +17,8 @@ Prove that the rewrite can safely replace the production application.
 - Verify Netlify direct-route handling and SPA fallback configuration.
 - Check asset paths, caching, compression, bundle composition, and unexpected third-party requests.
 - Check accessibility, metadata, favicons, canonical URL expectations, and basic indexing behavior.
+- Give the not-found view its own document title. It currently keeps the root title, "Divinity Cures".
+- Measure high-zoom and screen-reader behavior on real devices. Keyboard flow, landmarks, headings, labels, the live result summary, and a 375 px layout were checked in a desktop browser during the presentation rebuild.
 - Deploy a preview without changing production.
 - Document cutover and rollback steps.
 

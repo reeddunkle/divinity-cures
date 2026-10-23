@@ -23,6 +23,22 @@ describe("loadCatalog", () => {
     expect(catalog.skills[0]?.statusEffects[0]?.statusEffect.name).toBe("Fortified");
   });
 
+  it("decodes once-per-combat cooldowns and rejects other cooldown labels", () => {
+    const catalog = loadCatalog(validInput).pipe(E.runSync);
+
+    expect(catalog.skills.find((skill) => skill.name === "Skin Graft")?.cooldown).toBe(
+      "oncePerCombat",
+    );
+
+    const error = loadCatalog({
+      ...validInput,
+      skills: [{ ...skills[0], cooldown: "infinite" }],
+    }).pipe(E.flip, E.runSync);
+
+    expect(error).toMatchObject({ _tag: "CatalogDecodeError" });
+    expect(error.message).toContain("cooldown");
+  });
+
   it("rejects unknown fields and reports every decoding issue", () => {
     const error = loadCatalog({
       skills: [

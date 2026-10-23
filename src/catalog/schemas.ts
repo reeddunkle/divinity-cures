@@ -14,6 +14,8 @@ const Stat = Schema.Struct({
 
 const emptyStats = Schema.Array(Stat).pipe(Schema.withDecodingDefaultKey(E.succeed([])));
 
+const Cooldown = Schema.Union([Schema.Finite, Schema.Literal("oncePerCombat")]);
+
 const SchoolAdjustment = Schema.Struct({
   amount: Schema.optionalKey(Schema.Finite),
   percent: Schema.optionalKey(Schema.Finite),
@@ -47,7 +49,7 @@ const SkillStatusEffectReference = Schema.Struct({
 
 export const SkillRecord = Schema.Struct({
   actionPoints: Schema.Finite,
-  cooldown: Schema.Finite,
+  cooldown: Cooldown,
   description: Schema.String,
   id: Schema.String,
   imageSrc: Schema.String,
@@ -73,7 +75,7 @@ export const StatusEffectRecord = Schema.Struct({
   description: Schema.String,
   givenBy: emptyStringArray,
   id: Schema.String,
-  imageSrc: Schema.String,
+  imageSrc: Schema.optionalKey(Schema.String),
   immunities: emptyStringArray,
   name: Schema.String,
   removes: emptyStringArray,

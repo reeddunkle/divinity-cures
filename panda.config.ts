@@ -1,6 +1,11 @@
 import { defineConfig } from "@pandacss/dev";
 
+import { globalCss } from "./src/theme/global-css.ts";
+import { button, card, cureBadge, textLink } from "./src/theme/recipes.ts";
+import { semanticTokens, tokens } from "./src/theme/semantic-tokens.ts";
+
 export default defineConfig({
+  globalCss,
   include: ["./src/**/*.{ts,tsx}"],
   jsxFramework: "react",
   outdir: "styled-system",
@@ -9,12 +14,10 @@ export default defineConfig({
   strictTokens: true,
   theme: {
     extend: {
-      semanticTokens: {
-        colors: {
-          background: { value: { base: "{colors.gray.950}" } },
-          foreground: { value: { base: "{colors.gray.50}" } },
-        },
-      },
+      recipes: { button, cureBadge, textLink },
+      semanticTokens,
+      slotRecipes: { card },
+      tokens,
     },
   },
 });

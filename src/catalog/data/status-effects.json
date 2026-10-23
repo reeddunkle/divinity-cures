@@ -4,7 +4,7 @@
     "description": "Restores Vitality per turn, healing the living and dealing physical damage to the undead.",
     "clearedBy": ["Bleeding"],
     "removes": ["Infested"],
-    "imageSrc": "https://d124vy484dv6tz.cloudfront.net/icons/status_effect_regenerate-icon.webp",
+    "imageSrc": "/images/icons/status-effect-regenerate-icon.webp",
     "id": "0"
   },
   {
@@ -12,13 +12,13 @@
     "description": "Maximum Physical Armor increased.\nPhysical Armor: +??\nImmunity to being teleported.",
     "immunities": ["Teleport"],
     "givenBy": ["Blessed Oil Surface"],
-    "imageSrc": "https://d124vy484dv6tz.cloudfront.net/icons/status_effect_fortified-icon.webp",
+    "imageSrc": "/images/icons/status-effect-fortified-icon.webp",
     "id": "1"
   },
   {
     "name": "Mending Metal",
     "description": "Restores Physical Armor per turn.",
-    "imageSrc": "https://d124vy484dv6tz.cloudfront.net/icons/geomancer_mend_metal-icon.webp",
+    "imageSrc": "/images/icons/geomancer-mend-metal-icon.webp",
     "id": "2"
   },
   {
@@ -39,7 +39,7 @@
       }
     ],
     "immunities": ["Blinded", "Crippled", "Knocked Down", "Muted"],
-    "imageSrc": "https://d124vy484dv6tz.cloudfront.net/icons/rested.webp",
+    "imageSrc": "/images/icons/rested.webp",
     "id": "3"
   },
   {
@@ -62,7 +62,7 @@
       }
     ],
     "clearedBy": ["Slowed", "Crippled"],
-    "imageSrc": "https://d124vy484dv6tz.cloudfront.net/icons/status_effect_hasted-icon.png"
+    "imageSrc": "/images/icons/status-effect-hasted-icon.png"
   },
   {
     "name": "Clear-Minded",
@@ -105,7 +105,7 @@
       "Taunted",
       "Terrified"
     ],
-    "imageSrc": "https://d124vy484dv6tz.cloudfront.net/icons/pyrokinetic_burn_my_eyes-icon.png",
+    "imageSrc": "/images/icons/pyrokinetic-burn-my-eyes-icon.png",
     "id": "5"
   },
   {
@@ -124,7 +124,7 @@
       "Shocked",
       "Shackles of Pain"
     ],
-    "imageSrc": "https://d124vy484dv6tz.cloudfront.net/icons/status_effect_frozen-icon.webp",
+    "imageSrc": "/images/icons/status-effect-frozen-icon.webp",
     "id": "6"
   },
   {
@@ -135,7 +135,7 @@
         "name": "Magical Armor"
       }
     ],
-    "imageSrc": "https://d124vy484dv6tz.cloudfront.net/icons/hydrosophist_soothing_cold-icon.webp",
+    "imageSrc": "/images/icons/hydrosophist-soothing-cold-icon.webp",
     "id": "7"
   },
   {
@@ -146,19 +146,19 @@
         "name": "Magical Armor Max"
       }
     ],
-    "imageSrc": "https://d124vy484dv6tz.cloudfront.net/icons/status_effect_frozen_shell-icon.png",
+    "imageSrc": "/images/icons/status-effect-frozen-shell-icon.png",
     "id": "8"
   },
   {
     "name": "Charmed",
     "description": "Temporarily turns the target's allegiance around. (Your character can be charmed to attack your party). Resisted by Magic Armor.",
-    "imageSrc": "https://d124vy484dv6tz.cloudfront.net/icons/status_effect_charmed-icon.png",
+    "imageSrc": "/images/icons/status-effect-charmed-icon.png",
     "id": "9"
   },
   {
     "name": "Soul Mate",
     "description": "Caster: Character is copying 50% of healing and Armor restoration to linked character.\nTarget: Character is receiving healing and Armor restoration from linked character.",
-    "imageSrc": "https://d124vy484dv6tz.cloudfront.net/icons/summoning-14-21.webp",
+    "imageSrc": "/images/icons/summoning-14-21.webp",
     "id": "10"
   },
   {
@@ -180,7 +180,7 @@
         "percent": 15
       }
     ],
-    "imageSrc": "https://d124vy484dv6tz.cloudfront.net/icons/status_effect_blessed-icon.webp",
+    "imageSrc": "/images/icons/status-effect-blessed-icon.webp",
     "id": "11"
   },
   {
@@ -194,7 +194,7 @@
       }
     ],
     "immunities": ["Atrophy"],
-    "imageSrc": "https://d124vy484dv6tz.cloudfront.net/icons/huntsman-15-24.png"
+    "imageSrc": "/images/icons/huntsman-15-24.png"
   },
   {
     "name": "Evading",
@@ -209,26 +209,26 @@
         "percent": 90
       }
     ],
-    "imageSrc": "https://d124vy484dv6tz.cloudfront.net/icons/aerotheurge-17-1.webp",
+    "imageSrc": "/images/icons/aerotheurge-17-1.webp",
     "id": "13"
   },
   {
     "name": "Steam Lance",
     "description": "MISSING INFO",
-    "imageSrc": "https://d124vy484dv6tz.cloudfront.net/icons/hydrosophist_steam_lance-icon.webp",
+    "imageSrc": "/images/icons/hydrosophist-steam-lance-icon.webp",
     "id": "14"
   },
   {
     "name": "Skin Graft",
     "description": "MISSING INFO",
-    "imageSrc": "https://d124vy484dv6tz.cloudfront.net/icons/polymorph-12-13.png",
+    "imageSrc": "/images/icons/polymorph-12-13.png",
     "id": "15"
   },
   {
     "name": "Enraged",
     "id": "16",
     "description": "Character is enraged. Critical hits are guaranteed, but character is Muted and can only use weapon skills.",
-    "imageSrc": "https://d124vy484dv6tz.cloudfront.net/icons/status_effect_raged-icon.webp",
+    "imageSrc": "/images/icons/status-effect-raged-icon.webp",
     "stats": [
       {
         "name": "Critical Change",
@@ -239,7 +239,7 @@
   {
     "name": "Infected",
     "description": "Contagious (can spread to nearby players/enemies)",
-    "imageSrc": "https://d124vy484dv6tz.cloudfront.net/icons/status_effect_infectious_disease-icon.png",
+    "imageSrc": "/images/icons/status-effect-infectious-disease-icon.png",
     "stats": [
       {
         "name": "Constitution",
@@ -256,7 +256,7 @@
     "name": "Madness",
     "aliases": ["Mad"],
     "description": "This character has been driven mad. While in this state, they will attack friend and foe alike.\nMaddened characters will attack those nearest them, regardless of alignment.",
-    "imageSrc": "https://d124vy484dv6tz.cloudfront.net/icons/maddening_song-icon.webp",
+    "imageSrc": "/images/icons/maddening-song-icon.webp",
     "id": "18"
   },
   {
@@ -264,12 +264,11 @@
     "id": "19",
     "immunities": ["Silenced", "Suffocating"],
     "description": "Allows you to ignore effects of cloud surfaces and making them immune to Suffocation and Silence.",
-    "imageSrc": "https://d124vy484dv6tz.cloudfront.net/icons/aerotheurge-16-14.png"
+    "imageSrc": "/images/icons/aerotheurge-16-14.png"
   },
   {
     "name": "Atrophy",
     "id": "20",
-    "description": "Character cannot use weapons for attacks or skills. Atrophy prevents the target from using their physical weapon or skills tied to their weapon. It does not prevent casters from using spells.",
-    "imageSrc": ""
+    "description": "Character cannot use weapons for attacks or skills. Atrophy prevents the target from using their physical weapon or skills tied to their weapon. It does not prevent casters from using spells."
   }
 ]

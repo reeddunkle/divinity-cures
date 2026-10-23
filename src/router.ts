@@ -1,5 +1,6 @@
 import { createRouter, type RouterHistory } from "@tanstack/react-router";
 
+import { NotFound, RouteError } from "./components/route-fallbacks.tsx";
 import { routeTree } from "./routeTree.gen.ts";
 import { parseSearch, stringifySearch } from "./url-state/search-params.ts";
 
@@ -12,6 +13,8 @@ export type AppRouterOptions = {
 
 export const createAppRouter = (options: AppRouterOptions = {}) =>
   createRouter({
+    defaultErrorComponent: RouteError,
+    defaultNotFoundComponent: NotFound,
     defaultPreload: "intent",
     scrollRestoration: true,
     ...options,

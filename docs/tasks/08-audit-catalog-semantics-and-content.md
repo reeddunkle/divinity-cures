@@ -19,6 +19,9 @@ The original schemas silently stripped fields that exist in the datasets, includ
 - Audit aliases and normalization rules used by future search behavior.
 - Review factual game content against trustworthy sources without silently changing inherited data.
 - Separate factual corrections from structural migrations so each change is reviewable.
+- Confirm what a range of `0` means. The UI shows every range in meters, including Breathing Bubble, Break the Shackles, and Skin Graft at `0 m`.
+- Check whether any other skill should use the explicit `"oncePerCombat"` cooldown. Skin Graft uses it, and a numeric `0` now means no cooldown.
+- Check surprising cures, such as Fortify granting immunity to Teleport.
 
 ## Acceptance criteria
 

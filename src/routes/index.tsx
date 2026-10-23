@@ -2,30 +2,29 @@ import { useForm } from "@tanstack/react-form";
 import { createFileRoute, useRouter } from "@tanstack/react-router";
 import { useEffect, useRef } from "react";
 
+import { css } from "../../styled-system/css";
+import { button } from "../../styled-system/recipes";
 import { catalog } from "../catalog/index.ts";
-import { prepareCureSkills, searchCures, type SearchResult } from "../search/search.ts";
+import { Page } from "../components/page.tsx";
+import { SkillCard } from "../components/skill-card.tsx";
+import { prepareCureSkills, searchCures } from "../search/search.ts";
+import { pageTitle } from "../site.ts";
 import { latestQuery, navigateToQuery } from "../url-state/search-navigation.ts";
 import { decodeSearchParams, queryOf, syncFormQuery } from "../url-state/search-params.ts";
 
 const cureSkills = prepareCureSkills(catalog.skills);
 
-function SearchResultItem({ result }: { readonly result: SearchResult }) {
-  return (
-    <li>
-      <h2>{result.isNameMatch ? <mark>{result.skill.name}</mark> : result.skill.name}</h2>
-      <p>
-        {result.skill.actionPoints} AP, {result.skill.sourcePoints} SP
-      </p>
-      <ul aria-label={`Cures from ${result.skill.name}`}>
-        {result.cures.map((cure) => {
-          const label = cure.grantsImmunity ? `${cure.status} (grants immunity)` : cure.status;
+const resultSummary = (count: number, query: string) => {
+  if (query === "") {
+    return `All ${count} cure skills`;
+  }
 
-          return <li key={cure.status}>{cure.isMatch ? <mark>{label}</mark> : label}</li>;
-        })}
-      </ul>
-    </li>
-  );
-}
+  if (count === 0) {
+    return `No skills match “${query}”.`;
+  }
+
+  return `${count} ${count === 1 ? "skill matches" : "skills match"} “${query}”`;
+};
 
 function HomeRoute() {
   const router = useRouter();
@@ -53,56 +52,103 @@ function HomeRoute() {
   };
 
   return (
-    <main>
-      <h1>Divinity Cures</h1>
+    <Page title="Find a cure">
       <form
-        role="search"
+        className={css({ display: "grid", gap: "2" })}
         onSubmit={(event) => {
           event.preventDefault();
           void form.handleSubmit();
         }}
+        role="search"
       >
         <form.Field name="query">
           {(field) => (
             <>
-              <label htmlFor={field.name}>Find cures for</label>
-              <input
-                autoComplete="off"
-                id={field.name}
-                name={field.name}
-                onBlur={field.handleBlur}
-                onChange={(event) => {
-                  field.handleChange(event.target.value);
-                  void navigateToQuery(router, event.target.value, "edit");
-                }}
-                placeholder="Burning, Decaying, First Aid…"
-                ref={inputRef}
-                type="search"
-                value={field.state.value}
-              />
+              <label className={css({ fontWeight: "semibold" })} htmlFor={field.name}>
+                Find cures for
+              </label>
+              <div className={css({ display: "flex", flexWrap: "wrap", gap: "2" })}>
+                <input
+                  autoComplete="off"
+                  className={css({
+                    backgroundColor: "surface.sunken",
+                    borderColor: "border.default",
+                    borderRadius: "control",
+                    borderStyle: "solid",
+                    borderWidth: "1px",
+                    flexBasis: "60",
+                    flexGrow: "1",
+                    fontSize: "lg",
+                    minHeight: "11",
+                    minWidth: "0",
+                    paddingInline: "3",
+                    _placeholder: { color: "text.muted" },
+                  })}
+                  id={field.name}
+                  name={field.name}
+                  onBlur={field.handleBlur}
+                  onChange={(event) => {
+                    field.handleChange(event.target.value);
+                    void navigateToQuery(router, event.target.value, "edit");
+                  }}
+                  placeholder="Burning, Decaying, First Aid…"
+                  ref={inputRef}
+                  type="search"
+                  value={field.state.value}
+                />
+                <div className={css({ display: "flex", gap: "2" })}>
+                  <button className={button()} type="submit">
+                    Search
+                  </button>
+                  <button
+                    className={button({ tone: "quiet" })}
+                    disabled={query === ""}
+                    onClick={clear}
+                    type="button"
+                  >
+                    Clear
+                  </button>
+                </div>
+              </div>
             </>
           )}
         </form.Field>
-        <button type="submit">Search</button>
-        <button disabled={query === ""} onClick={clear} type="button">
-          Clear
-        </button>
       </form>
-      <p aria-live="polite" role="status">
-        {results.length === 0
-          ? `No cures match “${query}”.`
-          : `${results.length} ${results.length === 1 ? "cure" : "cures"}`}
-      </p>
-      <ol>
+      <div
+        className={css({
+          alignItems: "baseline",
+          color: "text.muted",
+          columnGap: "4",
+          display: "flex",
+          flexWrap: "wrap",
+          fontSize: "sm",
+          justifyContent: "space-between",
+          rowGap: "1",
+        })}
+      >
+        <p aria-live="polite" role="status">
+          {resultSummary(results.length, query)}
+        </p>
+        <p>
+          <span aria-hidden="true">*</span> Grants immunity
+        </p>
+      </div>
+      <ol
+        aria-label="Cure skills"
+        className={css({ display: "grid", gap: "4", listStyleType: "none" })}
+      >
         {results.map((result) => (
-          <SearchResultItem key={result.skill.id} result={result} />
+          <li key={result.skill.id}>
+            <SkillCard result={result} />
+          </li>
         ))}
       </ol>
-    </main>
+    </Page>
   );
 }
 
 export const Route = createFileRoute("/")({
   component: HomeRoute,
+  head: () => ({ meta: [{ title: pageTitle() }] }),
   validateSearch: decodeSearchParams,
 });

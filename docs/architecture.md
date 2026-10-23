@@ -35,6 +35,11 @@ TanStack Router owns durable, shareable search state in the `search` query param
 
 React renders routes and interaction. Panda CSS owns tokens, recipes, and extracted styles. Presentation modules consume prepared domain values instead of interpreting raw catalog records.
 
+- `src/theme` defines semantic tokens, global styles, and the recipes for shared visual patterns: `button`, `textLink`, `cureBadge`, and the `card` slot recipe. Components refer to semantic tokens such as `surface.raised` or `cure.immunity.background` rather than palette steps.
+- `src/skill-details` turns skill values into display text, such as cost, cooldown, range, and school requirement labels, and is tested without React.
+- The root route owns the skip link, landmarks, document titles through `HeadContent`, and focus. Moving to a different pathname focuses `<main>`, while search edits on `/` leave focus alone.
+- Images are served from `public/` by root-relative path. See [assets](./assets.md).
+
 ## Effect policy
 
 Effect v4 is the default TypeScript standard library for schema decoding, typed failures, collection operations, ordering, optionality, matching, and other domain transformations where it improves clarity. Stable and unstable modules are both allowed.
