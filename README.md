@@ -12,4 +12,4 @@ pnpm exec playwright install chromium
 pnpm check
 ```
 
-`pnpm check` runs lint, format checks, unit tests, browser tests in headless Chromium, typecheck, and the production build. See [deployment](./docs/deployment.md) for Netlify.
+`pnpm check` runs lint, format checks, unit tests, browser tests in headless Chromium, typecheck, and the production build. GitHub Actions runs it from a clean install on every push and pull request. See [deployment](./docs/deployment.md) for Netlify.
