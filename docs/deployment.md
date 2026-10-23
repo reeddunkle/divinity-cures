@@ -4,7 +4,7 @@ The site is static: Vite builds it into `dist/`, and Netlify serves that folder.
 
 ## Netlify configuration
 
-- **Build:** `pnpm build` typechecks and builds. Netlify reads Node from `.node-version` and pnpm from `PNPM_VERSION`, because Node 26 no longer ships Corepack. Installing runs `prepare`, which patches TypeScript with Effect TSGo and generates `styled-system/`.
+- **Build:** `pnpm build` typechecks and builds. Netlify reads Node from `.node-version` and pnpm from `PNPM_VERSION`, because Node 26 no longer ships Corepack. Installing runs `prepare`, which patches TypeScript with Effect TSGo and generates `styled-system/`. Netlify restores a cached `node_modules`, and when the lockfile is unchanged pnpm skips the install and `prepare` with it, so `pnpm build` runs `panda codegen` itself before typechecking.
 - **Routes:** `/` is served by `index.html`. `/about` and `/about/` are rewritten to `index.html` with status 200. Every other path that does not match a file gets `index.html` with status 404, so the app renders its not-found page and crawlers see a real 404.
 - **Caching:** hashed files under `/assets/*` are cached for a year as immutable. Images under `/images/*` are cached for a week, because their names are not hashed. `index.html` keeps Netlify's default of revalidating on every request.
 - **Headers:** every response sets `X-Content-Type-Options: nosniff` and `Referrer-Policy: strict-origin-when-cross-origin`.
