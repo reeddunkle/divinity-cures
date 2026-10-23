@@ -6,27 +6,20 @@
 
 Prove that the rewrite can safely replace the production application.
 
+## Context
+
+Local verification is done. A clean install passes `pnpm check`, which runs lint, format, unit and browser tests, typecheck, and the build. Oxlint reports React hooks and refs issues, type-aware rules, and Panda CSS rules, while TypeScript reports Effect diagnostics and strict Panda tokens. [`netlify.toml`](../../netlify.toml), the [deployment guide](../deployment.md), and the [parity checklist](../parity-checklist.md) are in place.
+
 ## Work
 
-- Run Effect-aware TypeScript 7 checking, type-aware Oxlint, Oxfmt checks, tests, and a clean production build.
-- Verify a clean install patches TypeScript with Effect TSGo while leaving Oxlint on its native engine.
-- Verify Oxlint reports React correctness and React Compiler diagnostics.
-- Verify Panda CSS diagnostics run through its Oxlint plugin.
-- Add component tests for the search form's URL synchronization after choosing a DOM test environment, which requires new packages.
-- Compare the rewrite against the parity checklist at representative viewport sizes.
-- Verify Netlify direct-route handling and SPA fallback configuration.
-- Check asset paths, caching, compression, bundle composition, and unexpected third-party requests.
-- Check accessibility, metadata, favicons, canonical URL expectations, and basic indexing behavior.
-- Give the not-found view its own document title. It currently keeps the root title, "Divinity Cures".
-- Measure high-zoom and screen-reader behavior on real devices. Keyboard flow, landmarks, headings, labels, the live result summary, and a 375 px layout were checked in a desktop browser during the presentation rebuild.
-- Deploy a preview without changing production.
-- Document cutover and rollback steps.
+- Deploy a branch deploy or Deploy Preview from `vite-rewrite` without changing production, following the [deployment guide](../deployment.md).
+- Run the guide's preview checklist against the deployed URL, including status codes, caching and compression headers, `noindex` on previews, and third-party requests.
+- Test high zoom and a mobile screen reader on real devices.
+- Record the production domain, and decide whether to add a canonical link.
 
 ## Acceptance criteria
 
-- All checks pass from a clean install.
-- Oxlint reports React correctness, React Compiler compatibility, TypeScript-aware, and Panda CSS issues.
-- Oxfmt is the only formatting workflow used locally and in CI.
-- `/`, `/about`, and valid search URLs work directly in the deployed preview.
+- `/`, `/about`, and valid search URLs work directly in the deployed preview, and unknown paths return 404.
+- Every row of the preview checklist passes, or its failure is explained.
 - The parity checklist has no unexplained failures.
 - The cutover can be reversed without reconstructing the old application.

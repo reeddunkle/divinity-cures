@@ -77,6 +77,8 @@ function RootLayout() {
 export const Route = createRootRoute({
   component: RootLayout,
   errorComponent: RouteError,
-  head: () => ({ meta: [{ title: pageTitle() }] }),
+  head: ({ matches }) => ({
+    meta: [{ title: pageTitle(matches.length === 1 ? "Page not found" : undefined) }],
+  }),
   notFoundComponent: NotFound,
 });

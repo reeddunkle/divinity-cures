@@ -36,12 +36,15 @@
     "@types/react": "catalog:types",
     "@types/react-dom": "catalog:types",
     "@vitejs/plugin-react": "catalog:build",
+    "@vitest/browser-playwright": "catalog:test",
     "oxfmt": "catalog:lint",
     "oxlint": "catalog:lint",
     "oxlint-tsgolint": "catalog:lint",
+    "playwright": "catalog:test",
     "typescript": "catalog:build",
     "vite": "catalog:build",
-    "vitest": "catalog:test"
+    "vitest": "catalog:test",
+    "vitest-browser-react": "catalog:test"
   },
   "packageManager": "pnpm@12.15.0"
 }
