@@ -12,7 +12,7 @@ const renderApp = async (initialEntry: string) => {
   await router.load();
 
   const screen = await render(<RouterProvider router={router} />);
-  const input = screen.getByRole("searchbox", { name: "Status or skill" });
+  const input = screen.getByRole("searchbox", { name: "Status, skill, or school" });
   const status = screen.getByRole("status");
   const href = () => router.state.location.href;
 
@@ -96,5 +96,27 @@ describe("home route search form", () => {
 
     expect(href()).toBe("/?search=Disarmed");
     await expect.element(input).toHaveValue("Disarmed");
+  });
+
+  it("searches for a school when its icons are followed", async () => {
+    const { history, href, input, screen } = await renderApp("/?search=first+aid");
+
+    await screen.getByRole("link", { name: "Search Huntsman skills" }).click();
+
+    expect(href()).toBe("/?search=Huntsman");
+    expect(history.length).toBe(2);
+    await expect.element(input).toHaveValue("Huntsman");
+    await expect.element(screen.getByRole("status")).toHaveTextContent("5 skills match “Huntsman”");
+  });
+
+  it("replaces a draft entry when a school is followed while typing", async () => {
+    const { history, href, input, screen } = await renderApp("/");
+
+    await userEvent.type(input, "fortify");
+    await screen.getByRole("link", { name: "Search Geomancer skills" }).click();
+
+    expect(href()).toBe("/?search=Geomancer");
+    expect(history.length).toBe(2);
+    await expect.element(input).toHaveValue("Geomancer");
   });
 });

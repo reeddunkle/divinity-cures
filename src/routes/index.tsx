@@ -65,7 +65,7 @@ function HomeRoute() {
           {(field) => (
             <>
               <label className={css({ fontWeight: "semibold" })} htmlFor={field.name}>
-                Status or skill
+                Status, skill, or school
               </label>
               <div className={css({ display: "flex", flexWrap: "wrap", gap: "2" })}>
                 <input
@@ -91,7 +91,7 @@ function HomeRoute() {
                     field.handleChange(event.target.value);
                     void navigateToQuery(router, event.target.value, "edit");
                   }}
-                  placeholder="Burning, Decaying, First Aid…"
+                  placeholder="Burning, First Aid, Hydrosophist…"
                   ref={inputRef}
                   type="search"
                   value={field.state.value}
@@ -148,6 +148,7 @@ function HomeRoute() {
               scrollbarGutter: "stable",
             },
           })}
+          id="results"
           key={query}
         >
           {results.map((result) => (

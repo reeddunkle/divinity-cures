@@ -17,6 +17,7 @@ export const createAppRouter = (options: AppRouterOptions = {}) =>
     defaultNotFoundComponent: NotFound,
     defaultPreload: "intent",
     scrollRestoration: true,
+    scrollToTopSelectors: ["#main", "#results"],
     ...options,
     parseSearch,
     routeTree,

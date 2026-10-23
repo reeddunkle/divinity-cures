@@ -51,13 +51,14 @@ export const navigateToQuery = (
   router: RegisteredRouter,
   query: string,
   intent: SearchIntent,
+  options: { readonly resetScroll?: boolean } = {},
 ): Promise<void> =>
   O.match(planSearchNavigation(currentEntry(router), query, intent), {
     onNone: () => Promise.resolve(),
     onSome: (navigation) =>
       router.navigate({
         replace: navigation.replace,
-        resetScroll: false,
+        resetScroll: options.resetScroll ?? false,
         search: navigation.search,
         state: { searchDraft: navigation.isDraft },
         to: "/",

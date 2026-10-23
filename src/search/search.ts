@@ -4,7 +4,7 @@ import * as Order from "effect/Order";
 import * as Str from "effect/String";
 
 import type { Skill } from "../catalog/catalog.ts";
-import type { StatusEffectRecord } from "../catalog/schemas.ts";
+import type { SchoolId, StatusEffectRecord } from "../catalog/schemas.ts";
 
 export type Cure = {
   readonly aliases: readonly string[];
@@ -24,6 +24,7 @@ export type MatchedCure = Cure & {
 export type SearchResult = {
   readonly cures: readonly MatchedCure[];
   readonly isNameMatch: boolean;
+  readonly matchedSchoolIds: readonly SchoolId[];
   readonly skill: Skill;
 };
 
@@ -100,11 +101,18 @@ const curesMatch = (cure: Cure, matches: (text: string) => boolean) =>
 const toResult = (cureSkill: CureSkill, matches: (text: string) => boolean): SearchResult => ({
   cures: A.map(cureSkill.cures, (cure) => ({ ...cure, isMatch: curesMatch(cure, matches) })),
   isNameMatch: matches(cureSkill.skill.name),
+  matchedSchoolIds: pipe(
+    cureSkill.skill.schools,
+    A.filter(({ school }) => matches(school.name)),
+    A.map(({ school }) => school.id),
+  ),
   skill: cureSkill.skill,
 });
 
 const isMatch = (result: SearchResult) =>
-  result.isNameMatch || A.some(result.cures, (cure) => cure.isMatch);
+  result.isNameMatch ||
+  A.isReadonlyArrayNonEmpty(result.matchedSchoolIds) ||
+  A.some(result.cures, (cure) => cure.isMatch);
 
 export const searchCures = (
   cureSkills: readonly CureSkill[],

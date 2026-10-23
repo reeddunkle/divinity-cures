@@ -2,7 +2,13 @@ import { catalog } from "virtual:bundled-catalog";
 import { describe, expect, it } from "vitest";
 
 import type { Skill } from "../catalog/catalog.ts";
-import { SkillId, StatusEffectId, type StatusEffectRecord } from "../catalog/schemas.ts";
+import {
+  SchoolId,
+  type SchoolRecord,
+  SkillId,
+  StatusEffectId,
+  type StatusEffectRecord,
+} from "../catalog/schemas.ts";
 import { normalizeSearchText, prepareCureSkills, searchCures } from "./search.ts";
 
 const makeStatusEffect = (overrides: Partial<StatusEffectRecord>): StatusEffectRecord => ({
@@ -18,6 +24,19 @@ const makeStatusEffect = (overrides: Partial<StatusEffectRecord>): StatusEffectR
   stats: [],
   ...overrides,
 });
+
+const makeSchool = (id: string, name: string): SchoolRecord => ({
+  description: "",
+  effects: [],
+  id: SchoolId.make(id),
+  imageSrcColored: "",
+  modifies: [],
+  name,
+});
+
+const geomancer = makeSchool("geomancer", "Geomancer");
+const hydrosophist = makeSchool("hydrosophist", "Hydrosophist");
+const warfare = makeSchool("warfare", "Warfare");
 
 const makeSkill = (overrides: Partial<Skill>): Skill => ({
   actionPoints: 1,
@@ -46,6 +65,7 @@ const fortify = makeSkill({
   id: SkillId.make("fortify"),
   name: "Fortify",
   removes: ["Poisoned", "Burning"],
+  schools: [{ requires: 1, school: geomancer }],
 });
 const firstAid = makeSkill({
   id: SkillId.make("first-aid"),
@@ -56,6 +76,10 @@ const restoration = makeSkill({
   actionPoints: 2,
   id: SkillId.make("restoration"),
   name: "Restoration",
+  schools: [
+    { requires: 1, school: hydrosophist },
+    { requires: 1, school: warfare },
+  ],
   statusEffects: [
     applied(
       makeStatusEffect({
@@ -135,7 +159,12 @@ describe("searchCures", () => {
 
     expect(names(results)).toEqual(["First Aid", "Fortify", "Restoration", "Arcane Cure"]);
     expect(
-      results.every((result) => !result.isNameMatch && result.cures.every((cure) => !cure.isMatch)),
+      results.every(
+        (result) =>
+          !result.isNameMatch &&
+          result.matchedSchoolIds.length === 0 &&
+          result.cures.every((cure) => !cure.isMatch),
+      ),
     ).toBe(true);
   });
 
@@ -198,6 +227,28 @@ describe("searchCures", () => {
     expect(results[0]?.cures.every((cure) => !cure.isMatch)).toBe(true);
   });
 
+  it("matches school names by prefix without highlighting the name or cures", () => {
+    const results = searchCures(cureSkills, "geo");
+
+    expect(names(results)).toEqual(["Fortify"]);
+    expect(results[0]?.matchedSchoolIds).toEqual(["geomancer"]);
+    expect(results[0]?.isNameMatch).toBe(false);
+    expect(results[0]?.cures.every((cure) => !cure.isMatch)).toBe(true);
+  });
+
+  it("matches a skill when any of its schools matches", () => {
+    const results = searchCures(cureSkills, "warfare");
+
+    expect(names(results)).toEqual(["Restoration"]);
+    expect(results[0]?.matchedSchoolIds).toEqual(["warfare"]);
+  });
+
+  it("does not record school matches for other fields", () => {
+    expect(
+      searchCures(cureSkills, "burn").every((result) => result.matchedSchoolIds.length === 0),
+    ).toBe(true);
+  });
+
   it("never returns skills that cure nothing, even when their name matches", () => {
     expect(names(searchCures(cureSkills, "burning touch"))).toEqual([]);
   });
@@ -222,6 +273,18 @@ describe("searchCures", () => {
 
     expect(names(searchCures(catalogCures, "first aid"))).toContain("First Aid");
     expect(searchCures(catalogCures, "burning").length).toBeGreaterThan(0);
+  });
+
+  it("finds every cure skill of a school in the real catalog", () => {
+    const catalogCures = prepareCureSkills(catalog.skills, catalog.statusEffects);
+    const hydrosophistSkills = catalogCures.filter((cureSkill) =>
+      cureSkill.skill.schools.some(({ school }) => school.name === "Hydrosophist"),
+    );
+
+    expect(hydrosophistSkills.length).toBeGreaterThan(0);
+    expect(names(searchCures(catalogCures, "Hydrosophist"))).toEqual(
+      hydrosophistSkills.map((cureSkill) => cureSkill.skill.name),
+    );
   });
 
   it("finds Mad cures in the real catalog by its Madness alias", () => {

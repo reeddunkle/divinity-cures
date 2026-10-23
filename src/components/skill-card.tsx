@@ -1,10 +1,12 @@
-import type { ReactNode } from "react";
+import { Link, useRouter } from "@tanstack/react-router";
+import type { MouseEvent, ReactNode } from "react";
 
-import { css } from "../../styled-system/css";
+import { css, cx } from "../../styled-system/css";
 import { visuallyHidden } from "../../styled-system/patterns";
 import { card } from "../../styled-system/recipes";
 import type { SearchResult } from "../search/search.ts";
-import { schoolRequirements } from "../skill-details/skill-details.ts";
+import { type SchoolRequirement, schoolRequirements } from "../skill-details/skill-details.ts";
+import { navigateToQuery } from "../url-state/search-navigation.ts";
 import { CooldownDial } from "./cooldown-dial.tsx";
 import { CureBadge } from "./cure-badge.tsx";
 import { PointCosts } from "./point-costs.tsx";
@@ -26,8 +28,65 @@ function Stat(props: { readonly children: ReactNode; readonly term: string }) {
   );
 }
 
+const isPlainClick = (event: MouseEvent) =>
+  event.button === 0 && !event.altKey && !event.ctrlKey && !event.metaKey && !event.shiftKey;
+
+const schoolLink = css({
+  borderRadius: "sm",
+  display: "flex",
+  flexDirection: "column",
+  gap: "0.5",
+  outlineOffset: "0.5",
+  _hover: {
+    outlineColor: "match.background/50",
+    outlineStyle: "solid",
+    outlineWidth: "2px",
+  },
+});
+
+const matchedSchoolLink = css({
+  outlineColor: "match.background",
+  outlineStyle: "solid",
+  outlineWidth: "2px",
+  _hover: { outlineColor: "match.background" },
+});
+
+function SchoolLink(props: { readonly isMatch: boolean; readonly requirement: SchoolRequirement }) {
+  const router = useRouter();
+  const { requirement } = props;
+
+  return (
+    <Link
+      aria-label={`Search ${requirement.name} skills`}
+      className={cx(schoolLink, props.isMatch && matchedSchoolLink)}
+      onClick={(event) => {
+        if (isPlainClick(event)) {
+          event.preventDefault();
+          void navigateToQuery(router, requirement.name, "commit", { resetScroll: true });
+        }
+      }}
+      search={{ search: requirement.name }}
+      title={requirement.label}
+      to="/"
+    >
+      {Array.from({ length: requirement.count }, (_, index) => (
+        <img
+          alt=""
+          className={css({ height: "icon.schoolGutter", width: "icon.schoolGutter" })}
+          decoding="async"
+          height={32}
+          key={index}
+          loading="lazy"
+          src={requirement.imageSrc}
+          width={32}
+        />
+      ))}
+    </Link>
+  );
+}
+
 export function SkillCard(props: { readonly result: SearchResult }) {
-  const { cures, isNameMatch, skill } = props.result;
+  const { cures, isNameMatch, matchedSchoolIds, skill } = props.result;
   const styles = card();
   const titleId = `skill-${skill.id}-title`;
 
@@ -78,23 +137,11 @@ export function SkillCard(props: { readonly result: SearchResult }) {
       </div>
       <ul aria-label="School requirements" className={styles.gutter}>
         {schoolRequirements(skill).map((requirement) => (
-          <li
-            className={css({ display: "flex", flexDirection: "column", gap: "0.5" })}
-            key={requirement.id}
-            title={requirement.label}
-          >
-            {Array.from({ length: requirement.count }, (_, index) => (
-              <img
-                alt=""
-                className={css({ height: "icon.schoolGutter", width: "icon.schoolGutter" })}
-                decoding="async"
-                height={32}
-                key={index}
-                loading="lazy"
-                src={requirement.imageSrc}
-                width={32}
-              />
-            ))}
+          <li key={requirement.id}>
+            <SchoolLink
+              isMatch={matchedSchoolIds.includes(requirement.id)}
+              requirement={requirement}
+            />
             <span className={visuallyHidden()}>{requirement.label}</span>
           </li>
         ))}

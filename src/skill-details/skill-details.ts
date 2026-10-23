@@ -1,10 +1,11 @@
 import * as A from "effect/Array";
 
 import type { Skill } from "../catalog/catalog.ts";
+import type { SchoolId } from "../catalog/schemas.ts";
 
 export type SchoolRequirement = {
   readonly count: number;
-  readonly id: string;
+  readonly id: SchoolId;
   readonly imageSrc: string;
   readonly label: string;
   readonly name: string;
