@@ -15,18 +15,22 @@ The site is static: Vite builds it into `dist/`, and Netlify serves that folder.
 
 ## Bundle
 
-Measured on 2026-10-23 with `vite build`; sizes are minified, with gzipped sizes in parentheses.
+Measured on 2026-10-23 with `vite build`; sizes are minified, with gzipped sizes in parentheses. The first load fetches the entry chunk and, once Effect Schema left the browser bundle, a shared `site` chunk that `index.html` preloads.
 
-| Chunk       | Before              | After               |
-| ----------- | ------------------- | ------------------- |
-| Entry       | 387.6 kB (125.7 kB) | 377.2 kB (122.5 kB) |
-| Home route  | 107.3 kB (28.6 kB)  | 126.7 kB (28.3 kB)  |
-| About route | 2.0 kB (0.7 kB)     | 2.0 kB (0.7 kB)     |
-| Stylesheet  | 32.6 kB (8.9 kB)    | 32.6 kB (8.9 kB)    |
+| JavaScript          | Before              | Catalog built ahead | Schema removed      |
+| ------------------- | ------------------- | ------------------- | ------------------- |
+| First load          | 387.6 kB (125.7 kB) | 377.2 kB (122.5 kB) | 316.4 kB (103.7 kB) |
+| Entry chunk         | 387.6 kB (125.7 kB) | 377.2 kB (122.5 kB) | 247.2 kB (78.7 kB)  |
+| Shared `site` chunk | none                | none                | 69.2 kB (25.0 kB)   |
+| Home route          | 107.3 kB (28.6 kB)  | 126.7 kB (28.3 kB)  | 128.2 kB (28.8 kB)  |
+| About route         | 2.0 kB (0.7 kB)     | 2.0 kB (0.7 kB)     | 2.0 kB (0.7 kB)     |
 
-The build now validates the catalog with `loadCatalog` and ships the decoded result, so visitors no longer run Effect Schema or the Effect runtime to load data, and an invalid catalog fails the build instead of the page. The home route chunk grows uncompressed because shared status and school records are repeated in each skill, but it shrinks gzipped.
+The stylesheet is 32.6 kB (8.9 kB) throughout.
 
-Before minification, the entry chunk is mostly React DOM (about 537 kB), Effect (about 245 kB), and TanStack Router (about 162 kB); the home route chunk is mostly TanStack Form (about 97 kB) and the catalog. Most of Effect's share is Schema, which also pulls in modules the app never uses, such as `Duration`, `DateTime`, `BigDecimal`, and HTTP cookie and DNS helpers. After the catalog change, decoding the `search` parameter with Schema is the only reason it stays: an experiment that decoded it with `Predicate` instead cut the entry chunk to 247.3 kB (78.8 kB gzipped).
+- **Catalog built ahead:** the build validates the catalog with `loadCatalog` and ships the decoded result, so visitors no longer run Effect Schema or the Effect runtime to load data, and an invalid catalog fails the build instead of the page. The home route chunk grows uncompressed because shared status and school records are repeated in each skill, but it barely changes gzipped.
+- **Schema removed:** the `search` parameter was then the only value decoded with Effect Schema in the browser. Schema also pulled in modules the app never uses, such as `Duration`, `DateTime`, `BigDecimal`, and HTTP cookie and DNS helpers. Decoding it with `Predicate` instead takes Schema out of the browser bundle.
+
+Before minification, the remaining JavaScript is mostly React DOM, TanStack Router, and, in the home route, TanStack Form and the catalog.
 
 Card images use `loading="lazy"` and `decoding="async"`. On a cold load at 1280 × 720, only the first seven skill icons load; the rest load as the results list scrolls toward them.
 

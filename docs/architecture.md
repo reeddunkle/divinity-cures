@@ -27,7 +27,7 @@ The search module owns normalization, cure expansion, filtering, highlighting, a
 
 TanStack Router owns durable, shareable search state in the `search` query parameter. TanStack Form owns transient input interaction. Their synchronization belongs at the route seam rather than inside the search module.
 
-- Search parameters are always parsed as plain strings and decoded with Effect Schema. Whitespace is trimmed and collapsed, and an empty query is omitted from the URL.
+- Search parameters are always parsed as plain strings. The `search` parameter is decoded with Effect's `Predicate` guards rather than Effect Schema, because it is the only value the browser decodes and Schema would add about 19 kB gzipped to the first load; a non-string value is treated as an empty query. Whitespace is trimmed and collapsed, and an empty query is omitted from the URL.
 - Every edit updates the URL, so the visible results can always be reloaded or shared.
 - The first edit after a committed search pushes a history entry marked as a draft; later edits replace it. Submitting or clearing commits the entry, so the next edit pushes again.
 - Navigation that does not change the query adds no entry.
@@ -46,6 +46,8 @@ React renders routes and interaction. Panda CSS owns tokens, recipes, and extrac
 ## Effect policy
 
 Effect v4 is the default TypeScript standard library for schema decoding, typed failures, collection operations, ordering, optionality, matching, and other domain transformations where it improves clarity. Stable and unstable modules are both allowed.
+
+Effect Schema decodes data at build and test time, where its size costs nothing. Browser code avoids Schema because it pulls in much of Effect; small runtime guards use the `Predicate` module instead.
 
 Expected failures use tagged errors. Defects remain defects. The Effect runtime is used for typed failure, dependencies, resources, concurrency, or observability rather than wrapping every synchronous value.
 

@@ -2,16 +2,11 @@ import { pipe } from "effect/Function";
 import * as O from "effect/Option";
 import * as P from "effect/Predicate";
 import * as R from "effect/Record";
-import * as Schema from "effect/Schema";
 import * as Str from "effect/String";
 
-const SearchParams = Schema.Struct({
-  search: Schema.optional(Schema.String),
-});
-
-export type SearchParams = typeof SearchParams.Type;
-
-const decodeUnknownSearchParams = Schema.decodeUnknownOption(SearchParams);
+export type SearchParams = {
+  readonly search?: string | undefined;
+};
 
 export const formatQuery = (query: string) => pipe(query, Str.replace(/\s+/gu, " "), Str.trim);
 
@@ -26,14 +21,7 @@ export const toSearchParams = (query: string): SearchParams =>
   );
 
 export const decodeSearchParams = (input: unknown): SearchParams =>
-  pipe(
-    decodeUnknownSearchParams(input),
-    O.flatMapNullishOr((params) => params.search),
-    O.match({
-      onNone: () => toSearchParams(""),
-      onSome: toSearchParams,
-    }),
-  );
+  toSearchParams(P.hasProperty(input, "search") && P.isString(input.search) ? input.search : "");
 
 export const queryOf = (params: SearchParams) => params.search ?? "";
 
