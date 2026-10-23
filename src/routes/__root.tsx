@@ -9,15 +9,26 @@ import { pageTitle } from "../site.ts";
 
 function useFocusMainOnPageChange() {
   const mainRef = useRef<HTMLElement>(null);
-  const pathname = useRouterState({ select: (state) => state.location.pathname });
+  const pathname = useRouterState({ select: (state) => state.resolvedLocation?.pathname });
+  const href = useRouterState({ select: (state) => state.resolvedLocation?.href });
   const previousPathname = useRef(pathname);
+  const previousHref = useRef(href);
 
   useEffect(() => {
-    if (previousPathname.current !== pathname) {
-      previousPathname.current = pathname;
+    if (previousHref.current === href) {
+      return;
+    }
+
+    const isFirstLoad = previousHref.current === undefined;
+    const isNewPage = previousPathname.current !== pathname;
+    const isFocusLost = document.activeElement === null || document.activeElement === document.body;
+    previousPathname.current = pathname;
+    previousHref.current = href;
+
+    if (!isFirstLoad && (isNewPage || isFocusLost)) {
       mainRef.current?.focus();
     }
-  }, [pathname]);
+  }, [href, pathname]);
 
   return mainRef;
 }

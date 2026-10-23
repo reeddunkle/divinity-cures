@@ -37,7 +37,7 @@ React renders routes and interaction. Panda CSS owns tokens, recipes, and extrac
 
 - `src/theme` defines semantic tokens, global styles, and the recipes for shared visual patterns: `button`, `textLink`, `cureBadge`, and the `card` slot recipe. Components refer to semantic tokens such as `surface.raised` or `cure.immunity.background` rather than palette steps.
 - `src/skill-details` turns skill values into display text, such as cost, cooldown, range, and school requirement labels, and is tested without React.
-- The root route owns the skip link, landmarks, document titles through `HeadContent`, and focus. Moving to a different pathname focuses `<main>`, while search edits on `/` leave focus alone.
+- The root route owns the skip link, landmarks, document titles through `HeadContent`, and focus. Moving to a different pathname focuses `<main>`, while search edits on `/` leave focus alone. A navigation that removes the focused element, such as following a cure badge, which remounts the results list, also focuses `<main>` rather than leaving focus on the page body. The first load leaves focus alone.
 - Images are served from `public/` by root-relative path. See [assets](./assets.md).
 
 ## Effect policy

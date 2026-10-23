@@ -73,6 +73,28 @@ describe("focus management", () => {
     await expect.element(screen.getByRole("main")).toHaveFocus();
   });
 
+  it("focuses the main landmark after a followed cure badge is replaced", async () => {
+    const { screen } = await renderApp("/?search=first+aid");
+
+    await screen.getByRole("link", { name: "Disarmed" }).click();
+
+    await expect
+      .element(screen.getByRole("searchbox", { name: "Find cures for" }))
+      .toHaveValue("Disarmed");
+    await expect.element(screen.getByRole("main")).toHaveFocus();
+  });
+
+  it("leaves focus alone on the first load", async () => {
+    const router = createAppRouter({
+      history: createMemoryHistory({ initialEntries: ["/about"] }),
+      scrollRestoration: false,
+    });
+    const screen = await render(<RouterProvider router={router} />);
+
+    await expect.element(screen.getByRole("heading", { level: 1, name: "About" })).toBeVisible();
+    expect(document.activeElement).toBe(document.body);
+  });
+
   it("keeps focus in the search box while the query changes", async () => {
     const { screen } = await renderApp("/");
     const input = screen.getByRole("searchbox", { name: "Find cures for" });
