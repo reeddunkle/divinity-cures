@@ -15,6 +15,11 @@ Two annotated Git tags mark the rewrite boundary. `vite-rewrite-start` is the di
 
 Check out `nextjs-final` to run or compare the old application, and use `git diff nextjs-final vite-rewrite-start` to see where the rewrite began.
 
+## Design
+
+- [Typography](./docs/typography.md)
+- [Color palette](https://paletton.com/#uid=14n0u0ktPiAlqqgpXmxBddWN28G) from the original Next.js application
+
 ## Development
 
 ```bash

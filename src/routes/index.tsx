@@ -65,7 +65,7 @@ function HomeRoute() {
           {(field) => (
             <>
               <label className={css({ fontWeight: "semibold" })} htmlFor={field.name}>
-                Find cures for
+                Status or skill
               </label>
               <div className={css({ display: "flex", flexWrap: "wrap", gap: "2" })}>
                 <input

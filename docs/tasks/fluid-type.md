@@ -1,6 +1,6 @@
 # Fluid type
 
-Links and prior research: [design references](../design-references.md)
+Links and prior research: [typography](../typography.md)
 
 ## Kevin Powell video
 
