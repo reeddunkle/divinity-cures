@@ -12,7 +12,7 @@ const renderApp = async (initialEntry: string) => {
   await router.load();
 
   const screen = await render(<RouterProvider router={router} />);
-  const input = screen.getByRole("searchbox", { name: "Find cures for" });
+  const input = screen.getByRole("searchbox", { name: "Status or skill" });
   const status = screen.getByRole("status");
   const href = () => router.state.location.href;
 

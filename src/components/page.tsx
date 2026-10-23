@@ -14,9 +14,7 @@ export function Page(props: {
         props.fillHeight === true && { height: { md: "full" } },
       )}
     >
-      <h1 className={css({ fontSize: { base: "2xl", md: "3xl" }, fontWeight: "bold" })}>
-        {props.title}
-      </h1>
+      <h1 className={css({ fontSize: "3xl", fontWeight: "bold" })}>{props.title}</h1>
       {props.children}
     </div>
   );

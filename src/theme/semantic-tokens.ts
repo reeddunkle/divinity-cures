@@ -1,5 +1,19 @@
 import { defineSemanticTokens, defineTokens } from "@pandacss/dev";
 
+const typeStep = (step: number) => ({
+  value: `calc(var(--type-base) * pow(var(--type-ratio), ${step}))`,
+});
+
+export const fontSizes = defineTokens.fontSizes({
+  xs: typeStep(-2),
+  sm: typeStep(-1),
+  md: typeStep(0),
+  lg: typeStep(1),
+  xl: typeStep(2),
+  "2xl": typeStep(3),
+  "3xl": typeStep(4),
+});
+
 export const tokens = defineTokens({
   colors: {
     plum: {
@@ -60,6 +74,9 @@ export const semanticTokens = defineSemanticTokens({
     card: { value: "{radii.lg}" },
     control: { value: "{radii.md}" },
     pill: { value: "{radii.full}" },
+  },
+  fontSizes: {
+    cooldown: { value: "1rem" },
   },
   sizes: {
     icon: {

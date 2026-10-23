@@ -163,7 +163,7 @@ export const card = defineSlotRecipe({
     },
     title: {
       color: "text.skillName",
-      fontSize: { base: "xl", md: "2xl" },
+      fontSize: "2xl",
       fontWeight: "medium",
       gridArea: "title",
       letterSpacing: "wide",

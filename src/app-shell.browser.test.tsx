@@ -46,7 +46,7 @@ describe("about route", () => {
 
     expect(router.state.location.href).toBe("/?search=first+aid");
     await expect
-      .element(screen.getByRole("searchbox", { name: "Find cures for" }))
+      .element(screen.getByRole("searchbox", { name: "Status or skill" }))
       .toHaveValue("first aid");
   });
 });
@@ -88,7 +88,7 @@ describe("focus management", () => {
     await screen.getByRole("link", { name: "Disarmed" }).click();
 
     await expect
-      .element(screen.getByRole("searchbox", { name: "Find cures for" }))
+      .element(screen.getByRole("searchbox", { name: "Status or skill" }))
       .toHaveValue("Disarmed");
     await expect.element(screen.getByRole("main")).toHaveFocus();
   });
@@ -106,7 +106,7 @@ describe("focus management", () => {
 
   it("keeps focus in the search box while the query changes", async () => {
     const { screen } = await renderApp("/");
-    const input = screen.getByRole("searchbox", { name: "Find cures for" });
+    const input = screen.getByRole("searchbox", { name: "Status or skill" });
 
     await input.fill("burn");
 

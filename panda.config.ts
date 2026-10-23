@@ -2,7 +2,7 @@ import { defineConfig } from "@pandacss/dev";
 
 import { globalCss } from "./src/theme/global-css.ts";
 import { button, card, cureBadge, textLink } from "./src/theme/recipes.ts";
-import { semanticTokens, tokens } from "./src/theme/semantic-tokens.ts";
+import { fontSizes, semanticTokens, tokens } from "./src/theme/semantic-tokens.ts";
 
 export default defineConfig({
   globalCss,
@@ -13,6 +13,7 @@ export default defineConfig({
   presets: ["@pandacss/preset-base", "@pandacss/preset-panda"],
   strictTokens: true,
   theme: {
+    tokens: { fontSizes },
     extend: {
       recipes: { button, cureBadge, textLink },
       semanticTokens,

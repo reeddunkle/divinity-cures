@@ -25,7 +25,7 @@ export function CooldownDial(props: { readonly cooldown: Skill["cooldown"] }) {
         />
         <path className={css({ stroke: "text.default" })} d="M37 19.5L42 25L47 19.5" />
         <text
-          className={css({ fill: "text.default", fontFamily: "mono", fontSize: "md" })}
+          className={css({ fill: "text.default", fontFamily: "mono", fontSize: "cooldown" })}
           dominantBaseline="central"
           textAnchor="middle"
           x="24"
