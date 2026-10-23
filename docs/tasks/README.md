@@ -10,7 +10,6 @@ This directory contains only outstanding work. Tasks are ordered by dependency a
 | P2       | [12 — Serve page metadata without JavaScript](./12-serve-page-metadata-without-javascript.md) | Complete prerendered HTML for every route           |
 | P2       | [13 — Reduce initial JavaScript](./13-reduce-initial-javascript.md)                           | A measured, smaller first load                      |
 | P3       | [14 — Add a Content Security Policy](./14-add-content-security-policy.md)                     | Same-origin-only resource policy in production      |
-| P3       | [15 — Expand browser test coverage](./15-expand-browser-test-coverage.md)                     | Every route, fallback, and layout under test        |
 
 ## Working principles
 

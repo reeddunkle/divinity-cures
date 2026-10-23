@@ -1,3 +1,4 @@
+import pandacss from "@pandacss/vite";
 import { playwright } from "@vitest/browser-playwright";
 import { defineConfig } from "vitest/config";
 
@@ -11,6 +12,7 @@ export default defineConfig({
         },
       },
       {
+        plugins: [pandacss({ transform: true })],
         test: {
           browser: {
             enabled: true,
