@@ -18,6 +18,22 @@
   },
   "overrides": [
     {
+      "files": ["src/**/*.ts", "src/**/*.tsx"],
+      "rules": {
+        "no-restricted-imports": [
+          "error",
+          {
+            "patterns": [
+              {
+                "group": ["../*"],
+                "message": "Import modules outside this directory through @/ or styled-system/."
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
       "files": ["src/routes/**/*.ts", "src/routes/**/*.tsx"],
       "rules": {
         "unicorn/filename-case": "off"

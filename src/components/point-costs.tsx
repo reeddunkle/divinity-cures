@@ -1,7 +1,8 @@
-import { css } from "../../styled-system/css";
-import { visuallyHidden } from "../../styled-system/patterns";
-import { uiImages } from "../assets.ts";
-import { costLabel } from "../skill-details/skill-details.ts";
+import { css } from "styled-system/css";
+import { visuallyHidden } from "styled-system/patterns";
+
+import { uiImages } from "@/assets.ts";
+import { costLabel } from "@/skill-details/skill-details.ts";
 
 const pointIcon = css({ height: "icon.point", width: "icon.point" });
 

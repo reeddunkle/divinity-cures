@@ -1,9 +1,9 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
+import { css } from "styled-system/css";
+import { textLink } from "styled-system/recipes";
 
-import { css } from "../../styled-system/css";
-import { textLink } from "../../styled-system/recipes";
-import { Page } from "../components/page.tsx";
-import { pageHead, site } from "../site.ts";
+import { Page } from "@/components/page.tsx";
+import { pageHead, site } from "@/site.ts";
 
 const list = css({
   display: "grid",

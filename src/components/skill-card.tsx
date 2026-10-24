@@ -1,16 +1,17 @@
 import { Tooltip } from "@base-ui/react/tooltip";
 import type { ReactNode } from "react";
+import { css, cx } from "styled-system/css";
+import { visuallyHidden } from "styled-system/patterns";
+import { card, tooltip } from "styled-system/recipes";
 
-import { css, cx } from "../../styled-system/css";
-import { visuallyHidden } from "../../styled-system/patterns";
-import { card, tooltip } from "../../styled-system/recipes";
-import type { SearchResult } from "../search/search.ts";
+import type { SearchResult } from "@/search/search.ts";
 import {
   cooldownLabel,
   rangeLabel,
   type SchoolRequirement,
   schoolRequirements,
-} from "../skill-details/skill-details.ts";
+} from "@/skill-details/skill-details.ts";
+
 import { CooldownDial } from "./cooldown-dial.tsx";
 import { CureBadge } from "./cure-badge.tsx";
 import { PointCosts } from "./point-costs.tsx";

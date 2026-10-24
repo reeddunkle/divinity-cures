@@ -1,12 +1,12 @@
 import { Tooltip } from "@base-ui/react/tooltip";
 import { createRootRoute, HeadContent, Outlet, useRouterState } from "@tanstack/react-router";
 import { useEffect, useRef } from "react";
+import { css } from "styled-system/css";
 
-import { css } from "../../styled-system/css";
-import { NotFound, RouteError } from "../components/route-fallbacks.tsx";
-import { SiteFooter } from "../components/site-footer.tsx";
-import { SiteHeader } from "../components/site-header.tsx";
-import { pageHead } from "../site.ts";
+import { NotFound, RouteError } from "@/components/route-fallbacks.tsx";
+import { SiteFooter } from "@/components/site-footer.tsx";
+import { SiteHeader } from "@/components/site-header.tsx";
+import { pageHead } from "@/site.ts";
 
 function useFocusMainOnPageChange() {
   const mainRef = useRef<HTMLElement>(null);

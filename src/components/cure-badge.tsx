@@ -1,6 +1,8 @@
-import { visuallyHidden } from "../../styled-system/patterns";
-import { cureBadge } from "../../styled-system/recipes";
-import type { MatchedCure } from "../search/search.ts";
+import { visuallyHidden } from "styled-system/patterns";
+import { cureBadge } from "styled-system/recipes";
+
+import type { MatchedCure } from "@/search/search.ts";
+
 import { SearchLink } from "./search-link.tsx";
 
 export function CureBadge(props: { readonly cure: MatchedCure }) {

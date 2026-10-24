@@ -1,6 +1,7 @@
-import { css } from "../../styled-system/css";
-import { visuallyHidden } from "../../styled-system/patterns";
-import { rangeLabel } from "../skill-details/skill-details.ts";
+import { css } from "styled-system/css";
+import { visuallyHidden } from "styled-system/patterns";
+
+import { rangeLabel } from "@/skill-details/skill-details.ts";
 
 const arrow = css({ height: "4", stroke: "text.default", width: "4" });
 

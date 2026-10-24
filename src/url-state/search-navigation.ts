@@ -1,7 +1,8 @@
 import type { RegisteredRouter } from "@tanstack/react-router";
 import * as O from "effect/Option";
 
-import { type ScrollScope, scrollNavigationOptions } from "../scroll/scroll-policy.ts";
+import { type ScrollScope, scrollNavigationOptions } from "@/scroll/scroll-policy.ts";
+
 import { decodeSearchParams, queryOf, type SearchParams, toSearchParams } from "./search-params.ts";
 
 declare module "@tanstack/react-router" {

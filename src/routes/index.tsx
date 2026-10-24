@@ -1,16 +1,16 @@
 import { useForm } from "@tanstack/react-form";
 import { createFileRoute, useRouter } from "@tanstack/react-router";
 import { useEffect, useRef } from "react";
+import { css } from "styled-system/css";
+import { button } from "styled-system/recipes";
 import { catalog } from "virtual:bundled-catalog";
 
-import { css } from "../../styled-system/css";
-import { button } from "../../styled-system/recipes";
-import { Page } from "../components/page.tsx";
-import { SkillCard } from "../components/skill-card.tsx";
-import { prepareCureSkills, searchCures } from "../search/search.ts";
-import { pageHead } from "../site.ts";
-import { latestQuery, searchFromInput } from "../url-state/search-navigation.ts";
-import { decodeSearchParams, queryOf, syncFormQuery } from "../url-state/search-params.ts";
+import { Page } from "@/components/page.tsx";
+import { SkillCard } from "@/components/skill-card.tsx";
+import { prepareCureSkills, searchCures } from "@/search/search.ts";
+import { pageHead } from "@/site.ts";
+import { latestQuery, searchFromInput } from "@/url-state/search-navigation.ts";
+import { decodeSearchParams, queryOf, syncFormQuery } from "@/url-state/search-params.ts";
 
 const cureSkills = prepareCureSkills(catalog.skills, catalog.statusEffects);
 

@@ -1,7 +1,7 @@
 import * as A from "effect/Array";
 
-import type { Skill } from "../catalog/catalog.ts";
-import type { SchoolId } from "../catalog/schemas.ts";
+import type { Skill } from "@/catalog/catalog.ts";
+import type { SchoolId } from "@/catalog/schemas.ts";
 
 export type SchoolRequirement = {
   readonly count: number;

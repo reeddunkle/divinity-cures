@@ -71,7 +71,11 @@ Tests live in `src/tests`, apart from the code they cover.
 - `browser-tests` holds the `*.browser.test.tsx` files, which run in headless Chromium with the app's real styles.
 - `common` holds helpers shared by more than one test file. `createTestRouter` builds and loads the app router on a memory history, and `renderApp` also renders it. A helper stays in its test file until a second file needs it.
 
-Tests import source through the `@/` alias for `src/`. Vitest picks the project by file suffix anywhere under `src`, so a test placed outside `src/tests` still runs.
+Vitest picks the project by file suffix anywhere under `src`, so a test placed outside `src/tests` still runs.
+
+## Imports
+
+Code under `src` imports a module in its own directory with `./` and any other module through an alias: `@/` for `src` and `styled-system/` for Panda output. Both aliases live in `tsconfig.json` `paths`, which Vite and Vitest read through `resolve.tsconfigPaths`. Oxlint rejects `../` imports under `src`. Files outside `src`, such as `build-plugins`, keep relative imports because Node loads them before Vite resolves aliases.
 
 ## Dependency direction
 

@@ -1,9 +1,9 @@
 import { Link } from "@tanstack/react-router";
+import { css } from "styled-system/css";
+import { textLink } from "styled-system/recipes";
 
-import { css } from "../../styled-system/css";
-import { textLink } from "../../styled-system/recipes";
-import { uiImages } from "../assets.ts";
-import { site } from "../site.ts";
+import { uiImages } from "@/assets.ts";
+import { site } from "@/site.ts";
 
 const navLink = textLink({ emphasis: "nav" });
 

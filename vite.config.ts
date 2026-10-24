@@ -15,4 +15,5 @@ export default defineConfig({
     react(),
     bundledCatalog(),
   ],
+  resolve: { tsconfigPaths: true },
 });

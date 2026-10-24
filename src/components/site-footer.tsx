@@ -1,6 +1,7 @@
-import { css } from "../../styled-system/css";
-import { textLink } from "../../styled-system/recipes";
-import { site } from "../site.ts";
+import { css } from "styled-system/css";
+import { textLink } from "styled-system/recipes";
+
+import { site } from "@/site.ts";
 
 const footerLink = textLink({ emphasis: "nav" });
 

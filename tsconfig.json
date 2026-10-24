@@ -18,7 +18,7 @@
     "noUncheckedSideEffectImports": true,
     "noUnusedLocals": true,
     "noUnusedParameters": true,
-    "paths": { "@/*": ["./src/*"] },
+    "paths": { "@/*": ["./src/*"], "styled-system/*": ["./styled-system/*"] },
     "resolveJsonModule": true,
     "skipLibCheck": true,
     "strict": true,

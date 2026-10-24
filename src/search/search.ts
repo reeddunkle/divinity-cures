@@ -3,8 +3,8 @@ import { pipe } from "effect/Function";
 import * as Order from "effect/Order";
 import * as Str from "effect/String";
 
-import type { Skill } from "../catalog/catalog.ts";
-import type { SchoolId, StatusEffectRecord } from "../catalog/schemas.ts";
+import type { Skill } from "@/catalog/catalog.ts";
+import type { SchoolId, StatusEffectRecord } from "@/catalog/schemas.ts";
 
 export type Cure = {
   readonly aliases: readonly string[];

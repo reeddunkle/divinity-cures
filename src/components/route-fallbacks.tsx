@@ -1,7 +1,7 @@
 import { type ErrorComponentProps, Link, useRouter } from "@tanstack/react-router";
+import { css } from "styled-system/css";
+import { button, textLink } from "styled-system/recipes";
 
-import { css } from "../../styled-system/css";
-import { button, textLink } from "../../styled-system/recipes";
 import { Page } from "./page.tsx";
 
 export function NotFound() {

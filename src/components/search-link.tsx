@@ -1,7 +1,7 @@
 import { Link, useRouter } from "@tanstack/react-router";
 import type { ComponentPropsWithRef, MouseEvent } from "react";
 
-import { followSearchLink } from "../url-state/search-navigation.ts";
+import { followSearchLink } from "@/url-state/search-navigation.ts";
 
 const isPlainClick = (event: MouseEvent) =>
   event.button === 0 && !event.altKey && !event.ctrlKey && !event.metaKey && !event.shiftKey;

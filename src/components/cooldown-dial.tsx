@@ -1,7 +1,8 @@
-import { css } from "../../styled-system/css";
-import { visuallyHidden } from "../../styled-system/patterns";
-import type { Skill } from "../catalog/catalog.ts";
-import { cooldownGlyph, cooldownLabel } from "../skill-details/skill-details.ts";
+import { css } from "styled-system/css";
+import { visuallyHidden } from "styled-system/patterns";
+
+import type { Skill } from "@/catalog/catalog.ts";
+import { cooldownGlyph, cooldownLabel } from "@/skill-details/skill-details.ts";
 
 export function CooldownDial(props: { readonly cooldown: Skill["cooldown"] }) {
   const label = cooldownLabel(props.cooldown);
