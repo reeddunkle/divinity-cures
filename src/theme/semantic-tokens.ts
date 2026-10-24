@@ -89,7 +89,7 @@ export const semanticTokens = defineSemanticTokens({
     pill: { value: "{radii.full}" },
   },
   fontSizes: {
-    cooldown: { value: "1rem" },
+    cooldown: { value: "1.375rem" },
   },
   sizes: {
     icon: {
