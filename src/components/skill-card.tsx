@@ -33,7 +33,7 @@ function Stat(props: {
   return (
     <div title={props.title}>
       <dt className={visuallyHidden()}>{props.term}</dt>
-      <dd className={css({ display: "flex" })}>{props.children}</dd>
+      <dd className={css({ display: "flex", justifyContent: "center" })}>{props.children}</dd>
     </div>
   );
 }
@@ -105,29 +105,31 @@ export function SkillCard(props: { readonly result: SearchResult }) {
 
   return (
     <article aria-labelledby={titleId} className={styles.root}>
-      <img
-        alt=""
-        className={styles.icon}
-        decoding="async"
-        height={56}
-        loading="lazy"
-        src={skill.imageSrc}
-        width={56}
-      />
       <h2 className={styles.title} id={titleId}>
         {skill.name}
       </h2>
-      <dl className={styles.stats}>
-        <Stat term="Cost">
-          <PointCosts actionPoints={skill.actionPoints} sourcePoints={skill.sourcePoints} />
-        </Stat>
-        <Stat term="Cooldown" title={`Cooldown: ${cooldownLabel(skill.cooldown)}`}>
-          <CooldownDial cooldown={skill.cooldown} />
-        </Stat>
-        <Stat term="Range" title={`Range: ${rangeLabel(skill.range)}`}>
-          <RangeIndicator range={skill.range} />
-        </Stat>
-      </dl>
+      <div className={styles.side}>
+        <img
+          alt=""
+          className={styles.icon}
+          decoding="async"
+          height={56}
+          loading="lazy"
+          src={skill.imageSrc}
+          width={56}
+        />
+        <dl className={styles.stats}>
+          <Stat term="Cost">
+            <PointCosts actionPoints={skill.actionPoints} sourcePoints={skill.sourcePoints} />
+          </Stat>
+          <Stat term="Cooldown" title={`Cooldown: ${cooldownLabel(skill.cooldown)}`}>
+            <CooldownDial cooldown={skill.cooldown} />
+          </Stat>
+          <Stat term="Range" title={`Range: ${rangeLabel(skill.range)}`}>
+            <RangeIndicator range={skill.range} />
+          </Stat>
+        </dl>
+      </div>
       <div className={styles.content}>
         <section aria-labelledby={`${titleId}-cures`} className={styles.section}>
           <h3 className={styles.sectionTitle} id={`${titleId}-cures`}>
