@@ -26,6 +26,11 @@ export const tokens = defineTokens({
   sizes: {
     content: { value: "48rem" },
   },
+  zIndex: {
+    sticky: { value: 10 },
+    tooltip: { value: 50 },
+    skipLink: { value: 100 },
+  },
 });
 
 export const semanticTokens = defineSemanticTokens({

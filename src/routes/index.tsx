@@ -2,6 +2,7 @@ import { useForm } from "@tanstack/react-form";
 import { createFileRoute, useRouter } from "@tanstack/react-router";
 import { useEffect, useRef } from "react";
 import { css } from "styled-system/css";
+import { visuallyHidden } from "styled-system/patterns";
 import { button } from "styled-system/recipes";
 import { catalog } from "virtual:bundled-catalog";
 
@@ -53,121 +54,153 @@ function HomeRoute() {
   };
 
   return (
-    <Page fillHeight title="Find a cure">
-      <form
-        className={css({ display: "grid", flexShrink: "0", gap: "2" })}
-        onSubmit={(event) => {
-          event.preventDefault();
-          void form.handleSubmit();
-        }}
-        role="search"
-      >
-        <form.Field name="query">
-          {(field) => (
-            <>
-              <label className={css({ fontWeight: "semibold" })} htmlFor={field.name}>
-                Status, skill, or school
-              </label>
-              <div className={css({ display: "flex", flexWrap: "wrap", gap: "2" })}>
-                <input
-                  autoComplete="off"
-                  className={css({
-                    backgroundColor: "surface.sunken",
-                    borderColor: "border.default",
-                    borderRadius: "control",
-                    borderStyle: "solid",
-                    borderWidth: "1px",
-                    flexBasis: "60",
-                    flexGrow: "1",
-                    fontSize: "lg",
-                    minHeight: "11",
-                    minWidth: "0",
-                    paddingInline: "3",
-                    _placeholder: { color: "text.muted" },
-                  })}
-                  id={field.name}
-                  name={field.name}
-                  onBlur={field.handleBlur}
-                  onChange={(event) => {
-                    field.handleChange(event.target.value);
-                    void searchFromInput(router, event.target.value, "edit");
-                  }}
-                  placeholder="Burning, First Aid, Hydrosophist…"
-                  ref={inputRef}
-                  type="search"
-                  value={field.state.value}
-                />
-                <button
-                  className={button({ tone: "quiet" })}
-                  disabled={query === ""}
-                  onClick={clear}
-                  type="button"
-                >
-                  Clear
-                </button>
-              </div>
-            </>
-          )}
-        </form.Field>
-      </form>
+    <Page fillHeight hideTitle title="Find a cure">
       <div
         className={css({
-          alignItems: "baseline",
-          color: "text.muted",
-          columnGap: "4",
           display: "flex",
-          flexShrink: "0",
-          flexWrap: "wrap",
-          fontSize: "sm",
-          justifyContent: "space-between",
-          rowGap: "1",
+          flexDirection: "column",
+          gap: "3",
+          md: { flexGrow: "1", minHeight: "0" },
         })}
       >
-        <p aria-live="polite" role="status">
-          {resultSummary(results.length, query)}
-        </p>
-        <p className={css({ alignItems: "center", display: "inline-flex", gap: "1" })}>
-          <ShieldIcon /> Grants immunity
-        </p>
-      </div>
-      {results.length > 0 && (
-        <ol
-          aria-label="Cure skills"
-          className={css({
-            backgroundColor: "surface.sunken",
-            borderColor: "border.strong",
-            borderRadius: "card",
-            borderStyle: "solid",
-            borderWidth: "2px",
-            boxShadow: "results",
-            listStyleType: "none",
-            position: "relative",
-            md: {
-              flexGrow: "1",
-              minHeight: "0",
-              overflowY: "auto",
-              scrollbarGutter: "stable",
-            },
-          })}
-          id="results"
-          key={query}
+        <form
+          className={css({ display: "grid", flexShrink: "0", gap: "2" })}
+          onSubmit={(event) => {
+            event.preventDefault();
+            void form.handleSubmit();
+          }}
+          role="search"
         >
-          {results.map((result) => (
-            <li
+          <form.Field name="query">
+            {(field) => (
+              <>
+                <label className={visuallyHidden()} htmlFor={field.name}>
+                  Status, skill, or school
+                </label>
+                <div className={css({ display: "flex", flexWrap: "wrap", gap: "2" })}>
+                  <input
+                    autoComplete="off"
+                    className={css({
+                      backgroundColor: "surface.sunken",
+                      borderColor: "border.default",
+                      borderRadius: "control",
+                      borderStyle: "solid",
+                      borderWidth: "1px",
+                      flexBasis: "60",
+                      flexGrow: "1",
+                      fontSize: "lg",
+                      minHeight: "11",
+                      minWidth: "0",
+                      paddingInline: "3",
+                      _placeholder: { color: "text.muted" },
+                    })}
+                    id={field.name}
+                    name={field.name}
+                    onBlur={field.handleBlur}
+                    onChange={(event) => {
+                      field.handleChange(event.target.value);
+                      void searchFromInput(router, event.target.value, "edit");
+                    }}
+                    placeholder="Search a status, skill, or school…"
+                    ref={inputRef}
+                    type="search"
+                    value={field.state.value}
+                  />
+                  <button
+                    className={button({ tone: "quiet" })}
+                    disabled={query === ""}
+                    onClick={clear}
+                    type="button"
+                  >
+                    Clear
+                  </button>
+                </div>
+              </>
+            )}
+          </form.Field>
+        </form>
+        <div
+          className={css(
+            {
+              backgroundColor: "surface.sunken",
+              borderColor: "border.strong",
+              borderRadius: "card",
+              borderStyle: "solid",
+              borderWidth: "2px",
+              boxShadow: "results",
+              display: "flex",
+              flexDirection: "column",
+              overflow: "clip",
+              md: { minHeight: "0" },
+            },
+            results.length > 0 && { md: { flexGrow: "1" } },
+          )}
+        >
+          <div
+            className={css({
+              alignItems: "center",
+              backgroundColor: "surface.raised",
+              color: "text.muted",
+              columnGap: "4",
+              display: "flex",
+              flexShrink: "0",
+              flexWrap: "wrap",
+              fontSize: "sm",
+              justifyContent: "space-between",
+              paddingBlock: "1.5",
+              paddingInline: { base: "3", md: "4" },
+              position: "sticky",
+              rowGap: "1",
+              top: "0",
+              zIndex: "sticky",
+              "&:not(:last-child)": {
+                borderBottomColor: "border.default",
+                borderBottomStyle: "solid",
+                borderBottomWidth: "1px",
+              },
+            })}
+          >
+            <p aria-live="polite" role="status">
+              {resultSummary(results.length, query)}
+            </p>
+            <p className={css({ alignItems: "center", display: "inline-flex", gap: "1" })}>
+              <ShieldIcon /> Grants immunity
+            </p>
+          </div>
+          {results.length > 0 && (
+            <ol
+              aria-label="Cure skills"
               className={css({
-                "& + &": {
-                  borderTopColor: "border.default",
-                  borderTopStyle: "solid",
-                  borderTopWidth: "1px",
+                listStyleType: "none",
+                position: "relative",
+                md: {
+                  flexGrow: "1",
+                  minHeight: "0",
+                  overflowY: "auto",
+                  scrollbarGutter: "stable",
                 },
               })}
-              key={result.skill.id}
+              id="results"
+              key={query}
             >
-              <SkillCard result={result} />
-            </li>
-          ))}
-        </ol>
-      )}
+              {results.map((result) => (
+                <li
+                  className={css({
+                    "& + &": {
+                      borderTopColor: "border.default",
+                      borderTopStyle: "solid",
+                      borderTopWidth: "1px",
+                    },
+                  })}
+                  key={result.skill.id}
+                >
+                  <SkillCard result={result} />
+                </li>
+              ))}
+            </ol>
+          )}
+        </div>
+      </div>
     </Page>
   );
 }

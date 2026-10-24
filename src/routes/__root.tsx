@@ -72,7 +72,7 @@ function RootLayout() {
             maxWidth: "content",
             outlineStyle: "none",
             overflowY: { md: "auto" },
-            paddingBlock: "8",
+            paddingBlock: { base: "8", md: "4" },
             paddingInline: "page",
             width: "full",
           })}

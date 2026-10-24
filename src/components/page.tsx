@@ -1,9 +1,11 @@
 import type { ReactNode } from "react";
 import { css } from "styled-system/css";
+import { visuallyHidden } from "styled-system/patterns";
 
 export function Page(props: {
   readonly children: ReactNode;
   readonly fillHeight?: boolean;
+  readonly hideTitle?: boolean;
   readonly title: string;
 }) {
   return (
@@ -13,7 +15,13 @@ export function Page(props: {
         props.fillHeight === true && { height: { md: "full" } },
       )}
     >
-      <h1 className={css({ fontSize: "3xl", fontWeight: "bold" })}>{props.title}</h1>
+      <h1
+        className={
+          props.hideTitle === true ? visuallyHidden() : css({ fontSize: "3xl", fontWeight: "bold" })
+        }
+      >
+        {props.title}
+      </h1>
       {props.children}
     </div>
   );
