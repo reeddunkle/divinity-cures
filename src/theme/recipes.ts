@@ -88,31 +88,49 @@ export const cureBadge = defineRecipe({
   className: "cure-badge",
   base: {
     alignItems: "center",
-    borderColor: "transparent",
     borderRadius: "pill",
     borderStyle: "solid",
     borderWidth: "1px",
+    boxShadow: "sm",
     display: "inline-flex",
     fontSize: "sm",
+    fontWeight: "semibold",
     gap: "1",
     lineHeight: "tight",
-    paddingBlock: "1",
-    paddingInline: "2.5",
+    minHeight: "8",
+    paddingBlock: "1.5",
+    paddingInline: "3",
     textDecorationLine: "none",
     _hover: {
-      borderColor: "border.strong",
-      textDecorationLine: "underline",
+      boxShadow: "md",
+    },
+    _motionSafe: {
+      transitionDuration: "fast",
+      transitionProperty: "background-color, border-color, box-shadow, transform",
+      _hover: {
+        transform: "translateY(-1px)",
+      },
     },
   },
   variants: {
     effect: {
       removes: {
         backgroundColor: "cure.removes.background",
+        borderColor: "cure.removes.border",
         color: "cure.removes.foreground",
+        _hover: {
+          backgroundColor: "cure.removes.backgroundHover",
+          borderColor: "cure.removes.borderHover",
+        },
       },
       immunity: {
         backgroundColor: "cure.immunity.background",
+        borderColor: "cure.immunity.border",
         color: "cure.immunity.foreground",
+        _hover: {
+          backgroundColor: "cure.immunity.backgroundHover",
+          borderColor: "cure.immunity.borderHover",
+        },
       },
     },
     matched: {
@@ -124,8 +142,12 @@ export const cureBadge = defineRecipe({
     {
       css: {
         backgroundColor: "match.background",
+        borderColor: "match.border",
         color: "match.foreground",
-        fontWeight: "semibold",
+        _hover: {
+          backgroundColor: "match.backgroundHover",
+          borderColor: "match.border",
+        },
       },
       matched: true,
     },
@@ -155,30 +177,42 @@ export const card = defineSlotRecipe({
     root: {
       columnGap: { base: "3", md: "4" },
       display: "grid",
-      gridTemplateAreas: '"title title gutter" "stats content gutter"',
-      gridTemplateColumns: "minmax(4.5rem, 1fr) 4fr auto",
+      gridTemplateAreas: '"icon title gutter" "icon stats gutter" ". content gutter"',
+      gridTemplateColumns: "auto 1fr auto",
       padding: { base: "3", md: "4" },
       position: "relative",
-      rowGap: "3",
+      rowGap: "1",
     },
     title: {
+      alignSelf: "end",
       color: "text.skillName",
       fontSize: "2xl",
-      fontWeight: "medium",
+      fontWeight: "bold",
       gridArea: "title",
-      letterSpacing: "wide",
-      lineHeight: "none",
+      lineHeight: "tight",
+      minWidth: "0",
+      overflowWrap: "break-word",
       textTransform: "uppercase",
     },
     stats: {
-      alignContent: "start",
-      display: "grid",
-      gap: "2",
+      alignItems: "center",
+      alignSelf: "start",
+      columnGap: "3",
+      display: "flex",
+      flexWrap: "wrap",
       gridArea: "stats",
-      justifyItems: "center",
+      rowGap: "1",
+      "& > div + div": {
+        borderLeftColor: "border.default",
+        borderLeftStyle: "solid",
+        borderLeftWidth: "1px",
+        paddingLeft: "3",
+      },
     },
     icon: {
+      alignSelf: "start",
       borderRadius: "control",
+      gridArea: "icon",
       height: "icon.skill",
       width: "icon.skill",
     },
@@ -187,6 +221,7 @@ export const card = defineSlotRecipe({
       display: "grid",
       gap: "4",
       gridArea: "content",
+      marginTop: "3",
       minWidth: "0",
     },
     gutter: {
@@ -208,20 +243,19 @@ export const card = defineSlotRecipe({
       textTransform: "uppercase",
     },
     description: {
-      backgroundColor: "surface.raised",
-      borderColor: "border.default",
+      backgroundColor: "surface.tint",
+      borderColor: "border.tint",
       borderRadius: "control",
       borderStyle: "solid",
       borderWidth: "1px",
       _hover: {
-        backgroundColor: "surface.hover",
-        borderColor: "border.strong",
+        backgroundColor: "surface.tintHover",
+        borderColor: "border.tintHover",
       },
       _open: {
-        backgroundColor: "violet.950",
-        borderColor: "border.strong",
+        backgroundColor: "surface.inset",
         _hover: {
-          backgroundColor: "violet.950",
+          backgroundColor: "surface.inset",
         },
       },
       _motionSafe: {
@@ -235,7 +269,7 @@ export const card = defineSlotRecipe({
       paddingBlock: "2",
       paddingInline: "3",
       "[open] > &": {
-        borderBottomColor: "border.strong",
+        borderBottomColor: "border.tint",
         borderBottomStyle: "solid",
         borderBottomWidth: "1px",
       },
@@ -247,6 +281,23 @@ export const card = defineSlotRecipe({
       whiteSpace: "pre-line",
     },
   },
+  variants: {
+    nameMatch: {
+      false: {},
+      true: {
+        title: {
+          textDecorationColor: "match.background",
+          textDecorationLine: "underline",
+          textDecorationThickness: "0.12em",
+          textUnderlineOffset: "0.18em",
+        },
+      },
+    },
+  },
+  defaultVariants: {
+    nameMatch: false,
+  },
+  staticCss: [{ nameMatch: ["*"] }],
 });
 
 export const tooltip = defineSlotRecipe({

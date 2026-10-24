@@ -164,8 +164,14 @@ const nextFrames = async () => {
 
 const isInViewport = (element: Element) => {
   const rect = element.getBoundingClientRect();
+  const list = resultsList()?.getBoundingClientRect();
 
-  return rect.top >= 0 && rect.bottom <= innerHeight && rect.left >= 0 && rect.right <= innerWidth;
+  return (
+    rect.top >= Math.max(0, list?.top ?? 0) &&
+    rect.bottom <= Math.min(innerHeight, list?.bottom ?? innerHeight) &&
+    rect.left >= 0 &&
+    rect.right <= innerWidth
+  );
 };
 
 const searchLinks = {

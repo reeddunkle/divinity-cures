@@ -24,7 +24,7 @@ function AboutRoute() {
           <li>It removes the status effect directly.</li>
           <li>
             It applies a different status effect, which in turn removes the first one. That status
-            often grants immunity as well, marked with an asterisk (*).
+            often grants immunity as well, marked with a shield icon.
           </li>
         </ul>
         <section className={css({ display: "grid", gap: "2" })}>

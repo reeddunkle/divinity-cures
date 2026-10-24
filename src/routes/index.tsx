@@ -6,6 +6,7 @@ import { button } from "styled-system/recipes";
 import { catalog } from "virtual:bundled-catalog";
 
 import { Page } from "@/components/page.tsx";
+import { ShieldIcon } from "@/components/shield-icon.tsx";
 import { SkillCard } from "@/components/skill-card.tsx";
 import { prepareCureSkills, searchCures } from "@/search/search.ts";
 import { pageHead } from "@/site.ts";
@@ -125,8 +126,8 @@ function HomeRoute() {
         <p aria-live="polite" role="status">
           {resultSummary(results.length, query)}
         </p>
-        <p>
-          <span aria-hidden="true">*</span> Grants immunity
+        <p className={css({ alignItems: "center", display: "inline-flex", gap: "1" })}>
+          <ShieldIcon /> Grants immunity
         </p>
       </div>
       {results.length > 0 && (

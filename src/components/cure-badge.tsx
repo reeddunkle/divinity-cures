@@ -4,6 +4,7 @@ import { cureBadge } from "styled-system/recipes";
 import type { MatchedCure } from "@/search/search.ts";
 
 import { SearchLink } from "./search-link.tsx";
+import { ShieldIcon } from "./shield-icon.tsx";
 
 export function CureBadge(props: { readonly cure: MatchedCure }) {
   const { grantsImmunity, isMatch, status } = props.cure;
@@ -16,7 +17,7 @@ export function CureBadge(props: { readonly cure: MatchedCure }) {
       {status}
       {grantsImmunity ? (
         <>
-          <span aria-hidden="true">*</span>
+          <ShieldIcon />
           <span className={visuallyHidden()}>(grants immunity)</span>
         </>
       ) : null}
