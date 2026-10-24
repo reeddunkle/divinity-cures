@@ -17,6 +17,7 @@
     "typecheck": "tsc --project tsconfig.effect.json --pretty false"
   },
   "dependencies": {
+    "@base-ui/react": "catalog:ui",
     "@tanstack/react-form": "catalog:tanstack",
     "@tanstack/react-router": "catalog:tanstack",
     "effect": "catalog:effect",

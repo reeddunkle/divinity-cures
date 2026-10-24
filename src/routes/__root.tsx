@@ -1,3 +1,4 @@
+import { Tooltip } from "@base-ui/react/tooltip";
 import { createRootRoute, HeadContent, Outlet, useRouterState } from "@tanstack/react-router";
 import { useEffect, useRef } from "react";
 
@@ -37,7 +38,7 @@ function RootLayout() {
   const mainRef = useFocusMainOnPageChange();
 
   return (
-    <>
+    <Tooltip.Provider>
       <HeadContent />
       <div
         className={css({
@@ -83,7 +84,7 @@ function RootLayout() {
         </main>
         <SiteFooter />
       </div>
-    </>
+    </Tooltip.Provider>
   );
 }
 

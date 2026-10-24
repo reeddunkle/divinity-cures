@@ -248,3 +248,42 @@ export const card = defineSlotRecipe({
     },
   },
 });
+
+export const tooltip = defineSlotRecipe({
+  className: "tooltip",
+  slots: ["positioner", "popup", "arrow"],
+  base: {
+    positioner: {
+      zIndex: "tooltip",
+    },
+    popup: {
+      backgroundColor: "text.default",
+      borderRadius: "control",
+      color: "text.onAccent",
+      fontSize: "sm",
+      fontWeight: "semibold",
+      paddingBlock: "1",
+      paddingInline: "2",
+      "&[data-starting-style], &[data-ending-style]": {
+        opacity: "0",
+      },
+      _motionSafe: {
+        transitionDuration: "fast",
+        transitionProperty: "opacity",
+        "&[data-instant]": {
+          transitionDuration: "0s",
+        },
+      },
+    },
+    arrow: {
+      backgroundColor: "text.default",
+      height: "2",
+      rotate: "45deg",
+      width: "2",
+      "&[data-side=top]": { bottom: "-1" },
+      "&[data-side=bottom]": { top: "-1" },
+      "&[data-side=left]": { right: "-1" },
+      "&[data-side=right]": { left: "-1" },
+    },
+  },
+});

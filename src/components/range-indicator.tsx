@@ -24,10 +24,7 @@ export function RangeIndicator(props: { readonly range: number }) {
   const label = rangeLabel(props.range);
 
   return (
-    <span
-      className={css({ alignItems: "center", display: "inline-flex", gap: "0.5" })}
-      title={`Range: ${label}`}
-    >
+    <span className={css({ alignItems: "center", display: "inline-flex", gap: "0.5" })}>
       <Arrow d="M8 12H20M8 12L12 8M8 12L12 16" />
       <span aria-hidden="true" className={css({ fontFamily: "mono", fontSize: "sm" })}>
         {`${props.range}m`}

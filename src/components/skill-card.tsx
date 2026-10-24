@@ -1,11 +1,17 @@
+import { Tooltip } from "@base-ui/react/tooltip";
 import { Link, useRouter } from "@tanstack/react-router";
 import type { MouseEvent, ReactNode } from "react";
 
 import { css, cx } from "../../styled-system/css";
 import { visuallyHidden } from "../../styled-system/patterns";
-import { card } from "../../styled-system/recipes";
+import { card, tooltip } from "../../styled-system/recipes";
 import type { SearchResult } from "../search/search.ts";
-import { type SchoolRequirement, schoolRequirements } from "../skill-details/skill-details.ts";
+import {
+  cooldownLabel,
+  rangeLabel,
+  type SchoolRequirement,
+  schoolRequirements,
+} from "../skill-details/skill-details.ts";
 import { navigateToQuery } from "../url-state/search-navigation.ts";
 import { CooldownDial } from "./cooldown-dial.tsx";
 import { CureBadge } from "./cure-badge.tsx";
@@ -19,9 +25,16 @@ const inlineList = css({
   listStyleType: "none",
 });
 
-function Stat(props: { readonly children: ReactNode; readonly term: string }) {
+function Stat(props: {
+  readonly children: ReactNode;
+  readonly term: string;
+  readonly title?: string;
+}) {
   return (
-    <div className={css({ display: "flex", justifyContent: "center" })}>
+    <div
+      className={css({ display: "flex", justifyContent: "center", justifySelf: "stretch" })}
+      title={props.title}
+    >
       <dt className={visuallyHidden()}>{props.term}</dt>
       <dd className={css({ display: "flex", justifyContent: "center" })}>{props.children}</dd>
     </div>
@@ -54,34 +67,48 @@ const matchedSchoolLink = css({
 function SchoolLink(props: { readonly isMatch: boolean; readonly requirement: SchoolRequirement }) {
   const router = useRouter();
   const { requirement } = props;
+  const styles = tooltip();
 
   return (
-    <Link
-      aria-label={`Search ${requirement.name} skills`}
-      className={cx(schoolLink, props.isMatch && matchedSchoolLink)}
-      onClick={(event) => {
-        if (isPlainClick(event)) {
-          event.preventDefault();
-          void navigateToQuery(router, requirement.name, "commit", { resetScroll: true });
+    <Tooltip.Root>
+      <Tooltip.Trigger
+        render={
+          <Link
+            aria-label={`Search ${requirement.name} skills`}
+            className={cx(schoolLink, props.isMatch && matchedSchoolLink)}
+            onClick={(event) => {
+              if (isPlainClick(event)) {
+                event.preventDefault();
+                void navigateToQuery(router, requirement.name, "commit", { resetScroll: true });
+              }
+            }}
+            search={{ search: requirement.name }}
+            to="/"
+          />
         }
-      }}
-      search={{ search: requirement.name }}
-      title={requirement.label}
-      to="/"
-    >
-      {Array.from({ length: requirement.count }, (_, index) => (
-        <img
-          alt=""
-          className={css({ height: "icon.schoolGutter", width: "icon.schoolGutter" })}
-          decoding="async"
-          height={32}
-          key={index}
-          loading="lazy"
-          src={requirement.imageSrc}
-          width={32}
-        />
-      ))}
-    </Link>
+      >
+        {Array.from({ length: requirement.count }, (_, index) => (
+          <img
+            alt=""
+            className={css({ height: "icon.schoolGutter", width: "icon.schoolGutter" })}
+            decoding="async"
+            height={32}
+            key={index}
+            loading="lazy"
+            src={requirement.imageSrc}
+            width={32}
+          />
+        ))}
+      </Tooltip.Trigger>
+      <Tooltip.Portal>
+        <Tooltip.Positioner className={styles.positioner} side="left" sideOffset={8}>
+          <Tooltip.Popup className={styles.popup}>
+            <Tooltip.Arrow className={styles.arrow} />
+            {requirement.label}
+          </Tooltip.Popup>
+        </Tooltip.Positioner>
+      </Tooltip.Portal>
+    </Tooltip.Root>
   );
 }
 
@@ -105,14 +132,14 @@ export function SkillCard(props: { readonly result: SearchResult }) {
           src={skill.imageSrc}
           width={56}
         />
-        <dl className={css({ display: "grid", gap: "2" })}>
+        <dl className={css({ display: "grid", gap: "2", justifySelf: "stretch" })}>
           <Stat term="Cost">
             <PointCosts actionPoints={skill.actionPoints} sourcePoints={skill.sourcePoints} />
           </Stat>
-          <Stat term="Cooldown">
+          <Stat term="Cooldown" title={`Cooldown: ${cooldownLabel(skill.cooldown)}`}>
             <CooldownDial cooldown={skill.cooldown} />
           </Stat>
-          <Stat term="Range">
+          <Stat term="Range" title={`Range: ${rangeLabel(skill.range)}`}>
             <RangeIndicator range={skill.range} />
           </Stat>
         </dl>

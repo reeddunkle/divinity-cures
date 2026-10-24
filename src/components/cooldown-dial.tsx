@@ -7,7 +7,7 @@ export function CooldownDial(props: { readonly cooldown: Skill["cooldown"] }) {
   const label = cooldownLabel(props.cooldown);
 
   return (
-    <span className={css({ display: "inline-flex" })} title={`Cooldown: ${label}`}>
+    <span className={css({ display: "inline-flex" })}>
       <svg
         aria-hidden="true"
         className={css({ height: "icon.cooldown", width: "icon.cooldown" })}
