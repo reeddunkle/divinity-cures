@@ -1,42 +1,14 @@
 import { Tooltip } from "@base-ui/react/tooltip";
-import { createRootRoute, HeadContent, Outlet, useRouterState } from "@tanstack/react-router";
-import { useEffect, useRef } from "react";
+import { createRootRoute, HeadContent, Outlet } from "@tanstack/react-router";
 import { css } from "styled-system/css";
 
 import { NotFound, RouteError } from "@/components/route-fallbacks.tsx";
 import { SiteFooter } from "@/components/site-footer.tsx";
 import { SiteHeader } from "@/components/site-header.tsx";
+import { mainId } from "@/focus/focus-policy.ts";
 import { pageHead } from "@/site.ts";
 
-function useFocusMainOnPageChange() {
-  const mainRef = useRef<HTMLElement>(null);
-  const pathname = useRouterState({ select: (state) => state.resolvedLocation?.pathname });
-  const href = useRouterState({ select: (state) => state.resolvedLocation?.href });
-  const previousPathname = useRef(pathname);
-  const previousHref = useRef(href);
-
-  useEffect(() => {
-    if (previousHref.current === href) {
-      return;
-    }
-
-    const isFirstLoad = previousHref.current === undefined;
-    const isNewPage = previousPathname.current !== pathname;
-    const isFocusLost = document.activeElement === null || document.activeElement === document.body;
-    previousPathname.current = pathname;
-    previousHref.current = href;
-
-    if (!isFirstLoad && (isNewPage || isFocusLost)) {
-      mainRef.current?.focus({ preventScroll: true });
-    }
-  }, [href, pathname]);
-
-  return mainRef;
-}
-
 function RootLayout() {
-  const mainRef = useFocusMainOnPageChange();
-
   return (
     <Tooltip.Provider>
       <HeadContent />
@@ -61,7 +33,7 @@ function RootLayout() {
             zIndex: "skipLink",
             _focus: { transform: "none" },
           })}
-          href="#main"
+          href={`#${mainId}`}
         >
           Skip to content
         </a>
@@ -76,8 +48,7 @@ function RootLayout() {
             paddingInline: "page",
             width: "full",
           })}
-          id="main"
-          ref={mainRef}
+          id={mainId}
           tabIndex={-1}
         >
           <Outlet />

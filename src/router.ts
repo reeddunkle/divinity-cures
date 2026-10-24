@@ -1,6 +1,7 @@
 import { createRouter, type RouterHistory } from "@tanstack/react-router";
 
 import { NotFound, RouteError } from "./components/route-fallbacks.tsx";
+import { installFocusPolicy } from "./focus/focus-policy.ts";
 import { routeTree } from "./routeTree.gen.ts";
 import { installScrollPolicy, routerScrollOptions } from "./scroll/scroll-policy.ts";
 import { parseSearch, stringifySearch } from "./url-state/search-params.ts";
@@ -24,6 +25,7 @@ export const createAppRouter = (options: AppRouterOptions = {}) => {
     stringifySearch,
   });
 
+  installFocusPolicy(router);
   installScrollPolicy(router);
 
   return router;
