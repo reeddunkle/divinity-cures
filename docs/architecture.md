@@ -11,13 +11,14 @@ Divinity Cures is a static client-side reference application. It has no server r
 The catalog module owns decoding raw game data, validating cross-record invariants, joining related records, and exposing immutable domain data. Callers do not coordinate raw datasets or depend on Effect Schema details. The `build-plugins/catalog.ts` Vite plugin runs `loadCatalog` at build and test time and serves the decoded catalog as the `virtual:bundled-catalog` module, so an invalid catalog fails the build and the tests rather than a visitor's page load. [Catalog content](./catalog-content.md) records sourced corrections to the inherited data and the questions that remain open.
 
 - Identifiers are non-empty strings branded per dataset as `SkillId`, `StatusEffectId`, and `SchoolId`, so one kind cannot stand in for another. Every reference must point at an existing record whose name matches the name stored beside the reference.
+- Every name in a skill's or status's `removes` or `immunities` must be the canonical name of a status record; an alias or an unknown name fails the build. Status names and aliases are unique across records. A status's `clearedBy` is derived from the `removes` of other statuses rather than stored.
 - Action points, memory, and numeric cooldowns are whole numbers of at least 0; a cooldown of 0 means none. Source points are whole numbers from 0 to 3, the size of the Source pool. Ranges are meters of at least 0 and may be fractional. School requirements and applied-status durations are whole numbers of at least 1. Stat amounts and percentages stay signed because penalties are negative.
 
 ### Search
 
 The search module owns normalization, cure expansion, filtering, highlighting, and ordering as pure domain transformations. React and TanStack Router call its interface but do not define its rules. Its tests are the specification; in summary:
 
-- A skill's cures are its removed statuses and granted immunities, plus those of the status effects it applies. Skills without cures are never results.
+- A skill's cures are its removed statuses and granted immunities, plus those of the status effects it applies, whether the removed status is harmful or helpful. Skills without cures are never results.
 - Queries and searched text are NFKC-normalized, lowercased, trimmed, and whitespace-collapsed.
 - A query matches skill names, removed statuses, and granted immunities at the start of any word, so `disease` matches `Infectious Disease` but `isease` does not. A status also matches through the aliases on its status record, so `madness` finds `Mad`, and the canonical name is highlighted.
 - An empty query returns every cure skill without highlights. A query with no matches returns no results.

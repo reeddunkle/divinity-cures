@@ -41,7 +41,7 @@ export class MismatchedCatalogReferenceError extends Schema.TaggedError<
   targetName: Schema.String,
 }) {}
 
-const StatusNameField = Schema.Literals(["clearedBy", "immunities", "removes"]);
+const StatusNameField = Schema.Literals(["immunities", "removes"]);
 
 export type StatusNameField = typeof StatusNameField.Type;
 
@@ -73,15 +73,6 @@ export class AliasedStatusNameError extends Schema.TaggedError<
   statusName: Schema.String,
 }) {}
 
-export class InconsistentStatusRemovalError extends Schema.TaggedError<
-  InconsistentStatusRemovalError,
-  { readonly brand: unique symbol }
->()("InconsistentStatusRemovalError", {
-  missingFrom: Schema.Literals(["clearedBy", "removes"]),
-  removedName: Schema.String,
-  removerName: Schema.String,
-}) {}
-
 export type CatalogError =
   | CatalogDecodeError
   | DuplicateCatalogIdError
@@ -89,5 +80,4 @@ export type CatalogError =
   | MismatchedCatalogReferenceError
   | DuplicateStatusNameError
   | UnknownStatusNameError
-  | AliasedStatusNameError
-  | InconsistentStatusRemovalError;
+  | AliasedStatusNameError;

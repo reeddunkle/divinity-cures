@@ -292,30 +292,16 @@ describe("loadCatalog", () => {
   });
 
   it.each([
-    [
-      "is cleared by a status that does not remove it",
-      [
-        { clearedBy: ["Slowed"], id: "hasted", name: "Hasted" },
-        { id: "slowed", name: "Slowed" },
-      ],
-      { missingFrom: "removes", removedName: "Hasted", removerName: "Slowed" },
-    ],
-    [
-      "is removed by a status it is not cleared by",
-      [
-        { id: "hasted", name: "Hasted", removes: ["Slowed"] },
-        { id: "slowed", name: "Slowed" },
-      ],
-      { missingFrom: "clearedBy", removedName: "Slowed", removerName: "Hasted" },
-    ],
-  ])("rejects a status that %s", (_case, records, mismatch) => {
-    const error = loadCatalog({
-      ...validInput,
-      skills: [],
-      statusEffects: records,
-    }).pipe(E.flip, E.runSync);
+    ["Clear-Minded", ["Enraged"]],
+    ["Hasted", ["Crippled", "Slowed"]],
+    ["Infested", ["Regenerating", "Blessed"]],
+    ["Regenerating", ["Bleeding"]],
+  ])("derives the statuses that clear %s from their removals", (name, clearedBy) => {
+    const catalog = loadCatalog(validInput).pipe(E.runSync);
 
-    expect(error).toMatchObject({ _tag: "InconsistentStatusRemovalError", ...mismatch });
+    expect(
+      catalog.statusEffects.find((statusEffect) => statusEffect.name === name)?.clearedBy,
+    ).toEqual(clearedBy);
   });
 
   it("rejects applied-status references whose name differs from the status effect", () => {

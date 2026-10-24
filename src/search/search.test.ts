@@ -1,17 +1,11 @@
 import { catalog } from "virtual:bundled-catalog";
 import { describe, expect, it } from "vitest";
 
-import type { Skill } from "../catalog/catalog.ts";
-import {
-  SchoolId,
-  type SchoolRecord,
-  SkillId,
-  StatusEffectId,
-  type StatusEffectRecord,
-} from "../catalog/schemas.ts";
+import type { Skill, StatusEffect } from "../catalog/catalog.ts";
+import { SchoolId, type SchoolRecord, SkillId, StatusEffectId } from "../catalog/schemas.ts";
 import { normalizeSearchText, prepareCureSkills, searchCures } from "./search.ts";
 
-const makeStatusEffect = (overrides: Partial<StatusEffectRecord>): StatusEffectRecord => ({
+const makeStatusEffect = (overrides: Partial<StatusEffect>): StatusEffect => ({
   aliases: [],
   clearedBy: [],
   description: "",
@@ -59,7 +53,7 @@ const makeSkill = (overrides: Partial<Skill>): Skill => ({
   ...overrides,
 });
 
-const applied = (statusEffect: StatusEffectRecord) => ({ stats: [], statusEffect });
+const applied = (statusEffect: StatusEffect) => ({ stats: [], statusEffect });
 
 const fortify = makeSkill({
   id: SkillId.make("fortify"),

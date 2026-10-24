@@ -13,7 +13,6 @@ import {
   type DatasetName,
   DuplicateCatalogIdError,
   DuplicateStatusNameError,
-  InconsistentStatusRemovalError,
   MismatchedCatalogReferenceError,
   type StatusNameField,
   UnknownStatusNameError,
@@ -41,7 +40,11 @@ export type AppliedStatusEffect = {
   readonly duration?: number;
   readonly imageSrc?: string;
   readonly stats: SkillRecord["statusEffects"][number]["stats"];
-  readonly statusEffect: StatusEffectRecord;
+  readonly statusEffect: StatusEffect;
+};
+
+export type StatusEffect = StatusEffectRecord & {
+  readonly clearedBy: readonly string[];
 };
 
 export type Skill = Omit<SkillRecord, "schools" | "statusEffects"> & {
@@ -52,7 +55,7 @@ export type Skill = Omit<SkillRecord, "schools" | "statusEffects"> & {
 export type Catalog = {
   readonly schools: readonly SchoolRecord[];
   readonly skills: readonly Skill[];
-  readonly statusEffects: readonly StatusEffectRecord[];
+  readonly statusEffects: readonly StatusEffect[];
 };
 
 type CatalogRecord = {
@@ -154,7 +157,7 @@ const validateStatusNames = (
   );
   const usages = [
     ...statusNameUsages("skills", skills, ["immunities", "removes"]),
-    ...statusNameUsages("statusEffects", statusEffects, ["clearedBy", "immunities", "removes"]),
+    ...statusNameUsages("statusEffects", statusEffects, ["immunities", "removes"]),
   ];
 
   return E.forEach(
@@ -176,43 +179,15 @@ const validateStatusNames = (
   );
 };
 
-const validateStatusRemovals = (statusEffects: readonly StatusEffectRecord[]) => {
-  const statusEffectsByName = new Map(
-    A.map(statusEffects, (statusEffect) => [statusEffect.name, statusEffect] as const),
-  );
-  const pairs = [
-    ...A.flatMap(statusEffects, (removed) =>
-      A.map(removed.clearedBy, (removerName) => ({
-        missingFrom: "removes" as const,
-        removedName: removed.name,
-        removerName,
-      })),
+const withClearedBy = (statusEffects: readonly StatusEffectRecord[]): readonly StatusEffect[] =>
+  A.map(statusEffects, (statusEffect) => ({
+    ...statusEffect,
+    clearedBy: pipe(
+      statusEffects,
+      A.filter((remover) => A.contains(remover.removes, statusEffect.name)),
+      A.map((remover) => remover.name),
     ),
-    ...A.flatMap(statusEffects, (remover) =>
-      A.map(remover.removes, (removedName) => ({
-        missingFrom: "clearedBy" as const,
-        removedName,
-        removerName: remover.name,
-      })),
-    ),
-  ];
-
-  return E.forEach(
-    pairs,
-    (pair) => {
-      const isConsistent =
-        pair.missingFrom === "removes"
-          ? A.contains(statusEffectsByName.get(pair.removerName)?.removes ?? [], pair.removedName)
-          : A.contains(
-              statusEffectsByName.get(pair.removedName)?.clearedBy ?? [],
-              pair.removerName,
-            );
-
-      return isConsistent ? E.void : E.fail(new InconsistentStatusRemovalError(pair));
-    },
-    { discard: true },
-  );
-};
+  }));
 
 const brokenReference = (
   sourceDataset: DatasetName,
@@ -258,7 +233,7 @@ const resolveReference = <Target extends NamedCatalogRecord>(
 const resolveSkill = E.fnUntraced(function* (
   skill: SkillRecord,
   schoolsById: ReadonlyMap<string, SchoolRecord>,
-  statusEffectsById: ReadonlyMap<string, StatusEffectRecord>,
+  statusEffectsById: ReadonlyMap<string, StatusEffect>,
 ): E.fn.Return<Skill, BrokenCatalogReferenceError | MismatchedCatalogReferenceError> {
   const schools = yield* E.all(
     pipe(
@@ -308,7 +283,6 @@ export const loadCatalog: (input: CatalogInput) => E.Effect<Catalog, CatalogErro
     ]);
     yield* validateUniqueStatusNames(decoded.statusEffects);
     yield* validateStatusNames(decoded.skills, decoded.statusEffects);
-    yield* validateStatusRemovals(decoded.statusEffects);
 
     const schoolsById = new Map(
       pipe(
@@ -316,9 +290,10 @@ export const loadCatalog: (input: CatalogInput) => E.Effect<Catalog, CatalogErro
         A.map((school) => [school.id, school] as const),
       ),
     );
+    const statusEffects = withClearedBy(decoded.statusEffects);
     const statusEffectsById = new Map(
       pipe(
-        decoded.statusEffects,
+        statusEffects,
         A.map((statusEffect) => [statusEffect.id, statusEffect] as const),
       ),
     );
@@ -332,7 +307,7 @@ export const loadCatalog: (input: CatalogInput) => E.Effect<Catalog, CatalogErro
     return {
       schools: decoded.spellSchools,
       skills,
-      statusEffects: decoded.statusEffects,
+      statusEffects,
     };
   },
 );

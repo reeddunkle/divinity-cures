@@ -49,6 +49,10 @@ function AboutRoute() {
         </section>
         <p>The line between direct and indirect is blurry, so both count equally as a cure.</p>
         <p>
+          A cure doesn&apos;t have to remove something harmful. <strong>Enrage</strong> removes{" "}
+          <strong>Clear-Minded</strong>, a helpful status, and that counts as a cure too.
+        </p>
+        <p>
           I hand-coded this data. If I missed anything, please{" "}
           <a className={textLink()} href={site.links.issues}>
             let me know
