@@ -1,19 +1,12 @@
-import { createMemoryHistory, RouterProvider } from "@tanstack/react-router";
 import { describe, expect, it } from "vitest";
-import { render } from "vitest-browser-react";
 import { userEvent } from "vitest/browser";
 
-import { createAppRouter } from "../router.ts";
+import { renderApp } from "@/tests/common/render-app.tsx";
 
 const tooltipText = () => document.querySelector(".tooltip__popup")?.textContent ?? null;
 
 const renderFirstAid = async () => {
-  const history = createMemoryHistory({ initialEntries: ["/?search=first+aid"] });
-  const router = createAppRouter({ history, scrollRestoration: false });
-
-  await router.load();
-
-  const screen = await render(<RouterProvider router={router} />);
+  const { screen } = await renderApp("/?search=first+aid");
   const schoolLink = screen.getByRole("link", { name: "Search Huntsman skills" });
 
   return { schoolLink, screen };

@@ -1,6 +1,6 @@
 # Static assets
 
-Every image is served from `public/` and referenced by a root-relative path. `src/assets.test.ts` fails when a catalog record, `src/assets.ts`, or `index.html` references a remote URL or a missing file, or when an image under `public/` is not referenced.
+Every image is served from `public/` and referenced by a root-relative path. `src/tests/unit-tests/assets.test.ts` fails when a catalog record, `src/assets.ts`, or `index.html` references a remote URL or a missing file, or when an image under `public/` is not referenced.
 
 ## Repository-owned images
 

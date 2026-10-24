@@ -1,10 +1,11 @@
-import { createMemoryHistory, RouterProvider } from "@tanstack/react-router";
+import { RouterProvider } from "@tanstack/react-router";
 import { act } from "react";
 import { hydrateRoot } from "react-dom/client";
 import { afterAll, afterEach, beforeAll, describe, expect, it } from "vitest";
 
-import { renderPage } from "./entry-server.tsx";
-import { createAppRouter, prepareForHydration, prerenderKey } from "./router.ts";
+import { renderPage } from "@/entry-server.tsx";
+import { prepareForHydration, prerenderKey } from "@/router.ts";
+import { createTestRouter } from "@/tests/common/test-router.ts";
 
 const containers: HTMLElement[] = [];
 
@@ -29,11 +30,7 @@ const hydrate = async (url: string, prerenderedUrl: string) => {
   document.body.append(container);
   containers.push(container);
 
-  const router = createAppRouter({
-    history: createMemoryHistory({ initialEntries: [url] }),
-    scrollRestoration: false,
-  });
-  await router.load();
+  const { router } = await createTestRouter(url);
   prepareForHydration(router);
 
   const errors: unknown[] = [];

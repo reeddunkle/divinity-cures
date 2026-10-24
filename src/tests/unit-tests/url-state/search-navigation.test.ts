@@ -1,14 +1,13 @@
-import { createMemoryHistory } from "@tanstack/react-router";
 import * as O from "effect/Option";
 import { describe, expect, it } from "vitest";
 
-import { createAppRouter } from "../router.ts";
+import { createTestRouter } from "@/tests/common/test-router.ts";
 import {
   followSearchLink,
   latestQuery,
   planSearchNavigation,
   searchFromInput,
-} from "./search-navigation.ts";
+} from "@/url-state/search-navigation.ts";
 
 const committed = (search: string) => ({
   isDraft: false,
@@ -59,15 +58,10 @@ describe("planSearchNavigation", () => {
 });
 
 const setup = async (initialEntry: string) => {
-  const history = createMemoryHistory({ initialEntries: [initialEntry] });
-  const router = createAppRouter({
-    history,
+  const { history, router } = await createTestRouter(initialEntry, {
     isServer: false,
     origin: "http://localhost",
-    scrollRestoration: false,
   });
-
-  await router.load();
 
   const type = async (...queries: readonly string[]) => {
     for (const query of queries) {

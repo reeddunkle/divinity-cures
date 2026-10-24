@@ -1,11 +1,11 @@
 import * as E from "effect/Effect";
 import { describe, expect, it } from "vitest";
 
-import { loadCatalog } from "./catalog.ts";
-import skills from "./data/skills.json";
-import spellSchools from "./data/spell-schools.json";
-import statusEffects from "./data/status-effects.json";
-import type { SkillId, StatusEffectId } from "./schemas.ts";
+import { loadCatalog } from "@/catalog/catalog.ts";
+import skills from "@/catalog/data/skills.json";
+import spellSchools from "@/catalog/data/spell-schools.json";
+import statusEffects from "@/catalog/data/status-effects.json";
+import type { SkillId, StatusEffectId } from "@/catalog/schemas.ts";
 
 const validInput = {
   skills,

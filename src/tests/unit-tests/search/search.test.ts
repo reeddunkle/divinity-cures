@@ -1,9 +1,9 @@
 import { catalog } from "virtual:bundled-catalog";
 import { describe, expect, it } from "vitest";
 
-import type { Skill, StatusEffect } from "../catalog/catalog.ts";
-import { SchoolId, type SchoolRecord, SkillId, StatusEffectId } from "../catalog/schemas.ts";
-import { normalizeSearchText, prepareCureSkills, searchCures } from "./search.ts";
+import type { Skill, StatusEffect } from "@/catalog/catalog.ts";
+import { SchoolId, type SchoolRecord, SkillId, StatusEffectId } from "@/catalog/schemas.ts";
+import { normalizeSearchText, prepareCureSkills, searchCures } from "@/search/search.ts";
 
 const makeStatusEffect = (overrides: Partial<StatusEffect>): StatusEffect => ({
   aliases: [],

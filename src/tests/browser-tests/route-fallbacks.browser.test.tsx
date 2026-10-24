@@ -9,7 +9,7 @@ import {
 import { describe, expect, it } from "vitest";
 import { render } from "vitest-browser-react";
 
-import { NotFound, RouteError } from "./route-fallbacks.tsx";
+import { NotFound, RouteError } from "@/components/route-fallbacks.tsx";
 
 const renderFailingRoute = async () => {
   let attempts = 0;

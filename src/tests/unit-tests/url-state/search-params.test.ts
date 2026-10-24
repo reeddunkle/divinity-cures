@@ -6,7 +6,7 @@ import {
   stringifySearch,
   syncFormQuery,
   toSearchParams,
-} from "./search-params.ts";
+} from "@/url-state/search-params.ts";
 
 describe("decodeSearchParams", () => {
   it("decodes a search query", () => {

@@ -1,17 +1,10 @@
-import { createMemoryHistory, RouterProvider } from "@tanstack/react-router";
 import { describe, expect, it } from "vitest";
-import { render } from "vitest-browser-react";
 import { userEvent } from "vitest/browser";
 
-import { createAppRouter } from "./router.ts";
+import { renderApp as renderAppAt } from "@/tests/common/render-app.tsx";
 
 const renderApp = async (initialEntry: string) => {
-  const history = createMemoryHistory({ initialEntries: [initialEntry] });
-  const router = createAppRouter({ history, scrollRestoration: false });
-
-  await router.load();
-
-  const screen = await render(<RouterProvider router={router} />);
+  const { history, router, screen } = await renderAppAt(initialEntry);
   const input = screen.getByRole("searchbox", { name: "Status, skill, or school" });
   const status = screen.getByRole("status");
   const href = () => router.state.location.href;

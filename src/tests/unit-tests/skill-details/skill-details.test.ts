@@ -7,7 +7,7 @@ import {
   costLabel,
   rangeLabel,
   schoolRequirements,
-} from "./skill-details.ts";
+} from "@/skill-details/skill-details.ts";
 
 const skillNamed = (name: string) => {
   const skill = catalog.skills.find((candidate) => candidate.name === name);

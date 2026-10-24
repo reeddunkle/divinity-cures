@@ -63,6 +63,16 @@ Oxlint owns correctness, suspicious-code, React Compiler, Panda CSS, and selecte
 
 React Compiler is not enabled. On 2026-10-23 it was measured through `@vitejs/plugin-react`'s native `oxc-transform-react` integration. Every component compiled without diagnostics, and tests and the production build passed. It added about 2.7 kB gzipped across the JavaScript chunks and left build time unchanged. In a profiled session of typing, submitting, following a cure badge, and clearing, it changed neither the number of commits nor the render time, beyond run-to-run noise. The results list is keyed by the query, so every edit remounts every card, and search returns new result objects for each query, so memoization has nothing to skip. Oxlint's React Compiler rules stay on so the code remains compatible. Revisit the decision if the results list stops remounting on each query or the interface gains expensive components that re-render with unchanged props.
 
+## Tests
+
+Tests live in `src/tests`, apart from the code they cover.
+
+- `unit-tests` runs in Node and mirrors the source modules, such as `unit-tests/search`.
+- `browser-tests` holds the `*.browser.test.tsx` files, which run in headless Chromium with the app's real styles.
+- `common` holds helpers shared by more than one test file. `createTestRouter` builds and loads the app router on a memory history, and `renderApp` also renders it. A helper stays in its test file until a second file needs it.
+
+Tests import source through the `@/` alias for `src/`. Vitest picks the project by file suffix anywhere under `src`, so a test placed outside `src/tests` still runs.
+
 ## Dependency direction
 
 Presentation depends on URL state and domain interfaces. URL state depends on TanStack Router. Search depends on catalog domain types. Catalog implementation depends on Effect and raw static data. Dependencies do not point back toward presentation.

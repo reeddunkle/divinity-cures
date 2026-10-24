@@ -1,6 +1,6 @@
 import { describe, expect, it } from "vitest";
 
-import { renderPage, renderRobots, renderSitemap } from "./entry-server.tsx";
+import { renderPage, renderRobots, renderSitemap } from "@/entry-server.tsx";
 
 const metaContent = (head: string, key: string) =>
   head.match(

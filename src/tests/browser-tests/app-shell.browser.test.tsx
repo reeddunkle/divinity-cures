@@ -3,23 +3,8 @@ import { afterEach, describe, expect, it } from "vitest";
 import { render } from "vitest-browser-react";
 import { page, userEvent } from "vitest/browser";
 
-import { createAppRouter } from "./router.ts";
-
-import "./styles.css";
-
-const renderApp = async (initialEntry: string, options: { scrollRestoration?: boolean } = {}) => {
-  const history = createMemoryHistory({ initialEntries: [initialEntry] });
-  const router = createAppRouter({
-    history,
-    scrollRestoration: options.scrollRestoration ?? false,
-  });
-
-  await router.load();
-
-  const screen = await render(<RouterProvider router={router} />);
-
-  return { router, screen };
-};
+import { createAppRouter } from "@/router.ts";
+import { renderApp } from "@/tests/common/render-app.tsx";
 
 const canonicalHref = () =>
   document.querySelector('link[rel="canonical"]')?.getAttribute("href") ?? null;
