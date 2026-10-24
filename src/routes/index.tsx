@@ -9,7 +9,7 @@ import { Page } from "../components/page.tsx";
 import { SkillCard } from "../components/skill-card.tsx";
 import { prepareCureSkills, searchCures } from "../search/search.ts";
 import { pageHead } from "../site.ts";
-import { latestQuery, navigateToQuery } from "../url-state/search-navigation.ts";
+import { latestQuery, searchFromInput } from "../url-state/search-navigation.ts";
 import { decodeSearchParams, queryOf, syncFormQuery } from "../url-state/search-params.ts";
 
 const cureSkills = prepareCureSkills(catalog.skills, catalog.statusEffects);
@@ -34,7 +34,7 @@ function HomeRoute() {
 
   const form = useForm({
     defaultValues: { query },
-    onSubmit: ({ value }) => navigateToQuery(router, value.query, "commit"),
+    onSubmit: ({ value }) => searchFromInput(router, value.query, "commit"),
   });
 
   useEffect(() => {
@@ -47,7 +47,7 @@ function HomeRoute() {
 
   const clear = () => {
     form.setFieldValue("query", "", { dontUpdateMeta: true });
-    void navigateToQuery(router, "", "commit");
+    void searchFromInput(router, "", "commit");
     inputRef.current?.focus();
   };
 
@@ -89,7 +89,7 @@ function HomeRoute() {
                   onBlur={field.handleBlur}
                   onChange={(event) => {
                     field.handleChange(event.target.value);
-                    void navigateToQuery(router, event.target.value, "edit");
+                    void searchFromInput(router, event.target.value, "edit");
                   }}
                   placeholder="Burning, First Aid, Hydrosophist…"
                   ref={inputRef}

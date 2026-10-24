@@ -1,6 +1,7 @@
 import type { RegisteredRouter } from "@tanstack/react-router";
 import * as O from "effect/Option";
 
+import { type ScrollScope, scrollNavigationOptions } from "../scroll/scroll-policy.ts";
 import { decodeSearchParams, queryOf, type SearchParams, toSearchParams } from "./search-params.ts";
 
 declare module "@tanstack/react-router" {
@@ -47,20 +48,26 @@ const currentEntry = (router: RegisteredRouter): SearchEntry => ({
 
 export const latestQuery = (router: RegisteredRouter) => queryOf(currentEntry(router).search);
 
-export const navigateToQuery = (
+const navigateToQuery = (
   router: RegisteredRouter,
   query: string,
   intent: SearchIntent,
-  options: { readonly resetScroll?: boolean } = {},
+  scope: ScrollScope,
 ): Promise<void> =>
   O.match(planSearchNavigation(currentEntry(router), query, intent), {
     onNone: () => Promise.resolve(),
     onSome: (navigation) =>
       router.navigate({
+        ...scrollNavigationOptions(router, scope),
         replace: navigation.replace,
-        resetScroll: options.resetScroll ?? false,
         search: navigation.search,
         state: { searchDraft: navigation.isDraft },
         to: "/",
       }),
   });
+
+export const searchFromInput = (router: RegisteredRouter, query: string, intent: SearchIntent) =>
+  navigateToQuery(router, query, intent, "results");
+
+export const followSearchLink = (router: RegisteredRouter, query: string) =>
+  navigateToQuery(router, query, "commit", "page");

@@ -1,6 +1,5 @@
 import { Tooltip } from "@base-ui/react/tooltip";
-import { Link, useRouter } from "@tanstack/react-router";
-import type { MouseEvent, ReactNode } from "react";
+import type { ReactNode } from "react";
 
 import { css, cx } from "../../styled-system/css";
 import { visuallyHidden } from "../../styled-system/patterns";
@@ -12,11 +11,11 @@ import {
   type SchoolRequirement,
   schoolRequirements,
 } from "../skill-details/skill-details.ts";
-import { navigateToQuery } from "../url-state/search-navigation.ts";
 import { CooldownDial } from "./cooldown-dial.tsx";
 import { CureBadge } from "./cure-badge.tsx";
 import { PointCosts } from "./point-costs.tsx";
 import { RangeIndicator } from "./range-indicator.tsx";
+import { SearchLink } from "./search-link.tsx";
 
 const inlineList = css({
   display: "flex",
@@ -41,9 +40,6 @@ function Stat(props: {
   );
 }
 
-const isPlainClick = (event: MouseEvent) =>
-  event.button === 0 && !event.altKey && !event.ctrlKey && !event.metaKey && !event.shiftKey;
-
 const schoolLink = css({
   borderRadius: "sm",
   display: "flex",
@@ -65,7 +61,6 @@ const matchedSchoolLink = css({
 });
 
 function SchoolLink(props: { readonly isMatch: boolean; readonly requirement: SchoolRequirement }) {
-  const router = useRouter();
   const { requirement } = props;
   const styles = tooltip();
 
@@ -73,17 +68,10 @@ function SchoolLink(props: { readonly isMatch: boolean; readonly requirement: Sc
     <Tooltip.Root>
       <Tooltip.Trigger
         render={
-          <Link
+          <SearchLink
             aria-label={`Search ${requirement.name} skills`}
             className={cx(schoolLink, props.isMatch && matchedSchoolLink)}
-            onClick={(event) => {
-              if (isPlainClick(event)) {
-                event.preventDefault();
-                void navigateToQuery(router, requirement.name, "commit", { resetScroll: true });
-              }
-            }}
-            search={{ search: requirement.name }}
-            to="/"
+            query={requirement.name}
           />
         }
       >

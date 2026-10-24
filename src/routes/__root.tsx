@@ -27,7 +27,7 @@ function useFocusMainOnPageChange() {
     previousHref.current = href;
 
     if (!isFirstLoad && (isNewPage || isFocusLost)) {
-      mainRef.current?.focus();
+      mainRef.current?.focus({ preventScroll: true });
     }
   }, [href, pathname]);
 

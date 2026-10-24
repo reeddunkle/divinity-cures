@@ -3,7 +3,12 @@ import * as O from "effect/Option";
 import { describe, expect, it } from "vitest";
 
 import { createAppRouter } from "../router.ts";
-import { latestQuery, navigateToQuery, planSearchNavigation } from "./search-navigation.ts";
+import {
+  followSearchLink,
+  latestQuery,
+  planSearchNavigation,
+  searchFromInput,
+} from "./search-navigation.ts";
 
 const committed = (search: string) => ({
   isDraft: false,
@@ -66,7 +71,7 @@ const setup = async (initialEntry: string) => {
 
   const type = async (...queries: readonly string[]) => {
     for (const query of queries) {
-      await navigateToQuery(router, query, "edit");
+      await searchFromInput(router, query, "edit");
     }
   };
 
@@ -110,7 +115,7 @@ describe("search navigation", () => {
     const { router, snapshot, traverse, type } = await setup("/");
 
     await type("b", "bur");
-    await navigateToQuery(router, "bur", "commit");
+    await searchFromInput(router, "bur", "commit");
     await type("p", "poi");
 
     expect(snapshot()).toEqual({ href: "/?search=poi", entries: 3, query: "poi" });
@@ -133,8 +138,8 @@ describe("search navigation", () => {
     const { router, snapshot, type } = await setup("/");
 
     await type("burn");
-    await navigateToQuery(router, "burn", "commit");
-    await navigateToQuery(router, "burn", "commit");
+    await searchFromInput(router, "burn", "commit");
+    await searchFromInput(router, "burn", "commit");
 
     expect(snapshot()).toEqual({ href: "/?search=burn", entries: 2, query: "burn" });
   });
@@ -154,7 +159,7 @@ describe("search navigation", () => {
   it("clears a committed search into a new entry", async () => {
     const { router, snapshot, traverse } = await setup("/?search=burn");
 
-    await navigateToQuery(router, "", "commit");
+    await searchFromInput(router, "", "commit");
 
     expect(snapshot()).toEqual({ href: "/", entries: 2, query: "" });
 
@@ -166,8 +171,39 @@ describe("search navigation", () => {
   it("does not add an entry when clearing an empty search", async () => {
     const { router, snapshot } = await setup("/");
 
-    await navigateToQuery(router, "", "commit");
+    await searchFromInput(router, "", "commit");
 
     expect(snapshot()).toEqual({ href: "/", entries: 1, query: "" });
+  });
+});
+
+describe("following a search link", () => {
+  it("pushes a committed entry after a committed search", async () => {
+    const { router, snapshot, traverse } = await setup("/?search=burn");
+
+    await followSearchLink(router, "Poisoned");
+
+    expect(snapshot()).toEqual({ href: "/?search=Poisoned", entries: 2, query: "Poisoned" });
+
+    await traverse("back");
+
+    expect(snapshot()).toEqual({ href: "/?search=burn", entries: 2, query: "burn" });
+  });
+
+  it("replaces a draft entry", async () => {
+    const { router, snapshot, type } = await setup("/");
+
+    await type("bu", "burn");
+    await followSearchLink(router, "Poisoned");
+
+    expect(snapshot()).toEqual({ href: "/?search=Poisoned", entries: 2, query: "Poisoned" });
+  });
+
+  it("does not add an entry when following a link to the current search", async () => {
+    const { router, snapshot } = await setup("/?search=Poisoned");
+
+    await followSearchLink(router, "Poisoned");
+
+    expect(snapshot()).toEqual({ href: "/?search=Poisoned", entries: 1, query: "Poisoned" });
   });
 });

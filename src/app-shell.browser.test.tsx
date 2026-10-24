@@ -1,15 +1,18 @@
 import { createMemoryHistory, RouterProvider } from "@tanstack/react-router";
 import { afterEach, describe, expect, it } from "vitest";
 import { render } from "vitest-browser-react";
-import { page } from "vitest/browser";
+import { page, userEvent } from "vitest/browser";
 
 import { createAppRouter } from "./router.ts";
 
 import "./styles.css";
 
-const renderApp = async (initialEntry: string) => {
+const renderApp = async (initialEntry: string, options: { scrollRestoration?: boolean } = {}) => {
   const history = createMemoryHistory({ initialEntries: [initialEntry] });
-  const router = createAppRouter({ history, scrollRestoration: false });
+  const router = createAppRouter({
+    history,
+    scrollRestoration: options.scrollRestoration ?? false,
+  });
 
   await router.load();
 
@@ -160,5 +163,169 @@ describe("results layout", () => {
     await expect.element(list).toBeVisible();
     await expect.poll(pageScrolls).toBe(true);
     expect(isScrollable(list.element())).toBe(false);
+  });
+});
+
+const resultsList = () => document.getElementById("results");
+
+const nextFrame = () =>
+  // @effect-diagnostics-next-line newPromise:off
+  new Promise(requestAnimationFrame);
+
+const nextFrames = async () => {
+  await nextFrame();
+  await nextFrame();
+};
+
+const isInViewport = (element: Element) => {
+  const rect = element.getBoundingClientRect();
+
+  return rect.top >= 0 && rect.bottom <= innerHeight && rect.left >= 0 && rect.right <= innerWidth;
+};
+
+const searchLinks = {
+  "cure badge": 'a[href*="search="]:not([aria-label])',
+  "school icon": 'a[href*="search="][aria-label^="Search "]',
+} as const;
+
+const visibleSearchLink = (kind: keyof typeof searchLinks) => {
+  const link = [...(resultsList()?.querySelectorAll(searchLinks[kind]) ?? [])]
+    .filter(isInViewport)
+    .at(-1);
+
+  if (link === undefined) {
+    throw new Error(`No visible ${kind}`);
+  }
+
+  return link;
+};
+
+const followVisibleSearchLink = async (kind: keyof typeof searchLinks) => {
+  const previousList = resultsList();
+
+  await userEvent.click(visibleSearchLink(kind));
+  await expect.poll(() => resultsList() !== previousList).toBe(true);
+  await nextFrames();
+};
+
+describe("scroll", () => {
+  afterEach(async () => {
+    scrollTo({ behavior: "instant", top: 0 });
+    await page.viewport(414, 896);
+  });
+
+  describe.each(["cure badge", "school icon"] as const)("following a %s", (kind) => {
+    it("resets the results list on wide screens without smooth scrolling", async () => {
+      await page.viewport(1280, 720);
+      const { screen } = await renderApp("/");
+
+      await expect
+        .poll(() => isScrollable(screen.getByRole("list", { name: "Cure skills" }).element()))
+        .toBe(true);
+      resultsList()?.scrollTo({ behavior: "instant", top: 1200 });
+
+      await followVisibleSearchLink(kind);
+
+      expect(resultsList()?.scrollTop).toBe(0);
+      expect(scrollY).toBe(0);
+      await expect.element(screen.getByRole("main")).toHaveFocus();
+    });
+
+    it("resets the page on narrow screens without smooth scrolling", async () => {
+      await page.viewport(375, 812);
+      const { screen } = await renderApp("/");
+
+      await expect.poll(pageScrolls).toBe(true);
+      scrollTo({ behavior: "instant", top: 2000 });
+
+      await followVisibleSearchLink(kind);
+
+      expect(scrollY).toBe(0);
+      await nextFrames();
+      expect(scrollY).toBe(0);
+      await expect.element(screen.getByRole("main")).toHaveFocus();
+    });
+  });
+
+  it("resets the results list but not the page while typing on narrow screens", async () => {
+    await page.viewport(375, 812);
+    const { screen } = await renderApp("/");
+    const input = screen.getByRole("searchbox", { name: "Status, skill, or school" });
+
+    await expect.poll(pageScrolls).toBe(true);
+    scrollTo({ behavior: "instant", top: 40 });
+
+    await userEvent.type(input, "a");
+    await nextFrames();
+
+    expect(scrollY).toBe(40);
+    await expect.element(input).toHaveFocus();
+  });
+
+  it("resets the results list while typing on wide screens", async () => {
+    await page.viewport(1280, 720);
+    const { screen } = await renderApp("/");
+    const input = screen.getByRole("searchbox", { name: "Status, skill, or school" });
+
+    await expect
+      .poll(() => isScrollable(screen.getByRole("list", { name: "Cure skills" }).element()))
+      .toBe(true);
+    resultsList()?.scrollTo({ behavior: "instant", top: 1200 });
+
+    await userEvent.type(input, "a");
+    await nextFrames();
+
+    expect(resultsList()?.scrollTop).toBe(0);
+    await expect.element(input).toHaveFocus();
+  });
+
+  it("resets the results list on submit on wide screens", async () => {
+    await page.viewport(1280, 720);
+    const { screen } = await renderApp("/");
+    const input = screen.getByRole("searchbox", { name: "Status, skill, or school" });
+
+    await userEvent.type(input, "a");
+    await expect
+      .poll(() => isScrollable(screen.getByRole("list", { name: "Cure skills" }).element()))
+      .toBe(true);
+    resultsList()?.scrollTo({ behavior: "instant", top: 600 });
+
+    await userEvent.keyboard("{Enter}");
+    await nextFrames();
+
+    expect(resultsList()?.scrollTop).toBe(0);
+    await expect.element(input).toHaveFocus();
+  });
+
+  it("restores the results list position on Back on wide screens", async () => {
+    await page.viewport(1280, 720);
+    const { router, screen } = await renderApp("/", { scrollRestoration: true });
+
+    await expect
+      .poll(() => isScrollable(screen.getByRole("list", { name: "Cure skills" }).element()))
+      .toBe(true);
+    resultsList()?.scrollTo({ behavior: "instant", top: 1200 });
+    await nextFrames();
+
+    await followVisibleSearchLink("cure badge");
+    router.history.back();
+
+    await expect.poll(() => router.state.location.href).toBe("/");
+    await expect.poll(() => resultsList()?.scrollTop).toBe(1200);
+  });
+
+  it("restores the page position on Back on narrow screens", async () => {
+    await page.viewport(375, 812);
+    const { router } = await renderApp("/", { scrollRestoration: true });
+
+    await expect.poll(pageScrolls).toBe(true);
+    scrollTo({ behavior: "instant", top: 2000 });
+    await nextFrames();
+
+    await followVisibleSearchLink("cure badge");
+    router.history.back();
+
+    await expect.poll(() => router.state.location.href).toBe("/");
+    await expect.poll(() => scrollY).toBe(2000);
   });
 });

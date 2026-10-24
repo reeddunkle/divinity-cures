@@ -2,6 +2,7 @@ import { createRouter, type RouterHistory } from "@tanstack/react-router";
 
 import { NotFound, RouteError } from "./components/route-fallbacks.tsx";
 import { routeTree } from "./routeTree.gen.ts";
+import { installScrollPolicy, routerScrollOptions } from "./scroll/scroll-policy.ts";
 import { parseSearch, stringifySearch } from "./url-state/search-params.ts";
 
 export type AppRouterOptions = {
@@ -11,18 +12,22 @@ export type AppRouterOptions = {
   readonly scrollRestoration?: boolean;
 };
 
-export const createAppRouter = (options: AppRouterOptions = {}) =>
-  createRouter({
+export const createAppRouter = (options: AppRouterOptions = {}) => {
+  const router = createRouter({
     defaultErrorComponent: RouteError,
     defaultNotFoundComponent: NotFound,
     defaultPreload: "intent",
-    scrollRestoration: true,
-    scrollToTopSelectors: ["#main", "#results"],
+    ...routerScrollOptions,
     ...options,
     parseSearch,
     routeTree,
     stringifySearch,
   });
+
+  installScrollPolicy(router);
+
+  return router;
+};
 
 export type AppRouter = ReturnType<typeof createAppRouter>;
 
