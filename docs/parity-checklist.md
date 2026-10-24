@@ -1,10 +1,10 @@
 # Parity checklist
 
-This compares the rewrite with the Next.js application at `main` (`34eb28e`). Both ran locally on 2026-10-23: the old app with `next dev` and the rewrite with `vite preview`. Differences marked **Intended** follow from the rewrite's design and need no fix.
+This compares the rewrite with the Next.js app at `main` (`34eb28e`), both run locally on 2026-10-23, the old app with `next dev` and the rewrite with `vite preview`. **Intended** marks differences that follow from the rewrite's design and need no fix.
 
 ## Search results
 
-For each query below, both apps returned the same skills, each with the same cures and the same immunity markers. Order was ignored, because the old app's order depended on in-place sorting.
+For each query, both apps returned the same skills with the same cures and immunity markers. Order was ignored because the old app sorted in place.
 
 | Query       | Skills | Result                                                                    |
 | ----------- | -----: | ------------------------------------------------------------------------- |
@@ -51,4 +51,4 @@ For each query below, both apps returned the same skills, each with the same cur
 
 ## Viewports
 
-The rewrite was checked at 375 × 812, 768 × 1024, and a desktop width of about 1280 px. There was no horizontal scrolling at any of them, and the search controls wrap below the input at 375 px.
+Checked at 375 × 812, 768 × 1024, and about 1280 px wide. Nothing scrolled horizontally, and the search controls wrap below the input at 375 px.

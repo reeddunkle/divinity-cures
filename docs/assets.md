@@ -1,6 +1,6 @@
 # Static assets
 
-Every image is served from `public/` and referenced by a root-relative path. `src/tests/unit-tests/assets.test.ts` fails when a catalog record, `src/assets.ts`, or `index.html` references a remote URL or a missing file, or when an image under `public/` is not referenced.
+Every image is served from `public/` by root-relative path. `src/tests/unit-tests/assets.test.ts` fails if a catalog record, `src/assets.ts`, or `index.html` references a remote URL or missing file, or if nothing references an image under `public/`.
 
 ## Repository-owned images
 
@@ -9,17 +9,17 @@ Every image is served from `public/` and referenced by a root-relative path. `sr
 | `favicon.ico`, `favicon-16x16.png`, `favicon-32x32.png`, `apple-icon.png` | `app/` in the Next.js application                                                   | Project-owned artwork      |
 | `images/logo.png`                                                         | `public/images/d-icon.png` in the Next.js application, scaled from 800 px to 128 px | Project-owned artwork      |
 
-`apple-icon.png` (180 × 180) is also the Open Graph and Twitter card image, referenced as `uiImages.shareImage`. It meets the 144 × 144 minimum for a Twitter summary card.
+`apple-icon.png` (180 × 180) is also the Open Graph and Twitter card image, `uiImages.shareImage`, and meets the 144 × 144 Twitter summary card minimum.
 
-The Next.js `android-chrome-*` icons were not carried over because nothing referenced them. Add them back together with a web app manifest if one is introduced.
+The Next.js `android-chrome-*` icons were dropped because nothing referenced them. Restore them if the site gains a web app manifest.
 
 ## Game icons
 
-The icons under `public/images/icons/` are Divinity: Original Sin 2 artwork. The Next.js application loaded them from the project's CloudFront bucket at `https://d124vy484dv6tz.cloudfront.net/icons/`. They were downloaded from that bucket on 2026-10-23 and kept in their original format, because each file's contents matched its extension.
+The icons under `public/images/icons/` are Divinity: Original Sin 2 artwork, copyright Larian Studios and credited in the site footer. The Next.js app loaded them from the project's CloudFront bucket at `https://d124vy484dv6tz.cloudfront.net/icons/`. They were downloaded on 2026-10-23 and kept in their original formats, which matched their extensions.
 
-- **Copyright:** Larian Studios. The site footer attributes them.
-- **Redistribution:** The project owner approved self-hosting them as fan-site use. No separate license grants redistribution, so remove or replace any icon if Larian objects.
-- **Normalization:** File names are the source names lowercased, with each run of other characters replaced by a single hyphen. The data references each file once by path, including icons that several records share.
+The project owner approved self-hosting them as fan-site use. No license grants redistribution, so remove or replace any icon if Larian objects.
+
+Local names are the source names lowercased, with each run of other characters replaced by one hyphen. The data references each file once by path, including icons that several records share.
 
 | Local path (under `public/images/`)               | Source file name                            |
 | ------------------------------------------------- | ------------------------------------------- |
@@ -91,5 +91,5 @@ The icons under `public/images/icons/` are Divinity: Original Sin 2 artwork. The
 
 ## Exceptions
 
-- The Atrophy status effect has no icon. Its empty `imageSrc` was removed, and the status-effect `imageSrc` field is now optional.
-- No AWS or wiki image request remains.
+- The Atrophy status has no icon, so the status `imageSrc` field is optional.
+- No AWS or wiki image requests remain.

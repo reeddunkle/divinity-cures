@@ -1,21 +1,21 @@
 # Deployment
 
-The site is static: Vite builds it into `dist/`, and Netlify serves that folder. [`netlify.toml`](../netlify.toml) holds the whole Netlify configuration, so settings in the Netlify UI should not be needed beyond linking the repository.
+Vite builds the static site into `dist/`, and Netlify serves it. [`netlify.toml`](../netlify.toml) holds all Netlify configuration, so the Netlify UI only needs the linked repository.
 
 ## Netlify configuration
 
-- **Build:** `pnpm build` typechecks, builds, and prerenders. Netlify reads Node from `.node-version` and pnpm from `PNPM_VERSION`, because Node 26 no longer ships Corepack. Installing runs `prepare`, which patches TypeScript with Effect TSGo and generates `styled-system/`. Netlify restores a cached `node_modules`, and when the lockfile is unchanged pnpm skips the install and `prepare` with it, so `pnpm build` runs `panda codegen` itself before typechecking. After `vite build`, `build-plugins/prerender.ts` loads `src/entry-server.tsx` through Vite, renders `/`, `/about`, and the not-found page to `index.html`, `about/index.html`, and `404.html`, and writes `sitemap.xml` and `robots.txt`.
-- **Routes:** `/` is served by `index.html`. `/about` and `/about/` are rewritten to `about/index.html` with status 200, forced so Netlify's directory handling cannot redirect them. Every other path that does not match a file gets `404.html` with status 404. Each file holds its page's title, description, canonical link, Open Graph and Twitter card tags, and full content, so crawlers and link previews need no JavaScript. A search such as `/?search=burn` is served `index.html`, and the client renders its results.
-- **Caching:** hashed files under `/assets/*` are cached for a year as immutable. Images under `/images/*` are cached for a week, because their names are not hashed. `index.html` keeps Netlify's default of revalidating on every request.
-- **Headers:** every response sets `X-Content-Type-Options: nosniff` and `Referrer-Policy: strict-origin-when-cross-origin`.
-- **Content Security Policy:** every response enforces a policy that allows scripts, styles, images, fetches, and manifests only from the site's own origin, and blocks everything else, including inline scripts, inline `<style>` elements, plugins, `<base>` changes, and framing (`frame-ancestors 'none'`). The production build has no inline script or style, and Panda emits one static stylesheet. Anything that adds a third-party resource or an inline script must update the policy in `netlify.toml`.
-- **Permissions Policy:** every response disables the accelerometer, Topics API, camera, screen capture, geolocation, gyroscope, magnetometer, microphone, Payment Request API, and WebUSB, none of which the site uses.
-- **Compression:** Netlify compresses text responses with Brotli or gzip automatically.
-- **Indexing:** `robots.txt` allows everything and points to `sitemap.xml`, which lists `/` and `/about`. Netlify does not add an `x-robots-tag: noindex` header to branch deploys, so a branch deploy URL such as `deploy-preview--divinity-cures.netlify.app` can be indexed if it is linked publicly. To consolidate those duplicates and the `divinity-cures.netlify.app` host, each route sets a canonical link to its path on `https://divinitycures.com`, without the query string. The not-found page sets none.
+- **Build.** `pnpm build` typechecks, builds, and prerenders. Netlify reads Node from `.node-version` and pnpm from `PNPM_VERSION`, since Node 26 dropped Corepack. Install runs `prepare`, which patches TypeScript with Effect TSGo and generates `styled-system/`. When the lockfile is unchanged, Netlify restores a cached `node_modules` and pnpm skips install and `prepare`, so `pnpm build` runs `panda codegen` itself before typechecking. After `vite build`, `build-plugins/prerender.ts` loads `src/entry-server.tsx` through Vite, renders `/`, `/about`, and the not-found page to `index.html`, `about/index.html`, and `404.html`, and writes `sitemap.xml` and `robots.txt`.
+- **Routes.** `index.html` serves `/`. `/about` and `/about/` rewrite to `about/index.html` with status 200, forced so Netlify's directory handling can't redirect them. Any other path without a matching file gets `404.html` with status 404. Each HTML file holds its page's title, description, canonical link, social card tags, and full content, so crawlers and link previews need no JavaScript. `/?search=burn` gets `index.html`, and the client renders the results.
+- **Caching.** Hashed files under `/assets/*` are cached as immutable for a year. `/images/*` is cached for a week because image names aren't hashed. `index.html` keeps Netlify's default of revalidating on every request.
+- **Headers.** Every response sets `X-Content-Type-Options: nosniff` and `Referrer-Policy: strict-origin-when-cross-origin`.
+- **Content Security Policy.** Every response allows scripts, styles, images, fetches, and manifests only from the site's origin. It blocks everything else, including inline scripts, inline `<style>`, plugins, `<base>` changes, and framing (`frame-ancestors 'none'`). The build has no inline script or style, and Panda emits one static stylesheet. Adding a third-party resource or inline script means updating the policy in `netlify.toml`.
+- **Permissions Policy.** Every response disables the accelerometer, Topics API, camera, screen capture, geolocation, gyroscope, magnetometer, microphone, Payment Request API, and WebUSB. The site uses none of them.
+- **Compression.** Netlify serves text with Brotli or gzip.
+- **Indexing.** `robots.txt` allows everything and points to `sitemap.xml`, which lists `/` and `/about`. Netlify doesn't send `x-robots-tag: noindex` on branch deploys, so a publicly linked branch URL such as `deploy-preview--divinity-cures.netlify.app` can get indexed. Each route's canonical link points to its path on `https://divinitycures.com`, without the query string, to consolidate those duplicates and the `divinity-cures.netlify.app` host. The not-found page has none.
 
 ## Bundle
 
-Measured on 2026-10-23 with `vite build`; sizes are minified, with gzipped sizes in parentheses. The first load fetches the entry chunk and, once Effect Schema left the browser bundle, a shared `site` chunk that `index.html` preloads.
+Measured on 2026-10-23 with `vite build`. Sizes are minified, with gzipped sizes in parentheses. The first load fetches the entry chunk and, from "Schema removed" on, a shared `site` chunk that `index.html` preloads.
 
 | JavaScript          | Before              | Catalog built ahead | Schema removed      | Prerendered         |
 | ------------------- | ------------------- | ------------------- | ------------------- | ------------------- |
@@ -28,24 +28,24 @@ Measured on 2026-10-23 with `vite build`; sizes are minified, with gzipped sizes
 
 The stylesheet is 32.6 kB (8.9 kB) throughout.
 
-- **Catalog built ahead:** the build validates the catalog with `loadCatalog` and ships the decoded result, so visitors no longer run Effect Schema or the Effect runtime to load data, and an invalid catalog fails the build instead of the page. The home route chunk grows uncompressed because shared status and school records are repeated in each skill, but it barely changes gzipped.
-- **Schema removed:** the `search` parameter was then the only value decoded with Effect Schema in the browser. Schema also pulled in modules the app never uses, such as `Duration`, `DateTime`, `BigDecimal`, and HTTP cookie and DNS helpers. Decoding it with `Predicate` instead takes Schema out of the browser bundle.
-- **Prerendered:** the client loads the router before rendering so it can hydrate the prerendered markup, which moves the route tree into its own chunk that `index.html` also preloads.
+- **Catalog built ahead.** The build validates the catalog with `loadCatalog` and ships the decoded result, so visitors no longer run Effect Schema or the Effect runtime to load data. The home route chunk grows uncompressed because each skill repeats its shared status and school records, but it barely changes gzipped.
+- **Schema removed.** The `search` parameter was the last value the browser decoded with Effect Schema, which also pulled in unused modules such as `Duration`, `DateTime`, `BigDecimal`, and HTTP cookie and DNS helpers. Decoding it with `Predicate` took Schema out of the browser bundle.
+- **Prerendered.** The client loads the router before rendering so it can hydrate the prerendered markup. That moves the route tree into its own chunk, which `index.html` also preloads.
 
 Before minification, the remaining JavaScript is mostly React DOM, TanStack Router, and, in the home route, TanStack Form and the catalog.
 
-Card images use `loading="lazy"` and `decoding="async"`. On a cold load at 1280 × 720, only the first seven skill icons load; the rest load as the results list scrolls toward them.
+Card images use `loading="lazy"` and `decoding="async"`. A cold load at 1280 × 720 fetches only the first seven skill icons, and the rest load as the results list scrolls toward them.
 
 ## Checks
 
-The full `pnpm check`, including the browser tests, runs locally and in GitHub Actions on every push and pull request. Netlify runs only `pnpm build`, so a deploy never needs a browser download.
+`pnpm check`, including the browser tests, runs locally and in GitHub Actions on every push and pull request. Netlify runs only `pnpm build`, so deploys never download a browser.
 
 ## Preview a deploy
 
 1. In Netlify, open the project and go to **Project configuration → Build & deploy → Continuous deployment**.
-   - Under **Build settings**, set **Runtime** to not set, so the Next.js runtime doesn't run. Keep the base directory as `/`. `netlify.toml` takes precedence over the build command and publish directory, but setting them to `pnpm build` and `dist` keeps the UI accurate.
-   - Under **Branches and deploy contexts**, keep the production branch as `main`, and add `deploy-preview` to **Branch deploys**.
-2. Under **Environment variables**, make sure neither `NODE_VERSION` nor `PNPM_VERSION` is set, because either would override the repository. No Next.js variables such as `NEXT_DISABLE_EDGE_IMAGES` should remain.
+   - Under **Build settings**, set **Runtime** to not set so the Next.js runtime doesn't run, and keep the base directory as `/`. `netlify.toml` overrides the build command and publish directory, but set them to `pnpm build` and `dist` so the UI stays accurate.
+   - Under **Branches and deploy contexts**, keep `main` as the production branch and add `deploy-preview` to **Branch deploys**.
+2. Under **Environment variables**, make sure `NODE_VERSION` and `PNPM_VERSION` are unset, because either overrides the repository. Remove any Next.js variables such as `NEXT_DISABLE_EDGE_IMAGES`.
 3. Push the commit to test with `git push origin main:deploy-preview`. Netlify builds it at `https://deploy-preview--divinity-cures.netlify.app/`.
 4. When the deploy finishes, run the checklist below against that URL.
 
@@ -81,6 +81,6 @@ The full `pnpm check`, including the browser tests, runs locally and in GitHub A
 
 ## Roll back
 
-1. In Netlify, open **Deploys**, choose the last Next.js production deploy noted above, and select **Publish deploy**. The old site is live again in seconds, and nothing has to be rebuilt.
-2. Netlify stops auto-publishing while a rolled-back deploy is locked in. Before re-enabling auto-publishing, either fix forward on `main` or revert the merge with `git revert -m 1 <merge commit>` and push, so the next build doesn't republish the rewrite.
-3. The old application stays intact in Git history before the merge commit, so it can be rebuilt from that commit if its deploy ever expires.
+1. In Netlify **Deploys**, choose the last Next.js production deploy noted above and select **Publish deploy**. The old site is live again in seconds with no rebuild.
+2. Netlify stops auto-publishing while a rolled-back deploy is locked. Before re-enabling it, fix forward on `main` or revert the merge with `git revert -m 1 <merge commit>` and push, so the next build doesn't republish the rewrite.
+3. If the old deploy ever expires, rebuild it from the commit before the merge.

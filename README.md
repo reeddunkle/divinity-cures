@@ -1,8 +1,8 @@
 # Divinity Cures
 
-A fresh static application for finding cures in Divinity: Original Sin 2.
+A static site for finding cures in Divinity: Original Sin 2.
 
-The rewrite uses Vite, React, TypeScript 7, TanStack Router, TanStack Form, Effect v4, Panda CSS v2, Oxlint, and Oxfmt. See [`docs/tasks`](./docs/tasks/README.md) for the active backlog.
+It uses Vite, React, TypeScript 7, TanStack Router, TanStack Form, Effect v4, Panda CSS v2, Oxlint, and Oxfmt. See [`docs/tasks`](./docs/tasks/README.md) for the active backlog.
 
 ## History
 
@@ -13,7 +13,7 @@ Two annotated Git tags mark the rewrite boundary. `vite-rewrite-start` is the di
 | `nextjs-final`       | `34eb28e` | The last commit of the original Next.js application |
 | `vite-rewrite-start` | `630c9f4` | The first commit of the Vite single-page rewrite    |
 
-Check out `nextjs-final` to run or compare the old application, and use `git diff nextjs-final vite-rewrite-start` to see where the rewrite began.
+Check out `nextjs-final` to run the old app. `git diff nextjs-final vite-rewrite-start` shows where the rewrite began.
 
 ## Design
 
@@ -28,4 +28,4 @@ pnpm exec playwright install chromium
 pnpm check
 ```
 
-`pnpm check` runs lint, format checks, unit tests, browser tests in headless Chromium, typecheck, and the production build. GitHub Actions runs it from a clean install on every push and pull request. See [deployment](./docs/deployment.md) for Netlify.
+`pnpm check` runs lint, format checks, unit tests, headless Chromium browser tests, typecheck, and the production build. GitHub Actions runs it from a clean install on every push and pull request. See [deployment](./docs/deployment.md) for Netlify.

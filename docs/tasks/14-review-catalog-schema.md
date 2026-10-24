@@ -4,11 +4,11 @@
 
 ## Objective
 
-Reshape the catalog schema so hand-edited data stays easy to write while the loader catches every mistake it can.
+Reshape the catalog schema so hand-edited data stays easy to write and the loader catches every mistake it can.
 
 ## Context
 
-The [data model](../catalog-content.md#data-model) documents what each field means, and the loader checks status names and references. Several shapes were kept as inherited because changing them was outside the semantic audit.
+The [data model](../catalog-content.md#data-model) documents each field, and the loader checks status names and references. Several inherited shapes stayed because changing them was outside the semantic audit.
 
 ## Work
 

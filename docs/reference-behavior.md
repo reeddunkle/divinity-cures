@@ -1,6 +1,6 @@
 # Existing application observations
 
-These observations help us understand the former application. They are not compatibility requirements.
+How the old app behaved. None of this is a compatibility requirement.
 
 - `/` shows cure cards and accepts a `search` query parameter.
 - `/about` explains direct and indirect cures.
@@ -11,4 +11,4 @@ These observations help us understand the former application. They are not compa
 - Several render paths sort input arrays in place.
 - Invalid catalog data is logged and then hidden behind non-null assertions.
 
-The rewrite will retain the useful routes, content, and shareable-search goal. Search rules, ordering, failure handling, and URL synchronization will be specified afresh.
+The rewrite keeps the useful routes, content, and shareable searches, and specifies search rules, ordering, failure handling, and URL sync from scratch.
