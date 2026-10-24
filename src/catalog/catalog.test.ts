@@ -19,7 +19,7 @@ describe("loadCatalog", () => {
 
     expect(catalog.skills).toHaveLength(30);
     expect(catalog.schools).toHaveLength(12);
-    expect(catalog.statusEffects).toHaveLength(53);
+    expect(catalog.statusEffects).toHaveLength(52);
     expect(catalog.skills[0]?.schools[0]?.school.name).toBe("Geomancer");
     expect(catalog.skills[0]?.statusEffects[0]?.statusEffect.name).toBe("Fortified");
   });
@@ -47,6 +47,18 @@ describe("loadCatalog", () => {
       expect(statusNamed("Mad")?.aliases).toEqual(["Madness"]);
       expect(curedStatuses).toContain("Mad");
       expect(curedStatuses).not.toContain("Madness");
+    });
+
+    it("names the Silencing Stare status Silenced, as the game does, with Muted as an alias", () => {
+      expect(statusNamed("Silenced")?.aliases).toEqual(["Muted"]);
+      expect(statusNamed("Muted")).toBeUndefined();
+      expect(statusNamed("Rested")?.immunities).toContain("Silenced");
+      expect(curedStatuses).not.toContain("Muted");
+    });
+
+    it("names the Throw Dust status Blinded, as the game does, with Blind as an alias", () => {
+      expect(statusNamed("Blinded")?.aliases).toEqual(["Blind"]);
+      expect(curedStatuses).not.toContain("Blind");
     });
 
     it("lists Mad once among Clear-Minded's immunities", () => {

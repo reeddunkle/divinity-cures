@@ -36,7 +36,8 @@ function AboutRoute() {
             </li>
             <li>
               <strong>Rested</strong> grants immunity to, and removes, <strong>Blinded</strong>,{" "}
-              <strong>Crippled</strong>, <strong>Knocked Down</strong>, and <strong>Muted</strong>.
+              <strong>Crippled</strong>, <strong>Knocked Down</strong>, and{" "}
+              <strong>Silenced</strong>.
             </li>
             <li>
               <strong>First Aid</strong> therefore cures all of these,{" "}

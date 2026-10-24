@@ -37,7 +37,7 @@
         "amount": 2
       }
     ],
-    "immunities": ["Blinded", "Crippled", "Knocked Down", "Muted"],
+    "immunities": ["Blinded", "Crippled", "Knocked Down", "Silenced"],
     "imageSrc": "/images/icons/rested.webp",
     "id": "3"
   },
@@ -271,6 +271,7 @@
   },
   {
     "name": "Blinded",
+    "aliases": ["Blind"],
     "id": "23"
   },
   {
@@ -331,10 +332,6 @@
     "id": "37"
   },
   {
-    "name": "Muted",
-    "id": "38"
-  },
-  {
     "name": "Necrofire",
     "id": "39"
   },
@@ -360,6 +357,7 @@
   },
   {
     "name": "Silenced",
+    "aliases": ["Muted"],
     "id": "45"
   },
   {

@@ -2,9 +2,9 @@
 
 This directory contains only outstanding work. Tasks are ordered by dependency and risk rather than visual impact.
 
-| Priority | Task                                                                                    | Outcome                                             |
-| -------- | --------------------------------------------------------------------------------------- | --------------------------------------------------- |
-| P1       | [08 — Audit catalog semantics and content](./08-audit-catalog-semantics-and-content.md) | Deliberate domain rules and trustworthy source data |
+| Priority | Task                                                            | Outcome                                         |
+| -------- | --------------------------------------------------------------- | ----------------------------------------------- |
+| P2       | [14 — Review the catalog schema](./14-review-catalog-schema.md) | Easy-to-edit data whose mistakes fail the build |
 
 ## Working principles
 
