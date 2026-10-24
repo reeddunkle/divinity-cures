@@ -5,6 +5,7 @@ This directory contains only outstanding work. Tasks are ordered by dependency a
 | Priority | Task                                                            | Outcome                                         |
 | -------- | --------------------------------------------------------------- | ----------------------------------------------- |
 | P2       | [14 — Review the catalog schema](./14-review-catalog-schema.md) | Easy-to-edit data whose mistakes fail the build |
+| P3       | [15 — Adopt the import alias](./15-adopt-import-alias.md)       | One import rule across the app                  |
 
 ## Working principles
 
