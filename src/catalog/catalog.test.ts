@@ -19,7 +19,7 @@ describe("loadCatalog", () => {
 
     expect(catalog.skills).toHaveLength(30);
     expect(catalog.schools).toHaveLength(12);
-    expect(catalog.statusEffects).toHaveLength(21);
+    expect(catalog.statusEffects).toHaveLength(53);
     expect(catalog.skills[0]?.schools[0]?.school.name).toBe("Geomancer");
     expect(catalog.skills[0]?.statusEffects[0]?.statusEffect.name).toBe("Fortified");
   });
@@ -247,6 +247,75 @@ describe("loadCatalog", () => {
       targetId: "0",
       targetName: spellSchools[0]?.name,
     });
+  });
+
+  it("rejects a status name used by two status records", () => {
+    const error = loadCatalog({
+      ...validInput,
+      statusEffects: [...statusEffects, { id: "duplicate", name: "Madness" }],
+    }).pipe(E.flip, E.runSync);
+
+    expect(error).toMatchObject({
+      _tag: "DuplicateStatusNameError",
+      statusName: "Madness",
+    });
+  });
+
+  it("rejects cures naming a status without a record", () => {
+    const error = loadCatalog({
+      ...validInput,
+      skills: [{ ...skills[0], removes: ["Gilded"] }],
+    }).pipe(E.flip, E.runSync);
+
+    expect(error).toMatchObject({
+      _tag: "UnknownStatusNameError",
+      field: "removes",
+      sourceDataset: "skills",
+      sourceId: skills[0]?.id,
+      statusName: "Gilded",
+    });
+  });
+
+  it("rejects cures naming a status by its alias", () => {
+    const error = loadCatalog({
+      ...validInput,
+      skills: [{ ...skills[0], immunities: ["Madness"] }],
+    }).pipe(E.flip, E.runSync);
+
+    expect(error).toMatchObject({
+      _tag: "AliasedStatusNameError",
+      canonicalName: "Mad",
+      field: "immunities",
+      sourceDataset: "skills",
+      statusName: "Madness",
+    });
+  });
+
+  it.each([
+    [
+      "is cleared by a status that does not remove it",
+      [
+        { clearedBy: ["Slowed"], id: "hasted", name: "Hasted" },
+        { id: "slowed", name: "Slowed" },
+      ],
+      { missingFrom: "removes", removedName: "Hasted", removerName: "Slowed" },
+    ],
+    [
+      "is removed by a status it is not cleared by",
+      [
+        { id: "hasted", name: "Hasted", removes: ["Slowed"] },
+        { id: "slowed", name: "Slowed" },
+      ],
+      { missingFrom: "clearedBy", removedName: "Slowed", removerName: "Hasted" },
+    ],
+  ])("rejects a status that %s", (_case, records, mismatch) => {
+    const error = loadCatalog({
+      ...validInput,
+      skills: [],
+      statusEffects: records,
+    }).pipe(E.flip, E.runSync);
+
+    expect(error).toMatchObject({ _tag: "InconsistentStatusRemovalError", ...mismatch });
   });
 
   it("rejects applied-status references whose name differs from the status effect", () => {

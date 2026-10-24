@@ -88,7 +88,7 @@ export const SkillRecord = Schema.Struct({
 export const StatusEffectRecord = Schema.Struct({
   aliases: emptyStringArray,
   clearedBy: emptyStringArray,
-  description: Schema.String,
+  description: Schema.optionalKey(Schema.String),
   givenBy: emptyStringArray,
   id: StatusEffectId,
   imageSrc: Schema.optionalKey(Schema.String),

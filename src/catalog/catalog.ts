@@ -1,6 +1,6 @@
 import * as A from "effect/Array";
 import * as E from "effect/Effect";
-import { pipe } from "effect/Function";
+import { identity, pipe } from "effect/Function";
 import * as O from "effect/Option";
 import * as R from "effect/Record";
 import * as Schema from "effect/Schema";
@@ -9,9 +9,14 @@ import {
   BrokenCatalogReferenceError,
   type CatalogError,
   CatalogDecodeError,
+  AliasedStatusNameError,
   type DatasetName,
   DuplicateCatalogIdError,
+  DuplicateStatusNameError,
+  InconsistentStatusRemovalError,
   MismatchedCatalogReferenceError,
+  type StatusNameField,
+  UnknownStatusNameError,
 } from "./errors.ts";
 import {
   CatalogRecords,
@@ -95,6 +100,118 @@ const validateUniqueIds = (dataset: DatasetName, records: readonly CatalogRecord
   }
 
   return E.void;
+};
+
+const validateUniqueStatusNames = (statusEffects: readonly StatusEffectRecord[]) => {
+  const duplicateName = pipe(
+    statusEffects,
+    A.flatMap((statusEffect) => [statusEffect.name, ...statusEffect.aliases]),
+    A.groupBy(identity),
+    R.values,
+    A.findFirst((group) => group.length > 1),
+    O.map((group) => group[0]),
+  );
+
+  if (O.isSome(duplicateName)) {
+    return E.fail(new DuplicateStatusNameError({ statusName: duplicateName.value }));
+  }
+
+  return E.void;
+};
+
+type StatusNameUsage = {
+  readonly field: StatusNameField;
+  readonly sourceDataset: DatasetName;
+  readonly sourceId: string;
+  readonly statusName: string;
+};
+
+const statusNameUsages = <Field extends StatusNameField>(
+  sourceDataset: DatasetName,
+  records: readonly (CatalogRecord & Readonly<Record<Field, readonly string[]>>)[],
+  fields: readonly Field[],
+): readonly StatusNameUsage[] =>
+  A.flatMap(records, (record) =>
+    A.flatMap(fields, (field) =>
+      A.map(record[field], (statusName) => ({
+        field,
+        sourceDataset,
+        sourceId: record.id,
+        statusName,
+      })),
+    ),
+  );
+
+const validateStatusNames = (
+  skills: readonly SkillRecord[],
+  statusEffects: readonly StatusEffectRecord[],
+) => {
+  const canonicalNames = new Set(A.map(statusEffects, (statusEffect) => statusEffect.name));
+  const canonicalNameByAlias = new Map(
+    A.flatMap(statusEffects, (statusEffect) =>
+      A.map(statusEffect.aliases, (alias) => [alias, statusEffect.name] as const),
+    ),
+  );
+  const usages = [
+    ...statusNameUsages("skills", skills, ["immunities", "removes"]),
+    ...statusNameUsages("statusEffects", statusEffects, ["clearedBy", "immunities", "removes"]),
+  ];
+
+  return E.forEach(
+    usages,
+    (usage) => {
+      if (canonicalNames.has(usage.statusName)) {
+        return E.void;
+      }
+
+      const canonicalName = canonicalNameByAlias.get(usage.statusName);
+
+      return E.fail(
+        canonicalName === undefined
+          ? new UnknownStatusNameError(usage)
+          : new AliasedStatusNameError({ ...usage, canonicalName }),
+      );
+    },
+    { discard: true },
+  );
+};
+
+const validateStatusRemovals = (statusEffects: readonly StatusEffectRecord[]) => {
+  const statusEffectsByName = new Map(
+    A.map(statusEffects, (statusEffect) => [statusEffect.name, statusEffect] as const),
+  );
+  const pairs = [
+    ...A.flatMap(statusEffects, (removed) =>
+      A.map(removed.clearedBy, (removerName) => ({
+        missingFrom: "removes" as const,
+        removedName: removed.name,
+        removerName,
+      })),
+    ),
+    ...A.flatMap(statusEffects, (remover) =>
+      A.map(remover.removes, (removedName) => ({
+        missingFrom: "clearedBy" as const,
+        removedName,
+        removerName: remover.name,
+      })),
+    ),
+  ];
+
+  return E.forEach(
+    pairs,
+    (pair) => {
+      const isConsistent =
+        pair.missingFrom === "removes"
+          ? A.contains(statusEffectsByName.get(pair.removerName)?.removes ?? [], pair.removedName)
+          : A.contains(
+              statusEffectsByName.get(pair.removedName)?.clearedBy ?? [],
+              pair.removerName,
+            );
+
+      return isConsistent ? E.void : E.fail(new InconsistentStatusRemovalError(pair));
+    },
+    { discard: true },
+  );
 };
 
 const brokenReference = (
@@ -189,6 +306,9 @@ export const loadCatalog: (input: CatalogInput) => E.Effect<Catalog, CatalogErro
       validateUniqueIds("spellSchools", decoded.spellSchools),
       validateUniqueIds("statusEffects", decoded.statusEffects),
     ]);
+    yield* validateUniqueStatusNames(decoded.statusEffects);
+    yield* validateStatusNames(decoded.skills, decoded.statusEffects);
+    yield* validateStatusRemovals(decoded.statusEffects);
 
     const schoolsById = new Map(
       pipe(

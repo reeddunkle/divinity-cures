@@ -41,8 +41,53 @@ export class MismatchedCatalogReferenceError extends Schema.TaggedError<
   targetName: Schema.String,
 }) {}
 
+const StatusNameField = Schema.Literals(["clearedBy", "immunities", "removes"]);
+
+export type StatusNameField = typeof StatusNameField.Type;
+
+export class DuplicateStatusNameError extends Schema.TaggedError<
+  DuplicateStatusNameError,
+  { readonly brand: unique symbol }
+>()("DuplicateStatusNameError", {
+  statusName: Schema.String,
+}) {}
+
+export class UnknownStatusNameError extends Schema.TaggedError<
+  UnknownStatusNameError,
+  { readonly brand: unique symbol }
+>()("UnknownStatusNameError", {
+  field: StatusNameField,
+  sourceDataset: DatasetName,
+  sourceId: Schema.String,
+  statusName: Schema.String,
+}) {}
+
+export class AliasedStatusNameError extends Schema.TaggedError<
+  AliasedStatusNameError,
+  { readonly brand: unique symbol }
+>()("AliasedStatusNameError", {
+  canonicalName: Schema.String,
+  field: StatusNameField,
+  sourceDataset: DatasetName,
+  sourceId: Schema.String,
+  statusName: Schema.String,
+}) {}
+
+export class InconsistentStatusRemovalError extends Schema.TaggedError<
+  InconsistentStatusRemovalError,
+  { readonly brand: unique symbol }
+>()("InconsistentStatusRemovalError", {
+  missingFrom: Schema.Literals(["clearedBy", "removes"]),
+  removedName: Schema.String,
+  removerName: Schema.String,
+}) {}
+
 export type CatalogError =
   | CatalogDecodeError
   | DuplicateCatalogIdError
   | BrokenCatalogReferenceError
-  | MismatchedCatalogReferenceError;
+  | MismatchedCatalogReferenceError
+  | DuplicateStatusNameError
+  | UnknownStatusNameError
+  | AliasedStatusNameError
+  | InconsistentStatusRemovalError;

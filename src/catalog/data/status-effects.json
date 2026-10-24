@@ -261,5 +261,133 @@
     "name": "Atrophy",
     "id": "20",
     "description": "Character cannot use weapons for attacks or skills. Atrophy prevents the target from using their physical weapon or skills tied to their weapon. It does not prevent casters from using spells."
+  },
+  {
+    "name": "Acid",
+    "id": "21"
+  },
+  {
+    "name": "Bleeding",
+    "id": "22"
+  },
+  {
+    "name": "Blinded",
+    "id": "23"
+  },
+  {
+    "name": "Burning",
+    "id": "24"
+  },
+  {
+    "name": "Chilled",
+    "id": "25"
+  },
+  {
+    "name": "Crippled",
+    "id": "26"
+  },
+  {
+    "name": "Cursed",
+    "id": "27"
+  },
+  {
+    "name": "Decaying",
+    "id": "28"
+  },
+  {
+    "name": "Disarmed",
+    "id": "29"
+  },
+  {
+    "name": "Diseased",
+    "id": "30"
+  },
+  {
+    "name": "Drunk",
+    "id": "31"
+  },
+  {
+    "name": "Frightened",
+    "id": "32"
+  },
+  {
+    "name": "Frozen",
+    "id": "33"
+  },
+  {
+    "name": "Infectious Disease",
+    "id": "34"
+  },
+  {
+    "name": "Infested",
+    "id": "35"
+  },
+  {
+    "name": "Invisible",
+    "id": "36"
+  },
+  {
+    "name": "Knocked Down",
+    "id": "37"
+  },
+  {
+    "name": "Muted",
+    "id": "38"
+  },
+  {
+    "name": "Necrofire",
+    "id": "39"
+  },
+  {
+    "name": "Petrified",
+    "id": "40"
+  },
+  {
+    "name": "Plagued",
+    "id": "41"
+  },
+  {
+    "name": "Poisoned",
+    "id": "42"
+  },
+  {
+    "name": "Shackles of Pain",
+    "id": "43"
+  },
+  {
+    "name": "Shocked",
+    "id": "44"
+  },
+  {
+    "name": "Silenced",
+    "id": "45"
+  },
+  {
+    "name": "Sleeping",
+    "id": "46"
+  },
+  {
+    "name": "Slowed",
+    "id": "47"
+  },
+  {
+    "name": "Stunned",
+    "id": "48"
+  },
+  {
+    "name": "Suffocating",
+    "id": "49"
+  },
+  {
+    "name": "Taunted",
+    "id": "50"
+  },
+  {
+    "name": "Teleport",
+    "id": "51"
+  },
+  {
+    "name": "Terrified",
+    "id": "52"
   }
 ]
