@@ -47,5 +47,12 @@
     "vitest": "catalog:test",
     "vitest-browser-react": "catalog:test"
   },
-  "packageManager": "pnpm@12.15.0"
+   "devEngines": {
+    "packageManager": {
+      "name": "pnpm",
+      "version": "12.16.1",
+      "onFail": "error"
+    }
+  },
+  "packageManager": "pnpm@12.16.1"
 }
